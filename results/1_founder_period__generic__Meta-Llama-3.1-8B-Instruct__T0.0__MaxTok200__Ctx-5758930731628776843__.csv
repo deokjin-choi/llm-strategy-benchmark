@@ -1,0 +1,406 @@
+scenario,problem_type,repeat,Model,Temperature,Max Tokens,Context Tags,Num Context,Prompt,Raw Output,Parse Error,Chosen Option,Standard Mapping,Rationale,Key Signals Used
+1_founder_period,generic,1,meta-llama/Meta-Llama-3.1-8B-Instruct,0.0,200,"[Market] Global new car sales: ~60 million units/year.; [Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.",3,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""Developing a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself from competitors, and demonstrate its technological capabilities. This approach also enables the company to secure future funding by showcasing its innovative products. The high-performance prototype's performance potential further justifies this option."",
+  ""key_signals_used"": [""Prototype performance: 0–60 mph in 3.6 s; ~300 km range""]
+}",,B,Technology Leadership,"""Developing a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself from competitors, and demonstrate its technological capabilities. This approach also enables the company to secure future funding by showcasing its innovative products. The high-performance prototype's performance potential further justifies this option.""",Prototype performance: 0–60 mph in 3.6 s; ~300 km range
+1_founder_period,generic,2,meta-llama/Meta-Llama-3.1-8B-Instruct,0.0,200,"[Market] Global new car sales: ~60 million units/year.; [Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.",3,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""Developing a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself from competitors, and demonstrate its technological capabilities. This approach also enables the company to secure future funding by showcasing its innovative products. The high-performance prototype's performance potential further justifies this option."",
+  ""key_signals_used"": [""Prototype performance: 0–60 mph in 3.6 s; ~300 km range""]
+}",,B,Technology Leadership,"""Developing a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself from competitors, and demonstrate its technological capabilities. This approach also enables the company to secure future funding by showcasing its innovative products. The high-performance prototype's performance potential further justifies this option.""",Prototype performance: 0–60 mph in 3.6 s; ~300 km range
+1_founder_period,generic,3,meta-llama/Meta-Llama-3.1-8B-Instruct,0.0,200,"[Market] Global new car sales: ~60 million units/year.; [Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.",3,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""Developing a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself from competitors, and demonstrate its technological capabilities. This approach also enables the company to secure future funding by showcasing its innovative products. The high-performance prototype's performance potential further justifies this option."",
+  ""key_signals_used"": [""Prototype performance: 0–60 mph in 3.6 s; ~300 km range""]
+}",,B,Technology Leadership,"""Developing a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself from competitors, and demonstrate its technological capabilities. This approach also enables the company to secure future funding by showcasing its innovative products. The high-performance prototype's performance potential further justifies this option.""",Prototype performance: 0–60 mph in 3.6 s; ~300 km range
+1_founder_period,generic,4,meta-llama/Meta-Llama-3.1-8B-Instruct,0.0,200,"[Market] Global new car sales: ~60 million units/year.; [Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.",3,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""Developing a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself from competitors, and demonstrate its technological capabilities. This approach also enables the company to secure future funding by showcasing its innovative products. The high-performance prototype's performance potential further justifies this option."",
+  ""key_signals_used"": [""Prototype performance: 0–60 mph in 3.6 s; ~300 km range""]
+}",,B,Technology Leadership,"""Developing a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself from competitors, and demonstrate its technological capabilities. This approach also enables the company to secure future funding by showcasing its innovative products. The high-performance prototype's performance potential further justifies this option.""",Prototype performance: 0–60 mph in 3.6 s; ~300 km range
+1_founder_period,generic,5,meta-llama/Meta-Llama-3.1-8B-Instruct,0.0,200,"[Market] Global new car sales: ~60 million units/year.; [Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.",3,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""Developing a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself from competitors, and demonstrate its technological capabilities. This approach also enables the company to secure future funding by showcasing its innovative products. The high-performance prototype's performance potential further justifies this option."",
+  ""key_signals_used"": [""Prototype performance: 0–60 mph in 3.6 s; ~300 km range""]
+}",,B,Technology Leadership,"""Developing a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself from competitors, and demonstrate its technological capabilities. This approach also enables the company to secure future funding by showcasing its innovative products. The high-performance prototype's performance potential further justifies this option.""",Prototype performance: 0–60 mph in 3.6 s; ~300 km range
+1_founder_period,generic,6,meta-llama/Meta-Llama-3.1-8B-Instruct,0.0,200,"[Market] Global new car sales: ~60 million units/year.; [Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.",3,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""Developing a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself from competitors, and demonstrate its technological capabilities. This approach also enables the company to secure future funding by showcasing its innovative products. The high-performance prototype's performance potential further justifies this option."",
+  ""key_signals_used"": [""Prototype performance: 0–60 mph in 3.6 s; ~300 km range""]
+}",,B,Technology Leadership,"""Developing a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself from competitors, and demonstrate its technological capabilities. This approach also enables the company to secure future funding by showcasing its innovative products. The high-performance prototype's performance potential further justifies this option.""",Prototype performance: 0–60 mph in 3.6 s; ~300 km range
+1_founder_period,generic,7,meta-llama/Meta-Llama-3.1-8B-Instruct,0.0,200,"[Market] Global new car sales: ~60 million units/year.; [Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.",3,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""Developing a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself from competitors, and demonstrate its technological capabilities. This approach also enables the company to secure future funding by showcasing its innovative products. The high-performance prototype's performance potential further justifies this option."",
+  ""key_signals_used"": [""Prototype performance: 0–60 mph in 3.6 s; ~300 km range""]
+}",,B,Technology Leadership,"""Developing a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself from competitors, and demonstrate its technological capabilities. This approach also enables the company to secure future funding by showcasing its innovative products. The high-performance prototype's performance potential further justifies this option.""",Prototype performance: 0–60 mph in 3.6 s; ~300 km range
+1_founder_period,generic,8,meta-llama/Meta-Llama-3.1-8B-Instruct,0.0,200,"[Market] Global new car sales: ~60 million units/year.; [Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.",3,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""Developing a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself from competitors, and demonstrate its technological capabilities. This approach also enables the company to secure future funding by showcasing its innovative products. The high-performance prototype's performance potential further justifies this option."",
+  ""key_signals_used"": [""Prototype performance: 0–60 mph in 3.6 s; ~300 km range""]
+}",,B,Technology Leadership,"""Developing a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself from competitors, and demonstrate its technological capabilities. This approach also enables the company to secure future funding by showcasing its innovative products. The high-performance prototype's performance potential further justifies this option.""",Prototype performance: 0–60 mph in 3.6 s; ~300 km range
+1_founder_period,generic,9,meta-llama/Meta-Llama-3.1-8B-Instruct,0.0,200,"[Market] Global new car sales: ~60 million units/year.; [Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.",3,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""Developing a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself from competitors, and demonstrate its technological capabilities. This approach also enables the company to secure future funding by showcasing its innovative products. The high-performance prototype's performance potential further justifies this option."",
+  ""key_signals_used"": [""Prototype performance: 0–60 mph in 3.6 s; ~300 km range""]
+}",,B,Technology Leadership,"""Developing a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself from competitors, and demonstrate its technological capabilities. This approach also enables the company to secure future funding by showcasing its innovative products. The high-performance prototype's performance potential further justifies this option.""",Prototype performance: 0–60 mph in 3.6 s; ~300 km range
+1_founder_period,generic,10,meta-llama/Meta-Llama-3.1-8B-Instruct,0.0,200,"[Market] Global new car sales: ~60 million units/year.; [Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.",3,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""Developing a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself from competitors, and demonstrate its technological capabilities. This approach also enables the company to secure future funding by showcasing its innovative products. The high-performance prototype's performance potential further justifies this option."",
+  ""key_signals_used"": [""Prototype performance: 0–60 mph in 3.6 s; ~300 km range""]
+}",,B,Technology Leadership,"""Developing a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself from competitors, and demonstrate its technological capabilities. This approach also enables the company to secure future funding by showcasing its innovative products. The high-performance prototype's performance potential further justifies this option.""",Prototype performance: 0–60 mph in 3.6 s; ~300 km range
+1_founder_period,generic,11,meta-llama/Meta-Llama-3.1-8B-Instruct,0.0,200,"[Market] Global new car sales: ~60 million units/year.; [Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.",3,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""Developing a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself from competitors, and demonstrate its technological capabilities. This approach also enables the company to secure future funding by showcasing its innovative products. The high-performance prototype's performance potential further justifies this option."",
+  ""key_signals_used"": [""Prototype performance: 0–60 mph in 3.6 s; ~300 km range""]
+}",,B,Technology Leadership,"""Developing a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself from competitors, and demonstrate its technological capabilities. This approach also enables the company to secure future funding by showcasing its innovative products. The high-performance prototype's performance potential further justifies this option.""",Prototype performance: 0–60 mph in 3.6 s; ~300 km range
+1_founder_period,generic,12,meta-llama/Meta-Llama-3.1-8B-Instruct,0.0,200,"[Market] Global new car sales: ~60 million units/year.; [Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.",3,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""Developing a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself from competitors, and demonstrate its technological capabilities. This approach also enables the company to secure future funding by showcasing its innovative products. The high-performance prototype's performance potential further justifies this option."",
+  ""key_signals_used"": [""Prototype performance: 0–60 mph in 3.6 s; ~300 km range""]
+}",,B,Technology Leadership,"""Developing a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself from competitors, and demonstrate its technological capabilities. This approach also enables the company to secure future funding by showcasing its innovative products. The high-performance prototype's performance potential further justifies this option.""",Prototype performance: 0–60 mph in 3.6 s; ~300 km range
+1_founder_period,generic,13,meta-llama/Meta-Llama-3.1-8B-Instruct,0.0,200,"[Market] Global new car sales: ~60 million units/year.; [Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.",3,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""Developing a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself from competitors, and demonstrate its technological capabilities. This approach also enables the company to secure future funding by showcasing its innovative products. The high-performance prototype's performance potential further justifies this option."",
+  ""key_signals_used"": [""Prototype performance: 0–60 mph in 3.6 s; ~300 km range""]
+}",,B,Technology Leadership,"""Developing a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself from competitors, and demonstrate its technological capabilities. This approach also enables the company to secure future funding by showcasing its innovative products. The high-performance prototype's performance potential further justifies this option.""",Prototype performance: 0–60 mph in 3.6 s; ~300 km range
+1_founder_period,generic,14,meta-llama/Meta-Llama-3.1-8B-Instruct,0.0,200,"[Market] Global new car sales: ~60 million units/year.; [Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.",3,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""Developing a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself from competitors, and demonstrate its technological capabilities. This approach also enables the company to secure future funding by showcasing its innovative products. The high-performance prototype's performance potential further justifies this option."",
+  ""key_signals_used"": [""Prototype performance: 0–60 mph in 3.6 s; ~300 km range""]
+}",,B,Technology Leadership,"""Developing a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself from competitors, and demonstrate its technological capabilities. This approach also enables the company to secure future funding by showcasing its innovative products. The high-performance prototype's performance potential further justifies this option.""",Prototype performance: 0–60 mph in 3.6 s; ~300 km range
+1_founder_period,generic,15,meta-llama/Meta-Llama-3.1-8B-Instruct,0.0,200,"[Market] Global new car sales: ~60 million units/year.; [Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.",3,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""Developing a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself from competitors, and demonstrate its technological capabilities. This approach also enables the company to secure future funding by showcasing its innovative products. The high-performance prototype's performance potential further justifies this option."",
+  ""key_signals_used"": [""Prototype performance: 0–60 mph in 3.6 s; ~300 km range""]
+}",,B,Technology Leadership,"""Developing a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself from competitors, and demonstrate its technological capabilities. This approach also enables the company to secure future funding by showcasing its innovative products. The high-performance prototype's performance potential further justifies this option.""",Prototype performance: 0–60 mph in 3.6 s; ~300 km range

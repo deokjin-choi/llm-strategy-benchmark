@@ -1,0 +1,356 @@
+scenario,problem_type,repeat,Model,Temperature,Max Tokens,Context Tags,Num Context,Prompt,Raw Output,Parse Error,Chosen Option,Standard Mapping,Rationale,Key Signals Used
+1_founder_period,generic,1,meta-llama/Meta-Llama-3.1-8B-Instruct,0.7,256,[Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.,1,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""The company should focus on a high-performance EV sports car to create a compelling narrative and demonstrate technology leadership. This approach allows the company to showcase its innovative capabilities and build brand recognition, while managing capital risk by targeting a niche market."",
+  ""key_signals_used"": [""Technology"", ""Prototype performance""]
+}",,B,Technology Leadership,"""The company should focus on a high-performance EV sports car to create a compelling narrative and demonstrate technology leadership. This approach allows the company to showcase its innovative capabilities and build brand recognition, while managing capital risk by targeting a niche market.""",Technology; Prototype performance
+1_founder_period,generic,2,meta-llama/Meta-Llama-3.1-8B-Instruct,0.7,256,[Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.,1,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""Developing a high-performance EV sports car allows the company to create a compelling narrative around technology leadership, showcasing its innovative capabilities and performance potential. This strategy also helps to differentiate the company from competitors and attract future funding."",
+  ""key_signals_used"": [""Technology"", ""Prototype performance""]
+}",,B,Technology Leadership,"""Developing a high-performance EV sports car allows the company to create a compelling narrative around technology leadership, showcasing its innovative capabilities and performance potential. This strategy also helps to differentiate the company from competitors and attract future funding.""",Technology; Prototype performance
+1_founder_period,generic,3,meta-llama/Meta-Llama-3.1-8B-Instruct,0.7,256,[Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.,1,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{""chosen_option"": ""B"", ""standard_mapping"": ""Technology Leadership"", ""rationale"": ""To prove the concept and secure funding, the company should focus on showcasing its technological capabilities. Developing a high-performance EV sports car will demonstrate the company's innovative spirit and differentiate its narrative from competitors."", ""key_signals_used"": [""Technology"", ""Prototype performance""]}",,B,Technology Leadership,"""To prove the concept and secure funding, the company should focus on showcasing its technological capabilities. Developing a high-performance EV sports car will demonstrate the company's innovative spirit and differentiate its narrative from competitors.""",Technology; Prototype performance
+1_founder_period,generic,4,meta-llama/Meta-Llama-3.1-8B-Instruct,0.7,256,[Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.,1,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""The high-performance prototype demonstrates the company's technical capabilities, allowing it to lead in the EV market with a differentiated product. This option minimizes the need for a proven supply chain and manufacturing assets, reducing capital risk."",
+  ""key_signals_used"": [""Technology"", ""Prototype performance""]
+}",,B,Technology Leadership,"""The high-performance prototype demonstrates the company's technical capabilities, allowing it to lead in the EV market with a differentiated product. This option minimizes the need for a proven supply chain and manufacturing assets, reducing capital risk.""",Technology; Prototype performance
+1_founder_period,generic,5,meta-llama/Meta-Llama-3.1-8B-Instruct,0.7,256,[Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.,1,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""Developing a high-performance EV sports car allows the company to showcase its technology capabilities, create a compelling narrative, and differentiate itself from competitors. This option also enables the company to manage capital risk by leveraging the performance potential of EVs."",
+  ""key_signals_used"": [""Prototype performance""]
+}",,B,Technology Leadership,"""Developing a high-performance EV sports car allows the company to showcase its technology capabilities, create a compelling narrative, and differentiate itself from competitors. This option also enables the company to manage capital risk by leveraging the performance potential of EVs.""",Prototype performance
+1_founder_period,generic,6,meta-llama/Meta-Llama-3.1-8B-Instruct,0.7,256,[Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.,1,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{""chosen_option"": ""B"", ""standard_mapping"": ""Technology Leadership"", ""rationale"": ""Given the high-performance prototype, a high-performance EV sports car can create a compelling and differentiated narrative, leveraging the core technology to attract early adopters and secure future funding."", ""key_signals_used"": [""Technology"", ""Prototype performance""]}",,B,Technology Leadership,"""Given the high-performance prototype, a high-performance EV sports car can create a compelling and differentiated narrative, leveraging the core technology to attract early adopters and secure future funding.""",Technology; Prototype performance
+1_founder_period,generic,7,meta-llama/Meta-Llama-3.1-8B-Instruct,0.7,256,[Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.,1,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""C"",
+  ""standard_mapping"": ""Open Innovation"",
+  ""rationale"": ""Co-developing with a major automaker allows the company to leverage existing manufacturing assets and brand recognition, reducing capital risk. This approach also enables the company to learn from a partner and accelerate its market entry."",
+  ""key_signals_used"": [""lacking a proven supply chain"", ""manufacturing assets"", ""brand recognition""]
+}",,C,Open Innovation,"""Co-developing with a major automaker allows the company to leverage existing manufacturing assets and brand recognition, reducing capital risk. This approach also enables the company to learn from a partner and accelerate its market entry.""",lacking a proven supply chain; manufacturing assets; brand recognition
+1_founder_period,generic,8,meta-llama/Meta-Llama-3.1-8B-Instruct,0.7,256,[Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.,1,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""Selecting a high-performance EV sports car allows the company to create a compelling narrative around its EV technology, leveraging the prototype's performance potential to differentiate itself from competitors. This approach also enables the company to secure funding by showcasing its technology capabilities. The high capital risk is managed by targeting a niche market."",
+  ""key_signals_used"": [""Technology"", ""Prototype performance""]
+}",,B,Technology Leadership,"""Selecting a high-performance EV sports car allows the company to create a compelling narrative around its EV technology, leveraging the prototype's performance potential to differentiate itself from competitors. This approach also enables the company to secure funding by showcasing its technology capabilities. The high capital risk is managed by targeting a niche market.""",Technology; Prototype performance
+1_founder_period,generic,9,meta-llama/Meta-Llama-3.1-8B-Instruct,0.7,256,[Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.,1,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""To prove the concept and secure future funding, a high-performance EV sports car can showcase the technology's capabilities, creating a compelling narrative. This approach also allows the company to differentiate itself from competitors, leveraging its technology leadership."",
+  ""key_signals_used"": [""Prototype performance: 0–60 mph in 3.6 s; ~300 km range""]
+}",,B,Technology Leadership,"""To prove the concept and secure future funding, a high-performance EV sports car can showcase the technology's capabilities, creating a compelling narrative. This approach also allows the company to differentiate itself from competitors, leveraging its technology leadership.""",Prototype performance: 0–60 mph in 3.6 s; ~300 km range
+1_founder_period,generic,10,meta-llama/Meta-Llama-3.1-8B-Instruct,0.7,256,[Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.,1,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{""chosen_option"": ""B"", ""standard_mapping"": ""Technology Leadership"", ""rationale"": ""Selecting a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself in a crowded market, and manage capital risk by targeting a niche audience."", ""key_signals_used"": [""Technology"", ""Prototype performance""]}",,B,Technology Leadership,"""Selecting a high-performance EV sports car allows the company to create a compelling narrative, differentiate itself in a crowded market, and manage capital risk by targeting a niche audience.""",Technology; Prototype performance
+1_founder_period,generic,11,meta-llama/Meta-Llama-3.1-8B-Instruct,0.7,256,[Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.,1,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{""chosen_option"": ""B"", ""standard_mapping"": ""Technology Leadership"", ""rationale"": ""Given the lack of proven supply chain, manufacturing assets, and brand recognition, the company needs to differentiate itself through technology. A high-performance EV sports car leverages the existing prototype's performance potential, creating a compelling narrative and justifying future investment."", ""key_signals_used"": [""Technology"", ""Prototype performance""]}",,B,Technology Leadership,"""Given the lack of proven supply chain, manufacturing assets, and brand recognition, the company needs to differentiate itself through technology. A high-performance EV sports car leverages the existing prototype's performance potential, creating a compelling narrative and justifying future investment.""",Technology; Prototype performance
+1_founder_period,generic,12,meta-llama/Meta-Llama-3.1-8B-Instruct,0.7,256,[Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.,1,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""C"",
+  ""standard_mapping"": ""Open Innovation"",
+  ""rationale"": ""Co-developing an EV platform with a major automaker reduces capital risk by leveraging existing manufacturing assets and brand recognition. This option also allows the company to tap into the partner's expertise and resources, accelerating market entry and improving the chances of securing future funding."",
+  ""key_signals_used"": [""Technology"", ""Problem""]
+}",,C,Open Innovation,"""Co-developing an EV platform with a major automaker reduces capital risk by leveraging existing manufacturing assets and brand recognition. This option also allows the company to tap into the partner's expertise and resources, accelerating market entry and improving the chances of securing future funding.""",Technology; Problem
+1_founder_period,generic,13,meta-llama/Meta-Llama-3.1-8B-Instruct,0.7,256,[Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.,1,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""To prove the concept and secure future funding, the company must create a compelling narrative. Developing a high-performance EV sports car aligns with this goal by leveraging the existing prototype performance, showcasing technological prowess, and differentiating the brand."",
+  ""key_signals_used"": [""Technology"", ""Prototype performance: 0–60 mph in 3.6 s; ~300 km range""]
+}",,B,Technology Leadership,"""To prove the concept and secure future funding, the company must create a compelling narrative. Developing a high-performance EV sports car aligns with this goal by leveraging the existing prototype performance, showcasing technological prowess, and differentiating the brand.""",Technology; Prototype performance: 0–60 mph in 3.6 s; ~300 km range
+1_founder_period,generic,14,meta-llama/Meta-Llama-3.1-8B-Instruct,0.7,256,[Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.,1,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""Given the high-performance prototype's impressive 0-60 mph in 3.6 s and ~300 km range, developing a high-performance EV sports car will allow the company to capitalize on its technical capabilities and create a compelling narrative."",
+  ""key_signals_used"": [""Technology"", ""Prototype performance""]
+}",,B,Technology Leadership,"""Given the high-performance prototype's impressive 0-60 mph in 3.6 s and ~300 km range, developing a high-performance EV sports car will allow the company to capitalize on its technical capabilities and create a compelling narrative.""",Technology; Prototype performance
+1_founder_period,generic,15,meta-llama/Meta-Llama-3.1-8B-Instruct,0.7,256,[Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.,1,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""Given the lack of proven supply chain and manufacturing assets, developing a high-performance EV sports car allows the company to focus on its core technology while leveraging existing production capabilities. This approach enables the company to demonstrate its technical prowess and create a compelling narrative. The high-performance prototype's impressive specs further justify this option."",
+  ""key_signals_used"": [""Prototype performance: 0–60 mph in 3.6 s; ~300 km range.""]
+}",,B,Technology Leadership,"""Given the lack of proven supply chain and manufacturing assets, developing a high-performance EV sports car allows the company to focus on its core technology while leveraging existing production capabilities. This approach enables the company to demonstrate its technical prowess and create a compelling narrative. The high-performance prototype's impressive specs further justify this option.""",Prototype performance: 0–60 mph in 3.6 s; ~300 km range.

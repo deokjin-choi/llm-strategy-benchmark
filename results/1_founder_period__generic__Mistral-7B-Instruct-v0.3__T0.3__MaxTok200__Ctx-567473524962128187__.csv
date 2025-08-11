@@ -1,0 +1,361 @@
+scenario,problem_type,repeat,Model,Temperature,Max Tokens,Context Tags,Num Context,Prompt,Raw Output,Parse Error,Chosen Option,Standard Mapping,Rationale,Key Signals Used
+1_founder_period,generic,1,mistralai/Mistral-7B-Instruct-v0.3,0.3,200,"[Market] Global new car sales: ~60 million units/year.; [Market] EV share: <0.02% of global new car sales.; [Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.; [Finance] Initial funding: ~USD 7.5M Series A (private).",5,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Market] EV share: <0.02% of global new car sales. Battery electric vehicles accounted for less than ~0.02% of global new car sales.
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""C"", ""standard_mapping"": ""Open Innovation"", ""rationale"": ""Given the limited capital, lack of supply chain, manufacturing assets, and brand recognition, co-developing an EV platform with a major automaker (Open Innovation) provides a lower capital risk strategy to enter the market. This approach leverages the partner's existing resources and brand recognition, while the company focuses on its core technology strengths."", ""key_signals_used"": [""Finance"", ""Market""]}",,C,Open Innovation,"""Given the limited capital, lack of supply chain, manufacturing assets, and brand recognition, co-developing an EV platform with a major automaker (Open Innovation) provides a lower capital risk strategy to enter the market. This approach leverages the partner's existing resources and brand recognition, while the company focuses on its core technology strengths.""",Finance; Market
+1_founder_period,generic,2,mistralai/Mistral-7B-Instruct-v0.3,0.3,200,"[Market] Global new car sales: ~60 million units/year.; [Market] EV share: <0.02% of global new car sales.; [Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.; [Finance] Initial funding: ~USD 7.5M Series A (private).",5,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Market] EV share: <0.02% of global new car sales. Battery electric vehicles accounted for less than ~0.02% of global new car sales.
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""C"", ""standard_mapping"": ""Open Innovation"", ""rationale"": ""Given the limited capital, the company should consider co-developing an EV platform with a major automaker (Open Innovation) to leverage their manufacturing assets, supply chain, and brand recognition. This strategy allows the company to focus on its core technology while reducing the high capital risk."", ""key_signals_used"": [""Finance"", ""Market""]}",,C,Open Innovation,"""Given the limited capital, the company should consider co-developing an EV platform with a major automaker (Open Innovation) to leverage their manufacturing assets, supply chain, and brand recognition. This strategy allows the company to focus on its core technology while reducing the high capital risk.""",Finance; Market
+1_founder_period,generic,3,mistralai/Mistral-7B-Instruct-v0.3,0.3,200,"[Market] Global new car sales: ~60 million units/year.; [Market] EV share: <0.02% of global new car sales.; [Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.; [Finance] Initial funding: ~USD 7.5M Series A (private).",5,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Market] EV share: <0.02% of global new car sales. Battery electric vehicles accounted for less than ~0.02% of global new car sales.
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""B"", ""standard_mapping"": ""Technology Leadership"", ""rationale"": ""Given the limited capital, it's crucial to focus on a niche market with high potential for differentiation. The high-performance prototype demonstrates a competitive edge in performance, which can create a compelling narrative and attract attention. This approach aligns with Technology Leadership, as the company can establish itself as a leader in performance EVs before scaling up."", ""key_signals_used"": [""Prototype performance""]}",,B,Technology Leadership,"""Given the limited capital, it's crucial to focus on a niche market with high potential for differentiation. The high-performance prototype demonstrates a competitive edge in performance, which can create a compelling narrative and attract attention. This approach aligns with Technology Leadership, as the company can establish itself as a leader in performance EVs before scaling up.""",Prototype performance
+1_founder_period,generic,4,mistralai/Mistral-7B-Instruct-v0.3,0.3,200,"[Market] Global new car sales: ~60 million units/year.; [Market] EV share: <0.02% of global new car sales.; [Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.; [Finance] Initial funding: ~USD 7.5M Series A (private).",5,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Market] EV share: <0.02% of global new car sales. Battery electric vehicles accounted for less than ~0.02% of global new car sales.
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""C"", ""standard_mapping"": ""Open Innovation"", ""rationale"": ""Given the limited capital, lack of supply chain, manufacturing assets, and brand recognition, co-developing an EV platform with a major automaker (Open Innovation) provides a lower-risk entry strategy. This approach leverages the partner's resources and expertise to reduce the initial capital risk and accelerate market entry. The high-performance prototype demonstrates the potential of the technology, which can be used to differentiate the offering."", ""key_signals_used"": [""Initial funding"", ""Lack of supply chain, manufacturing assets, brand recognition"", ""Prototype performance""]}",,C,Open Innovation,"""Given the limited capital, lack of supply chain, manufacturing assets, and brand recognition, co-developing an EV platform with a major automaker (Open Innovation) provides a lower-risk entry strategy. This approach leverages the partner's resources and expertise to reduce the initial capital risk and accelerate market entry. The high-performance prototype demonstrates the potential of the technology, which can be used to differentiate the offering.""","Initial funding; Lack of supply chain, manufacturing assets, brand recognition; Prototype performance"
+1_founder_period,generic,5,mistralai/Mistral-7B-Instruct-v0.3,0.3,200,"[Market] Global new car sales: ~60 million units/year.; [Market] EV share: <0.02% of global new car sales.; [Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.; [Finance] Initial funding: ~USD 7.5M Series A (private).",5,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Market] EV share: <0.02% of global new car sales. Battery electric vehicles accounted for less than ~0.02% of global new car sales.
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""C"", ""standard_mapping"": ""Open Innovation"", ""rationale"": ""Given the limited capital, lack of supply chain, manufacturing assets, and brand recognition, co-developing an EV platform with a major automaker (Open Innovation) is the most appropriate strategy. This approach allows the company to leverage the partner's resources, reduce risk, and gain access to established markets, while focusing on its core technology."", ""key_signals_used"": [""Finance"", ""Market""]}",,C,Open Innovation,"""Given the limited capital, lack of supply chain, manufacturing assets, and brand recognition, co-developing an EV platform with a major automaker (Open Innovation) is the most appropriate strategy. This approach allows the company to leverage the partner's resources, reduce risk, and gain access to established markets, while focusing on its core technology.""",Finance; Market
+1_founder_period,generic,6,mistralai/Mistral-7B-Instruct-v0.3,0.3,200,"[Market] Global new car sales: ~60 million units/year.; [Market] EV share: <0.02% of global new car sales.; [Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.; [Finance] Initial funding: ~USD 7.5M Series A (private).",5,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Market] EV share: <0.02% of global new car sales. Battery electric vehicles accounted for less than ~0.02% of global new car sales.
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""B"", ""standard_mapping"": ""Technology Leadership"", ""rationale"": ""Given the limited capital, it's essential to focus on a niche market with high differentiation. The high-performance prototype demonstrates a competitive edge in performance, which can help create a compelling narrative and attract attention. This strategy, while risky, has the potential to secure future funding and establish a brand in the EV market."", ""key_signals_used"": [""Prototype performance""]}",,B,Technology Leadership,"""Given the limited capital, it's essential to focus on a niche market with high differentiation. The high-performance prototype demonstrates a competitive edge in performance, which can help create a compelling narrative and attract attention. This strategy, while risky, has the potential to secure future funding and establish a brand in the EV market.""",Prototype performance
+1_founder_period,generic,7,mistralai/Mistral-7B-Instruct-v0.3,0.3,200,"[Market] Global new car sales: ~60 million units/year.; [Market] EV share: <0.02% of global new car sales.; [Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.; [Finance] Initial funding: ~USD 7.5M Series A (private).",5,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Market] EV share: <0.02% of global new car sales. Battery electric vehicles accounted for less than ~0.02% of global new car sales.
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""C"", ""standard_mapping"": ""Open Innovation"", ""rationale"": ""Given the limited capital and lack of a proven supply chain, co-developing an EV platform with a major automaker (Open Innovation) allows the company to leverage the partner's resources, reduce risk, and gain access to established manufacturing and distribution networks. This strategy also provides the opportunity to learn and adapt while working with an industry leader."", ""key_signals_used"": [""Finance"", ""Market""]}",,C,Open Innovation,"""Given the limited capital and lack of a proven supply chain, co-developing an EV platform with a major automaker (Open Innovation) allows the company to leverage the partner's resources, reduce risk, and gain access to established manufacturing and distribution networks. This strategy also provides the opportunity to learn and adapt while working with an industry leader.""",Finance; Market
+1_founder_period,generic,8,mistralai/Mistral-7B-Instruct-v0.3,0.3,200,"[Market] Global new car sales: ~60 million units/year.; [Market] EV share: <0.02% of global new car sales.; [Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.; [Finance] Initial funding: ~USD 7.5M Series A (private).",5,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Market] EV share: <0.02% of global new car sales. Battery electric vehicles accounted for less than ~0.02% of global new car sales.
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""C"", ""standard_mapping"": ""Open Innovation"", ""rationale"": ""Given the limited capital, lack of supply chain, manufacturing assets, and brand recognition, co-developing an EV platform with a major automaker (Open Innovation) allows the company to leverage the partner's resources and expertise, reducing risk and accelerating market entry. The key signals used are: Initial funding, Market (EV share), Technology (Li-ion cell cost, prototype performance)."" , ""key_signals_used"": [""Initial funding"", ""Market"", ""Technology""]}",,C,Open Innovation,"""Given the limited capital, lack of supply chain, manufacturing assets, and brand recognition, co-developing an EV platform with a major automaker (Open Innovation) allows the company to leverage the partner's resources and expertise, reducing risk and accelerating market entry. The key signals used are: Initial funding, Market (EV share), Technology (Li-ion cell cost, prototype performance).""",Initial funding; Market; Technology
+1_founder_period,generic,9,mistralai/Mistral-7B-Instruct-v0.3,0.3,200,"[Market] Global new car sales: ~60 million units/year.; [Market] EV share: <0.02% of global new car sales.; [Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.; [Finance] Initial funding: ~USD 7.5M Series A (private).",5,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Market] EV share: <0.02% of global new car sales. Battery electric vehicles accounted for less than ~0.02% of global new car sales.
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""C"", ""standard_mapping"": ""Open Innovation"", ""rationale"": ""Given the limited capital, lack of supply chain, manufacturing assets, and brand recognition, co-developing an EV platform with a major automaker (Open Innovation) allows the company to leverage the partner's resources, reduce risk, and gain access to established markets, thus increasing the chances of securing future funding."", ""key_signals_used"": [""Market"", ""Finance""]}",,C,Open Innovation,"""Given the limited capital, lack of supply chain, manufacturing assets, and brand recognition, co-developing an EV platform with a major automaker (Open Innovation) allows the company to leverage the partner's resources, reduce risk, and gain access to established markets, thus increasing the chances of securing future funding.""",Market; Finance
+1_founder_period,generic,10,mistralai/Mistral-7B-Instruct-v0.3,0.3,200,"[Market] Global new car sales: ~60 million units/year.; [Market] EV share: <0.02% of global new car sales.; [Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.; [Finance] Initial funding: ~USD 7.5M Series A (private).",5,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Market] EV share: <0.02% of global new car sales. Battery electric vehicles accounted for less than ~0.02% of global new car sales.
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""C"", ""standard_mapping"": ""Open Innovation"", ""rationale"": ""Given the limited capital and lack of supply chain, manufacturing assets, and brand recognition, co-developing an EV platform with a major automaker (Open Innovation) allows the company to leverage the partner's resources and expertise, reducing risk and accelerating market entry."", ""key_signals_used"": [""Finance"", ""Market""]}",,C,Open Innovation,"""Given the limited capital and lack of supply chain, manufacturing assets, and brand recognition, co-developing an EV platform with a major automaker (Open Innovation) allows the company to leverage the partner's resources and expertise, reducing risk and accelerating market entry.""",Finance; Market
+1_founder_period,generic,11,mistralai/Mistral-7B-Instruct-v0.3,0.3,200,"[Market] Global new car sales: ~60 million units/year.; [Market] EV share: <0.02% of global new car sales.; [Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.; [Finance] Initial funding: ~USD 7.5M Series A (private).",5,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Market] EV share: <0.02% of global new car sales. Battery electric vehicles accounted for less than ~0.02% of global new car sales.
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""B"", ""standard_mapping"": ""Technology Leadership"", ""rationale"": ""Given the limited capital, it's crucial to focus on a niche market segment to create a compelling differentiation. The high-performance prototype demonstrates the company's technological prowess in the EV space. Developing a high-performance EV sports car (option B) allows the company to establish technology leadership in this niche market, which could attract early adopters and potential investors."", ""key_signals_used"": [""Prototype performance""]}",,B,Technology Leadership,"""Given the limited capital, it's crucial to focus on a niche market segment to create a compelling differentiation. The high-performance prototype demonstrates the company's technological prowess in the EV space. Developing a high-performance EV sports car (option B) allows the company to establish technology leadership in this niche market, which could attract early adopters and potential investors.""",Prototype performance
+1_founder_period,generic,12,mistralai/Mistral-7B-Instruct-v0.3,0.3,200,"[Market] Global new car sales: ~60 million units/year.; [Market] EV share: <0.02% of global new car sales.; [Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.; [Finance] Initial funding: ~USD 7.5M Series A (private).",5,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Market] EV share: <0.02% of global new car sales. Battery electric vehicles accounted for less than ~0.02% of global new car sales.
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""C"", ""standard_mapping"": ""Open Innovation"", ""rationale"": ""Given the limited capital, lack of supply chain, manufacturing assets, and brand recognition, co-developing an EV platform with a major automaker (Open Innovation) reduces the risk by leveraging their established infrastructure and brand. This strategy allows the company to focus on its core technology while gaining access to a larger market."", ""key_signals_used"": [""Market"", ""Finance""]}",,C,Open Innovation,"""Given the limited capital, lack of supply chain, manufacturing assets, and brand recognition, co-developing an EV platform with a major automaker (Open Innovation) reduces the risk by leveraging their established infrastructure and brand. This strategy allows the company to focus on its core technology while gaining access to a larger market.""",Market; Finance
+1_founder_period,generic,13,mistralai/Mistral-7B-Instruct-v0.3,0.3,200,"[Market] Global new car sales: ~60 million units/year.; [Market] EV share: <0.02% of global new car sales.; [Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.; [Finance] Initial funding: ~USD 7.5M Series A (private).",5,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Market] EV share: <0.02% of global new car sales. Battery electric vehicles accounted for less than ~0.02% of global new car sales.
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""C"", ""standard_mapping"": ""Open Innovation"", ""rationale"": ""Given the limited capital, lack of supply chain, and brand recognition, co-developing an EV platform with a major automaker (Open Innovation) provides a lower capital risk strategy. This approach leverages the partner's manufacturing assets, established brand, and existing supply chain, while the company focuses on its core technology and differentiation."", ""key_signals_used"": [""Finance"", ""Market""]}",,C,Open Innovation,"""Given the limited capital, lack of supply chain, and brand recognition, co-developing an EV platform with a major automaker (Open Innovation) provides a lower capital risk strategy. This approach leverages the partner's manufacturing assets, established brand, and existing supply chain, while the company focuses on its core technology and differentiation.""",Finance; Market
+1_founder_period,generic,14,mistralai/Mistral-7B-Instruct-v0.3,0.3,200,"[Market] Global new car sales: ~60 million units/year.; [Market] EV share: <0.02% of global new car sales.; [Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.; [Finance] Initial funding: ~USD 7.5M Series A (private).",5,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Market] EV share: <0.02% of global new car sales. Battery electric vehicles accounted for less than ~0.02% of global new car sales.
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""C"", ""standard_mapping"": ""Open Innovation"", ""rationale"": ""Given the limited capital, lack of supply chain, manufacturing assets, and brand recognition, it's strategic to leverage an existing automaker's resources through co-development (Option C). This approach reduces the high capital risk and allows for faster market entry, as the established partner can provide the necessary infrastructure. The key signals used are: [Market], [Finance]"", ""key_signals_used"": [""Global new car sales"", ""Initial funding""]}",,C,Open Innovation,"""Given the limited capital, lack of supply chain, manufacturing assets, and brand recognition, it's strategic to leverage an existing automaker's resources through co-development (Option C). This approach reduces the high capital risk and allows for faster market entry, as the established partner can provide the necessary infrastructure. The key signals used are: [Market], [Finance]""",Global new car sales; Initial funding
+1_founder_period,generic,15,mistralai/Mistral-7B-Instruct-v0.3,0.3,200,"[Market] Global new car sales: ~60 million units/year.; [Market] EV share: <0.02% of global new car sales.; [Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.; [Finance] Initial funding: ~USD 7.5M Series A (private).",5,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Market] EV share: <0.02% of global new car sales. Battery electric vehicles accounted for less than ~0.02% of global new car sales.
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""C"", ""standard_mapping"": ""Open Innovation"", ""rationale"": ""Given the limited capital, lack of supply chain, manufacturing assets, and brand recognition, co-developing an EV platform with a major automaker (Open Innovation) allows the company to leverage the partner's resources and expertise, reducing the high capital risk and accelerating market entry."", ""key_signals_used"": [""Finance"", ""Market""]}",,C,Open Innovation,"""Given the limited capital, lack of supply chain, manufacturing assets, and brand recognition, co-developing an EV platform with a major automaker (Open Innovation) allows the company to leverage the partner's resources and expertise, reducing the high capital risk and accelerating market entry.""",Finance; Market

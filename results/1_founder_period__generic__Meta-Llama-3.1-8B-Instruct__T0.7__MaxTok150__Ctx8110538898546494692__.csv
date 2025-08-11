@@ -1,0 +1,416 @@
+scenario,problem_type,repeat,Model,Temperature,Max Tokens,Context Tags,Num Context,Prompt,Raw Output,Parse Error,Chosen Option,Standard Mapping,Rationale,Key Signals Used
+1_founder_period,generic,1,meta-llama/Meta-Llama-3.1-8B-Instruct,0.7,150,"[Market] Global new car sales: ~60 million units/year.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.; [Finance] Initial funding: ~USD 7.5M Series A (private).; [Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs.",4,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+- [Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs. Major automakers at the time were focused on hybrid and fuel cell technologies, not pure electric vehicles.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""C"",
+  ""standard_mapping"": ""Open Innovation"",
+  ""rationale"": ""Co-developing an EV platform with a major automaker reduces capital risk by leveraging established manufacturing assets and brand recognition, while allowing the company to create a compelling narrative and differentiate itself in the market."",
+  ""key_signals_used"": [""[Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs."", ""[Finance] Initial funding: ~USD 7.5M Series A (private)""]
+}",,C,Open Innovation,"""Co-developing an EV platform with a major automaker reduces capital risk by leveraging established manufacturing assets and brand recognition, while allowing the company to create a compelling narrative and differentiate itself in the market.""","[Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs.; [Finance] Initial funding: ~USD 7.5M Series A (private)"
+1_founder_period,generic,2,meta-llama/Meta-Llama-3.1-8B-Instruct,0.7,150,"[Market] Global new car sales: ~60 million units/year.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.; [Finance] Initial funding: ~USD 7.5M Series A (private).; [Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs.",4,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+- [Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs. Major automakers at the time were focused on hybrid and fuel cell technologies, not pure electric vehicles.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""Given the initial funding and the need to create a compelling narrative, developing a high-performance EV sports car enables the company to demonstrate its technology leadership and differentiate itself in the market. This option leverages the prototype's performance potential, aligning with the Technology Leadership strategy."",
+  ""key_signals_used"": [""Technology"", ""Finance"", ""Market"", ""Problem""]
+}",,B,Technology Leadership,"""Given the initial funding and the need to create a compelling narrative, developing a high-performance EV sports car enables the company to demonstrate its technology leadership and differentiate itself in the market. This option leverages the prototype's performance potential, aligning with the Technology Leadership strategy.""",Technology; Finance; Market; Problem
+1_founder_period,generic,3,meta-llama/Meta-Llama-3.1-8B-Instruct,0.7,150,"[Market] Global new car sales: ~60 million units/year.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.; [Finance] Initial funding: ~USD 7.5M Series A (private).; [Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs.",4,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+- [Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs. Major automakers at the time were focused on hybrid and fuel cell technologies, not pure electric vehicles.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""The company should focus on developing a high-performance EV sports car to create a compelling narrative and differentiate itself from established automakers. This approach leverages the prototype's performance potential, and the limited capital can be allocated effectively to create a unique selling proposition. By doing so, the company can attract early adopters and generate buzz, increasing its chances of securing future funding."",
+  ""key_signals_used"": [""Technology"", ""Prototype performance"", ""Finance"", ""Market"", ""Incumbent focus""]
+}",,B,Technology Leadership,"""The company should focus on developing a high-performance EV sports car to create a compelling narrative and differentiate itself from established automakers. This approach leverages the prototype's performance potential, and the limited capital can be allocated effectively to create a unique selling proposition. By doing so, the company can attract early adopters and generate buzz, increasing its chances of securing future funding.""",Technology; Prototype performance; Finance; Market; Incumbent focus
+1_founder_period,generic,4,meta-llama/Meta-Llama-3.1-8B-Instruct,0.7,150,"[Market] Global new car sales: ~60 million units/year.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.; [Finance] Initial funding: ~USD 7.5M Series A (private).; [Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs.",4,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+- [Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs. Major automakers at the time were focused on hybrid and fuel cell technologies, not pure electric vehicles.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""A"",
+  ""standard_mapping"": ""Fast Follower"",
+  ""rationale"": ""Given the limited capital and the established automakers' focus on hybrid and fuel cell technologies, building a portfolio of hybrid/fuel cell vehicles is a more capital-efficient approach to prove the concept and secure future funding."",
+  ""key_signals_used"": [""Market"", ""Finance""]
+}",,A,Fast Follower,"""Given the limited capital and the established automakers' focus on hybrid and fuel cell technologies, building a portfolio of hybrid/fuel cell vehicles is a more capital-efficient approach to prove the concept and secure future funding.""",Market; Finance
+1_founder_period,generic,5,meta-llama/Meta-Llama-3.1-8B-Instruct,0.7,150,"[Market] Global new car sales: ~60 million units/year.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.; [Finance] Initial funding: ~USD 7.5M Series A (private).; [Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs.",4,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+- [Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs. Major automakers at the time were focused on hybrid and fuel cell technologies, not pure electric vehicles.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{""chosen_option"": ""B"", ""standard_mapping"": ""Technology Leadership"", ""rationale"": ""Given the high-performance prototype and the incumbent focus on hybrid and fuel cell technologies, developing a high-performance EV sports car can help the company create a compelling narrative and differentiate itself in the market."", ""key_signals_used"": [""Technology"", ""Market"", ""Prototype performance""]}",,B,Technology Leadership,"""Given the high-performance prototype and the incumbent focus on hybrid and fuel cell technologies, developing a high-performance EV sports car can help the company create a compelling narrative and differentiate itself in the market.""",Technology; Market; Prototype performance
+1_founder_period,generic,6,meta-llama/Meta-Llama-3.1-8B-Instruct,0.7,150,"[Market] Global new car sales: ~60 million units/year.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.; [Finance] Initial funding: ~USD 7.5M Series A (private).; [Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs.",4,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+- [Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs. Major automakers at the time were focused on hybrid and fuel cell technologies, not pure electric vehicles.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""To manage high capital risk and create a compelling narrative, the company should focus on a high-performance EV sports car. This option leverages the existing prototype performance and differentiates the company from established automakers focused on hybrid and fuel cell technologies. Limited initial funding also supports this choice, as it requires minimal investment to develop a niche product."",
+  ""key_signals_used"": [""Technology"", ""Market"", ""Finance""]
+}",,B,Technology Leadership,"""To manage high capital risk and create a compelling narrative, the company should focus on a high-performance EV sports car. This option leverages the existing prototype performance and differentiates the company from established automakers focused on hybrid and fuel cell technologies. Limited initial funding also supports this choice, as it requires minimal investment to develop a niche product.""",Technology; Market; Finance
+1_founder_period,generic,7,meta-llama/Meta-Llama-3.1-8B-Instruct,0.7,150,"[Market] Global new car sales: ~60 million units/year.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.; [Finance] Initial funding: ~USD 7.5M Series A (private).; [Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs.",4,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+- [Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs. Major automakers at the time were focused on hybrid and fuel cell technologies, not pure electric vehicles.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""Given the high capital risk and the need for a compelling narrative, developing a high-performance EV sports car allows the company to create a differentiated product that leverages its existing technology and prototype performance. This approach also aligns with the market trend of established automakers focusing on hybrid and fuel cell technologies, not pure EVs."",
+  ""key_signals_used"": [""Prototype performance: 0–60 mph in 3.6 s; ~300 km range"", ""Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs""]
+}",,B,Technology Leadership,"""Given the high capital risk and the need for a compelling narrative, developing a high-performance EV sports car allows the company to create a differentiated product that leverages its existing technology and prototype performance. This approach also aligns with the market trend of established automakers focusing on hybrid and fuel cell technologies, not pure EVs.""","Prototype performance: 0–60 mph in 3.6 s; ~300 km range; Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs"
+1_founder_period,generic,8,meta-llama/Meta-Llama-3.1-8B-Instruct,0.7,150,"[Market] Global new car sales: ~60 million units/year.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.; [Finance] Initial funding: ~USD 7.5M Series A (private).; [Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs.",4,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+- [Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs. Major automakers at the time were focused on hybrid and fuel cell technologies, not pure electric vehicles.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""Given the initial funding and high capital risk, a Technology Leadership approach allows the company to create a compelling narrative with a high-performance EV sports car, leveraging its unique technology to differentiate itself from competitors. This approach also enables the company to showcase its capabilities and attract future funding."",
+  ""key_signals_used"": [""Technology"", ""Finance"", ""Problem""]
+}",,B,Technology Leadership,"""Given the initial funding and high capital risk, a Technology Leadership approach allows the company to create a compelling narrative with a high-performance EV sports car, leveraging its unique technology to differentiate itself from competitors. This approach also enables the company to showcase its capabilities and attract future funding.""",Technology; Finance; Problem
+1_founder_period,generic,9,meta-llama/Meta-Llama-3.1-8B-Instruct,0.7,150,"[Market] Global new car sales: ~60 million units/year.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.; [Finance] Initial funding: ~USD 7.5M Series A (private).; [Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs.",4,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+- [Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs. Major automakers at the time were focused on hybrid and fuel cell technologies, not pure electric vehicles.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""Given the high-performance prototype and initial funding, leveraging this technology leadership position in EVs could create a compelling narrative and differentiate the company in the market."",
+  ""key_signals_used"": [""Technology"", ""Prototype performance"", ""Finance"", ""Market"", ""Incumbent focus""]
+}",,B,Technology Leadership,"""Given the high-performance prototype and initial funding, leveraging this technology leadership position in EVs could create a compelling narrative and differentiate the company in the market.""",Technology; Prototype performance; Finance; Market; Incumbent focus
+1_founder_period,generic,10,meta-llama/Meta-Llama-3.1-8B-Instruct,0.7,150,"[Market] Global new car sales: ~60 million units/year.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.; [Finance] Initial funding: ~USD 7.5M Series A (private).; [Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs.",4,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+- [Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs. Major automakers at the time were focused on hybrid and fuel cell technologies, not pure electric vehicles.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""Given the initial funding of USD 7.5M and the need to create a compelling narrative, developing a high-performance EV sports car allows the company to showcase its innovative capabilities and performance potential, thereby attracting attention and securing future funding."",
+  ""key_signals_used"": [""Prototype performance: 0–60 mph in 3.6 s; ~300 km range"", ""Finance: Initial funding: ~USD 7.5M Series A (private)""]
+}",,B,Technology Leadership,"""Given the initial funding of USD 7.5M and the need to create a compelling narrative, developing a high-performance EV sports car allows the company to showcase its innovative capabilities and performance potential, thereby attracting attention and securing future funding.""",Prototype performance: 0–60 mph in 3.6 s; ~300 km range; Finance: Initial funding: ~USD 7.5M Series A (private)
+1_founder_period,generic,11,meta-llama/Meta-Llama-3.1-8B-Instruct,0.7,150,"[Market] Global new car sales: ~60 million units/year.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.; [Finance] Initial funding: ~USD 7.5M Series A (private).; [Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs.",4,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+- [Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs. Major automakers at the time were focused on hybrid and fuel cell technologies, not pure electric vehicles.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""Developing a high-performance EV sports car leverages the company's unique strengths, attracts attention, and creates a compelling narrative to secure future funding. This approach also allows the company to focus on a specific niche, reducing capital risk. The prototype's performance potential supports this strategy."",
+  ""key_signals_used"": [""Technology"", ""Prototype performance"", ""Finance""]
+}",,B,Technology Leadership,"""Developing a high-performance EV sports car leverages the company's unique strengths, attracts attention, and creates a compelling narrative to secure future funding. This approach also allows the company to focus on a specific niche, reducing capital risk. The prototype's performance potential supports this strategy.""",Technology; Prototype performance; Finance
+1_founder_period,generic,12,meta-llama/Meta-Llama-3.1-8B-Instruct,0.7,150,"[Market] Global new car sales: ~60 million units/year.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.; [Finance] Initial funding: ~USD 7.5M Series A (private).; [Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs.",4,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+- [Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs. Major automakers at the time were focused on hybrid and fuel cell technologies, not pure electric vehicles.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""Given the high-performance prototype and the incumbent focus on hybrid and fuel cell technologies, a high-performance EV sports car would create a compelling narrative and differentiate the company from established automakers."",
+  ""key_signals_used"": [""Prototype performance"", ""Market"", ""Incumbent focus""]
+}",,B,Technology Leadership,"""Given the high-performance prototype and the incumbent focus on hybrid and fuel cell technologies, a high-performance EV sports car would create a compelling narrative and differentiate the company from established automakers.""",Prototype performance; Market; Incumbent focus
+1_founder_period,generic,13,meta-llama/Meta-Llama-3.1-8B-Instruct,0.7,150,"[Market] Global new car sales: ~60 million units/year.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.; [Finance] Initial funding: ~USD 7.5M Series A (private).; [Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs.",4,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+- [Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs. Major automakers at the time were focused on hybrid and fuel cell technologies, not pure electric vehicles.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""Given the high-performance prototype's exceptional performance and limited capital, developing a high-performance EV sports car allows the company to create a compelling and differentiated narrative while minimizing the capital risk associated with establishing a new supply chain and manufacturing assets."",
+  ""key_signals_used"": [""Prototype performance"", ""Finance"", ""Market""]
+}",,B,Technology Leadership,"""Given the high-performance prototype's exceptional performance and limited capital, developing a high-performance EV sports car allows the company to create a compelling and differentiated narrative while minimizing the capital risk associated with establishing a new supply chain and manufacturing assets.""",Prototype performance; Finance; Market
+1_founder_period,generic,14,meta-llama/Meta-Llama-3.1-8B-Instruct,0.7,150,"[Market] Global new car sales: ~60 million units/year.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.; [Finance] Initial funding: ~USD 7.5M Series A (private).; [Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs.",4,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+- [Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs. Major automakers at the time were focused on hybrid and fuel cell technologies, not pure electric vehicles.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""The high-performance prototype demonstrated the potential of EVs, and the established automakers' focus on hybrid and fuel cell technologies created an opportunity for technology leadership. With limited capital, a high-risk strategy like building a portfolio of hybrid/fuel cell vehicles (A) is less suitable. Co-developing an EV platform (C) might be beneficial but would require significant partnerships and investments. Developing a high-performance EV sports car (B) allows for a compelling narrative and differentiation."",
+  ""key_signals_used"": [""Technology"", ""Market"", ""Finance""]
+}",,B,Technology Leadership,"""The high-performance prototype demonstrated the potential of EVs, and the established automakers' focus on hybrid and fuel cell technologies created an opportunity for technology leadership. With limited capital, a high-risk strategy like building a portfolio of hybrid/fuel cell vehicles (A) is less suitable. Co-developing an EV platform (C) might be beneficial but would require significant partnerships and investments. Developing a high-performance EV sports car (B) allows for a compelling narrative and differentiation.""",Technology; Market; Finance
+1_founder_period,generic,15,meta-llama/Meta-Llama-3.1-8B-Instruct,0.7,150,"[Market] Global new car sales: ~60 million units/year.; [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.; [Finance] Initial funding: ~USD 7.5M Series A (private).; [Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs.",4,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+- [Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range. A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, demonstrating the performance potential of EVs.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+- [Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs. Major automakers at the time were focused on hybrid and fuel cell technologies, not pure electric vehicles.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON.","{
+  ""chosen_option"": ""B"",
+  ""standard_mapping"": ""Technology Leadership"",
+  ""rationale"": ""Given the high capital risk, leveraging the prototype's performance to create a compelling narrative and differentiate the company from established automakers is crucial. The Technology Leadership strategy allows the company to capitalize on its competitive advantage while addressing the capital risk."",
+  ""key_signals_used"": [""Technology"", ""Problem""]
+}",,B,Technology Leadership,"""Given the high capital risk, leveraging the prototype's performance to create a compelling narrative and differentiate the company from established automakers is crucial. The Technology Leadership strategy allows the company to capitalize on its competitive advantage while addressing the capital risk.""",Technology; Problem

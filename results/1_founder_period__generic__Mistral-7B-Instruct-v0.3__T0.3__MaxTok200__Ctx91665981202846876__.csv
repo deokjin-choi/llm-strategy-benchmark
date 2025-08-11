@@ -1,0 +1,316 @@
+scenario,problem_type,repeat,Model,Temperature,Max Tokens,Context Tags,Num Context,Prompt,Raw Output,Parse Error,Chosen Option,Standard Mapping,Rationale,Key Signals Used
+1_founder_period,generic,1,mistralai/Mistral-7B-Instruct-v0.3,0.3,200,"[Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Finance] Initial funding: ~USD 7.5M Series A (private).",2,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""A"", ""standard_mapping"": ""Fast Follower"", ""rationale"": ""Given the limited capital and lack of a proven supply chain, manufacturing assets, and brand recognition, it's strategic to adopt a Fast Follower approach (A) by building a portfolio of hybrid/fuel cell vehicles. This strategy allows the company to leverage existing technology and infrastructure, reducing the risk and cost associated with developing new technology (B) or co-developing with a major automaker (C)."", ""key_signals_used"": [""Technology"", ""Finance""]}",,A,Fast Follower,"""Given the limited capital and lack of a proven supply chain, manufacturing assets, and brand recognition, it's strategic to adopt a Fast Follower approach (A) by building a portfolio of hybrid/fuel cell vehicles. This strategy allows the company to leverage existing technology and infrastructure, reducing the risk and cost associated with developing new technology (B) or co-developing with a major automaker (C).""",Technology; Finance
+1_founder_period,generic,2,mistralai/Mistral-7B-Instruct-v0.3,0.3,200,"[Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Finance] Initial funding: ~USD 7.5M Series A (private).",2,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""C"", ""standard_mapping"": ""Open Innovation"", ""rationale"": ""Given the limited capital, it's strategic to reduce risk by co-developing an EV platform with a major automaker (Open Innovation). This approach leverages the partner's manufacturing assets, supply chain, and brand recognition, which are crucial for market entry."", ""key_signals_used"": [""Initial funding""]}",,C,Open Innovation,"""Given the limited capital, it's strategic to reduce risk by co-developing an EV platform with a major automaker (Open Innovation). This approach leverages the partner's manufacturing assets, supply chain, and brand recognition, which are crucial for market entry.""",Initial funding
+1_founder_period,generic,3,mistralai/Mistral-7B-Instruct-v0.3,0.3,200,"[Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Finance] Initial funding: ~USD 7.5M Series A (private).",2,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""A"", ""standard_mapping"": ""Fast Follower"", ""rationale"": ""Given the limited capital and the need to prove the concept, a Fast Follower strategy is appropriate. By building a portfolio of hybrid/fuel cell vehicles, the company can leverage existing technology and reduce the risk of developing a completely new product. This approach allows for a more gradual market entry, which aligns with the company's need to secure future funding."", ""key_signals_used"": [""Technology"", ""Finance""]}",,A,Fast Follower,"""Given the limited capital and the need to prove the concept, a Fast Follower strategy is appropriate. By building a portfolio of hybrid/fuel cell vehicles, the company can leverage existing technology and reduce the risk of developing a completely new product. This approach allows for a more gradual market entry, which aligns with the company's need to secure future funding.""",Technology; Finance
+1_founder_period,generic,4,mistralai/Mistral-7B-Instruct-v0.3,0.3,200,"[Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Finance] Initial funding: ~USD 7.5M Series A (private).",2,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""A"", ""standard_mapping"": ""Fast Follower"", ""rationale"": ""Given the limited capital and the need to prove the concept, it's strategic to follow established players in the market (Fast Follower) by building a portfolio of hybrid/fuel cell vehicles. This approach reduces the risk of failure by leveraging existing technologies and supply chains."", ""key_signals_used"": [""Technology"", ""Finance""]}",,A,Fast Follower,"""Given the limited capital and the need to prove the concept, it's strategic to follow established players in the market (Fast Follower) by building a portfolio of hybrid/fuel cell vehicles. This approach reduces the risk of failure by leveraging existing technologies and supply chains.""",Technology; Finance
+1_founder_period,generic,5,mistralai/Mistral-7B-Instruct-v0.3,0.3,200,"[Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Finance] Initial funding: ~USD 7.5M Series A (private).",2,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""C"", ""standard_mapping"": ""Open Innovation"", ""rationale"": ""Given the limited capital, it's advisable to leverage an established automaker's resources and expertise through co-development (Option C). This strategy reduces the high capital risk and allows the company to benefit from the partner's brand recognition, supply chain, and manufacturing assets. This approach aligns with the goal of proving the concept and securing future funding."", ""key_signals_used"": [""Initial funding"", ""limited capital""]}",,C,Open Innovation,"""Given the limited capital, it's advisable to leverage an established automaker's resources and expertise through co-development (Option C). This strategy reduces the high capital risk and allows the company to benefit from the partner's brand recognition, supply chain, and manufacturing assets. This approach aligns with the goal of proving the concept and securing future funding.""",Initial funding; limited capital
+1_founder_period,generic,6,mistralai/Mistral-7B-Instruct-v0.3,0.3,200,"[Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Finance] Initial funding: ~USD 7.5M Series A (private).",2,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""C"", ""standard_mapping"": ""Open Innovation"", ""rationale"": ""Given the limited capital, it's strategic to leverage a partnership with a major automaker (Open Innovation) to co-develop an EV platform. This reduces the risk associated with building a supply chain and manufacturing assets, while also providing access to established brand recognition."", ""key_signals_used"": [""Initial funding"", ""Limited capital""]}",,C,Open Innovation,"""Given the limited capital, it's strategic to leverage a partnership with a major automaker (Open Innovation) to co-develop an EV platform. This reduces the risk associated with building a supply chain and manufacturing assets, while also providing access to established brand recognition.""",Initial funding; Limited capital
+1_founder_period,generic,7,mistralai/Mistral-7B-Instruct-v0.3,0.3,200,"[Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Finance] Initial funding: ~USD 7.5M Series A (private).",2,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""A"", ""standard_mapping"": ""Fast Follower"", ""rationale"": ""Given the limited capital and lack of a proven supply chain, manufacturing assets, and brand recognition, a Fast Follower strategy (Option A) is more appropriate. This approach allows the company to leverage existing technology and market trends, reducing the risk associated with developing new technology. The hybrid/fuel cell vehicles market is growing, offering a compelling and differentiated narrative."", ""key_signals_used"": [""Technology"", ""Finance""]}",,A,Fast Follower,"""Given the limited capital and lack of a proven supply chain, manufacturing assets, and brand recognition, a Fast Follower strategy (Option A) is more appropriate. This approach allows the company to leverage existing technology and market trends, reducing the risk associated with developing new technology. The hybrid/fuel cell vehicles market is growing, offering a compelling and differentiated narrative.""",Technology; Finance
+1_founder_period,generic,8,mistralai/Mistral-7B-Instruct-v0.3,0.3,200,"[Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Finance] Initial funding: ~USD 7.5M Series A (private).",2,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""C"", ""standard_mapping"": ""Open Innovation"", ""rationale"": ""Given the limited capital, it's strategic to leverage a partnership with a major automaker (Open Innovation) to co-develop an EV platform, reducing the risk of building a supply chain and manufacturing assets from scratch. This approach allows the company to focus on its core technology while benefiting from the established brand recognition of the partner."", ""key_signals_used"": [""Initial funding"", ""Limited capital""]}",,C,Open Innovation,"""Given the limited capital, it's strategic to leverage a partnership with a major automaker (Open Innovation) to co-develop an EV platform, reducing the risk of building a supply chain and manufacturing assets from scratch. This approach allows the company to focus on its core technology while benefiting from the established brand recognition of the partner.""",Initial funding; Limited capital
+1_founder_period,generic,9,mistralai/Mistral-7B-Instruct-v0.3,0.3,200,"[Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Finance] Initial funding: ~USD 7.5M Series A (private).",2,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""C"", ""standard_mapping"": ""Open Innovation"", ""rationale"": ""Given the limited capital and lack of proven supply chain, manufacturing assets, and brand recognition, co-developing an EV platform with a major automaker (Option C) provides a lower capital risk strategy through open innovation. This approach leverages the resources and brand recognition of the major automaker, while the new company focuses on its core technology."", ""key_signals_used"": [""Finance"", ""Technology""]}",,C,Open Innovation,"""Given the limited capital and lack of proven supply chain, manufacturing assets, and brand recognition, co-developing an EV platform with a major automaker (Option C) provides a lower capital risk strategy through open innovation. This approach leverages the resources and brand recognition of the major automaker, while the new company focuses on its core technology.""",Finance; Technology
+1_founder_period,generic,10,mistralai/Mistral-7B-Instruct-v0.3,0.3,200,"[Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Finance] Initial funding: ~USD 7.5M Series A (private).",2,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""A"", ""standard_mapping"": ""Fast Follower"", ""rationale"": ""Given the limited capital, it's strategic to adopt a fast follower approach (Option A) by building a portfolio of hybrid/fuel cell vehicles. This allows the company to leverage existing technology and infrastructure, reducing the risk and cost associated with developing new technology. It also provides a more accessible entry point into the market."", ""key_signals_used"": [""Technology"", ""Finance""]}",,A,Fast Follower,"""Given the limited capital, it's strategic to adopt a fast follower approach (Option A) by building a portfolio of hybrid/fuel cell vehicles. This allows the company to leverage existing technology and infrastructure, reducing the risk and cost associated with developing new technology. It also provides a more accessible entry point into the market.""",Technology; Finance
+1_founder_period,generic,11,mistralai/Mistral-7B-Instruct-v0.3,0.3,200,"[Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Finance] Initial funding: ~USD 7.5M Series A (private).",2,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""A"", ""standard_mapping"": ""Fast Follower"", ""rationale"": ""Given the limited capital and lack of a proven supply chain, manufacturing assets, and brand recognition, it's strategic to adopt a Fast Follower approach (A) by building a portfolio of hybrid/fuel cell vehicles. This allows the company to leverage existing technology and infrastructure, reducing risk and capital expenditure."", ""key_signals_used"": [""Technology"", ""Finance""]}",,A,Fast Follower,"""Given the limited capital and lack of a proven supply chain, manufacturing assets, and brand recognition, it's strategic to adopt a Fast Follower approach (A) by building a portfolio of hybrid/fuel cell vehicles. This allows the company to leverage existing technology and infrastructure, reducing risk and capital expenditure.""",Technology; Finance
+1_founder_period,generic,12,mistralai/Mistral-7B-Instruct-v0.3,0.3,200,"[Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Finance] Initial funding: ~USD 7.5M Series A (private).",2,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""C"", ""standard_mapping"": ""Open Innovation"", ""rationale"": ""Given the limited capital, it's strategic to reduce risk by co-developing an EV platform with a major automaker (Open Innovation). This approach leverages the partner's manufacturing assets, brand recognition, and supply chain, thereby mitigating the high capital risk and accelerating market entry."", ""key_signals_used"": [""Finance"", ""Technology""]}",,C,Open Innovation,"""Given the limited capital, it's strategic to reduce risk by co-developing an EV platform with a major automaker (Open Innovation). This approach leverages the partner's manufacturing assets, brand recognition, and supply chain, thereby mitigating the high capital risk and accelerating market entry.""",Finance; Technology
+1_founder_period,generic,13,mistralai/Mistral-7B-Instruct-v0.3,0.3,200,"[Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Finance] Initial funding: ~USD 7.5M Series A (private).",2,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""C"", ""standard_mapping"": ""Open Innovation"", ""rationale"": ""Given the limited capital, it's strategic to leverage a major automaker's resources through co-development (Option C) to reduce the risk associated with building a supply chain and manufacturing assets. This approach, known as Open Innovation, allows the company to focus on its core technology while benefiting from the partner's brand recognition."", ""key_signals_used"": [""Finance"", ""Technology""]}",,C,Open Innovation,"""Given the limited capital, it's strategic to leverage a major automaker's resources through co-development (Option C) to reduce the risk associated with building a supply chain and manufacturing assets. This approach, known as Open Innovation, allows the company to focus on its core technology while benefiting from the partner's brand recognition.""",Finance; Technology
+1_founder_period,generic,14,mistralai/Mistral-7B-Instruct-v0.3,0.3,200,"[Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Finance] Initial funding: ~USD 7.5M Series A (private).",2,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""C"", ""standard_mapping"": ""Open Innovation"", ""rationale"": ""Given the limited capital and lack of established supply chain, co-developing an EV platform with a major automaker (Open Innovation) reduces the risk by leveraging their existing resources and brand recognition. This strategy allows the company to prove its concept and secure future funding."", ""key_signals_used"": [""Initial funding"", ""Limited capital""]}",,C,Open Innovation,"""Given the limited capital and lack of established supply chain, co-developing an EV platform with a major automaker (Open Innovation) reduces the risk by leveraging their existing resources and brand recognition. This strategy allows the company to prove its concept and secure future funding.""",Initial funding; Limited capital
+1_founder_period,generic,15,mistralai/Mistral-7B-Instruct-v0.3,0.3,200,"[Technology] Li-ion cell cost: ~1,000 USD/kWh.; [Finance] Initial funding: ~USD 7.5M Series A (private).",2,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Technology] Li-ion cell cost: ~1,000 USD/kWh. Lithium-ion cell costs were around ~1,000 USD per kWh.
+- [Finance] Initial funding: ~USD 7.5M Series A (private). Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""A"", ""standard_mapping"": ""Fast Follower"", ""rationale"": ""Given the limited capital and lack of a proven supply chain, manufacturing assets, and brand recognition, it's strategic to adopt a Fast Follower approach (A). This strategy allows the company to enter the market with a product that already has proven technology (Li-ion cells), reducing the risk of failure and the need for significant upfront investment."", ""key_signals_used"": [""Technology"", ""Finance""]}",,A,Fast Follower,"""Given the limited capital and lack of a proven supply chain, manufacturing assets, and brand recognition, it's strategic to adopt a Fast Follower approach (A). This strategy allows the company to enter the market with a product that already has proven technology (Li-ion cells), reducing the risk of failure and the need for significant upfront investment.""",Technology; Finance

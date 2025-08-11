@@ -1,0 +1,314 @@
+scenario,problem_type,repeat,Model,Temperature,Max Tokens,Context Tags,Num Context,Prompt,Raw Output,Parse Error,Chosen Option,Standard Mapping,Rationale,Key Signals Used
+1_founder_period,generic,1,mistralai/Mistral-7B-Instruct-v0.3,0.7,150,[Market] Global new car sales: ~60 million units/year.,1,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""C"", ""standard_mapping"": ""Open Innovation"", ""rationale"": ""Given the lack of established supply chain, manufacturing assets, and brand recognition, co-developing an EV platform with a major automaker (Open Innovation) reduces initial capital risk and accelerates market entry by leveraging the partner's resources and expertise."", ""key_signals_used"": [""Global new car sales""]}",,C,Open Innovation,"""Given the lack of established supply chain, manufacturing assets, and brand recognition, co-developing an EV platform with a major automaker (Open Innovation) reduces initial capital risk and accelerates market entry by leveraging the partner's resources and expertise.""",Global new car sales
+1_founder_period,generic,2,mistralai/Mistral-7B-Instruct-v0.3,0.7,150,[Market] Global new car sales: ~60 million units/year.,1,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""A"",
+""standard_mapping"": ""Fast Follower"",
+""rationale"": ""Given the new company lacks a proven supply chain, manufacturing assets, and brand recognition, a Fast Follower strategy (Option A) allows for entering the market with a more established technology (hybrid/fuel cell vehicles) while minimizing initial risk. This approach can help secure future funding and build a reputation before investing heavily in research and development."",
+""key_signals_used"": [""Global new car sales""]}",,A,Fast Follower,"""Given the new company lacks a proven supply chain, manufacturing assets, and brand recognition, a Fast Follower strategy (Option A) allows for entering the market with a more established technology (hybrid/fuel cell vehicles) while minimizing initial risk. This approach can help secure future funding and build a reputation before investing heavily in research and development.""",Global new car sales
+1_founder_period,generic,3,mistralai/Mistral-7B-Instruct-v0.3,0.7,150,[Market] Global new car sales: ~60 million units/year.,1,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""C"", ""standard_mapping"": ""Open Innovation"", ""rationale"": ""To mitigate high capital risk and lack of established supply chain, co-developing an EV platform with a major automaker (Open Innovation) can provide access to manufacturing assets, brand recognition, and market validation."", ""key_signals_used"": [""Global new car sales""]}",,C,Open Innovation,"""To mitigate high capital risk and lack of established supply chain, co-developing an EV platform with a major automaker (Open Innovation) can provide access to manufacturing assets, brand recognition, and market validation.""",Global new car sales
+1_founder_period,generic,4,mistralai/Mistral-7B-Instruct-v0.3,0.7,150,[Market] Global new car sales: ~60 million units/year.,1,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""C"", ""standard_mapping"": ""Open Innovation"", ""rationale"": ""Given the lack of resources and brand recognition, co-developing an EV platform with a major automaker (Open Innovation) mitigates the high capital risk by leveraging the partner's established supply chain and manufacturing assets. This strategy allows the new company to prove its concept and secure future funding."", ""key_signals_used"": [""Global new car sales""]}",,C,Open Innovation,"""Given the lack of resources and brand recognition, co-developing an EV platform with a major automaker (Open Innovation) mitigates the high capital risk by leveraging the partner's established supply chain and manufacturing assets. This strategy allows the new company to prove its concept and secure future funding.""",Global new car sales
+1_founder_period,generic,5,mistralai/Mistral-7B-Instruct-v0.3,0.7,150,[Market] Global new car sales: ~60 million units/year.,1,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""C"", ""standard_mapping"": ""Open Innovation"", ""rationale"": ""To manage high capital risk, it's strategic to co-develop an EV platform with a major automaker (Open Innovation) to leverage their manufacturing assets, supply chain, and brand recognition, thereby reducing the initial financial burden and increasing the likelihood of securing future funding."", ""key_signals_used"": [""Global new car sales""]}",,C,Open Innovation,"""To manage high capital risk, it's strategic to co-develop an EV platform with a major automaker (Open Innovation) to leverage their manufacturing assets, supply chain, and brand recognition, thereby reducing the initial financial burden and increasing the likelihood of securing future funding.""",Global new car sales
+1_founder_period,generic,6,mistralai/Mistral-7B-Instruct-v0.3,0.7,150,[Market] Global new car sales: ~60 million units/year.,1,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""C"", ""standard_mapping"": ""Open Innovation"", ""rationale"": ""Given the lack of established supply chain, manufacturing assets, and brand recognition, co-developing an EV platform with a major automaker (Open Innovation) offers a lower capital risk approach to market entry. This strategy leverages the partner's existing resources and brand recognition, while allowing the company to gain valuable industry experience."", ""key_signals_used"": [""Global new car sales""]}",,C,Open Innovation,"""Given the lack of established supply chain, manufacturing assets, and brand recognition, co-developing an EV platform with a major automaker (Open Innovation) offers a lower capital risk approach to market entry. This strategy leverages the partner's existing resources and brand recognition, while allowing the company to gain valuable industry experience.""",Global new car sales
+1_founder_period,generic,7,mistralai/Mistral-7B-Instruct-v0.3,0.7,150,[Market] Global new car sales: ~60 million units/year.,1,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""A"", ""standard_mapping"": ""Fast Follower"", ""rationale"": ""Given the lack of supply chain, manufacturing assets, and brand recognition, a fast follower strategy (Option A) is more appropriate. This allows the company to leverage existing technology and avoid high initial capital risks. Additionally, the hybrid/fuel cell vehicle market is growing, offering a compelling and differentiated narrative."", ""key_signals_used"": [""Global new car sales"", ""lack of supply chain, manufacturing assets, brand recognition""]}",,A,Fast Follower,"""Given the lack of supply chain, manufacturing assets, and brand recognition, a fast follower strategy (Option A) is more appropriate. This allows the company to leverage existing technology and avoid high initial capital risks. Additionally, the hybrid/fuel cell vehicle market is growing, offering a compelling and differentiated narrative.""","Global new car sales; lack of supply chain, manufacturing assets, brand recognition"
+1_founder_period,generic,8,mistralai/Mistral-7B-Instruct-v0.3,0.7,150,[Market] Global new car sales: ~60 million units/year.,1,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""A"", ""standard_mapping"": ""Fast Follower"", ""rationale"": ""Choosing option A allows the new company to enter the market with a differentiated product (hybrid/fuel cell vehicles) while minimizing risk. As a fast follower, the company can learn from existing players, leverage established technology, and improve upon it, which increases the chance of securing funding."", ""key_signals_used"": [""Global new car sales""]}",,A,Fast Follower,"""Choosing option A allows the new company to enter the market with a differentiated product (hybrid/fuel cell vehicles) while minimizing risk. As a fast follower, the company can learn from existing players, leverage established technology, and improve upon it, which increases the chance of securing funding.""",Global new car sales
+1_founder_period,generic,9,mistralai/Mistral-7B-Instruct-v0.3,0.7,150,[Market] Global new car sales: ~60 million units/year.,1,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""C"", ""standard_mapping"": ""Open Innovation"", ""rationale"": ""Co-developing an EV platform with a major automaker (Option C) is a more prudent approach for this new company. This strategy leverages an existing brand and supply chain, reducing capital risk and accelerating market entry. Open Innovation allows for shared resources and expertise, ultimately facilitating a faster path to product development and securing future funding."", ""key_signals_used"": [""Global new car sales""]}",,C,Open Innovation,"""Co-developing an EV platform with a major automaker (Option C) is a more prudent approach for this new company. This strategy leverages an existing brand and supply chain, reducing capital risk and accelerating market entry. Open Innovation allows for shared resources and expertise, ultimately facilitating a faster path to product development and securing future funding.""",Global new car sales
+1_founder_period,generic,10,mistralai/Mistral-7B-Instruct-v0.3,0.7,150,[Market] Global new car sales: ~60 million units/year.,1,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""C"", ""standard_mapping"": ""Open Innovation"", ""rationale"": ""Given the lack of a proven supply chain, manufacturing assets, and brand recognition, co-developing an EV platform with a major automaker (Open Innovation) would reduce the initial capital risk and leverage the partner's resources to prove the concept. This approach also allows for faster market entry compared to building the portfolio or developing a sports car (Fast Follower, Technology Leadership) with their own resources."", ""key_signals_used"": [""Global new car sales""]}",,C,Open Innovation,"""Given the lack of a proven supply chain, manufacturing assets, and brand recognition, co-developing an EV platform with a major automaker (Open Innovation) would reduce the initial capital risk and leverage the partner's resources to prove the concept. This approach also allows for faster market entry compared to building the portfolio or developing a sports car (Fast Follower, Technology Leadership) with their own resources.""",Global new car sales
+1_founder_period,generic,11,mistralai/Mistral-7B-Instruct-v0.3,0.7,150,[Market] Global new car sales: ~60 million units/year.,1,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {
+  ""chosen_option"": ""A"",
+  ""standard_mapping"": ""Fast Follower"",
+  ""rationale"": ""Given the lack of supply chain, manufacturing assets, and brand recognition, it is wise to enter the market as a fast follower. Building a portfolio of hybrid/fuel cell vehicles allows the company to leverage existing technology with less development risk, thereby reducing the high capital risk."",
+  ""key_signals_used"": [""Global new car sales""]
+}",,A,Fast Follower,"""Given the lack of supply chain, manufacturing assets, and brand recognition, it is wise to enter the market as a fast follower. Building a portfolio of hybrid/fuel cell vehicles allows the company to leverage existing technology with less development risk, thereby reducing the high capital risk.""",Global new car sales
+1_founder_period,generic,12,mistralai/Mistral-7B-Instruct-v0.3,0.7,150,[Market] Global new car sales: ~60 million units/year.,1,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""C"", ""standard_mapping"": ""Open Innovation"", ""rationale"": ""Given the lack of a proven supply chain, manufacturing assets, and brand recognition, co-developing an EV platform with a major automaker (Open Innovation) reduces capital risk and allows the new company to leverage the existing resources of the partner. This approach also provides a faster route to market entry."", ""key_signals_used"": [""Global new car sales""]}",,C,Open Innovation,"""Given the lack of a proven supply chain, manufacturing assets, and brand recognition, co-developing an EV platform with a major automaker (Open Innovation) reduces capital risk and allows the new company to leverage the existing resources of the partner. This approach also provides a faster route to market entry.""",Global new car sales
+1_founder_period,generic,13,mistralai/Mistral-7B-Instruct-v0.3,0.7,150,[Market] Global new car sales: ~60 million units/year.,1,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {
+  ""chosen_option"": ""A"",
+  ""standard_mapping"": ""Fast Follower"",
+  ""rationale"": ""Given the new company's lack of supply chain, manufacturing assets, and brand recognition, a Fast Follower strategy allows for a lower capital risk. By building a portfolio of hybrid/fuel cell vehicles, the company can leverage existing technology, establish a competitive position, and prove its concept in a growing market segment."",
+  ""key_signals_used"": [""Global new car sales""]
+}",,A,Fast Follower,"""Given the new company's lack of supply chain, manufacturing assets, and brand recognition, a Fast Follower strategy allows for a lower capital risk. By building a portfolio of hybrid/fuel cell vehicles, the company can leverage existing technology, establish a competitive position, and prove its concept in a growing market segment.""",Global new car sales
+1_founder_period,generic,14,mistralai/Mistral-7B-Instruct-v0.3,0.7,150,[Market] Global new car sales: ~60 million units/year.,1,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""C"", ""standard_mapping"": ""Open Innovation"", ""rationale"": ""To mitigate high capital risk, the company should consider Open Innovation (C) by co-developing an EV platform with a major automaker. This strategy allows the company to leverage the partner's resources, manufacturing assets, and brand recognition, while focusing on its core competencies."", ""key_signals_used"": [""Global new car sales""]}",,C,Open Innovation,"""To mitigate high capital risk, the company should consider Open Innovation (C) by co-developing an EV platform with a major automaker. This strategy allows the company to leverage the partner's resources, manufacturing assets, and brand recognition, while focusing on its core competencies.""",Global new car sales
+1_founder_period,generic,15,mistralai/Mistral-7B-Instruct-v0.3,0.7,150,[Market] Global new car sales: ~60 million units/year.,1,"You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.
+
+Additional context (subset may be empty):
+- [Market] Global new car sales: ~60 million units/year. Global new car sales were roughly ~60 million units per year.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Build a portfolio of hybrid/fuel cell vehicles
+  B) Develop a high-performance EV sports car
+  C) Co-develop an EV platform with a major automaker
+
+Standard strategy mappings:
+  A → Fast Follower
+  B → Technology Leadership
+  C → Open Innovation
+
+Return STRICT JSON with keys exactly: {""chosen_option"": ""A|B|C|D"", ""standard_mapping"": ""..."", ""rationale"": ""<3-4 concise sentences>"", ""key_signals_used"": [""<copy of tags you relied on, MUST be from the provided context blocks>""]}
+If no context was used, return an empty array `[]` for `key_signals_used`.Do not include any extra keys or prose outside JSON."," {""chosen_option"": ""A"", ""standard_mapping"": ""Fast Follower"", ""rationale"": ""Given the company's lack of supply chain, manufacturing assets, and brand recognition, it would be risky to pursue Technology Leadership (B) or Open Innovation (C). Instead, a Fast Follower strategy (A) allows the company to enter the market with a proven technology (hybrid/fuel cell vehicles) and minimize initial capital risk. This approach can help establish a foothold in the market and secure future funding."", ""key_signals_used"": [""Global new car sales""]}",,A,Fast Follower,"""Given the company's lack of supply chain, manufacturing assets, and brand recognition, it would be risky to pursue Technology Leadership (B) or Open Innovation (C). Instead, a Fast Follower strategy (A) allows the company to enter the market with a proven technology (hybrid/fuel cell vehicles) and minimize initial capital risk. This approach can help establish a foothold in the market and secure future funding.""",Global new car sales
