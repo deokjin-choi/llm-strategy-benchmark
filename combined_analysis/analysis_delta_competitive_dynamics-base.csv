@@ -1,13 +1,13 @@
 scenario,problem_type,Δ C → Open Innovation (competitive_dynamics-base),Δ Diversification (competitive_dynamics-base),Δ Fast Follower (competitive_dynamics-base),Δ Maintain (competitive_dynamics-base),Δ N/A (competitive_dynamics-base),Δ Niche Focus (competitive_dynamics-base),Δ Open Innovation (competitive_dynamics-base),Δ Technology Leadership (competitive_dynamics-base)
-1_founder_period,generic,0.0,0.0,-0.046797004991680546,0.0,0.0,0.0,0.005199667221297832,0.041597337770382714
-1_founder_period,specific,0.0,0.0,-0.0010399334442595665,0.0,0.0,0.0,-0.014559068219633958,0.015599001663893497
-2_roadster_launch,generic,0.0,0.0,0.020695364238410598,0.0,0.0,0.0,-0.12417218543046357,0.10347682119205293
+1_founder_period,generic,0.0,0.0,-0.046793760831889075,0.0,0.0,0.0,0.0051993067590987985,0.04159445407279022
+1_founder_period,specific,0.0,0.0,-0.0010398613518197708,0.0,0.0,0.0,-0.014558058925476597,0.01559792027729634
+2_roadster_launch,generic,0.0,0.0,0.020689655172413793,0.0,0.0,0.0,-0.12413793103448276,0.10344827586206895
 2_roadster_launch,specific,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
 3_model_s_launch,generic,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
 3_model_s_launch,specific,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-4_model_x_launch,generic,0.0,0.0,0.0,-0.08278145695364236,0.0,-0.04552980132450331,0.0,0.1283112582781457
+4_model_x_launch,generic,0.0,0.0,0.0,-0.08275862068965517,0.0,-0.04551724137931035,0.0,0.12827586206896552
 4_model_x_launch,specific,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-5_model_3_mass_market,generic,-0.06622516556291391,0.0,0.0,0.0,0.0,0.0,0.0,0.06622516556291391
+5_model_3_mass_market,generic,-0.06620689655172415,0.0,0.0,0.0,0.0,0.0,0.0,0.06620689655172418
 5_model_3_mass_market,specific,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-6_energy_infra,generic,0.0,0.08278145695364247,0.0,0.0,0.0,0.0,0.0,-0.08278145695364236
+6_energy_infra,generic,0.0,0.08275862068965512,0.0,0.0,0.0,0.0,0.0,-0.08275862068965517
 6_energy_infra,specific,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0

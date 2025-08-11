@@ -17,7 +17,7 @@ MODEL_ENDPOINTS = {
     "meta-llama/Meta-Llama-3.1-8B-Instruct": "http://localhost:3003/v1/chat/completions",
 }
 HEADERS = {"Content-Type": "application/json"}
-RESULTS_DIR = "./results_competitive_dynamics"
+RESULTS_DIR = "./results_randomized_numbers"
 REPEATS_PER_CASE = 5
 
 # ---------------------------
@@ -153,7 +153,7 @@ def run_all_scenarios_parallel():
     if not os.path.exists(RESULTS_DIR):
         os.makedirs(RESULTS_DIR)
     
-    with open('scenarios_competitive_dynamics.json', 'r', encoding='utf-8') as f:
+    with open('scenarios_randomized_numbers.json', 'r', encoding='utf-8') as f:
         SCENARIOS = json.load(f)
 
     # Generate all jobs to be processed
