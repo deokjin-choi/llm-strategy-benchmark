@@ -1,6 +1,6 @@
 # llm-strategy-benchmark
 
-### 🌟 Project Overview
+### Project Overview
 
 This project is a comprehensive benchmark designed to systematically evaluate how **Large Language Models (LLMs) make strategic decisions** in complex, real-world business scenarios. Our goal is to move beyond simple question-and-answer tests to understand the nuances of an LLM's analytical and reasoning capabilities when faced with ambiguous, high-stakes problems.
 
