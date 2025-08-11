@@ -17,8 +17,8 @@ MODEL_ENDPOINTS = {
     "meta-llama/Meta-Llama-3.1-8B-Instruct": "http://localhost:3003/v1/chat/completions",
 }
 HEADERS = {"Content-Type": "application/json"}
-RESULTS_DIR = "./results"
-REPEATS_PER_CASE = 15
+RESULTS_DIR = "./results_competitive_dynamics"
+REPEATS_PER_CASE = 5
 
 # ---------------------------
 # 1) Prompt Builder (same as before)
@@ -140,7 +140,7 @@ def run_single_case(case_params):
             "Rationale": json.dumps(parsed.get("rationale"), ensure_ascii=False) if parsed else None,
             "Key Signals Used": "; ".join(parsed.get("key_signals_used")) if (parsed and isinstance(parsed.get("key_signals_used"), list)) else None,
         })
-        time.sleep(0.1) # Small delay to avoid API hammering
+        time.sleep(0.01) # Small delay to avoid API hammering
     
     df_case = pd.DataFrame(results_for_case)
     df_case.to_csv(filepath, index=False)
@@ -153,7 +153,7 @@ def run_all_scenarios_parallel():
     if not os.path.exists(RESULTS_DIR):
         os.makedirs(RESULTS_DIR)
     
-    with open('scenarios.json', 'r', encoding='utf-8') as f:
+    with open('scenarios_competitive_dynamics.json', 'r', encoding='utf-8') as f:
         SCENARIOS = json.load(f)
 
     # Generate all jobs to be processed
@@ -166,11 +166,11 @@ def run_all_scenarios_parallel():
             if f"problem_{problem_type}" not in scenario_data:
                 continue
             for model in MODEL_ENDPOINTS.keys():
-                for temp in [0.0, 0.3, 0.7]:
-                    for max_tok in [150, 200, 256]:
-                        for subset in ctx_combos:
-                            # Create a job tuple for each unique case
-                            jobs.append((scenario_name, scenario_data, problem_type, model, temp, max_tok, subset))
+                temp = 0
+                max_tok = 256
+                for subset in ctx_combos:
+                    # Create a job tuple for each unique case
+                    jobs.append((scenario_name, scenario_data, problem_type, model, temp, max_tok, subset))
 
     logging.info(f"Total jobs to run: {len(jobs)}")
     

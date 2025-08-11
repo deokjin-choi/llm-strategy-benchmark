@@ -1,0 +1,94 @@
+{
+  "1_founder_period": {
+    "problem_generic": "Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.",
+    "problem_specific": "Problem: Tesla, a new company, must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.",
+    "context_blocks": {
+      "[Market] Global new car sales: ~60 million units/year.": "Global new car sales were roughly ~60 million units per year, attracting continuous investment from incumbents and new entrants.",
+      "[Market] EV share: <0.02% of global new car sales.": "Battery electric vehicles accounted for less than ~0.02% of global new car sales, but major automakers were beginning to signal plans for dedicated EV models.",
+      "[Technology] Li-ion cell cost: ~1,000 USD/kWh.": "Lithium-ion cell costs were around ~1,000 USD per kWh, and suppliers were investing in scale to serve both established brands and startups.",
+      "[Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.": "A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, drawing attention from both consumers and rival manufacturers exploring similar performance benchmarks.",
+      "[Finance] Initial funding: ~USD 7.5M Series A (private).": "Initial external funding amounted to approximately USD 7.5 million in a Series A round, creating urgency to secure a competitive market position before rivals moved aggressively.",
+      "[Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs.": "Major automakers at the time were focused on hybrid and fuel cell technologies, but were monitoring EV advances closely for potential rapid entry."
+    },
+    "execution_options": {
+      "A": { "name": "Build a portfolio of hybrid/fuel cell vehicles", "mapping": "Fast Follower" },
+      "B": { "name": "Develop a high-performance EV sports car", "mapping": "Technology Leadership" },
+      "C": { "name": "Co-develop an EV platform with a major automaker", "mapping": "Open Innovation" }
+    }
+  },
+  "2_roadster_launch": {
+    "problem_generic": "Problem: A company must manage conflicting goals of product quality and timely delivery during its initial product launch. With significant pre-orders already placed, the company faces severe cash flow issues and supply chain delays, jeopardizing brand trust and future investment if not handled correctly.",
+    "problem_specific": "Problem: Tesla must manage conflicting goals of product quality and timely delivery during its initial product launch. With significant pre-orders already placed, the company faces severe cash flow issues and supply chain delays, jeopardizing brand trust and future investment if not handled correctly.",
+    "context_blocks": {
+      "[Customer Response] Initial pre-orders: over 900 units.": "Initial pre-orders amounted to over 900 units, creating early buzz that could attract both customers and competitors’ attention.",
+      "[Market] Production ramp-up: 27-70 units delivered in the first months of production.": "Initial deliveries in the first months of production were very low, giving competitors a window to introduce alternatives.",
+      "[Finance] Investment raised: $40M secured for production start and dealer network.": "A $40M investment was secured to begin production and build a dealer network, but rivals with larger capital reserves could scale faster if they entered.",
+      "[Manufacturing] Supply Chain: Delays from key partners and frequent design changes hindered production.": "Frequent supply delays from key partners and design changes risked eroding the first-mover advantage if competitors launched sooner."
+    },
+    "execution_options": {
+      "A": { "name": "Prioritize product quality and performance, accepting launch delays", "mapping": "Technology Leadership" },
+      "B": { "name": "Accelerate launch to meet demand, accepting potential quality compromises", "mapping": "Fast Follower" },
+      "C": { "name": "Expand manufacturing partnerships to share risk", "mapping": "Open Innovation" }
+    }
+  },
+  "3_model_s_launch": {
+    "problem_generic": "Problem: A company needs to transition from a niche-market player to a mass-market manufacturer by establishing a large-scale production infrastructure. The key is to secure trust in the premium sedan market and build a production base for eventual expansion into lower-priced models.",
+    "problem_specific": "Problem: Tesla needs to transition from a niche-market player to a mass-market manufacturer by establishing a large-scale production infrastructure. The key is to secure trust in the premium sedan market and build a production base for eventual expansion into lower-priced models.",
+    "context_blocks": {
+      "[Finance] Large factory acquisition: $42M.": "The company acquired a large manufacturing factory for $42M, a move that competitors could match if they committed similar capital.",
+      "[Policy/Regulation] Government loan: $465M support.": "The company received a $465M government loan, signaling government endorsement that might encourage rivals to seek similar support.",
+      "[Market] Fuel cost savings: A new premium sedan was projected to save about $1,800 over 6 years.": "A new premium sedan was projected to save customers about $1,800 in fuel costs over 6 years, but competing models could narrow this advantage over time."
+    },
+    "execution_options": {
+      "A": { "name": "Focus exclusively on the premium EV sedan market", "mapping": "Technology Leadership" },
+      "B": { "name": "Immediately attempt to launch a lower-priced model to popularize EVs", "mapping": "Fast Follower" },
+      "C": { "name": "Sell battery packs and powertrains to other companies", "mapping": "Open Innovation" }
+    }
+  },
+  "4_model_x_launch": {
+    "problem_generic": "Problem: A company aims to enter the growing SUV market. However, a complex product design creates high production difficulty and quality risks, which could severely damage the brand's reputation despite a lack of direct competition.",
+    "problem_specific": "Problem: Tesla aims to enter the growing SUV market. However, a complex product design creates high production difficulty and quality risks, which could severely damage the brand's reputation despite a lack of direct competition.",
+    "context_blocks": {
+      "[Market] US SUV market share: about 32% of new car sales.": "SUVs made up about 32% of new car sales in the US, making it a target segment for multiple automakers’ upcoming EV launches.",
+      "[Market] Competition: There were very few competing electric SUVs at the time.": "At the time, there were very few competing electric SUVs, but several major brands had prototypes in development.",
+      "[Technology] Design Complexity: A new design with complex, upward-swinging doors posed significant manufacturing challenges.": "A new design with complex, upward-swinging doors differentiated the product, though rivals could introduce alternative innovations to compete.",
+      "[Customer Response] High pre-order volume: Over 30,000 pre-orders existed, increasing pressure to deliver.": "Over 30,000 pre-orders increased visibility in the market, which could prompt faster competitive responses."
+    },
+    "execution_options": {
+      "A": { "name": "Launch a luxury SUV with innovative, complex features", "mapping": "Technology Leadership" },
+      "B": { "name": "Develop a standard, mid-priced SUV to enter the mass market", "mapping": "Niche Focus" },
+      "C": { "name": "Postpone the launch to stabilize existing product production", "mapping": "Maintain" }
+    }
+  },
+  "5_model_3_mass_market": {
+    "problem_generic": "Problem: Facing an explosive increase in pre-orders, a company must rapidly scale production while maintaining product quality, financial stability, and public trust. The core challenge is to overcome production bottlenecks and reduce costs without sacrificing the brand’s reputation in the mass market.",
+    "problem_specific": "Problem: Facing an explosive increase in pre-orders, Tesla must rapidly scale production while maintaining product quality, financial stability, and public trust. The core challenge is to overcome production bottlenecks, dubbed 'Production Hell', and reduce costs without sacrificing the brand’s reputation in the mass market.",
+    "context_blocks": {
+      "[Customer Response] First week pre-orders: over 325,000 units.": "Over 325,000 units were pre-ordered in the first week, drawing global media attention and likely influencing competitor launch schedules.",
+      "[Finance] Value of orders: about $14B.": "The value of pre-orders was approximately $14 billion, potentially attracting new market entrants seeking to capture similar demand.",
+      "[Customer Response] Net pre-orders after cancellations: 373,000.": "Net pre-orders after removing cancellations and duplicates were 373,000, a visible indicator that could motivate rivals to adjust production plans.",
+      "[Market] Global EV sales and company production volume are surging.": "Global EV sales and the company's production volume are surging, creating momentum but also intensifying competitive pressures."
+    },
+    "execution_options": {
+      "A": { "name": "Prioritize production speed to meet demand as quickly as possible", "mapping": "Technology Leadership" },
+      "B": { "name": "Expand production gradually while prioritizing quality and profitability", "mapping": "Maintain" },
+      "C": { "name": "Utilize manufacturing partners (OEM) to scale production", "mapping": "Open Innovation" }
+    }
+  },
+  "6_energy_infra": {
+    "problem_generic": "Problem: A company needs to address key bottlenecks for mass EV adoption: the lack of charging infrastructure and high battery costs. The strategic goal is to diversify revenue beyond the core automotive business by integrating energy storage and generation to create synergy.",
+    "problem_specific": "Problem: Tesla needs to address key bottlenecks for mass EV adoption: the lack of charging infrastructure and high battery costs. The strategic goal is to diversify revenue beyond the core automotive business by integrating energy storage and generation to create synergy.",
+    "context_blocks": {
+      "[Technology] Proprietary charging network: over 2,000 stations, 18,000+ chargers (2020).": "The company's proprietary charging network had over 2,000 stations and 18,000+ chargers by 2020, setting a high barrier for competitors but prompting them to explore alternative charging partnerships.",
+      "[Technology] Large-scale factory production capacity: 35 GWh per year.": "The company's large-scale factory had a production capacity of 35 GWh per year, a scale that competitors would need years to match.",
+      "[Market] Solar module price: fell by about 80% over 10 years.": "Solar module prices fell by about 80% over a decade, encouraging multiple players to enter the solar energy market alongside the company.",
+      "[Strategy] Competitors' Infrastructure: Most other automakers relied on third-party charging networks, not building their own.": "Competitors typically relied on third-party charging networks, though some were beginning to form alliances to close this gap."
+    },
+    "execution_options": {
+      "A": { "name": "Build a proprietary charging network", "mapping": "Technology Leadership" },
+      "B": { "name": "Construct a large-scale, proprietary battery factory", "mapping": "Technology Leadership" },
+      "C": { "name": "Aggressively expand into energy storage and solar products", "mapping": "Diversification" },
+      "D": { "name": "Focus exclusively on the core automotive business", "mapping": "Retrenchment" }
+    }
+  }
+}

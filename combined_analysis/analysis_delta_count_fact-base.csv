@@ -1,0 +1,13 @@
+scenario,problem_type,Δ C → Open Innovation (count_fact-base),Δ Diversification (count_fact-base),Δ Fast Follower (count_fact-base),Δ Maintain (count_fact-base),Δ N/A (count_fact-base),Δ Niche Focus (count_fact-base),Δ Open Innovation (count_fact-base),Δ Technology Leadership (count_fact-base)
+1_founder_period,generic,0.0,0.0,0.10919301164725459,0.0,0.0,0.0,0.024958402662229595,-0.13415141430948418
+1_founder_period,specific,0.0,0.0,0.1611896838602329,0.0,0.0,0.0,0.11959234608985025,-0.28078202995008317
+2_roadster_launch,generic,0.0,0.0,0.0,0.0,0.0,0.0,-0.10347682119205298,0.10347682119205293
+2_roadster_launch,specific,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+3_model_s_launch,generic,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+3_model_s_launch,specific,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+4_model_x_launch,generic,0.0,0.0,0.0,-0.10347682119205298,0.0,-0.02069536423841059,0.0,0.1241721854304636
+4_model_x_launch,specific,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+5_model_3_mass_market,generic,-0.04139072847682121,0.0,0.0,0.07864238410596026,0.0,0.0,0.0,-0.03725165562913907
+5_model_3_mass_market,specific,0.0,0.0,0.0,0.020695364238410563,0.0,0.0,0.0,-0.020695364238410674
+6_energy_infra,generic,0.0,0.16556291390728484,0.0,0.0,0.0,0.0,0.0,-0.16556291390728478
+6_energy_infra,specific,0.0,0.08278145695364236,0.0,0.0,0.0,0.0,0.0,-0.08278145695364242
