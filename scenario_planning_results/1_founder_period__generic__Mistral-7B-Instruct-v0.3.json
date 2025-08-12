@@ -1,0 +1,8 @@
+{
+  "most_probable": "cf1c084151",
+  "worst_case": "a14d65e52b",
+  "best_case": "a0b4eb7bad",
+  "rationale_most_probable": "selected row index 35 median bad count heuristic",
+  "rationale_worst_case": "selected row index 63 highest bad count scenario shows downside pressure",
+  "rationale_best_case": "selected row index 0 lowest bad count scenario with rich narrative"
+}
