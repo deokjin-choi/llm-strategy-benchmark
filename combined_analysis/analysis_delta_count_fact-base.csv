@@ -1,13 +1,13 @@
-scenario,problem_type,Δ C → Open Innovation (count_fact-base),Δ Diversification (count_fact-base),Δ Fast Follower (count_fact-base),Δ Maintain (count_fact-base),Δ N/A (count_fact-base),Δ Niche Focus (count_fact-base),Δ Open Innovation (count_fact-base),Δ Technology Leadership (count_fact-base)
-1_founder_period,generic,0.0,0.0,0.10918544194107455,0.0,0.0,0.0,0.024956672443674166,-0.1341421143847487
-1_founder_period,specific,0.0,0.0,0.16117850953206236,0.0,0.0,0.0,0.11958405545927211,-0.2807625649913345
-2_roadster_launch,generic,0.0,0.0,0.0,0.0,0.0,0.0,-0.10344827586206895,0.10344827586206895
-2_roadster_launch,specific,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-3_model_s_launch,generic,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-3_model_s_launch,specific,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-4_model_x_launch,generic,0.0,0.0,0.0,-0.10344827586206895,0.0,-0.020689655172413793,0.0,0.12413793103448273
-4_model_x_launch,specific,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-5_model_3_mass_market,generic,-0.041379310344827586,0.0,0.0,0.07862068965517241,0.0,0.0,0.0,-0.037241379310344824
-5_model_3_mass_market,specific,0.0,0.0,0.0,0.02068965517241378,0.0,0.0,0.0,-0.020689655172413834
-6_energy_infra,generic,0.0,0.16551724137931034,0.0,0.0,0.0,0.0,0.0,-0.16551724137931034
-6_energy_infra,specific,0.0,0.08275862068965523,0.0,0.0,0.0,0.0,0.0,-0.08275862068965517
+scenario,problem_type,Δ Diversification (count_fact-base),Δ Fast Follower (count_fact-base),Δ Maintain (count_fact-base),Δ Niche Focus (count_fact-base),Δ Open Innovation (count_fact-base),Δ Technology Leadership (count_fact-base)
+1_founder_period,generic,0.0,0.109375,0.0,0.0,0.025000000000000022,-0.13437500000000002
+1_founder_period,specific,0.0,0.16145833333333334,0.0,0.0,0.11979166666666666,-0.28125
+2_roadster_launch,generic,0.0,0.0,0.0,0.0,-0.10416666666666666,0.10416666666666663
+2_roadster_launch,specific,0.0,0.0,0.0,0.0,0.0,0.0
+3_model_s_launch,generic,0.0,0.0,0.0,0.0,0.0,0.0
+3_model_s_launch,specific,0.0,0.0,0.0,0.0,0.0,0.0
+4_model_x_launch,generic,0.0,0.0,-0.10416666666666669,-0.02083333333333333,0.0,0.125
+4_model_x_launch,specific,0.0,0.0,0.0,0.0,0.0,0.0
+5_model_3_mass_market,generic,0.0,0.0,0.07916666666666666,0.0,-0.04166666666666663,-0.03749999999999998
+5_model_3_mass_market,specific,0.0,0.0,0.02083333333333337,0.0,0.0,-0.02083333333333326
+6_energy_infra,generic,0.16666666666666663,0.0,0.0,0.0,0.0,-0.16666666666666669
+6_energy_infra,specific,0.08333333333333337,0.0,0.0,0.0,0.0,-0.08333333333333331
