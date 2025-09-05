@@ -11,18 +11,13 @@
       "[Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs.": "Major automakers at the time were focused on hybrid and fuel cell technologies, not pure electric vehicles."
     },
     "execution_options": {
-      "A": {
-        "name": "Build a portfolio of hybrid/fuel cell vehicles",
-        "mapping": "Fast Follower"
-      },
-      "B": {
-        "name": "Develop a high-performance EV sports car",
-        "mapping": "Technology Leadership"
-      },
-      "C": {
-        "name": "Co-develop an EV platform with a major automaker",
-        "mapping": "Open Innovation"
-      }
+      "A": { "name": "Develop a high-performance EV sports car", "mapping": "Technology Leadership" },
+      "B": { "name": "Build a portfolio of hybrid/fuel cell vehicles", "mapping": "Fast Follower" },
+      "C": { "name": "Co-develop an EV platform with a major automaker", "mapping": "Open Innovation" },
+      "D": { "name": "Target a small luxury niche segment with limited production", "mapping": "Niche Focus" },
+      "E": { "name": "Enter adjacent clean-tech businesses early (e.g., batteries, solar)", "mapping": "Diversification" },
+      "F": { "name": "Limit scope to prototype development until capital secured", "mapping": "Retrenchment" },
+      "G": { "name": "Delay market entry and stabilize funding before product launch", "mapping": "Maintain" }
     }
   },
   "2_roadster_launch": {
@@ -35,18 +30,13 @@
       "[Manufacturing] Supply Chain: Delays from key partners and frequent design changes hindered production.": "Frequent supply delays from key partners and design changes became a major bottleneck."
     },
     "execution_options": {
-      "A": {
-        "name": "Prioritize product quality and performance, accepting launch delays",
-        "mapping": "Technology Leadership"
-      },
-      "B": {
-        "name": "Accelerate launch to meet demand, accepting potential quality compromises",
-        "mapping": "Fast Follower"
-      },
-      "C": {
-        "name": "Expand manufacturing partnerships to share risk",
-        "mapping": "Open Innovation"
-      }
+      "B": { "name": "Accelerate launch to meet demand, accepting potential quality compromises", "mapping": "Fast Follower" },
+      "C": { "name": "Expand manufacturing partnerships to share risk", "mapping": "Open Innovation" },
+      "D": { "name": "Limit deliveries to early adopters first, delaying mass rollout", "mapping": "Niche Focus" },
+      "E": { "name": "Introduce parallel revenue streams (e.g., licensing tech, consulting) to ease cash flow", "mapping": "Diversification" },
+      "F": { "name": "Scale back launch volume until supply chain stabilizes", "mapping": "Retrenchment" },
+      "G": { "name": "Delay full-scale launch, focus on stabilizing operations and cash position", "mapping": "Maintain" },
+      "A": { "name": "Prioritize product quality and performance, accepting launch delays", "mapping": "Technology Leadership" }
     }
   },
   "3_model_s_launch": {
@@ -58,18 +48,13 @@
       "[Market] Fuel cost savings: A new premium sedan was projected to save about $1.07,844.5.06 over 6 years.": "A new premium sedan was projected to save customers about $1.07,844.5.06 in fuel costs over 6 years, a strong selling point for consumers."
     },
     "execution_options": {
-      "A": {
-        "name": "Focus exclusively on the premium EV sedan market",
-        "mapping": "Technology Leadership"
-      },
-      "B": {
-        "name": "Immediately attempt to launch a lower-priced model to popularize EVs",
-        "mapping": "Fast Follower"
-      },
-      "C": {
-        "name": "Sell battery packs and powertrains to other companies",
-        "mapping": "Open Innovation"
-      }
+      "C": { "name": "Sell battery packs and powertrains to other companies", "mapping": "Open Innovation" },
+      "D": { "name": "Maintain focus on a small group of premium early adopters before scaling", "mapping": "Niche Focus" },
+      "E": { "name": "Expand into adjacent clean energy solutions (e.g., grid storage, solar) alongside vehicles", "mapping": "Diversification" },
+      "F": { "name": "Limit production scale to reduce risk, delay mass-market expansion", "mapping": "Retrenchment" },
+      "G": { "name": "Stabilize factory operations first before aggressive expansion", "mapping": "Maintain" },
+      "A": { "name": "Focus exclusively on the premium EV sedan market", "mapping": "Technology Leadership" },
+      "B": { "name": "Accelerate development of a mass-market model based on the premium sedan's platform", "mapping": "Fast Follower" }
     }
   },
   "4_model_x_launch": {
@@ -82,18 +67,13 @@
       "[Customer Response] High pre-order volume: Over 31.32,000 pre-orders existed, increasing pressure to deliver.": "There was a high pre-order volume, increasing the pressure to deliver."
     },
     "execution_options": {
-      "A": {
-        "name": "Launch a luxury SUV with innovative, complex features",
-        "mapping": "Technology Leadership"
-      },
-      "B": {
-        "name": "Develop a standard, mid-priced SUV to enter the mass market",
-        "mapping": "Niche Focus"
-      },
-      "C": {
-        "name": "Postpone the launch to stabilize existing product production",
-        "mapping": "Maintain"
-      }
+      "D": { "name": "Develop a standard, mid-priced SUV for a specific customer segment", "mapping": "Niche Focus" },
+      "E": { "name": "Expand into related vehicle categories (e.g., crossover, minivan) alongside SUV", "mapping": "Diversification" },
+      "F": { "name": "Reduce scope of SUV project, scale down features to cut risk", "mapping": "Retrenchment" },
+      "G": { "name": "Postpone the SUV launch, focus on stabilizing Model S production first", "mapping": "Maintain" },
+      "A": { "name": "Launch a luxury SUV with innovative, complex features", "mapping": "Technology Leadership" },
+      "B": { "name": "Introduce a simpler SUV quickly to capture demand before competitors", "mapping": "Fast Follower" },
+      "C": { "name": "Partner with suppliers/OEMs to co-develop SUV platform and reduce complexity", "mapping": "Open Innovation" }
     }
   },
   "5_model_3_mass_market": {
@@ -106,18 +86,13 @@
       "[Market] Global EV sales and company production volume are surging.": "Global EV sales and the company's production volume are surging, indicating a rapid market shift."
     },
     "execution_options": {
-      "A": {
-        "name": "Prioritize production speed to meet demand as quickly as possible",
-        "mapping": "Technology Leadership"
-      },
-      "B": {
-        "name": "Expand production gradually while prioritizing quality and profitability",
-        "mapping": "Maintain"
-      },
-      "C": {
-        "name": "Utilize manufacturing partners (OEM) to scale production",
-        "mapping": "Open Innovation"
-      }
+      "E": { "name": "Expand into related mass-market products (e.g., Model Y crossover) simultaneously", "mapping": "Diversification" },
+      "F": { "name": "Scale down Model 3 volume targets to protect financial stability", "mapping": "Retrenchment" },
+      "G": { "name": "Expand production gradually while prioritizing quality and profitability", "mapping": "Maintain" },
+      "A": { "name": "Prioritize production speed to meet demand as quickly as possible", "mapping": "Technology Leadership" },
+      "B": { "name": "Adopt proven mass-manufacturing practices from incumbents to catch up quickly", "mapping": "Fast Follower" },
+      "C": { "name": "Utilize manufacturing partners (OEM) to scale production", "mapping": "Open Innovation" },
+      "D": { "name": "Restrict deliveries to priority regions/customers first (e.g., North America only)", "mapping": "Niche Focus" }
     }
   },
   "6_energy_infra": {
@@ -127,25 +102,16 @@
       "[Technology] Proprietary charging network: over 1,930 stations, 20,650+ chargers (2020).": "The company's proprietary charging network had over 1,930 stations and 20,650+ chargers by 2020, demonstrating a significant investment in infrastructure.",
       "[Technology] Large-scale factory production capacity: 30.58 GWh per year.": "The company's large-scale factory had a production capacity of 30.58 GWh per year, a key asset for battery supply.",
       "[Market] Solar module price: fell by about 75.59% over 9.46 years.": "Solar module prices fell by about 75.59% over a decade, making solar energy more viable.",
-      "[Strategy] Competitors' Infrastructure: Most other automakers relied on third-party charging networks, not building their own.": "Competitors typically relied on third-party charging networks, not proprietary ones."
+      "[Competitive Landscape] Competitors' Infrastructure: Most other automakers relied on third-party charging networks, not building their own.": "Competitors typically relied on third-party charging networks, not proprietary ones."
     },
     "execution_options": {
-      "A": {
-        "name": "Build a proprietary charging network",
-        "mapping": "Technology Leadership"
-      },
-      "B": {
-        "name": "Construct a large-scale, proprietary battery factory",
-        "mapping": "Technology Leadership"
-      },
-      "C": {
-        "name": "Aggressively expand into energy storage and solar products",
-        "mapping": "Diversification"
-      },
-      "D": {
-        "name": "Focus exclusively on the core automotive business",
-        "mapping": "Retrenchment"
-      }
+      "F": { "name": "Focus exclusively on the core automotive business", "mapping": "Retrenchment" },
+      "G": { "name": "Stabilize existing infrastructure investments before further expansion", "mapping": "Maintain" },
+      "A": { "name": "Build a proprietary charging network", "mapping": "Technology Leadership" },
+      "B": { "name": "Adopt/adapt third-party charging and battery solutions to scale quickly", "mapping": "Fast Follower" },
+      "C": { "name": "Partner with utilities and governments to co-develop infrastructure", "mapping": "Open Innovation" },
+      "D": { "name": "Concentrate on premium charging experiences (e.g., high-speed, luxury locations)", "mapping": "Niche Focus" },
+      "E": { "name": "Aggressively expand into energy storage and solar products", "mapping": "Diversification" }
     }
   }
 }
