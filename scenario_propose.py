@@ -3,6 +3,7 @@
 import requests, itertools, pandas as pd, json, re, time, os, math, glob
 from multiprocessing import Pool
 import logging
+import tqdm
 
 # -----------------------------
 # 0) vLLM endpoints (updated models)
@@ -172,7 +173,7 @@ def run_all_scenarios_parallel(json_file, out_dir):
             if f"problem_{problem_type}" not in scenario_data:
                 continue
             for model in MODEL_ENDPOINTS.keys():
-                for temp in [0, 0.7]:   # 🔥 두 가지 temperature
+                for temp in [0, 0.7]:
                     max_tok = 256
                     for subset in ctx_combos:
                         jobs.append((scenario_name, scenario_data, problem_type, model, temp, max_tok, subset, out_dir))
@@ -181,7 +182,10 @@ def run_all_scenarios_parallel(json_file, out_dir):
     
     num_processes = min(os.cpu_count(), len(MODEL_ENDPOINTS))
     with Pool(processes=num_processes) as pool:
-        pool.map(run_single_case, jobs)
+        # ⭐️ tqdm을 사용하여 pool.imap_unordered에 대한 진행 상태 바를 표시
+        # imap_unordered는 작업 완료 순서대로 결과를 반환하여 tqdm과 잘 맞습니다.
+        for _ in tqdm.tqdm(pool.imap_unordered(run_single_case, jobs), total=len(jobs)):
+            pass
 
     logging.info(f"✅ All scenarios completed for {json_file}.")
 
