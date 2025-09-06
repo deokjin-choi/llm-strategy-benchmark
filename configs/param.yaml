@@ -1,0 +1,20 @@
+# configs/param.yaml
+
+environment: home   # home | company | amd_cloud
+
+repeats:
+  home: 5
+  company: 10
+  amd_cloud: 30
+
+temperatures:
+  home: [0, 0.7]
+  company: [0, 0.7]
+  amd_cloud: [0, 0.7]
+
+max_tokens: 256
+
+parallel:
+  home: false
+  company: true
+  amd_cloud: true

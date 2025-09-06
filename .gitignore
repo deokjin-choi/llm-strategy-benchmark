@@ -1,6 +1,8 @@
-results/
-results_count_fact/
-results_competitive_dynamics/
-results_opp_focus/
-results_randomized_numbers/
-/combined_analysis/old_results/
+# 대규모 실험결과
+infer_results/
+/combined_analysis/old_results
+
+# 캐시/임시파일
+__pycache__/
+*.pyc
+.DS_Store

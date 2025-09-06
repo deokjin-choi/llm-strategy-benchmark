@@ -1,0 +1,25 @@
+# configs/environment.yaml
+
+home:
+  runtime: ollama              # 실행 방식
+  models: small                # SMALL_MODELS만 실행
+  repeats: 5                   # 반복 횟수
+  temperatures: [0, 0.7]       # deterministic + creative
+  max_tokens: 256
+  output_dir: infer_results/home
+
+company:
+  runtime: vllm-cuda           # NVIDIA CUDA 기반 vLLM
+  models: full                 # FULL_MODELS 전부 실행 가능
+  repeats: 10                  # 빠른 패턴 검증
+  temperatures: [0, 0.7]       # deterministic + creative
+  max_tokens: 256
+  output_dir: infer_results/company
+
+amd_cloud:
+  runtime: vllm-rocm           # AMD ROCm 기반 vLLM
+  models: full                 # FULL_MODELS 전부 실행 가능
+  repeats: 30                  # 통계적 유의성 확보
+  temperatures: [0, 0.7]       # deterministic + creative
+  max_tokens: 256
+  output_dir: infer_results/amd_cloud
