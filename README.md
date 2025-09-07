@@ -87,10 +87,10 @@ In summary, TL acts as the default strategy across all conditions. Yet, under **
 
 ---
 
-### Figure 2. Generic vs. Specific (Tesla) by Case
-![Generic vs Specific by Case](combined_analysis/plots/eval_Generic_vs_Specific_by_Case_(identical_axes).png)
+### Figure 2. Delta from Base (Generic vs. Specific)
+![Delta from Base](combined_analysis/plots/eval_Generic_vs_Specific_by_Case_(identical_axes).png)
 
-Comparing **Generic (anonymous company)** vs. **Specific (Tesla)** framings reveals:
+Comparing **Delta from Base** under **Generic (anonymous company)** vs. **Specific (Tesla)** framings shows:
 - **Common pattern**: TL shows the largest differences. Explicit Tesla framing often **weakens TL** or reduces its growth.  
 - **competitive_dynamics**: Generic TL rises (+0.043), but under Tesla framing converges to near zero → stabilization effect.  
 - **count_fact**: Generic TL drops (−0.018), but with Tesla it drops further (−0.064). Tesla framing amplifies negative reactions, suppressing TL while boosting Fast Follower and Open Innovation.  

@@ -70,7 +70,7 @@ def build_prompt(problem: str, included_tags: list[str], context_blocks: dict, e
 
     schema_text = (
         "Return STRICT JSON with keys exactly: "
-        '{"chosen_option": "A|B|C|D|E|F|G", '
+        '{"chosen_option": "<MUST be exactly ONE of A, B, C, D, E, F, G (choose ONLY ONE)>", '
         '"standard_mapping": "...", '
         '"rationale": "<3-4 concise sentences>", '
         '"key_signals_used": ["<copy EXACTLY the full tag+short title from the provided context blocks>"]}\n'
