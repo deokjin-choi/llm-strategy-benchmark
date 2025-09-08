@@ -6,12 +6,12 @@ CONFIG_FILE="$(dirname $0)/../configs/models.yaml"
 
 # 모델별 포트 매핑
 declare -A PORT_MAP=(
-  [mistral]="3001"
-  [deepseek]="3005"
-  [llama]="3003"
-  [gemma]="3004"
-  [qwen]="3002"
-  [yi]="3006"
+  [mistral]="3000"
+  [deepseek]="3001"
+  [gemma]="3002"
+  [yi]="3003"
+  [qwen]="3004"
+  [llama]="3005"  
 )
 
 # 실행

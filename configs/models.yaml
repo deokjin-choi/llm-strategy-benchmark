@@ -4,46 +4,51 @@ mistral:
   name: mistralai/Mistral-7B-Instruct-v0.3
   endpoints:
     ollama: http://localhost:11434/api/generate
-    vllm-cuda: http://localhost:3001/v1/chat/completions
-    vllm-rocm: http://localhost:3001/v1/chat/completions
-  enabled: true
-
-qwen:
-  name: Qwen/Qwen2.5-14B-Instruct
-  endpoints:
-    ollama: null                # home 불가
-    vllm-cuda: http://localhost:3002/v1/chat/completions
-    vllm-rocm: http://localhost:3002/v1/chat/completions
-  enabled: true
-
-llama:
-  name: meta-llama/Meta-Llama-3.1-8B-Instruct
-  endpoints:
-    ollama: null                # home 불가
-    vllm-cuda: null
-    vllm-rocm: http://localhost:3003/v1/chat/completions
-  enabled: true
-
-gemma:
-  name: google/gemma-2-9b-it
-  endpoints:
-    ollama: http://localhost:11434/api/generate
-    vllm-cuda: http://localhost:3004/v1/chat/completions
-    vllm-rocm: http://localhost:3004/v1/chat/completions
+    vllm-cuda: http://localhost:3000/v1/chat/completions
+    vllm-rocm: http://localhost:3000/v1/chat/completions
   enabled: true
 
 deepseek:
   name: deepseek-ai/deepseek-llm-7b-chat
   endpoints:
     ollama: http://localhost:11434/api/generate
-    vllm-cuda: http://localhost:3005/v1/chat/completions
-    vllm-rocm: http://localhost:3005/v1/chat/completions
+    vllm-cuda: http://localhost:3001/v1/chat/completions
+    vllm-rocm: http://localhost:3001/v1/chat/completions
+  enabled: true
+
+gemma:
+  name: google/gemma-2-9b-it
+  endpoints:
+    ollama: http://localhost:11434/api/generate
+    vllm-cuda: http://localhost:3002/v1/chat/completions
+    vllm-rocm: http://localhost:3002/v1/chat/completions
   enabled: true
 
 yi:
   name: 01-ai/Yi-1.5-9B-Chat
   endpoints:
     ollama: http://localhost:11434/api/generate
-    vllm-cuda: http://localhost:3006/v1/chat/completions
-    vllm-rocm: http://localhost:3006/v1/chat/completions
+    vllm-cuda: http://localhost:3003/v1/chat/completions
+    vllm-rocm: http://localhost:3003/v1/chat/completions
   enabled: true
+
+qwen:
+  name: Qwen/Qwen2.5-14B-Instruct
+  endpoints:
+    ollama: null
+    vllm-cuda: http://localhost:3004/v1/chat/completions   # Qwen은 GPU2+3 묶음이므로 독립 포트 유지
+    vllm-rocm: http://localhost:3004/v1/chat/completions
+  enabled: true
+
+llama:
+  name: meta-llama/Meta-Llama-3.1-8B-Instruct
+  endpoints:
+    ollama: null
+    vllm-cuda: null   # 맨 마지막 포트에 고정
+    vllm-rocm: http://localhost:3005/v1/chat/completions
+  enabled: true     # 회사 CUDA 환경에서는 사용 안 함
+
+
+
+
+
