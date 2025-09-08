@@ -20,7 +20,7 @@ llama:
   name: meta-llama/Meta-Llama-3.1-8B-Instruct
   endpoints:
     ollama: null                # home 불가
-    vllm-cuda: http://localhost:3003/v1/chat/completions
+    vllm-cuda: null
     vllm-rocm: http://localhost:3003/v1/chat/completions
   enabled: true
 
@@ -33,7 +33,7 @@ gemma:
   enabled: true
 
 deepseek:
-  name: deepseek-ai/deepseek-7b-instruct
+  name: deepseek-ai/deepseek-llm-7b-chat
   endpoints:
     ollama: http://localhost:11434/api/generate
     vllm-cuda: http://localhost:3005/v1/chat/completions
@@ -41,7 +41,7 @@ deepseek:
   enabled: true
 
 yi:
-  name: 01-ai/Yi-9B-Chat
+  name: 01-ai/Yi-1.5-9B-Chat
   endpoints:
     ollama: http://localhost:11434/api/generate
     vllm-cuda: http://localhost:3006/v1/chat/completions

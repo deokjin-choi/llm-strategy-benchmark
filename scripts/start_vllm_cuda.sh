@@ -8,7 +8,7 @@ CONFIG_FILE="$(dirname $0)/../configs/models.yaml"
 declare -A GPU_MAP=(
   [mistral]="0"
   [deepseek]="0"
-  [llama]="1"
+  # [llama]="1"
   [gemma]="2"
   [qwen]="2,3"
   [yi]="3"
@@ -17,14 +17,14 @@ declare -A GPU_MAP=(
 declare -A PORT_MAP=(
   [mistral]="3001"
   [deepseek]="3005"
-  [llama]="3003"
+  # [llama]="3003"
   [gemma]="3004"
   [qwen]="3002"
   [yi]="3006"
 )
 
 # 실행
-for key in mistral deepseek llama gemma qwen yi; do
+for key in mistral deepseek gemma qwen yi; do
   MODEL_NAME=$(yq e ".${key}.name" $CONFIG_FILE)
   GPU=${GPU_MAP[$key]}
   PORT=${PORT_MAP[$key]}
