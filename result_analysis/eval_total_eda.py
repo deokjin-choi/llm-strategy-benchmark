@@ -27,7 +27,7 @@ def entropy(p, eps=1e-12):
 # Save helper
 # ---------------------------
 def save_fig(fig, title):
-    save_dir = "./combined_analysis/plots"
+    save_dir = "./final_results/plots"
     os.makedirs(save_dir, exist_ok=True)
     # 파일명 안전하게 치환
     safe_title = (
@@ -44,10 +44,10 @@ def save_fig(fig, title):
 # ---------------------------
 # A) Overall ratio EDA
 # ---------------------------
-def load_overall_ratio(csv_path="./combined_analysis/analysis_overall_ratio.csv"):
+def load_overall_ratio(csv_path="./final_results/analysis_overall_ratio.csv"):
     df = pd.read_csv(csv_path)
     df = df.set_index("scenario_type")
-    cols = ["Diversification","Fast Follower","Maintain","Niche Focus","Open Innovation","Technology Leadership"]
+    cols = ["Maintain", "Retrenchment", "Niche Focus","Diversification","Open Innovation","Fast Follower","Technology Leadership"]
     df = df[cols]
     return df
 
@@ -130,7 +130,7 @@ def plot_ratio_pca(df):
 # ---------------------------
 # B) Delta EDA
 # ---------------------------
-def load_delta_all(data_dir="./combined_analysis"):
+def load_delta_all(data_dir="./final_results"):
     all_data = []
     for filepath in glob.glob(os.path.join(data_dir, "analysis_delta_*base.csv")):
         case = os.path.basename(filepath).replace("analysis_delta_", "").replace("-base.csv", "")
@@ -142,7 +142,7 @@ def load_delta_all(data_dir="./combined_analysis"):
     return pd.concat(all_data, ignore_index=True)
 
 def compute_delta_metrics(df_delta):
-    strategies = ["Diversification","Fast Follower","Maintain","Niche Focus","Open Innovation","Technology Leadership"]
+    strategies = ["Maintain", "Retrenchment", "Niche Focus","Diversification","Open Innovation","Fast Follower","Technology Leadership"]
     sv = (df_delta
           .groupby(["strategy","problem_type"])["delta"]
           .agg(mean_abs=lambda x: np.mean(np.abs(x)),
@@ -176,7 +176,7 @@ def compute_delta_metrics(df_delta):
     return metrics, anch, shock
 
 def plot_delta_sensitivity(metrics_df):
-    order = ["Diversification","Fast Follower","Maintain","Niche Focus","Open Innovation","Technology Leadership"]
+    order = ["Maintain", "Retrenchment", "Niche Focus","Diversification","Open Innovation","Fast Follower","Technology Leadership"]
     fig, ax = plt.subplots(figsize=(10,5))
     subg = metrics_df[metrics_df["problem_type"]=="generic"].set_index("strategy").reindex(order)
     subs = metrics_df[metrics_df["problem_type"]=="specific"].set_index("strategy").reindex(order)
@@ -192,7 +192,7 @@ def plot_delta_sensitivity(metrics_df):
     plt.show()
 
 def plot_delta_sign_consistency(metrics_df):
-    order = ["Diversification","Fast Follower","Maintain","Niche Focus","Open Innovation","Technology Leadership"]
+    order = ["Maintain", "Retrenchment", "Niche Focus","Diversification","Open Innovation","Fast Follower","Technology Leadership"]
     fig, ax = plt.subplots(figsize=(10,5))
     subg = metrics_df[metrics_df["problem_type"]=="generic"].set_index("strategy").reindex(order)
     subs = metrics_df[metrics_df["problem_type"]=="specific"].set_index("strategy").reindex(order)
@@ -209,7 +209,7 @@ def plot_delta_sign_consistency(metrics_df):
     plt.show()
 
 def plot_anchoring_index(anch_df):
-    order = ["Diversification","Fast Follower","Maintain","Niche Focus","Open Innovation","Technology Leadership"]
+    order = ["Maintain", "Retrenchment", "Niche Focus","Diversification","Open Innovation","Fast Follower","Technology Leadership"]
     anch_df = anch_df.set_index("strategy").reindex(order)
     fig, ax = plt.subplots(figsize=(8,4))
     ax.bar(range(len(order)), anch_df["anchoring_index"].values)
@@ -241,7 +241,7 @@ def plot_shock_size(shock_df):
 # ---------------------------
 if __name__ == "__main__":
     # A) Overall ratios
-    ratio_df = load_overall_ratio("./combined_analysis/analysis_overall_ratio.csv")
+    ratio_df = load_overall_ratio("./final_results/analysis_overall_ratio.csv")
     plot_ratio_heatmap(ratio_df)
     plot_ratio_delta_from_base(ratio_df)
     metrics_ratio = compute_ratio_metrics(ratio_df)
@@ -250,7 +250,7 @@ if __name__ == "__main__":
     plot_ratio_pca(ratio_df)
 
     # B) Deltas
-    delta_df = load_delta_all("./combined_analysis")
+    delta_df = load_delta_all("./final_results")
     metrics_delta, anch_df, shock_df = compute_delta_metrics(delta_df)
     print("\n[Delta metrics: first rows]\n", metrics_delta.head().round(4))
     print("\n[Anchoring index]\n", anch_df.round(4))

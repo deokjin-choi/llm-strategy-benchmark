@@ -75,7 +75,7 @@ To rigorously test our hypotheses and evaluate our diagnostic metrics, we design
 ## Strategy Distribution Analysis
 
 ### Figure 1. Strategy Ratio by Scenario
-![Strategy Ratio by Scenario](combined_analysis/plots/eval_Strategy_Ratio_by_Scenario.png)
+![Strategy Ratio by Scenario](final_results/plots/eval_eda_Strategy_Ratio_by_Scenario.png)
 
 Across all scenarios, **Technology Leadership (TL)** consistently shows the highest share, while **Niche Focus** and **Maintain** remain persistently low. However, case-specific differences are clear:
 - **competitive_dynamics**: TL slightly strengthens (0.60 → 0.62) compared to base, with minimal overall change. When framed with Tesla, TL becomes anchored and stable.  
@@ -88,7 +88,7 @@ In summary, TL acts as the default strategy across all conditions. Yet, under **
 ---
 
 ### Figure 2. Delta from Base (Generic vs. Specific)
-![Delta from Base](combined_analysis/plots/eval_Generic_vs_Specific_by_Case_(identical_axes).png)
+![Delta from Base](final_results/plots/eval_Generic_vs_Specific_by_Case_(identical_axes).png)
 
 Comparing **Delta from Base** under **Generic (anonymous company)** vs. **Specific (Tesla)** framings shows:
 - **Common pattern**: TL shows the largest differences. Explicit Tesla framing often **weakens TL** or reduces its growth.  
@@ -102,7 +102,7 @@ Overall, **brand framing is not just stabilizing**; under unfavorable or uncerta
 ---
 
 ### Figure 3. PCA of Strategy Ratios (2D Projection)
-![PCA of Strategy Ratios](combined_analysis/plots/eval_eda_PCA_of_Strategy_Ratios_2D.png)
+![PCA of Strategy Ratios](final_results/plots/eval_eda_PCA_of_Strategy_Ratios_2D.png)
 
 We applied Singular Value Decomposition (SVD) to the scenario–strategy ratio matrix (after mean-centering) and projected it into two dimensions. This visualization highlights the relative similarity of strategic distributions across scenarios.
 

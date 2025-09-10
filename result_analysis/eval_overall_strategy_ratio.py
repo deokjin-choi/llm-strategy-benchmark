@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import os
 
-def plot_strategy_ratio_heatmap(csv_path="./combined_analysis/analysis_overall_ratio.csv"):
+def plot_strategy_ratio_heatmap(csv_path="./final_results/analysis_overall_ratio.csv"):
     # CSV 불러오기
     df = pd.read_csv(csv_path)
     
@@ -25,7 +25,7 @@ def plot_strategy_ratio_heatmap(csv_path="./combined_analysis/analysis_overall_r
     plt.tight_layout()
     
     # 저장 경로 지정
-    save_dir = "./combined_analysis/plots"
+    save_dir = "./final_results/plots"
     os.makedirs(save_dir, exist_ok=True)
     # 제목을 파일명으로 변환 (공백 등 안전하게 처리)
     safe_title = title.replace(" ", "_")
@@ -36,5 +36,5 @@ def plot_strategy_ratio_heatmap(csv_path="./combined_analysis/analysis_overall_r
     plt.show()
 
 if __name__ == "__main__":
-    csv_path = "./combined_analysis/analysis_overall_ratio.csv"
+    csv_path = "./final_results/analysis_overall_ratio.csv"
     plot_strategy_ratio_heatmap(csv_path)

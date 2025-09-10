@@ -1,6 +1,5 @@
 # 대규모 실험결과
 infer_results/
-/combined_analysis/old_results
 
 # 캐시/임시파일
 __pycache__/
