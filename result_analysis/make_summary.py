@@ -20,20 +20,10 @@ def ratio_table(df, keys):
     counts["Ratio"] = counts["Count"] / totals
     return counts.pivot(index=keys, columns="Standard Mapping", values="Ratio").fillna(0)
 
-def diff_table(df, keys):
-    """Calculate the delta (specific - generic) for a given set of keys."""
-    specific_df = ratio_table(df[df['problem_type'] == 'specific'], keys)
-    generic_df = ratio_table(df[df['problem_type'] == 'generic'], keys)
-    specific_df, generic_df = specific_df.align(generic_df, join='outer', fill_value=0)
-    diff_df = specific_df - generic_df
-    diff_df.columns = [f"Δ {c} (specific-generic)" for c in diff_df.columns]
-    return diff_df
-
-
 # -----------------------------
 # 2) Main Evaluation Logic
 # -----------------------------
-def analyze_all_scenarios():
+def build_summary_from_infer():
     """
     infer_results 폴더의 *scenarios*.csv 파일을 불러와 분석하고,
     결과는 final_results/summary, final_results/plots에 저장합니다.
@@ -133,4 +123,4 @@ def analyze_all_scenarios():
 
 
 if __name__ == "__main__":
-    analyze_all_scenarios()
+    build_summary_from_infer()
