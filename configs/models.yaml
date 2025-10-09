@@ -5,7 +5,7 @@ mistral:
   endpoints:
     ollama: http://localhost:11434/api/generate
     vllm-cuda: http://localhost:3000/v1/chat/completions
-    vllm-rocm: http://localhost:3000/v1/chat/completions
+    vllm-amd_cloud: http://localhost:3000/v1/chat/completions
   enabled: true
 
 deepseek:
@@ -13,7 +13,7 @@ deepseek:
   endpoints:
     ollama: http://localhost:11434/api/generate
     vllm-cuda: http://localhost:3001/v1/chat/completions
-    vllm-rocm: http://localhost:3001/v1/chat/completions
+    vllm-amd_cloud: http://localhost:3001/v1/chat/completions
   enabled: true
 
 gemma:
@@ -21,7 +21,7 @@ gemma:
   endpoints:
     ollama: http://localhost:11434/api/generate
     vllm-cuda: http://localhost:3002/v1/chat/completions
-    vllm-rocm: http://localhost:3002/v1/chat/completions
+    vllm-amd_cloud: http://localhost:3002/v1/chat/completions
   enabled: true
 
 yi:
@@ -29,7 +29,7 @@ yi:
   endpoints:
     ollama: http://localhost:11434/api/generate
     vllm-cuda: http://localhost:3003/v1/chat/completions
-    vllm-rocm: http://localhost:3003/v1/chat/completions
+    vllm-amd_cloud: http://localhost:3003/v1/chat/completions
   enabled: true
 
 qwen:
@@ -37,7 +37,7 @@ qwen:
   endpoints:
     ollama: null
     vllm-cuda: http://localhost:3004/v1/chat/completions   # Qwen은 GPU2+3 묶음이므로 독립 포트 유지
-    vllm-rocm: http://localhost:3004/v1/chat/completions
+    vllm-amd_cloud: http://localhost:3004/v1/chat/completions
   enabled: true
 
 llama:
@@ -45,7 +45,7 @@ llama:
   endpoints:
     ollama: null
     vllm-cuda: null   # 맨 마지막 포트에 고정
-    vllm-rocm: http://localhost:3005/v1/chat/completions
+    vllm-amd_cloud: http://localhost:3005/v1/chat/completions
   enabled: true     # 회사 CUDA 환경에서는 사용 안 함
 
 

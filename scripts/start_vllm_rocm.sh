@@ -14,8 +14,8 @@ declare -A PORT_MAP=(
   [llama]="3005"  
 )
 
-# 실행
-for key in mistral deepseek llama gemma qwen yi; do
+# 실행 : gemma는 형식이 달라서 제외함
+for key in mistral deepseek llama qwen yi; do
   MODEL_NAME=$(yq e ".${key}.name" $CONFIG_FILE)
   PORT=${PORT_MAP[$key]}
 
@@ -30,6 +30,7 @@ for key in mistral deepseek llama gemma qwen yi; do
   HIP_VISIBLE_DEVICES=0 nohup python -m vllm.entrypoints.openai.api_server \
     --model $MODEL_NAME \
     --port $PORT \
+    --gpu-memory-utilization 0.32 \
     --dtype bfloat16 > $LOGFILE 2>&1 &
 done
 
