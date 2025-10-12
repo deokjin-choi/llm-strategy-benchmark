@@ -117,7 +117,7 @@ def plot_correlation_generic_vs_specific(df_summary):
         df_summary (pd.DataFrame): A DataFrame containing 'case', 'strategy',
                                    'generic', and 'specific' delta values.
     """
-    print("\n--- Plotting Correlation between Generic and Specific Deltas ---")
+    print("\n--- Plotting Correlation between Generic and Specific Deltas (with Regression Line) ---")
     
     # 필수 열이 있는지 확인
     required_cols = ['case', 'strategy', 'generic', 'specific']
@@ -150,15 +150,29 @@ def plot_correlation_generic_vs_specific(df_summary):
         x = case_data['generic']
         y = case_data['specific']
         
-        # 상관계수 계산
+        # 1. 상관계수 계산
         corr_coef, _ = pearsonr(x, y)
         
-        # 산점도 그리기
+        # 2. 회귀 계수 계산 (기울기: m, 절편: c)
+        # np.polyfit(x, y, 1)은 1차 직선의 기울기와 절편을 반환
+        m, c = np.polyfit(x, y, 1)
+        
+        # 3. 산점도 그리기
         ax.scatter(x, y, alpha=0.6, s=50)
         
-        # 상관계수 텍스트 추가
-        ax.text(0.05, 0.95, f'r = {corr_coef:.2f}', 
-                transform=ax.transAxes, fontsize=12, verticalalignment='top')
+        # 4. 회귀선 그리기 (직선)
+        # x축의 최소/최대값으로 회귀선을 그림
+        x_min, x_max = ax.get_xlim()
+        x_line = np.array([min(x.min(), x_min), max(x.max(), x_max)])
+        y_line = m * x_line + c
+        
+        ax.plot(x_line, y_line, color='red', linestyle='-', linewidth=1.5, label='Regression Line')
+        
+        # 5. 상관계수 텍스트 추가
+        # 상관계수와 함께 회귀선의 기울기(m)도 표시하면 정보력이 높아집니다.
+        ax.text(0.05, 0.95, f'r = {corr_coef:.2f}\ny = {m:.2f}x + {c:.2f}', 
+                transform=ax.transAxes, fontsize=10, verticalalignment='top', 
+                bbox=dict(boxstyle="round,pad=0.5", fc="white", alpha=0.7))
         
         # 제목 및 축 레이블 설정
         ax.set_title(f"Scenario: {case}", fontsize=14)
@@ -172,14 +186,14 @@ def plot_correlation_generic_vs_specific(df_summary):
     for j in range(i + 1, len(axes)):
         fig.delaxes(axes[j])
         
-    suptitle = "Correlation between Generic and Specific Δ by Scenario"
+    suptitle = "Correlation between Generic and Specific Δ by Scenario (with Regression Line)"
     fig.suptitle(suptitle, fontsize=16)
     plt.tight_layout(rect=[0, 0.03, 1, 0.95])
     
     # 그래프 저장
     save_dir = "./final_results/plots"
     os.makedirs(save_dir, exist_ok=True)
-    fig.savefig(os.path.join(save_dir, "eval_case_correlation_deltas.png"), dpi=300)
+    fig.savefig(os.path.join(save_dir, "eval_case_correlation_deltas_with_regression.png"), dpi=300)
     plt.show()
 
 

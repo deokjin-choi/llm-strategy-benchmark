@@ -3,12 +3,12 @@
     "problem_generic": "Problem: A new company must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.",
     "problem_specific": "Problem: Tesla, a new company, must select an initial market entry strategy to prove its concept and secure future funding, despite lacking a proven supply chain, manufacturing assets, and brand recognition. The core challenge is to create a compelling and differentiated narrative while managing a high capital risk.",
     "context_blocks": {
-      "[Market] Global new car sales: ~60 million units/year.": "Global new car sales were roughly ~60 million units per year.",
-      "[Market] EV share: <0.02% of global new car sales.": "Battery electric vehicles accounted for less than ~0.02% of global new car sales.",
-      "[Technology] Li-ion cell cost: ~1,000 USD/kWh.": "Lithium-ion cell costs were around ~1,000 USD per kWh.",
-      "[Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.": "Although the prototype achieved a fast 0–60 mph time, it was unreliable and the manufacturing process was extremely difficult and costly.",
-      "[Finance] Initial funding: ~USD 7.5M Series A (private).": "Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital.",
-      "[Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs.": "Major automakers at the time were focused on hybrid and fuel cell technologies, not pure electric vehicles."
+      "[Market] Global new car sales: ~60 million units/year.": "Global new car sales were roughly ~60 million units per year, but overall industry growth is slowing significantly due to saturation in developed markets.",
+      "[Market] EV share: <0.02% of global new car sales.": "Battery electric vehicles accounted for less than ~0.02% of global new car sales, indicating an extreme lack of consumer trust and requiring prohibitively high educational marketing costs.",
+      "[Technology] Li-ion cell cost: ~1,000 USD/kWh.": "Lithium-ion cell costs were around ~1,000 USD per kWh, making affordable mass-market production fundamentally impossible under current technological and cost constraints.",
+      "[Technology] Prototype performance: 0–60 mph in 3.6 s; ~300 km range.": "A high-performance prototype achieved 0–60 mph in ~3.6 seconds with ~300 km range, but it was unreliable and the manufacturing process was extremely difficult and costly.",
+      "[Finance] Initial funding: ~USD 7.5M Series A (private).": "Initial external funding amounted to approximately USD 7.5 million in a Series A round, indicating limited capital that is insufficient to cover even one year of operational expenses and R&D.",
+      "[Market] Incumbent focus: Established automakers concentrated on hybrid and fuel cell technologies, not pure EVs.": "Major automakers at the time were focused on hybrid and fuel cell technologies, limiting access to key high-volume suppliers who are hesitant to commit resources to an unproven pure EV market."
     },
     "execution_options": {
       "A": { "name": "Develop a high-performance EV sports car", "mapping": "Technology Leadership" },
@@ -24,10 +24,10 @@
     "problem_generic": "Problem: A company must manage conflicting goals of product quality and timely delivery during its initial product launch. With significant pre-orders already placed, the company faces severe cash flow issues and supply chain delays, jeopardizing brand trust and future investment if not handled correctly.",
     "problem_specific": "Problem: Tesla must manage conflicting goals of product quality and timely delivery during its initial product launch. With significant pre-orders already placed, the company faces severe cash flow issues and supply chain delays, jeopardizing brand trust and future investment if not handled correctly.",
     "context_blocks": {
-      "[Customer Response] Initial pre-orders: over 900 units.": "Initial pre-orders amounted to over 900 units, but these were mostly from early adopters and a single quality flaw could lead to severe reputational damage.",
-      "[Market] Production ramp-up: 27-70 units delivered in the first months of production.": "Initial deliveries in the first months of production were very low, ranging from 27 to 70 units.",
-      "[Finance] Investment raised: $40M secured for production start and dealer network.": "A $40M investment was secured to begin production and build a dealer network, but cash flow remained tight.",
-      "[Manufacturing] Supply Chain: Delays from key partners and frequent design changes hindered production.": "Frequent supply delays from key partners and design changes became a major bottleneck."
+      "[Customer Response] Initial pre-orders: over 900 units.": "Initial pre-orders amounted to over 900 units, indicating high customer interest, but the majority were speculative orders from investors and collectors, not guaranteed long-term buyers",
+      "[Market] Production ramp-up: 27-70 units delivered in the first months of production.": "Initial deliveries in the first months of production were very low, ranging from 27 to 70 units, causing a significant backlog and leading to massive customer frustration and deposit refund requests.",
+      "[Finance] Investment raised: $40M secured for production start and dealer network.": "A $40M investment was secured to begin production and build a dealer network, but cash flow remained tight, and a failure to meet delivery targets risks immediate liquidity collapse.",
+      "[Manufacturing] Supply Chain: Delays from key partners and frequent design changes hindered production.": "Frequent supply delays from key partners and design changes became a major bottleneck, requiring the company to absorb high costs from emergency re-sourcing and re-engineering."
     },
     "execution_options": {
       "B": { "name": "Accelerate launch to meet demand, accepting potential quality compromises", "mapping": "Fast Follower" },
@@ -43,9 +43,9 @@
     "problem_generic": "Problem: A company needs to transition from a niche-market player to a mass-market manufacturer by establishing a large-scale production infrastructure. The key is to secure trust in the premium sedan market and build a production base for eventual expansion into lower-priced models.",
     "problem_specific": "Problem: Tesla needs to transition from a niche-market player to a mass-market manufacturer by establishing a large-scale production infrastructure. The key is to secure trust in the premium sedan market and build a production base for eventual expansion into lower-priced models.",
     "context_blocks": {
-      "[Finance] Large factory acquisition: $42M.": "The company acquired a large manufacturing factory for $42M, securing a large production facility.",
-      "[Policy/Regulation] Government loan: $465M support.": "The company received a $465M government loan, but it came with strict production and quality milestones, with penalties for failure.",
-      "[Market] Fuel cost savings: A new premium sedan was projected to save about $1,800 over 6 years.": "A new premium sedan was projected to save customers about $1,800 in fuel costs over 6 years, a strong selling point for consumers."
+      "[Finance] Large factory acquisition: $42M.": "The company acquired a large manufacturing factory for $42M, securing a large production facility, but the complete retooling required for the new platform created massive, front-loaded capital expenditure.",
+      "[Policy/Regulation] Government loan: $465M support.": "The company received a $465M government loan, providing significant financial backing, but it came with strict production and quality targets with severe financial penalties for failure.",
+      "[Market] Fuel cost savings: A new premium sedan was projected to save about $1,800 over 6 years.": "A new premium sedan was projected to save customers about $1,800 in fuel costs over 6 years, but this saving is financially negligible compared to the vehicle's high base price and is not a core driver for mass adoption."
     },
     "execution_options": {
       "C": { "name": "Sell battery packs and powertrains to other companies", "mapping": "Open Innovation" },
@@ -61,10 +61,10 @@
     "problem_generic": "Problem: A company aims to enter the growing SUV market. However, a complex product design creates high production difficulty and quality risks, which could severely damage the brand's reputation despite a lack of direct competition.",
     "problem_specific": "Problem: Tesla aims to enter the growing SUV market. However, a complex product design creates high production difficulty and quality risks, which could severely damage the brand's reputation despite a lack of direct competition.",
     "context_blocks": {
-      "[Market] US SUV market share: about 32% of new car sales.": "SUVs made up about 32% of new car sales in the US, a large and growing segment.",
-      "[Market] Competition: There were very few competing electric SUVs at the time.": "At the time, there were very few competing electric SUVs.",
-      "[Technology] Design Complexity: A new design with complex, upward-swinging doors posed significant manufacturing challenges.": "A new design with complex, upward-swinging doors was a critical design innovation that provided a key differentiator in a crowded market.",
-      "[Customer Response] High pre-order volume: Over 30,000 pre-orders existed, increasing pressure to deliver.": "There was a high pre-order volume, increasing the pressure to deliver."
+      "[Market] US SUV market share: about 32% of new car sales.": "SUVs made up about 32% of new car sales in the US, a large and growing segment, but traditional automakers are preparing massive internal combustion engine SUV inventories, creating a high barrier to entry.",
+      "[Market] Competition: There were very few competing electric SUVs at the time.": "At the time, there were very few competing electric SUVs, but major luxury incumbents can quickly adapt large existing platforms, eliminating any temporary first-mover advantage.",
+      "[Technology] Design Complexity: A new design with complex, upward-swinging doors posed significant manufacturing challenges.": "A new design with complex, upward-swinging doors posed significant manufacturing challenges, risking mass failure and potential brand collapse if reliability targets are missed.",
+      "[Customer Response] High pre-order volume: Over 30,000 pre-orders existed, increasing pressure to deliver.": "There was a high pre-order volume, increasing the pressure to deliver, but this high visibility means any production defects will be magnified, leading to devastating public relations consequences."
     },
     "execution_options": {
       "D": { "name": "Develop a standard, mid-priced SUV for a specific customer segment", "mapping": "Niche Focus" },
@@ -80,10 +80,10 @@
     "problem_generic": "Problem: Facing an explosive increase in pre-orders, a company must rapidly scale production while maintaining product quality, financial stability, and public trust. The core challenge is to overcome production bottlenecks and reduce costs without sacrificing the brand’s reputation in the mass market.",
     "problem_specific": "Problem: Facing an explosive increase in pre-orders, Tesla must rapidly scale production while maintaining product quality, financial stability, and public trust. The core challenge is to overcome production bottlenecks, dubbed 'Production Hell', and reduce costs without sacrificing the brand’s reputation in the mass market.",
     "context_blocks": {
-      "[Customer Response] First week pre-orders: over 325,000 units.": "Over 325,000 units were pre-ordered in the first week, but a significant portion of these were speculative and the cancellation rate was higher than anticipated.",
-      "[Finance] Value of orders: about $14B.": "The value of pre-orders was approximately $14 billion.",
-      "[Customer Response] Net pre-orders after cancellations: 373,000.": "Net pre-orders after removing cancellations and duplicates were 373,000.",
-      "[Market] Global EV sales and company production volume are surging.": "Global EV sales and the company's production volume are surging, indicating a rapid market shift."
+      "[Customer Response] First week pre-orders: over 325,000 units.": "Over 325,000 units were pre-ordered in the first week, but a significant portion were speculative orders from non-committed buyers, and high cancellation rates are projected.",
+      "[Finance] Value of orders: about $14B.": "The value of pre-orders was approximately $14 billion, but these funds are locked up as customer liabilities until delivery, creating an immediate and severe corporate liquidity strain.",
+      "[Customer Response] Net pre-orders after cancellations: 373,000.": "Net pre-orders after removing cancellations and duplicates were 373,000, but these remaining customers will be highly sensitive to production delays, threatening a collapse in public trust.",
+      "[Market] Global EV sales and company production volume are surging.": "Global EV sales and the company's production volume are surging, indicating a rapid market shift, but this growth exacerbates pressure on the struggling supply chain and forces costly, temporary production solutions."
     },
     "execution_options": {
       "E": { "name": "Expand into related mass-market products (e.g., Model Y crossover) simultaneously", "mapping": "Diversification" },
@@ -99,10 +99,10 @@
     "problem_generic": "Problem: A company needs to address key bottlenecks for mass EV adoption: the lack of charging infrastructure and high battery costs. The strategic goal is to diversify revenue beyond the core automotive business by integrating energy storage and generation to create synergy.",
     "problem_specific": "Problem: Tesla needs to address key bottlenecks for mass EV adoption: the lack of charging infrastructure and high battery costs. The strategic goal is to diversify revenue beyond the core automotive business by integrating energy storage and generation to create synergy.",
     "context_blocks": {
-      "[Technology] Proprietary charging network: over 2,000 stations, 18,000+ chargers (2020).": "The company's proprietary charging network was very costly to build and maintain, and third-party networks were becoming a more viable and cost-effective option for customers.",
-      "[Technology] Large-scale factory production capacity: 35 GWh per year.": "The company's large-scale factory had a production capacity of 35 GWh per year, a key asset for battery supply.",
-      "[Market] Solar module price: fell by about 80% over 10 years.": "Solar module prices fell by about 80% over a decade, making solar energy more viable.",
-      "[Competitive Landscape] Competitors' Infrastructure: Most other automakers relied on third-party charging networks, not building their own.": "Competitors typically relied on third-party charging networks, not proprietary ones."
+      "[Technology] Proprietary charging network: over 2,000 stations, 18,000+ chargers (2020).": "The company's proprietary charging network had over 2,000 stations and 18,000+ chargers by 2020, but this system is extremely costly to build and maintain, and third-party networks are emerging as more capital-efficient alternatives.",
+      "[Technology] Large-scale factory production capacity: 35 GWh per year.": "The company's large-scale factory had a production capacity of 35 GWh per year, a key asset for battery supply, but its current production utilization is low, tying up massive amounts of capital unproductively.",
+      "[Market] Solar module price: fell by about 80% over 10 years.": "Solar module prices fell by about 80% over a decade, making solar energy more viable, but significant regulatory hurdles and consumer skepticism remain for residential energy integration.",
+      "[Competitive Landscape] Competitors' Infrastructure: Most other automakers relied on third-party charging networks, not building their own.": "Competitors typically relied on third-party charging networks, a strategy that is potentially more flexible and capital-efficient in the long run, thereby giving them a cost advantage."
     },
     "execution_options": {
       "F": { "name": "Focus exclusively on the core automotive business", "mapping": "Retrenchment" },

@@ -112,17 +112,78 @@ def plot_ratio_metrics(metrics_df):
     plt.show()
 
 def plot_ratio_pca(df):
+    # 1. PCA 계산 (기존 로직)
     X = df.values
     Xc = X - X.mean(axis=0, keepdims=True)
     U, S, Vt = np.linalg.svd(Xc, full_matrices=False)
     Z = U[:, :2] * S[:2]
-    fig, ax = plt.subplots(figsize=(6,5))
+    
+    # 2. PCA 결과 DataFrame 생성 및 좌표 추출
+    # Z와 df.index를 결합하여 시나리오별 좌표를 쉽게 찾도록 합니다.
+    df_pca = pd.DataFrame(Z, index=df.index, columns=['PCA1', 'PCA2'])
+    
+    # 시각화할 시나리오 목록
+    scenarios_to_highlight = ['base', 'opp_focus', 'count_fact', 'competitive_dynamics', 'randomized_numbers']
+    
+    # Base 좌표 설정
+    try:
+        base_coords = df_pca.loc['base'].values
+        opp_coords = df_pca.loc['opp_focus'].values
+        count_coords = df_pca.loc['count_fact'].values
+    except KeyError:
+        print("Error: 'base', 'opp_focus', or 'count_fact' index not found in the DataFrame.")
+        return
+
+    # 3. 그래프 초기화
+    fig, ax = plt.subplots(figsize=(8, 7))
     ax.axhline(0, color="k", lw=1); ax.axvline(0, color="k", lw=1)
-    for (x,y), label in zip(Z, df.index):
-        ax.scatter(x, y)
-        ax.text(x, y, f" {label}", va="center", ha="left")
-    title = "PCA of Strategy Ratios 2D"
-    ax.set_title(title)
+    
+    # 색상 맵핑 (시나리오별 색상 구분)
+    color_map = {
+        'base': 'blue', 'randomized_numbers': 'purple', 
+        'opp_focus': 'red', 'count_fact': 'green', 
+        'competitive_dynamics': 'orange'
+    }
+    
+    # 4. 산점도 및 텍스트 그리기 (색상 적용)
+    for scenario in scenarios_to_highlight:
+        coords = df_pca.loc[scenario].values
+        color = color_map.get(scenario, 'gray')
+        
+        ax.scatter(coords[0], coords[1], color=color, s=80)
+        ax.text(coords[0], coords[1], f" {scenario}", va="center", ha="left", color='k', fontsize=10)
+        
+    # 5. 핵심 메시지 벡터(화살표) 추가 (Base를 시작점으로)
+    
+    # 5-1. Base -> Opp Focus (공격적 전략 이탈)
+    ax.annotate('', 
+                xy=opp_coords, xytext=base_coords, 
+                arrowprops=dict(arrowstyle="->", color='darkred', lw=2.5, mutation_scale=20, zorder=3),
+                zorder=3)
+    ax.text((opp_coords[0] + base_coords[0]) / 2, (opp_coords[1] + base_coords[1]) / 2 + 0.005, 
+            "Aggressive Shift", color='darkred', fontsize=10, ha='center')
+
+    # 5-2. Base -> Count Fact (방어적 전략 이탈)
+    ax.annotate('', 
+                xy=count_coords, xytext=base_coords, 
+                arrowprops=dict(arrowstyle="->", color='darkgreen', lw=2.5, mutation_scale=20, zorder=3),
+                zorder=3)
+    ax.text((count_coords[0] + base_coords[0]) / 2, (count_coords[1] + base_coords[1]) / 2 + 0.005, 
+            "Defensive Shift", color='darkgreen', fontsize=10, ha='center')
+
+
+    # 6. 전략적 극단 스펙트럼 선 추가
+    ax.plot([opp_coords[0], count_coords[0]], [opp_coords[1], count_coords[1]], 
+            color='gray', linestyle='--', linewidth=1, alpha=0.7, zorder=1)
+    ax.text((opp_coords[0] + count_coords[0]) / 2, (opp_coords[1] + count_coords[1]) / 2 - 0.005, 
+            "Aggressive-Defensive Spectrum", color='gray', fontsize=10, ha='center')
+
+
+    # 7. 플롯 마무리
+    title = "PCA of Strategy Ratios 2D (Vectorized Analysis)"
+    ax.set_title(title, fontsize=14)
+    ax.set_xlabel("PCA 1")
+    ax.set_ylabel("PCA 2")
     plt.tight_layout()
     save_fig(fig, title)
     plt.show()

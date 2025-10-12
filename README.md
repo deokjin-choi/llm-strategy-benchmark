@@ -56,7 +56,6 @@ To rigorously test our hypotheses and evaluate our diagnostic metrics, we design
   * `mistralai/Mistral-7B-Instruct-v0.3`
   * `Qwen/Qwen2.5-14B-Instruct`
   * `meta-llama/Meta-Llama-3.1-8B-Instruct`
-  * `google/gemma-2-9b-it`
   * `deepseek-ai/deepseek-7b-instruct`
   * `01-ai/Yi-9B-Chat`
 
@@ -86,9 +85,20 @@ Across all scenarios, **Technology Leadership (TL)** consistently shows the high
 In summary, TL acts as the default strategy across all conditions. Yet, under **negative context it weakens** and disperses to alternatives, while under **opportunity-focused context it intensifies**.
 
 ---
+### Figure 2. PCA of Strategy Ratios (2D Projection)
+![PCA of Strategy Ratios](final_results/plots/eval_eda_PCA_of_Strategy_Ratios_2D_Vectorized_Analysis.png)
 
-### Figure 2. Delta from Base (Generic vs. Specific)
-![Delta from Base](final_results/plots/eval_Generic_vs_Specific_by_Case_(identical_axes).png)
+We applied Singular Value Decomposition (SVD) to the scenario–strategy ratio matrix (after mean-centering) and projected it into two dimensions. This visualization highlights the relative similarity of strategic distributions across scenarios.
+
+Results show:
+- **base** and **randomized_numbers** cluster closely together.  
+- **opp_focus** and **count_fact** diverge strongly, indicating that **positive opportunity framing** and **negative fact framing** distinctly reshape strategic choices.  
+
+This demonstrates that **LLM strategy distributions are conditionally separable**, and PCA effectively captures these structural shifts.
+
+---
+### Figure 3. Delta from Base (Generic vs. Specific)
+![Delta from Base](final_results/plots/eval_Generic_and_Specific_Δ_by_Scenario.png)
 
 Comparing **Delta from Base** under **Generic (anonymous company)** vs. **Specific (Tesla)** framings shows:
 - **Common pattern**: TL shows the largest differences. Explicit Tesla framing often **weakens TL** or reduces its growth.  
@@ -98,18 +108,4 @@ Comparing **Delta from Base** under **Generic (anonymous company)** vs. **Specif
 - **randomized_numbers**: Generic shows a slight positive (+0.011), but Tesla framing flips it negative (−0.019), overemphasizing risk narratives.  
 
 Overall, **brand framing is not just stabilizing**; under unfavorable or uncertain contexts, it actively **suppresses aggressive TL choices** and shifts decisions toward alternative strategies.
-
----
-
-### Figure 3. PCA of Strategy Ratios (2D Projection)
-![PCA of Strategy Ratios](final_results/plots/eval_eda_PCA_of_Strategy_Ratios_2D.png)
-
-We applied Singular Value Decomposition (SVD) to the scenario–strategy ratio matrix (after mean-centering) and projected it into two dimensions. This visualization highlights the relative similarity of strategic distributions across scenarios.
-
-Results show:
-- **base, competitive_dynamics, randomized_numbers** cluster closely together.  
-- **opp_focus** and **count_fact** diverge strongly, indicating that **positive opportunity framing** and **negative fact framing** distinctly reshape strategic choices.  
-
-This demonstrates that **LLM strategy distributions are conditionally separable**, and PCA effectively captures these structural shifts.
-
 

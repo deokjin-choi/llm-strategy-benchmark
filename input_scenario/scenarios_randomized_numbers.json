@@ -45,7 +45,7 @@
     "context_blocks": {
       "[Finance] Large factory acquisition: $35.72M.": "The company acquired a large manufacturing factory for $35.72M, securing a large production facility.",
       "[Policy/Regulation] Government loan: $430.49M support.": "The company received a $430.49M government loan, providing significant financial backing.",
-      "[Market] Fuel cost savings: A new premium sedan was projected to save about $1.07,844.5.06 over 6 years.": "A new premium sedan was projected to save customers about $1.07,844.5.06 in fuel costs over 6 years, a strong selling point for consumers."
+      "[Market] Fuel cost savings: A new premium sedan was projected to save about $2,000 over 6 years.": "A new premium sedan was projected to save customers about $2,000 in fuel costs over 6 years, a strong selling point for consumers."
     },
     "execution_options": {
       "C": { "name": "Sell battery packs and powertrains to other companies", "mapping": "Open Innovation" },
@@ -64,7 +64,7 @@
       "[Market] US SUV market share: about 27.38% of new car sales.": "SUVs made up about 27.38% of new car sales in the US, a large and growing segment.",
       "[Market] Competition: There were very few competing electric SUVs at the time.": "At the time, there were very few competing electric SUVs.",
       "[Technology] Design Complexity: A new design with complex, upward-swinging doors posed significant manufacturing challenges.": "A new design with complex, upward-swinging doors posed significant manufacturing challenges.",
-      "[Customer Response] High pre-order volume: Over 31.32,000 pre-orders existed, increasing pressure to deliver.": "There was a high pre-order volume, increasing the pressure to deliver."
+      "[Customer Response] High pre-order volume: Over 31,000 pre-orders existed, increasing pressure to deliver.": "There was a high pre-order volume, increasing the pressure to deliver."
     },
     "execution_options": {
       "D": { "name": "Develop a standard, mid-priced SUV for a specific customer segment", "mapping": "Niche Focus" },
