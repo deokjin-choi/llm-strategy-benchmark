@@ -168,11 +168,22 @@ def compute_dynamic_context_all(input_dir="infer_results"):
     all_dfs = []
     for file in all_files:
         df = pd.read_csv(file)
-        if "scenario_type" in df.columns:
-            df = df[df["scenario_type"] == "base"]  # base 시나리오만
+
+        # 파일명에서 시나리오 타입 추출
+        file_name = os.path.basename(file).replace(".csv", "")
+        if file_name.endswith("_scenarios"):
+            scenario_type = "base"
+        else:
+            scenario_type = file_name.split("_", 1)[-1]
+            if scenario_type.startswith("scenarios_"):
+                scenario_type = scenario_type.replace("scenarios_", "")
+        df["scenario_type"] = scenario_type
+
         all_dfs.append(df)
 
+    # base 시나리오만 필터링
     df_combined = pd.concat(all_dfs, ignore_index=True)
+    df_combined = df_combined[df_combined["scenario_type"] == "base"]
 
     # 전략 비율 (Num Context 기준)
     df_ratio = ratio_table(df_combined, ["Num Context"])
@@ -209,7 +220,7 @@ def compute_dynamic_context_all(input_dir="infer_results"):
 
 def plot_dynamic_context_heatmap(df_ratio_base):
     """
-    모든 전략에 대해 Num Context × 전략 비율을 히트맵으로 시각화
+    base 시나리오 내 모든 전략에 대해모든 전략에 대해 Num Context × 전략 비율을 히트맵으로 시각화
     """
     save_dir = "./final_results/plots"
     os.makedirs(save_dir, exist_ok=True)
@@ -337,9 +348,9 @@ if __name__ == "__main__":
         plot_context_entropy(df_entropy)
 
     # base 시나리오의 모든 전략에 대해 컨텍스트 개수 변화에 따른 비율 변화 및 불안정성 지표
-    df_ratio_base, instability, overall_instability = compute_dynamic_context_all("infer_results")
-    if not df_ratio_base.empty:
-        plot_dynamic_context_heatmap(df_ratio_base)
-        plot_strategy_boxplot(df_ratio_base)      # Boxplot
-        plot_trend_with_instability(df_ratio_base, instability)
+    # df_ratio_base, instability, overall_instability = compute_dynamic_context_all("infer_results")
+    # if not df_ratio_base.empty:
+    #     plot_dynamic_context_heatmap(df_ratio_base)
+    #     plot_strategy_boxplot(df_ratio_base)      # Boxplot
+    #     plot_trend_with_instability(df_ratio_base, instability)
 

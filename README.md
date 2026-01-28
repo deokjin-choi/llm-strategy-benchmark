@@ -76,13 +76,14 @@ To rigorously test our hypotheses and evaluate our diagnostic metrics, we design
 ### Figure 1. Strategy Ratio by Scenario
 ![Strategy Ratio by Scenario](final_results/plots/eval_eda_Strategy_Ratio_by_Scenario.png)
 
-Across all scenarios, **Technology Leadership (TL)** consistently shows the highest share, while **Niche Focus** and **Maintain** remain persistently low. However, case-specific differences are clear:
-- **competitive_dynamics**: TL slightly strengthens (0.60 → 0.62) compared to base, with minimal overall change. When framed with Tesla, TL becomes anchored and stable.  
-- **count_fact**: TL decreases significantly (0.60 → 0.49), while **Fast Follower (0.16)** and **Open Innovation (0.19)** increase. Under unfavorable facts, strategies shift from aggressive to more conservative and cooperative.  
-- **opp_focus**: TL surges strongly (0.70). When opportunities are highlighted, the model strongly gravitates toward TL.  
-- **randomized_numbers**: Nearly identical to the base scenario. Numerical perturbations have negligible effect.  
+Across scenarios, the strategy distribution shows a clear **scenario-dependent shift** rather than a single dominant default. In the **base** setting, **Niche Focus** is the most frequent choice (0.28), followed by **Open Innovation** and **Technology Leadership** (both 0.15). Several scenario-specific patterns stand out:
 
-In summary, TL acts as the default strategy across all conditions. Yet, under **negative context it weakens** and disperses to alternatives, while under **opportunity-focused context it intensifies**.
+- **competitive_dynamics**: **Technology Leadership** increases (0.15 → 0.23), while **Niche Focus** slightly decreases (0.28 → 0.24). At the same time, **Open Innovation** shows a modest rise (0.15 → 0.17). This pattern suggests that competitive pressure encourages consideration of leadership-oriented strategies, but without the strong commitment observed under opportunity-focused conditions.
+- **count_fact**: **Technology Leadership** drops markedly (0.15 → 0.09), while **Niche Focus** rises (0.28 → 0.33) and **Fast Follower** increases (0.07 → 0.10). Under unfavorable facts, the model shifts away from leadership strategies toward more conservative positioning.
+- **opp_focus**: **Technology Leadership** surges strongly (0.15 → 0.39), becoming the dominant strategy. Opportunity-focused context sharply amplifies leadership-oriented decisions.
+- **randomized_numbers**: Nearly identical to the base scenario (e.g., **Niche Focus** 0.28 → 0.29; **Technology Leadership** 0.15 → 0.14), indicating **numerical perturbations have limited impact** on overall strategy choice.
+
+Overall, the results indicate that **context framing (opportunity vs. unfavorable facts)** drives large shifts in strategy preference, while **pure numerical variation** produces minimal change.
 
 ---
 ### Figure 2. PCA of Strategy Ratios (2D Projection)
@@ -100,12 +101,15 @@ This demonstrates that **LLM strategy distributions are conditionally separable*
 ### Figure 3. Delta from Base (Generic vs. Specific)
 ![Delta from Base](final_results/plots/eval_Generic_and_Specific_Δ_by_Scenario.png)
 
-Comparing **Delta from Base** under **Generic (anonymous company)** vs. **Specific (Tesla)** framings shows:
-- **Common pattern**: TL shows the largest differences. Explicit Tesla framing often **weakens TL** or reduces its growth.  
-- **competitive_dynamics**: Generic TL rises (+0.043), but under Tesla framing converges to near zero → stabilization effect.  
-- **count_fact**: Generic TL drops (−0.018), but with Tesla it drops further (−0.064). Tesla framing amplifies negative reactions, suppressing TL while boosting Fast Follower and Open Innovation.  
-- **opp_focus**: Generic TL rises sharply (+0.140), but with Tesla the increase is muted (+0.043). Tesla framing induces conservatism.  
-- **randomized_numbers**: Generic shows a slight positive (+0.011), but Tesla framing flips it negative (−0.019), overemphasizing risk narratives.  
+Figure 3 compares **strategy shifts relative to the base scenario** under **Generic (anonymous company)** and **Specific (brand-framed)** conditions, highlighting how **problem framing alters decision sensitivity rather than absolute strategy choice**.
 
-Overall, **brand framing is not just stabilizing**; under unfavorable or uncertain contexts, it actively **suppresses aggressive TL choices** and shifts decisions toward alternative strategies.
+Several consistent patterns emerge:
+
+- **Overall pattern**: Brand framing does not uniformly increase or decrease aggressiveness. Instead, it **modulates the direction and magnitude of strategy shifts depending on context**.
+- **competitive_dynamics**: Under competitive pressure, **Specific framing dampens extreme shifts** observed in the Generic case. Technology Leadership increases modestly, while alternative strategies such as Open Innovation also gain share, indicating a stabilizing effect rather than full commitment.
+- **count_fact**: When unfavorable facts are emphasized, **Specific framing amplifies defensive reactions**. Technology Leadership declines more strongly, accompanied by increased movement toward Fast Follower and Open Innovation strategies.
+- **opp_focus**: In opportunity-focused contexts, **Specific framing amplifies aggressive responses**. Technology Leadership increases more strongly than in the Generic case, suggesting that brand identity acts as a catalyst rather than a constraint when upside potential is salient.
+- **randomized_numbers**: Both Generic and Specific framings remain close to zero across strategies, indicating that **brand effects are largely inactive under purely numerical perturbations**.
+
+Overall, Figure 3 demonstrates that **brand framing functions as a context-dependent amplifier or stabilizer**, not a fixed bias. This highlights the importance of considering **decision sensitivity and framing effects** when deploying LLMs for strategic decision-making in R&D contexts.
 
