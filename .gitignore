@@ -1,6 +1,9 @@
 # 대규모 실험결과
 infer_results/
 
+# 참조논문
+references/
+
 # 캐시/임시파일
 __pycache__/
 *.pyc
