@@ -1157,49 +1157,58 @@ def run_model_profile_analysis(
     plot_radar_by_temperature(profile_df, radar_path, facet_by=radar_facet_by)
     print(f"Saved: {radar_path}")
 
-    print("Building condition-level DS diagnostics...")
-    ds_cond_df = build_condition_level_ds_diagnostics(df)
-    ds_cond_path = os.path.join(summary_dir, "model_profile_ds_condition_diagnostics.csv")
-    ds_cond_df.to_csv(ds_cond_path, index=False)
-    print(f"Saved: {ds_cond_path}")
+    # --- Localization on the experimental grid (DS, FR directionality, CR-by-scenario):
+    #     run `python -m result_analysis.fr_cr_ds_localization_analysis` (or import
+    #     `run_fr_cr_ds_localization`). Previously this block also lived here.
+    #
+    # print("Building condition-level DS diagnostics...")
+    # ds_cond_df = build_condition_level_ds_diagnostics(df)
+    # ds_cond_path = os.path.join(summary_dir, "model_profile_ds_condition_diagnostics.csv")
+    # ds_cond_df.to_csv(ds_cond_path, index=False)
+    # print(f"Saved: {ds_cond_path}")
+    #
+    # print("Plotting DS diagnostics (heatmaps + failure-mode scatters)...")
+    # plot_ds_condition_heatmaps(ds_cond_df, save_dir=plots_dir)
+    # plot_ds_failure_mode_scatter(ds_cond_df, save_dir=plots_dir)
+    #
+    # print("Building FR directionality summary (Δp Specific − Generic)...")
+    # fr_dir_df = build_fr_directionality_summary(df)
+    # fr_dir_path = os.path.join(summary_dir, "model_profile_fr_directionality_by_strategy.csv")
+    # fr_dir_df.to_csv(fr_dir_path, index=False)
+    # print(f"Saved: {fr_dir_path}")
+    #
+    # print("Plotting FR directionality bars...")
+    # plot_fr_directionality_bars(fr_dir_df, save_dir=plots_dir, top_k=8)
+    #
+    # print("Building temperature asymmetry table (ΔFR, ΔEFI)...")
+    # fr_efi_delta_df = build_temperature_fr_efi_delta_table(profile_df)
+    # fr_efi_delta_path = os.path.join(summary_dir, "model_profile_temp_delta_fr_efi.csv")
+    # fr_efi_delta_df.to_csv(fr_efi_delta_path, index=False)
+    # print(f"Saved: {fr_efi_delta_path}")
+    #
+    # print("Plotting temperature asymmetry scatter (ΔFR vs ΔEFI)...")
+    # fr_efi_scatter_path = os.path.join(plots_dir, "eval_temp_delta_fr_vs_efi.png")
+    # plot_temp_delta_fr_efi(fr_efi_delta_df, fr_efi_scatter_path)
+    # print(f"Saved: {fr_efi_scatter_path}")
 
-    print("Plotting DS diagnostics (heatmaps + failure-mode scatters)...")
-    plot_ds_condition_heatmaps(ds_cond_df, save_dir=plots_dir)
-    plot_ds_failure_mode_scatter(ds_cond_df, save_dir=plots_dir)
-
-    print("Building FR directionality summary (Δp Specific − Generic)...")
-    fr_dir_df = build_fr_directionality_summary(df)
-    fr_dir_path = os.path.join(summary_dir, "model_profile_fr_directionality_by_strategy.csv")
-    fr_dir_df.to_csv(fr_dir_path, index=False)
-    print(f"Saved: {fr_dir_path}")
-
-    print("Plotting FR directionality bars...")
-    plot_fr_directionality_bars(fr_dir_df, save_dir=plots_dir, top_k=8)
-
-    print("Building temperature asymmetry table (ΔFR, ΔEFI)...")
-    fr_efi_delta_df = build_temperature_fr_efi_delta_table(profile_df)
-    fr_efi_delta_path = os.path.join(summary_dir, "model_profile_temp_delta_fr_efi.csv")
-    fr_efi_delta_df.to_csv(fr_efi_delta_path, index=False)
-    print(f"Saved: {fr_efi_delta_path}")
-
-    print("Plotting temperature asymmetry scatter (ΔFR vs ΔEFI)...")
-    fr_efi_scatter_path = os.path.join(plots_dir, "eval_temp_delta_fr_vs_efi.png")
-    plot_temp_delta_fr_efi(fr_efi_delta_df, fr_efi_scatter_path)
-    print(f"Saved: {fr_efi_scatter_path}")
-
-    print("Building scenario-level axis table (FR/CR/DS) and deviation hotspots...")
-    scenario_axis_df = build_scenario_axis_table(df, ds_cond_table=ds_cond_df)
-    scenario_axis_path = os.path.join(summary_dir, "model_profile_scenario_axes_fr_cr_ds.csv")
-    scenario_axis_df.to_csv(scenario_axis_path, index=False)
-    print(f"Saved: {scenario_axis_path}")
-
-    hotspots_df = build_average_profile_deviation_hotspots(scenario_axis_df, top_k=10)
-    hotspots_path = os.path.join(summary_dir, "model_profile_scenario_hotspots_top10.csv")
-    hotspots_df.to_csv(hotspots_path, index=False)
-    print(f"Saved: {hotspots_path}")
-
-    print("Plotting scenario hotspot bars...")
-    plot_scenario_hotspots_bars(hotspots_df, save_dir=plots_dir, top_k=10)
+    # --- Scenario-level FR/CR/DS table + "average profile deviation" hotspot ranking
+    #     (시나리오 전개 / cohort-deviation narrative). Kept as library functions;
+    #     not executed in this pipeline. Use fr_cr_ds_localization_analysis for grid
+    #     localization, or call build_scenario_axis_table + build_average_profile_deviation_hotspots manually.
+    #
+    # print("Building scenario-level axis table (FR/CR/DS) and deviation hotspots...")
+    # scenario_axis_df = build_scenario_axis_table(df, ds_cond_table=ds_cond_df)
+    # scenario_axis_path = os.path.join(summary_dir, "model_profile_scenario_axes_fr_cr_ds.csv")
+    # scenario_axis_df.to_csv(scenario_axis_path, index=False)
+    # print(f"Saved: {scenario_axis_path}")
+    #
+    # hotspots_df = build_average_profile_deviation_hotspots(scenario_axis_df, top_k=10)
+    # hotspots_path = os.path.join(summary_dir, "model_profile_scenario_hotspots_top10.csv")
+    # hotspots_df.to_csv(hotspots_path, index=False)
+    # print(f"Saved: {hotspots_path}")
+    #
+    # print("Plotting scenario hotspot bars...")
+    # plot_scenario_hotspots_bars(hotspots_df, save_dir=plots_dir, top_k=10)
 
     print("\nDone.")
     print("\nPreview: model_profile_by_model_temp")
@@ -1210,14 +1219,6 @@ def run_model_profile_analysis(
     print(scaled_table.round(4).to_string(index=False))
     print("\nPreview: model_profile_temperature_delta")
     print(delta_df.round(4).to_string(index=False))
-    print("\nPreview: model_profile_ds_condition_diagnostics (head)")
-    print(ds_cond_df.head(10).round(4).to_string(index=False))
-    print("\nPreview: model_profile_fr_directionality_by_strategy (head)")
-    print(fr_dir_df.head(10).round(4).to_string(index=False))
-    print("\nPreview: model_profile_temp_delta_fr_efi")
-    print(fr_efi_delta_df.round(4).to_string(index=False))
-    print("\nPreview: model_profile_scenario_hotspots_top10 (head)")
-    print(hotspots_df.head(10).round(4).to_string(index=False))
 
 
 if __name__ == "__main__":
