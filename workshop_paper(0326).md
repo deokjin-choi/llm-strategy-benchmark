@@ -344,6 +344,54 @@ We therefore **disaggregate** three **choice-level** axes that co-vary with thos
 
 We **do not** repeat the same fine-grained exercise for **numerical sensitivity (NS)** or **explanatory framing invariance (EFI)** here. Section 5 already establishes that **moderate numeric perturbations** under an unchanged narrative produce **minimal** movement in strategy distributions, so additional NS breakdowns would largely **restate** that null pattern at finer resolution. **EFI** is inherently tied to **rationale text**; Section 5.5 documents systematic lexical shifts under brand exposure when the chosen strategy is held constant, so condition-wise EFI would **overlap** that message rather than add a distinct choice-level story. Restricting this subsection to **FR, CR, and DS** thus keeps the narrative **scoped**: we extend the analysis only where the experimental grid is still needed to **interpret** heterogeneity that the aggregate profiles alone cannot pin to specific scenario–framing–variant combinations.
 
+**Scenario $\times$ model overview (aligned metrics).** Fig. 5 and Fig. 6 summarize, for $T{=}0.0$ and $T{=}0.7$ respectively, the same scenario-level constructions used in the main axis definitions: $FR_{\mathrm{scenario}} = 1 - \mathbb{E}_v[\mathrm{JSD}(P_{\mathrm{Generic}}, P_{\mathrm{Specific}})]$ (averaged over context variants and context counts within each historical scenario), $CR_{\mathrm{scenario}}$ as the mean Jensen–Shannon distance between the **base** prompt and each **semantic** variant, and $DS_{\mathrm{scenario}}$ as the mean of $DS_{\mathrm{condition}}$ over all $(\mathrm{variant}, \mathrm{framing}, \mathrm{Num\ Context})$ cells inside the scenario. **Each panel is min–max scaled to $[0,1]$ on its own**, so color intensity is **relative within that metric** (not comparable in absolute hue across FR, CR, and DS panels).
+
+![Scenario_model_overview_T0](./final_results/plots/eval_scenario_model_overview_FR_CR_DS__T0.png)  
+Fig. 5\. Scenario $\times$ model heatmaps for $FR_{\mathrm{scenario}}$, $CR_{\mathrm{scenario}}$, and $DS_{\mathrm{scenario}}$ at $T{=}0.0$ (each panel scaled separately).
+
+![Scenario_model_overview_T07](./final_results/plots/eval_scenario_model_overview_FR_CR_DS__T0.7.png)  
+Fig. 6\. Same layout at $T{=}0.7$.
+
+**(1) Heterogeneous sensitivities.** 
+Visually, **FR** and **DS** are comparatively **uniform at high levels** across many cells at $T{=}0.0$, with **localized darker cells** (lower robustness or lower repeat-level concentration) rather than a second “bright” mode comparable to CR. **CR** is **sparse**: most scenario–model pairs sit at the **low end of the within-panel scale**, while a **few** combinations—most visibly around **`4_model_x_launch`** for several models—occupy the **top of the CR panel**. This pattern supports treating the model as a **conditional decision agent**: **framing sensitivity**, **semantic-context sensitivity**, and **run-to-run stability** need not **co-move** on the same grid cell; aggregate radar scores therefore **pool qualitatively different local behaviors**.
+
+**(2) Temperature.** 
+Comparing Fig. 5 and Fig. 6, the **spatial pattern** of **relative** highs and lows in **FR** and **CR** is **largely preserved** (e.g., persistent CR emphasis on Model X for selected models; persistent FR dips on particular scenario–model pairs). **DS**, by contrast, **shifts toward darker tones more broadly** at $T{=}0.7$, consistent with the cohort-level decline in decision stability reported in Section 5.6.2: stochastic decoding tends to **erode repeat-level concentration** without erasing **which** scenarios anchor the largest context-driven divergence.
+
+**(3) Priority cells for follow-up case analysis.** 
+For **follow-up cases where those properties fail most visibly**—the **darkest** cells in the FR and DS panels—we therefore select scenario–model pairs at the **minimum** of the (temperature-averaged) scaled scores. $CR_{\mathrm{scenario}}$ is different: it records the **average magnitude** of distributional movement between the **base** narrative and **semantic** variants, not a unidirectional “performance” index. Consistent with **(1)**, the CR panels are **mostly dark**, meaning that for most (model, scenario) pairs semantic variants **barely shift** the strategy distribution relative to the rest of the panel at that $T$; the **scientifically salient** locations for **context-driven redistribution** are the **few bright cells** (high scaled CR). We therefore select the **maximum** of the (temperature-averaged) scaled CR. **(2)** motivates folding **both** $T{=}0.0$ and $T{=}0.7$ into one ranking by **averaging** the two figure-consistent scaled values per cell, so that priority cells reflect **both** decoding regimes rather than a single snapshot.
+
+A **mean scaled value of $0.000$** for FR in Table 3 means that the listed cell attains the **minimum** of the FR panel at **both** $T{=}0.0$ and $T{=}0.7$ (mapped to $0$ after each panel’s own min–max); averaging the two zeros leaves **zero**. 
+
+| Metric | Model | Scenario | Mean scaled value (Figs. 5–6, avg.) |
+| :---- | :---- | :---- | :---- |
+| $FR_{\mathrm{scenario}}$ (min) | Qwen2.5-14B-Instruct | `5_model_3_mass_market` | 0.000 |
+| $CR_{\mathrm{scenario}}$ (max) | Qwen2.5-14B-Instruct | `4_model_x_launch` | 0.935 |
+| $DS_{\mathrm{scenario}}$ (min) | deepseek-llm-7b-chat | `2_roadster_launch` | 0.184 |
+
+
+Table 3\. One priority (model, scenario) per axis: panel min–max at each $T$ as in Figs. 5–6
+
+**Illustration (FR priority cell).** The minimum-$FR_{\mathrm{scenario}}$ cell pairs **Qwen2.5-14B-Instruct** with the historical episode **`5_model_3_mass_market`**, which in our benchmark narrative concerns explosive Model 3 pre-orders, production bottlenecks (“Production Hell”), and the need to scale while preserving quality, financial stability, and mass-market trust. To **separate firm-identity framing from semantic context manipulations**, Fig. 7 pools strategy choices under the **neutral `base` context variant only** and compares **Generic** versus **Specific** framing at **$T{=}0.0$** and **$T{=}0.7$**.
+
+![FR_deepdive_Qwen_Model3](./final_results/plots/eval_deepdive_fr_framing_stacks__Qwen2.5-14B__5_model_3_mass_market.png)  
+Fig. 7\. FR deep-dive: empirical strategy mix (Generic vs. Specific) for Qwen2.5-14B-Instruct on `5_model_3_mass_market`, restricted to the `base` context variant. Left: $T{=}0.0$; right: $T{=}0.7$.
+
+**Choice-level pattern.** The shift is stark and **stable across temperatures**. Under **Generic** framing, the run-level distribution concentrates on **Open Innovation** (scaling via manufacturing partners/OEMs). Under **Specific** framing with **Tesla** identified, mass shifts toward **Maintain** (gradual expansion with quality and profitability emphasized). This is not a marginal tilt: it is a **reallocation between two substantively different responses** to the same numerical backdrop—external partnership-led scaling versus conservative ramp-up—triggered primarily by **brand identification** in the prompt.
+
+**Rationale-level corroboration.** We complement Fig. 7 with a **textual** audit on the same slice (`base` variant; **Qwen2.5-14B-Instruct**; $T{=}0.0$ and $T{=}0.7$). After **brand-token masking** (so differences are not driven solely by “Tesla” repetition), informative **log-odds** rankings align with the choice-level split: **Generic**-associated n-grams emphasize **manufacturing partners / OEM-style scaling** (e.g., *utilizing manufacturing*, *manufacturing partners*, *scale production*), whereas **Specific**-associated n-grams emphasize **quality, profitability, and reputation-preserving ramp-up** (e.g., *quality profitability*, *maintaining reputation*, *long term*). Exploratory **substring hit rates** reinforce the same contrast: **OEM/partner**-style cues appear in **most** Generic rationales but **almost none** of the Specific rationales at $T{=}0.0$, while **stability–ramp**-style cues (e.g., graduality, stabilization, profitability) move **strongly toward** Specific rationales at both temperatures. A **paired permutation** test on brand-masked token statistics (480 paired runs per cell) yields a **global** separation statistic with $p\approx0.005$ at **both** $T{=}0.0$ and $T{=}0.7$, indicating that the lexical gap is **systematic** rather than a decoding artifact. **Interpretation:** We treat these patterns as evidence that the model’s **language** co-moves with the framing-induced **strategy shift**, consistent with **prior-associated narratives** about how Tesla is discussed; we do **not** claim verifiable retrieval of facts beyond the prompt. For deployment, the practical implication is unchanged: firm-named strategy workstreams should treat such outputs as **framing-conditional** rather than as a neutral read of the embedded facts, even when decoding temperature changes.
+
+**Comparison of interpretive paths (tabular synthesis).** Table 4 lists **Generic** and **Specific** on the row axis. **Contexts** are the same injected `context_blocks` from `input_scenario/scenarios.json` (`5_model_3_mass_market`); the Specific row points back to that list to avoid repetition. **Rationale** summarizes **brand-masked 2-grams** from the paired audit ($T{=}0.0$ and $T{=}0.7$ qualitatively aligned). **Strategy choice** matches Fig. 7 and the scenario menu wording in `scenarios.json` (without option letters). Reader-oriented schematic only.
+
+| Framing | Contexts | Rationale | Strategy choice |
+| :---- | :---- | :---- | :---- |
+| **Generic** | [Customer Response] First-week pre-orders $>325{,}000$; [Finance] Order value $\sim$ US\$14B; [Customer Response] Net pre-orders 373,000; [Market] Global EV sales and company production surging. | *Keywords (2-grams):* *manufacturing partners*, *scale production*, *quickly scale*, *utilizing manufacturing*, *production rapidly.* *Reading:* OEM/partner capacity and speed to absorb demand. | **Open Innovation** — *Utilize manufacturing partners (OEM) to scale production.* External partnerships as the main scaling lever. |
+| **Specific** | *Same `context_blocks` as Generic row.* | *Keywords (2-grams):* *quality profitability*, *maintaining reputation*, *long term*, *crucial maintaining.* *Reading:* Reputation, margins, and a controlled ramp over partner-led surge. | **Maintain** — *Expand production gradually while prioritizing quality and profitability.* Internal cadence and safeguards over fastest-possible scale-out. |
+
+Table 4\. FR-minimum cell (Qwen2.5-14B-Instruct, `5_model_3_mass_market`, `base`): shared contexts, framing-specific rationale vs. strategy label (Fig. 7). Rationale column summarizes the audit, not full vocabulary.
+
+<del>
+
 **Illustrative localization results.** The following figures are **not** an exhaustive gallery of every model and temperature; they **exemplify** recurring patterns in the condition-level tables and plots produced by the localization routine. Together, they show that aggregate axis scores pool cells with very different behavior.
 
 **Context responsiveness (CR) across historical scenarios.** Fig. 5 reports, for **Qwen2.5-14B** at **$T{=}0.0$**, the scenario-specific mean Jensen–Shannon distance between the **base** prompt and each **semantic** variant (`competitive_dynamics`, `count_fact`, `opp_focus`), averaged over framing and context-count conditions as defined for $CR_{\mathrm{scenario}}$. The bars are far from flat: some phases of the benchmark (e.g., Model X launch) exhibit **large** movement of the strategy distribution when semantic cues replace the neutral baseline, while others (e.g., mass-market Model 3) show **much smaller** responsiveness. This pattern supports interpreting $CR$ as **historically localized**—models are not uniformly “context-sensitive” agents; sensitivity is **concentrated** in particular narrative settings.
@@ -365,6 +413,8 @@ Fig. 7\. Mean decision stability ($DS_{\mathrm{condition}}$) by context variant 
 
 ![DS_failure_modes_DeepSeek_T07](./final_results/plots/eval_ds_failure_modes_scatter__deepseek-llm-7b-chat__T0.7.png)  
 Fig. 8\. Repeat-level instability diagnostics for each experimental cell (DeepSeek-LLM-7B-Chat, $T{=}0.7$). Color encodes $DS_{\mathrm{condition}}$; axes separate high toggling and high entropy failure modes.
+
+</del>
 
 **6\. Discussion and Implications**  
 The findings indicate that LLMs adjust strategic recommendations systematically in response to contextual cues, reflecting an ability to distinguish between qualitatively different strategic environments rather than producing rigid outputs.

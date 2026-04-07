@@ -1,5 +1,7 @@
 #%%
 import os, glob, re, time
+from typing import Dict, List, Optional, Tuple
+
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -23,16 +25,34 @@ NUMERIC_RELATED_STOPWORDS = {
 # -------------------------------
 # 1) 데이터 로드
 # -------------------------------
+def _parse_variant_from_scenario_filename(path: str) -> str:
+    base = os.path.basename(path).replace(".csv", "")
+    if base.startswith("scenarios_"):
+        return base.replace("scenarios_", "")
+    return base
+
+
 def load_rationale_data(input_dir="infer_results"):
-    all_files = glob.glob(os.path.join(input_dir, "*scenarios*.csv"))
+    """
+    Loads all `scenarios_*.csv` files and tags `context_variant` from the filename
+    (same convention as `model_behavioral_profile.load_profile_data`).
+    """
+    all_files = sorted(glob.glob(os.path.join(input_dir, "*scenarios*.csv")))
     if not all_files:
         print(f"No scenario files found in {input_dir}")
         return pd.DataFrame()
-    dfs = [pd.read_csv(f) for f in all_files]
+    dfs = []
+    for f in all_files:
+        d = pd.read_csv(f)
+        d["context_variant"] = _parse_variant_from_scenario_filename(f)
+        dfs.append(d)
     df = pd.concat(dfs, ignore_index=True)
     df["Rationale"] = df["Rationale"].fillna("")
     df["Standard Mapping"] = df["Standard Mapping"].fillna("N/A")
-    df["Key Signals Used"] = df["Key Signals Used"].fillna("")
+    if "Key Signals Used" in df.columns:
+        df["Key Signals Used"] = df["Key Signals Used"].fillna("")
+    else:
+        df["Key Signals Used"] = ""
 
     df = df[df["Standard Mapping"].isin(valid_strategies)].copy()
 
@@ -208,15 +228,19 @@ def compute_informative_log_odds(
     stop_words="english",
     min_df=2,
     top_k=30,
+    brand_tokens_as_stop: bool = True,
 ):
     """
     Monroe et al. 스타일의 informative log-odds ratio (+ prior) 구현(간단 버전).
 
     - prior(α)는 두 집단 전체 합산 빈도를 사용 (informative prior)
     - 출력: a에서 상대적으로 높은 키워드 top_k, b에서 상대적으로 높은 키워드 top_k
+    - brand_tokens_as_stop=False: 'tesla' 등을 불용어에서 제외(원문에서 브랜드 언급 빈도 비교용)
     """
     # Vectorize counts
-    custom_stop = {"tesla","Tesla","company","Company","brand"}  # 필요시 더 추가
+    custom_stop = {"tesla", "Tesla", "company", "Company", "brand"}
+    if not brand_tokens_as_stop:
+        custom_stop = {"company", "Company", "brand"}
     if stop_words == "english":
         stop_words = list(ENGLISH_STOP_WORDS.union(custom_stop).union(NUMERIC_RELATED_STOPWORDS))
     elif isinstance(stop_words, (list, set)):
@@ -317,6 +341,13 @@ def permutation_test_discriminative_keywords(
     - 관측 통계량:
         1) keyword별 |delta_log_odds|
         2) global: mean(|delta_log_odds|)
+
+    group_cols:
+        Default pairs rows that share the same strategic outcome (Chosen Option), suitable for
+        EFI-style “same decision, different framing” analysis.
+        For FR deep-dives where Generic vs Specific often change the mapped strategy, pass e.g.
+        ["scenario", "repeat", "Model", "Temperature", "Num Context"] so pairs align on run and
+        prompt size without requiring identical Chosen Option.
     """
     if group_cols is None:
         group_cols = ["scenario", "repeat", "Model", "Temperature", "Num Context", "Chosen Option"]
@@ -624,6 +655,219 @@ def compute_context_coverage(df: pd.DataFrame, use_masked_rationale: bool = Fals
     return d
 
 
+def filter_rationale_slice(
+    df: pd.DataFrame,
+    *,
+    scenario: str,
+    model: str,
+    temperature: Optional[float] = None,
+    context_variant: Optional[str] = "base",
+) -> pd.DataFrame:
+    """
+    Restrict to one historical scenario and model; optionally one temperature and context_variant.
+    Used for FR deep-dive rationale audits (align with `base`-only strategy plots).
+    """
+    d = df[(df["scenario"] == scenario) & (df["Model"] == model)].copy()
+    if temperature is not None:
+        d = d[d["Temperature"].apply(lambda t: abs(float(t) - float(temperature)) < 1e-6)]
+    if context_variant is not None:
+        if "context_variant" not in d.columns:
+            raise ValueError(
+                "DataFrame lacks `context_variant`. Reload with load_rationale_data() so each "
+                "infer_results/scenarios_*.csv file is tagged."
+            )
+        d = d[d["context_variant"] == context_variant]
+    d = d[d["problem_type"].isin(["generic", "specific"])].copy()
+    return d
+
+
+def hypothesis_term_hit_rates(
+    texts_generic: List[str],
+    texts_specific: List[str],
+    term_groups: Optional[Dict[str, Tuple[str, ...]]] = None,
+) -> pd.DataFrame:
+    """
+    For exploratory checks of narratives like 'OEM/partnering' vs 'internal stability':
+    fraction of texts that match at least one token (case-insensitive substring) per group.
+    """
+    if term_groups is None:
+        term_groups = {
+            "oem_partner": ("oem", "partner", "partnership", "manufacturing partner", "suppliers"),
+            "open_innovation_cues": ("open innovation", "joint venture", "licensing"),
+            "internal_ops": ("vertical integration", "vertically integrated", "in-house", "internal production"),
+            "stability_ramp": ("gradual", "stabilize", "stability", "profitability", "quality first"),
+            "production_stress": ("production hell", "bottleneck", "ramp up", "manufacturing scale"),
+        }
+
+    def _hit(text: str, needles: Tuple[str, ...]) -> bool:
+        low = str(text).lower()
+        return any(n in low for n in needles)
+
+    rows = []
+    for label, needles in term_groups.items():
+        g_hit = float(np.mean([_hit(t, needles) for t in texts_generic])) if texts_generic else np.nan
+        s_hit = float(np.mean([_hit(t, needles) for t in texts_specific])) if texts_specific else np.nan
+        rows.append(
+            {
+                "group": label,
+                "hit_rate_generic": g_hit,
+                "hit_rate_specific": s_hit,
+                "delta_specific_minus_generic": (s_hit - g_hit) if (np.isfinite(g_hit) and np.isfinite(s_hit)) else np.nan,
+            }
+        )
+    return pd.DataFrame(rows)
+
+
+def run_framing_keyword_slice_audit(
+    df: pd.DataFrame,
+    *,
+    scenario: str,
+    model: str,
+    temperature: Optional[float],
+    context_variant: str = "base",
+    homogeneous_only: bool = False,
+    pair_group_cols: Optional[List[str]] = None,
+    ngram_range=(1, 2),
+    min_df: int = 2,
+    top_k: int = 40,
+    n_perm: int = 300,
+    summary_dir: str = "./final_results/summary",
+    show_progress: bool = True,
+) -> Dict[str, object]:
+    """
+    Generic vs Specific rationale comparison on a **single** (scenario, model[, temperature], variant) slice.
+
+    Produces:
+      - Informative log-odds tables: Specific>Generic vs Generic>Specific, for **raw** and **brand-masked** text
+      - Hypothesis-group hit rates (OEM/partner vs internal stability, etc.)
+      - Optional paired permutation test (use `pair_group_cols` without Chosen Option for FR cases)
+
+    This supports checking whether differences beyond the brand token remain after masking (prior/narrative language).
+    """
+    os.makedirs(summary_dir, exist_ok=True)
+
+    d0 = filter_rationale_slice(
+        df,
+        scenario=scenario,
+        model=model,
+        temperature=temperature,
+        context_variant=context_variant,
+    )
+    if d0.empty:
+        raise ValueError(
+            f"No rows after slice: scenario={scenario}, model={model}, "
+            f"temperature={temperature}, context_variant={context_variant}"
+        )
+
+    if homogeneous_only:
+        d0 = filter_homogeneous_selections(d0)
+
+    texts_g_raw = d0.loc[d0["problem_type"] == "generic", "Rationale"].fillna("").astype(str).tolist()
+    texts_s_raw = d0.loc[d0["problem_type"] == "specific", "Rationale"].fillna("").astype(str).tolist()
+    texts_g_mask = [mask_brand_terms(t) for t in texts_g_raw]
+    texts_s_mask = [mask_brand_terms(t) for t in texts_s_raw]
+
+    # Log-odds: texts_a = specific, texts_b = generic -> head(specific) is enriched in Specific
+    top_s_raw, top_g_raw = compute_informative_log_odds(
+        texts_s_raw,
+        texts_g_raw,
+        ngram_range=ngram_range,
+        min_df=min_df,
+        top_k=top_k,
+        brand_tokens_as_stop=False,
+    )
+    top_s_mask, top_g_mask = compute_informative_log_odds(
+        texts_s_mask,
+        texts_g_mask,
+        ngram_range=ngram_range,
+        min_df=min_df,
+        top_k=top_k,
+        brand_tokens_as_stop=True,
+    )
+
+    hyp_raw = hypothesis_term_hit_rates(texts_g_raw, texts_s_raw)
+    hyp_mask = hypothesis_term_hit_rates(texts_g_mask, texts_s_mask)
+
+    perm_res = None
+    perm_err = None
+    if pair_group_cols is None:
+        pair_group_cols = ["scenario", "repeat", "Model", "Temperature", "Num Context"]
+
+    try:
+        perm_res = permutation_test_discriminative_keywords(
+            d0,
+            group_cols=pair_group_cols,
+            ngram_range=(2, 2) if ngram_range[1] >= 2 else (1, 1),
+            min_df=max(1, min_df),
+            n_perm=n_perm,
+            top_k=min(25, top_k),
+            random_state=42,
+            mask_brand=True,
+            show_progress=show_progress,
+        )
+    except Exception as e:
+        perm_err = str(e)
+
+    stem = f"rationale_framing_slice__{_safe_filename_stub(model)}__{_safe_filename_stub(scenario)}__T{float(temperature) if temperature is not None else 'all'}__cv{_safe_filename_stub(context_variant)}"
+
+    def _tag(tbl: pd.DataFrame, kind: str, direction: str) -> pd.DataFrame:
+        out = tbl.copy()
+        out.insert(0, "direction", direction)
+        out.insert(0, "text_mode", kind)
+        return out
+
+    long_parts = [
+        _tag(top_s_raw, "raw", "Specific>Generic"),
+        _tag(top_g_raw, "raw", "Generic>Specific"),
+        _tag(top_s_mask, "masked", "Specific>Generic"),
+        _tag(top_g_mask, "masked", "Generic>Specific"),
+    ]
+    long_kw = pd.concat(long_parts, ignore_index=True)
+    long_kw_path = os.path.join(summary_dir, f"{stem}_keywords_logodds.csv")
+    long_kw.to_csv(long_kw_path, index=False)
+
+    hyp_raw.to_csv(os.path.join(summary_dir, f"{stem}_hypothesis_hits_raw.csv"), index=False)
+    hyp_mask.to_csv(os.path.join(summary_dir, f"{stem}_hypothesis_hits_masked.csv"), index=False)
+
+    if perm_res is not None:
+        perm_res["keyword_stats"].to_csv(os.path.join(summary_dir, f"{stem}_perm_keyword_stats.csv"), index=False)
+
+    print(f"\n[Framing slice] Saved keyword tables to:\n  {long_kw_path}")
+    print("\n--- Top n-grams: Specific > Generic (brand-masked) ---")
+    print(top_s_mask.head(12).to_string(index=False))
+    print("\n--- Top n-grams: Generic > Specific (brand-masked) ---")
+    print(top_g_mask.head(12).to_string(index=False))
+    print("\n--- Hypothesis term hit rates (raw text) ---")
+    print(hyp_raw.to_string(index=False))
+    print("\n--- Hypothesis term hit rates (brand-masked text) ---")
+    print(hyp_mask.to_string(index=False))
+    if perm_err:
+        print(f"[Framing slice] Permutation skipped or failed: {perm_err}")
+    elif perm_res is not None:
+        print(
+            f"[Framing slice] Permutation: n_pairs={perm_res['n_pairs']}, "
+            f"global p={perm_res['perm_global_p_value']:.4g}"
+        )
+
+    return {
+        "df_slice": d0,
+        "top_specific_raw": top_s_raw,
+        "top_generic_raw": top_g_raw,
+        "top_specific_masked": top_s_mask,
+        "top_generic_masked": top_g_mask,
+        "hypothesis_hits_raw": hyp_raw,
+        "hypothesis_hits_masked": hyp_mask,
+        "permutation": perm_res,
+        "permutation_error": perm_err,
+        "paths": {"keywords_csv": long_kw_path},
+    }
+
+
+def _safe_filename_stub(s: str) -> str:
+    s = re.sub(r"[^a-zA-Z0-9._-]+", "_", str(s)).strip("_")
+    return s[:120] if len(s) > 120 else s
+
+
 def run_tesla_generic_audit(
     df: pd.DataFrame,
     ngram_range=(2, 2),
@@ -765,4 +1009,7 @@ if __name__ == "__main__":
         print("\nSaved figures:")
         print("- ./final_results/plots/eval_rationale_perm_global_distribution.png")
         print("- ./final_results/plots/eval_rationale_context_coverage_comparison.png")
+
+        # FR deep-dive slice (generic vs specific keywords on `base`): run
+        # `python -m result_analysis.deep_dive_fr_cr_ds_plots` (includes rationale_audit by default).
 

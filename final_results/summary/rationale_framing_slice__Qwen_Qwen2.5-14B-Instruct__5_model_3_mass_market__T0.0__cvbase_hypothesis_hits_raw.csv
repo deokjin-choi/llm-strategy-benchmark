@@ -1,0 +1,6 @@
+group,hit_rate_generic,hit_rate_specific,delta_specific_minus_generic
+oem_partner,0.9375,0.0,-0.9375
+open_innovation_cues,0.0,0.0,0.0
+internal_ops,0.0,0.0,0.0
+stability_ramp,0.35625,1.0,0.64375
+production_stress,0.0,0.0,0.0
