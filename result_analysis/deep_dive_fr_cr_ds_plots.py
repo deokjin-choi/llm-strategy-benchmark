@@ -30,6 +30,7 @@ Outputs (default paths under final_results/plots and final_results/summary):
   eval_deepdive_cr_jsd_by_variant__{model}__{scenario}__.png
   eval_deepdive_cr_strategy_stacks__{model}__{scenario}__.png
   eval_deepdive_ds_entropy_numcontext_box__{model}__{scenario}__.png
+  eval_deepdive_ds_strategy_stacks_numcontext_framing__{model}__{scenario}__.png
   deepdive_cr_jsd_by_variant_long.csv (optional cohort / scenario long table)
 
 Optional (``rationale_audit=True``): FR cell **generic vs specific** rationale keyword tables
@@ -454,6 +455,70 @@ def plot_ds_entropy_num_context_boxplots(
     plt.close(fig)
 
 
+def plot_ds_strategy_mix_by_num_context_framing_split(
+    df: pd.DataFrame,
+    *,
+    model: str,
+    scenario: str,
+    temperatures: Sequence[float] = TEMPERATURES_DEFAULT,
+    save_path: str,
+) -> None:
+    """
+    DS deep-dive companion to entropy boxplots: same layout as
+    ``plot_cr_strategy_mix_by_variant_framing_split`` (2 rows per T: generic / specific),
+    but **x-axis = Num Context**; within each bar, **pool all context_variant** rows
+    (mirrors CR stacks pooling over Num Context).
+    """
+    os.makedirs(os.path.dirname(save_path), exist_ok=True)
+    sub_all = df[(df["Model"] == model) & (df["scenario"] == scenario)]
+    if len(sub_all) == 0:
+        return
+
+    num_levels = sorted(sub_all["Num Context"].dropna().unique(), key=lambda x: float(x))
+    x_labels = [str(int(k)) if float(k).is_integer() else str(k) for k in num_levels]
+
+    n_t = len(temperatures)
+    fig, axes = plt.subplots(n_t * 2, 1, figsize=(7.2, 2.8 * n_t * 2), sharex=True)
+
+    row = 0
+    for temp in temperatures:
+        sub = sub_all[sub_all["Temperature"].apply(lambda x: _same_temp(x, temp))]
+        for ptype in ("generic", "specific"):
+            ax = axes[row]
+            rows_m = []
+            for k in num_levels:
+                g = sub[
+                    (sub["Num Context"] == k) & (sub["problem_type"] == ptype)
+                ]
+                if len(g) == 0:
+                    rows_m.append(np.full(len(valid_strategies), np.nan))
+                else:
+                    rows_m.append(_strategy_distribution(g["Standard Mapping"]))
+            mat = np.vstack(rows_m)
+            _stacked_bars(
+                ax,
+                x_labels,
+                mat,
+                title=(
+                    f"T={float(temp):g} — {ptype} "
+                    f"(pooled over context_variant)"
+                ),
+            )
+            row += 1
+
+    fig.suptitle(
+        f"DS deep-dive: strategy mix by Num Context (Generic vs Specific)\n"
+        f"{_short_model_name(model)} — {scenario}",
+        fontsize=11,
+        y=1.005,
+    )
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="center left", bbox_to_anchor=(1.02, 0.5), fontsize=7)
+    plt.tight_layout()
+    plt.savefig(save_path, dpi=300, bbox_inches="tight")
+    plt.close(fig)
+
+
 def run_deep_dive_fr_cr_ds(
     input_dir: str = "infer_results",
     summary_dir: str = "./final_results/summary",
@@ -548,6 +613,16 @@ def run_deep_dive_fr_cr_ds(
         save_path=os.path.join(
             plots_dir,
             f"eval_deepdive_ds_entropy_numcontext_box__{_safe_filename(_short_model_name(m))}__{_safe_filename(s)}.png",
+        ),
+    )
+    plot_ds_strategy_mix_by_num_context_framing_split(
+        df,
+        model=m,
+        scenario=s,
+        temperatures=temperatures,
+        save_path=os.path.join(
+            plots_dir,
+            f"eval_deepdive_ds_strategy_stacks_numcontext_framing__{_safe_filename(_short_model_name(m))}__{_safe_filename(s)}.png",
         ),
     )
 
