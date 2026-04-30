@@ -451,23 +451,6 @@ Lieberman, M.B. and Montgomery, D.B. (1988). First-mover advantages. Strategic M
 
 Schilling, M.A. (2019). Strategic Management of Technological Innovation (6th ed.). New York: McGraw-Hill Education.
 
-| Model | Temp | FS | CR | NI | DS | EFD | p-value |
-| :---- | :---- | :---- | :---- | :---- | :---- | :---- | :---- |
-| **Yi-1.5-9B** | 0.0 | 0.1712 | 0.0635 | 0.9608 | 0.9992 | 0.5708 | 0.005 |
-|  | 0.7 | 0.1302 | 0.0399 | 0.9858 | 0.9727 | 0.3102 | 0.005 |
-| **Qwen2.5-14B** | 0.0 | 0.2324 | 0.1028 | 0.9919 | 0.9996 | 0.5661 | 0.005 |
-|  | 0.7 | 0.2035 | 0.0953 | 0.9941 | 0.9935 | 0.4144 | 0.005 |
-| **DeepSeek-7B** | 0.0 | 0.0293 | 0.0657 | 0.9325 | 0.9987 | 0.5475 | 0.005 |
-|  | 0.7 | 0.0199 | 0.0274 | 0.9808 | 0.9687 | 0.2984 | 0.005 |
-| **Llama-3.1-8B** | 0.0 | 0.0637 | 0.1300 | 0.9946 | 0.9998 | 0.5351 | 0.005 |
-|  | 0.7 | 0.0435 | 0.0896 | 0.9944 | 0.9840 | 0.2949 | 0.005 |
-| **Mistral-7B** | 0.0 | 0.2086 | 0.0655 | 0.9951 | 0.9998 | 0.5583 | 0.005 |
-|  | 0.7 | 0.1614 | 0.0673 | 0.9898 | 0.9883 | 0.3106 | 0.005 |
-
-Table x (Raw metrics by model × temperature)
-
-\~  
-
 **Appendix A. Data Validation and Categorical Compliance**  
 This appendix reports instruction-following validity checks for the categorical strategy-selection task. The models demonstrated stable instruction-following performance, with an overall compliance rate of approximately 89%. Table A1 summarizes the compliance and non-compliance (error) rates across the five experimental scenarios.
 
