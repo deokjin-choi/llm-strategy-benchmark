@@ -268,6 +268,23 @@ Analyses use normalized distributions of **valid** strategic choices (invalid re
 
 # BACKUP D — FR Case Deep Dive (Qwen2.5-14B / Mass Market)
 
+**Problem (scenario text)**  
+Facing an explosive increase in pre-orders, a company must rapidly scale production while maintaining product quality, financial stability, and public trust. The core challenge is to overcome production bottlenecks and reduce costs without sacrificing the brand’s reputation in the mass market.
+
+**Strategy menu (7 options)**  
+
+| Mapped strategy | Execution option |
+| :---- | :---- |
+| Technology Leadership | Prioritize production speed to meet demand as quickly as possible |
+| Fast Follower | Adopt proven mass-manufacturing practices from incumbents to catch up quickly |
+| Open Innovation | Utilize manufacturing partners (OEM) to scale production |
+| Niche Focus | Restrict deliveries to priority regions/customers first (e.g., North America only) |
+| Diversification | Expand into related mass-market products (e.g., Model Y crossover) simultaneously |
+| Retrenchment | Scale down volume targets to protect financial stability |
+| Maintain | Expand production gradually while prioritizing quality and profitability |
+
+**Observed choices (base context, pooled)**  
+
 ![FR deep dive Qwen Model 3](./final_results/plots/eval_deepdive_fr_framing_stacks__Qwen2.5-14B__5_model_3_mass_market.png)
 
 | Framing | Strategy | Rationale keywords (examples) |
@@ -275,11 +292,29 @@ Analyses use normalized distributions of **valid** strategic choices (invalid re
 | **Generic** | **Open Innovation** | manufacturing partners, scale production, quickly scale |
 | **Specific (Tesla)** | **Maintain** | quality profitability, maintaining reputation, long term |
 
-Same baseline narrative; firm-identity framing reallocates the chosen strategy. Lexical gap: **p ≈ 0.005** at **T = 0.0** and **T = 0.7**.
+**Implication**  
+Same baseline narrative; firm-identity framing reallocates the chosen strategy (**Open Innovation → Maintain**). Rationale language also shifts systematically (lexical gap: **p ≈ 0.005** at **T = 0.0** and **T = 0.7**). Minimum audit: run **Generic vs. Specific** side-by-side.
 
 ---
 
 # BACKUP E — CR Case Deep Dive (Qwen2.5-14B / Model X Launch)
+
+**Problem (scenario text)**  
+A company aims to enter the growing SUV market. However, a complex product design creates high production difficulty and quality risks, which could severely damage the brand's reputation despite a lack of direct competition.
+
+**Strategy menu (7 options)**  
+
+| Mapped strategy | Execution option |
+| :---- | :---- |
+| Technology Leadership | Launch a luxury SUV with innovative, complex features |
+| Fast Follower | Introduce a simpler SUV quickly to capture demand before competitors |
+| Open Innovation | Partner with suppliers/OEMs to co-develop SUV platform and reduce complexity |
+| Niche Focus | Develop a standard, mid-priced SUV for a specific customer segment |
+| Diversification | Expand into related vehicle categories (e.g., crossover, minivan) alongside SUV |
+| Retrenchment | Reduce scope of SUV project, scale down features to cut risk |
+| Maintain | Postpone the SUV launch, focus on stabilizing Model S production first |
+
+**Observed choices (by framing × semantic variant)**  
 
 ![CR deep dive strategy stacks](./final_results/plots/eval_deepdive_cr_strategy_stacks_framing__Qwen2.5-14B__4_model_x_launch.png)
 
@@ -291,11 +326,29 @@ Same baseline narrative; firm-identity framing reallocates the chosen strategy. 
 | **competitive_dynamics** | **Fast Follower** rises |
 | **count_fact** | Small move vs. base in this cell |
 
-Asymmetric cue sensitivity: strong response to some cues; check under-reaction to negative constraints.
+**Implication**  
+Semantic variants can reallocate probability mass across distinct strategy families. In this cell, the model reacts strongly to **opportunity** and **competitive** cues, while movement under **unfavorable facts** is comparatively small—an asymmetric cue sensitivity that should be tested explicitly.
 
 ---
 
 # BACKUP F — DS Case Deep Dive (DeepSeek-LLM-7B / Roadster)
+
+**Problem (scenario text)**  
+A company must manage conflicting goals of product quality and timely delivery during its initial product launch. With significant pre-orders already placed, the company faces severe cash flow issues and supply chain delays, jeopardizing brand trust and future investment if not handled correctly.
+
+**Strategy menu (7 options)**  
+
+| Mapped strategy | Execution option |
+| :---- | :---- |
+| Technology Leadership | Prioritize product quality and performance, accepting launch delays |
+| Fast Follower | Accelerate launch to meet demand, accepting potential quality compromises |
+| Open Innovation | Expand manufacturing partnerships to share risk |
+| Niche Focus | Limit deliveries to early adopters first, delaying mass rollout |
+| Diversification | Introduce parallel revenue streams (e.g., licensing tech, consulting) to ease cash flow |
+| Retrenchment | Scale back launch volume until supply chain stabilizes |
+| Maintain | Delay full-scale launch, focus on stabilizing operations and cash position |
+
+**Observed choices (by context load / Num Context tiers)**  
 
 ![DS deep dive strategy stacks](./final_results/plots/eval_deepdive_ds_strategy_stacks_numcontext_framing__deepseek-llm-7b-chat__2_roadster_launch.png)
 
@@ -307,4 +360,5 @@ Asymmetric cue sensitivity: strong response to some cues; check under-reaction t
 | Partial | **Retrenchment** / **Niche Focus** |
 | Full | **Fast Follower** vs. **Retrenchment**; **T = 0.7** more diffuse |
 
-Stability depends on **how much context** is in the prompt and on **framing**, not on **T** alone.
+**Implication**  
+Stability depends on **how much context** is in the prompt (and on framing), not on **temperature** alone. Reliability audits should vary **Num Context** tiers explicitly.

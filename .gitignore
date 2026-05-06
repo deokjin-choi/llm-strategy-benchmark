@@ -4,7 +4,8 @@ infer_results/
 # 참조논문
 references/
 
-# 캐시/임시파일
+# 캐시/임시파일/발표자료
 __pycache__/
 *.pyc
 .DS_Store
+*.pptx
