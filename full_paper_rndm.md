@@ -190,7 +190,9 @@ $$FR(m, \tau) = 1 - \mathbb{E}_{s,v} \left[ JSD\left( P(m, \tau, s, v, \\text{Ge
 
 **(2) Context responsiveness (CR).** *Meaning:* How much the distribution moves when **semantic** context variants replace the base—higher CR means stronger reaction to competitive, constraint, or opportunity emphasis.  
 
-$$CR(m, \tau) = \mathbb{E}_{s,\phi,\, v \in \mathcal{V}_{\mathrm{sem}}} \left[ JSD\left( P(m, \tau, s, \text{Base}, \phi), P(m, \tau, s, v, \phi) \right) \right]$$  
+$$
+CR(m,\tau)=E_{s,\phi,\,v\in\mathcal{V}_{\mathrm{sem}}}\Big[JSD\big(P(m,\tau,s,\text{Base},\phi),\,P(m,\tau,s,v,\phi)\big)\Big]
+$$
 where $\mathcal{V}_{\mathrm{sem}}$ denotes the semantic-variant set `{competitive_dynamics, count_fact, opp_focus}`.
 
 **(3) Numerical sensitivity (NS).** *Meaning:* How much the distribution moves when numeric inputs are perturbed (**Randomized** vs. **Base**)—higher NS means numeric shifts more often change the strategy mix (in this benchmark, absolute NS values remain modest relative to semantic effects).  
@@ -198,9 +200,13 @@ where $\mathcal{V}_{\mathrm{sem}}$ denotes the semantic-variant set `{competitiv
 $$NS(m, \tau) = \mathbb{E}_{s,\phi} \left[ JSD\left( P(m, \tau, s, \text{Base}, \phi), P(m, \tau, s, \text{Randomized}, \phi) \right) \right]$$
 
 **(4) Decision stability (DS).** *Meaning:* How **concentrated** choices are across repeated runs under the same condition—higher DS means more predictable outputs for audit and workflow locking. Let $\mathcal{A}$ be the seven strategy labels. For condition $c = (s,n,v,\phi)$ (scenario, context load, variant, framing), the empirical mass on strategy $a$ is  
-$$p_{c}^{m,\tau}(a)=\frac{1}{R}\sum_{r=1}^{R}\mathbf{1}\big[\text{strategy}_{r}=a\big],\quad a\in\mathcal{A}.$$
+$$
+p_{c}^{m,\tau}(a)=\frac{1}{R}\sum_{r=1}^{R}1[\text{strategy}_{r}=a],\quad a\in\mathcal{A}.
+$$
 With Shannon entropy $H(p) = -\sum_{a \in \mathcal{A}} p(a)\log_2 p(a)$,  
-$$DS(m,\tau)=\mathbb{E}_{c}\left[1-\frac{H\!\left(p_{c}^{m,\tau}\right)}{\log_{2}|\mathcal{A}|}\right], \qquad H(p)=-\sum_{a\in\mathcal{A}}p(a)\log_{2}p(a).$$
+$$
+DS(m,\tau)=E_{c}\left[1-\frac{H\!\left(p_{c}^{m,\tau}\right)}{\log_{2}|\mathcal{A}|}\right].
+$$
 $\mathrm{DS} \to 1$ when the model almost always picks the same strategy; $\mathrm{DS} \to 0$ when the empirical distribution is nearly uniform.
 
 **(5) Explanatory framing invariance (EFI).** *Meaning:* When the **chosen strategy is identical** across Generic and Specific, how similar the **rationales** are lexically—higher EFI means less “post-hoc” re-storying under branding.
