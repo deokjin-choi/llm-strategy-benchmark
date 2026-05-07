@@ -182,41 +182,31 @@ Substantively, Tesla-framed rationales use higher-agency, vision-oriented langua
 
 Scenario-level results show that LLMs are sensitive to context and framing, but practitioners also need a compact way to compare **models** and **decoding settings** on comparable dimensions. We therefore define five profiling axes. Each axis answers a distinct governance question: Is the model **distracted by firm naming** (FR)? Does it **update** when semantic context changes (CR)? Does it **react to numeric perturbation** (NS)? Is it **repeatable** across reruns (DS)? When the label is fixed, is the **explanation** stable across frames (EFI)? Together they summarize trade-offs between framing stability, contextual agility, numeric responsiveness, operational repeatability, and rationale consistency.
 
-Let \(P(m,\tau,s,v,\phi)\) denote the empirical strategy distribution for model \(m\), temperature \(\tau\), scenario \(s\), context variant \(v\), and framing \(\phi \in \{\mathrm{Generic},\mathrm{Specific}\}\). For decision-level axes (FR–DS), distributional distance is measured with **Jensen–Shannon divergence** \(\mathrm{JSD}(\cdot,\cdot)\). By construction, **FR, CR, NS, DS** \(\in [0,1]\); **EFI** maps \(\mathrm{EFD}_{\mathrm{raw}} \geq 0\) to \((0,1]\).
+Let \(P(m, \tau, s, v, \phi)\) denote the empirical strategy distribution for model \(m\), temperature \(\tau\), scenario \(s\), context variant \(v\), and framing type \(\phi \in \{\text{Generic, Specific}\}\). For decision-level axes (1–4), distributional distance is measured with the Jensen–Shannon Divergence (\(JSD\)). By construction, **FR, CR, NS, DS** lie in \([0,1]\); **EFI** maps \(EFD_{\mathrm{raw}} \ge 0\) to \((0,1]\).
 
 **(1) Framing robustness (FR).** *Meaning:* How invariant the strategy mix is when only firm identity (Generic vs. Specific) changes—higher FR means the model is less “pulled” by brand cues.  
-\[
-\mathrm{FR}(m,\tau) = 1 - \mathbb{E}_{s,v}\!\left[\mathrm{JSD}\!\big(P(m,\tau,s,v,\mathrm{Generic}),\, P(m,\tau,s,v,\mathrm{Specific})\big)\right].
-\]
+
+$$FR(m, \tau) = 1 - \mathbb{E}_{s,v} \left[ JSD\left( P(m, \tau, s, v, \\text{Generic}), P(m, \tau, s, v, \\text{Specific}) \\right) \\right]$$
 
 **(2) Context responsiveness (CR).** *Meaning:* How much the distribution moves when **semantic** context variants replace the base—higher CR means stronger reaction to competitive, constraint, or opportunity emphasis.  
-\[
-\mathrm{CR}(m,\tau) = \mathbb{E}_{s,\phi,\, v \in \mathcal{V}_{\mathrm{sem}}}\!\left[\mathrm{JSD}\!\big(P(m,\tau,s,\mathrm{Base},\phi),\, P(m,\tau,s,v,\phi)\big)\right],
-\]
-where \(\mathcal{V}_{\mathrm{sem}} = \{\texttt{competitive\_dynamics},\texttt{count\_fact},\texttt{opp\_focus}\}\).
+
+$$CR(m, \\tau) = \\mathbb{E}_{s,\\phi, v \\in \\mathcal{V}_{sem}} \\left[ JSD\\left( P(m, \\tau, s, \\text{Base}, \\phi), P(m, \\tau, s, v, \\phi) \\right) \\right]$$  
+where \(\\mathcal{V}_{sem} = \\{\\texttt{competitive\\_dynamics}, \\texttt{count\\_fact}, \\texttt{opp\\_focus}\\}\\).
 
 **(3) Numerical sensitivity (NS).** *Meaning:* How much the distribution moves when numeric inputs are perturbed (**Randomized** vs. **Base**)—higher NS means numeric shifts more often change the strategy mix (in this benchmark, absolute NS values remain modest relative to semantic effects).  
-\[
-\mathrm{NS}(m,\tau) = \mathbb{E}_{s,\phi}\!\left[\mathrm{JSD}\!\big(P(m,\tau,s,\mathrm{Base},\phi),\, P(m,\tau,s,\mathrm{Randomized},\phi)\big)\right].
-\]
+
+$$NS(m, \\tau) = \\mathbb{E}_{s,\\phi} \\left[ JSD\\left( P(m, \\tau, s, \\text{Base}, \\phi), P(m, \\tau, s, \\text{Randomized}, \\phi) \\right) \\right]$$
 
 **(4) Decision stability (DS).** *Meaning:* How **concentrated** choices are across repeated runs under the same condition—higher DS means more predictable outputs for audit and workflow locking. Let \(\mathcal{A}\) be the seven strategy labels. For condition \(c = (s,n,v,\phi)\) (scenario, context load, variant, framing), the empirical mass on strategy \(a\) is  
-\[
-p_c^{m,\tau}(a) = \frac{1}{R}\sum_{r=1}^{R} \mathbf{1}[\text{strategy}_r = a], \quad a \in \mathcal{A}.
-\]
+$$p_{c}^{m,\\tau}(a)=\\frac{1}{R}\\sum_{r=1}^{R}\\mathbf{1}\\big[\\text{strategy}_{r}=a\\big],\\quad a\\in\\mathcal{A}.$$
 With Shannon entropy \(H(p) = -\sum_{a \in \mathcal{A}} p(a)\log_2 p(a)\),  
-\[
-\mathrm{DS}(m,\tau) = \mathbb{E}_{c}\!\left[1 - \frac{H\!\big(p_c^{m,\tau}\big)}{\log_2 |\mathcal{A}|}\right].
-\]
+$$DS(m,\\tau)=\\mathbb{E}_{c}\\left[1-\\frac{H\\!\\left(p_{c}^{m,\\tau}\\right)}{\\log_{2}|\\mathcal{A}|}\\right], \\qquad H(p)=-\\sum_{a\\in\\mathcal{A}}p(a)\\log_{2}p(a).$$
 \(\mathrm{DS} \to 1\) when the model almost always picks the same strategy; \(\mathrm{DS} \to 0\) when the empirical distribution is nearly uniform.
 
 **(5) Explanatory framing invariance (EFI).** *Meaning:* When the **chosen strategy is identical** across Generic and Specific, how similar the **rationales** are lexically—higher EFI means less “post-hoc” re-storying under branding.
 
 Implementation-wise, we align rationale pairs on \((s,r,m,\tau,n,a)\): scenario \(s\), repeat \(r\), model \(m\), temperature \(\tau\), context load \(n\), and strategy label \(a\) (**Standard Mapping** in the logs). Generic- and Specific-side texts are optionally **brand-masked**, then tokenized into an \(n\)-gram vocabulary \(\mathcal{V}\) (bigrams in the reported runs). Let \(c_w^{\phi}\) be the **pooled** count of term \(w\) across all aligned pairs in frame \(\phi \in \{\mathrm{Generic},\mathrm{Specific}\}\). Using the same smoothed log-odds construction as the rationale permutation analysis (pooled counts with a term-wise backing-off denominator shared across \(w\)), define a vocabulary-level contrast \(\Delta_w\) between the two frames. Then  
-\[
-\mathrm{EFD}_{\mathrm{raw}}(m,\tau) = \frac{1}{|\mathcal{V}|}\sum_{w\in\mathcal{V}} \big|\Delta_w\big|, \qquad
-\mathrm{EFI}(m,\tau) = \frac{1}{1 + \mathrm{EFD}_{\mathrm{raw}}(m,\tau)}.
-\]
+$$EFD_{raw}(m, \\tau) = \\frac{1}{|\\mathcal{V}|}\\sum_{w\\in\\mathcal{V}} \\left|\\Delta_{w}\\right|, \\qquad EFI(m, \\tau) = \\frac{1}{1 + EFD_{raw}(m, \\tau)}$$
 
 Figure 5 applies these scores in a compact panel view so temperature and model can be compared on the same five spokes.
 
