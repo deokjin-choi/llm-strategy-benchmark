@@ -190,7 +190,7 @@ $$FR(m, \tau) = 1 - \mathbb{E}_{s,v} \left[ JSD\left( P(m, \tau, s, v, \text{Gen
 
 **(2) Context responsiveness (CR).** *Meaning:* How much the distribution moves when **semantic** context variants replace the base—higher CR means stronger reaction to competitive, constraint, or opportunity emphasis.  
 
-$$CR(m,\tau)=E_{s,\phi,\,v\in V_{sem}}\Big[JSD\big(P(m,\tau,s,\mathrm{Base},\phi),\,P(m,\tau,s,v,\phi)\big)\Big]$$
+$$CR(m,\tau)=E_{s,\phi,\,v\in V_{sem}}\Big[JSD\big(P(m,\tau,s,\mathrm{Base},\phi),P(m,\tau,s,v,\phi)\big)\Big]$$
 where $V_{sem}$ is the semantic-variant set `{competitive_dynamics, count_fact, opp_focus}`.
 
 $$CR(m, \\tau) \= \\mathbb{E}\_{s,\\phi,v \\in \\mathcal{V}\_{sem}} \\left\[ JSD\\left( P(m, \\tau, s, \\text{Base}, \\phi), P(m, \\tau, s, v, \\phi) \\right) \\right\]$$  
