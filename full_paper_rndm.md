@@ -193,15 +193,12 @@ $$FR(m, \tau) = 1 - \mathbb{E}_{s,v} \left[ JSD\left( P(m, \tau, s, v, \text{Gen
 $$CR(m,\tau)=E_{s,\phi,\,v\in V_{sem}}\Big[JSD\big(P(m,\tau,s,\mathrm{Base},\phi),P(m,\tau,s,v,\phi)\big)\Big]$$
 where $V_{sem}$ is the semantic-variant set `{competitive_dynamics, count_fact, opp_focus}`.
 
-$$CR(m, \\tau) \= \\mathbb{E}\_{s,\\phi,v \\in \\mathcal{V}\_{sem}} \\left\[ JSD\\left( P(m, \\tau, s, \\text{Base}, \\phi), P(m, \\tau, s, v, \\phi) \\right) \\right\]$$  
-where $\\mathcal{V}\_{sem} \= \\{\\text{competitive\\\_dynamics, count\\\_fact, opp\\\_focus}\\}$.
-
 **(3) Numerical sensitivity (NS).** *Meaning:* How much the distribution moves when numeric inputs are perturbed (**Randomized** vs. **Base**)—higher NS means numeric shifts more often change the strategy mix (in this benchmark, absolute NS values remain modest relative to semantic effects).  
 
 $$NS(m, \tau) = \mathbb{E}_{s,\phi} \left[ JSD\left( P(m, \tau, s, \text{Base}, \phi), P(m, \tau, s, \text{Randomized}, \phi) \right) \right]$$
 
 **(4) Decision stability (DS).** *Meaning:* How **concentrated** choices are across repeated runs under the same condition—higher DS means more predictable outputs for audit and workflow locking. Let $\mathcal{A}$ be the seven strategy labels. For condition $c = (s,n,v,\phi)$ (scenario, context load, variant, framing), the empirical mass on strategy $a$ is  
-$$p_{c}^{m,\tau}(a)=\frac{1}{R}\sum_{r=1}^{R} I(\mathrm{strategy}_{r}=a),\quad a\in\mathcal{A}.$$
+We estimate $p_{c}^{m,\tau}(a)$ as the fraction of the $R$ repeated runs (under the same fixed condition $c$) whose selected label equals $a$ (for $a \in \mathcal{A}$).
 With Shannon entropy $H(p) = -\sum_{a \in \mathcal{A}} p(a)\log_2 p(a)$,  
 $$DS(m,\tau)=E_{c}\left[1-\frac{H\!\left(p_{c}^{m,\tau}\right)}{\log_{2}|\mathcal{A}|}\right].$$
 $\mathrm{DS} \to 1$ when the model almost always picks the same strategy; $\mathrm{DS} \to 0$ when the empirical distribution is nearly uniform.
