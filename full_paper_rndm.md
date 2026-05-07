@@ -191,7 +191,7 @@ $$FR(m, \tau) = 1 - \mathbb{E}_{s,v} \left[ JSD\left( P(m, \tau, s, v, \\text{Ge
 **(2) Context responsiveness (CR).** *Meaning:* How much the distribution moves when **semantic** context variants replace the base—higher CR means stronger reaction to competitive, constraint, or opportunity emphasis.  
 
 $$CR(m, \tau) = \mathbb{E}_{s,\phi,\, v \in \mathcal{V}_{\mathrm{sem}}} \left[ JSD\left( P(m, \tau, s, \text{Base}, \phi), P(m, \tau, s, v, \phi) \right) \right]$$  
-where $\mathcal{V}_{\mathrm{sem}} = \{\texttt{competitive\_dynamics}, \texttt{count\_fact}, \texttt{opp\_focus}\}$.
+where $\mathcal{V}_{\mathrm{sem}}$ denotes the semantic-variant set `{competitive_dynamics, count_fact, opp_focus}`.
 
 **(3) Numerical sensitivity (NS).** *Meaning:* How much the distribution moves when numeric inputs are perturbed (**Randomized** vs. **Base**)—higher NS means numeric shifts more often change the strategy mix (in this benchmark, absolute NS values remain modest relative to semantic effects).  
 
