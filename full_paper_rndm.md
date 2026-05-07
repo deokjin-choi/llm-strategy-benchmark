@@ -191,21 +191,21 @@ $$FR(m, \tau) = 1 - \mathbb{E}_{s,v} \left[ JSD\left( P(m, \tau, s, v, \\text{Ge
 **(2) Context responsiveness (CR).** *Meaning:* How much the distribution moves when **semantic** context variants replace the base—higher CR means stronger reaction to competitive, constraint, or opportunity emphasis.  
 
 $$CR(m, \\tau) = \\mathbb{E}_{s,\\phi, v \\in \\mathcal{V}_{sem}} \\left[ JSD\\left( P(m, \\tau, s, \\text{Base}, \\phi), P(m, \\tau, s, v, \\phi) \\right) \\right]$$  
-where \(\\mathcal{V}_{sem} = \\{\\texttt{competitive\\_dynamics}, \\texttt{count\\_fact}, \\texttt{opp\\_focus}\\}\\).
+where $\mathcal{V}_{\mathrm{sem}} = \{\texttt{competitive\_dynamics}, \texttt{count\_fact}, \texttt{opp\_focus}\}$.
 
 **(3) Numerical sensitivity (NS).** *Meaning:* How much the distribution moves when numeric inputs are perturbed (**Randomized** vs. **Base**)—higher NS means numeric shifts more often change the strategy mix (in this benchmark, absolute NS values remain modest relative to semantic effects).  
 
 $$NS(m, \\tau) = \\mathbb{E}_{s,\\phi} \\left[ JSD\\left( P(m, \\tau, s, \\text{Base}, \\phi), P(m, \\tau, s, \\text{Randomized}, \\phi) \\right) \\right]$$
 
-**(4) Decision stability (DS).** *Meaning:* How **concentrated** choices are across repeated runs under the same condition—higher DS means more predictable outputs for audit and workflow locking. Let \(\mathcal{A}\) be the seven strategy labels. For condition \(c = (s,n,v,\phi)\) (scenario, context load, variant, framing), the empirical mass on strategy \(a\) is  
+**(4) Decision stability (DS).** *Meaning:* How **concentrated** choices are across repeated runs under the same condition—higher DS means more predictable outputs for audit and workflow locking. Let $\mathcal{A}$ be the seven strategy labels. For condition $c = (s,n,v,\phi)$ (scenario, context load, variant, framing), the empirical mass on strategy $a$ is  
 $$p_{c}^{m,\\tau}(a)=\\frac{1}{R}\\sum_{r=1}^{R}\\mathbf{1}\\big[\\text{strategy}_{r}=a\\big],\\quad a\\in\\mathcal{A}.$$
-With Shannon entropy \(H(p) = -\sum_{a \in \mathcal{A}} p(a)\log_2 p(a)\),  
+With Shannon entropy $H(p) = -\sum_{a \in \mathcal{A}} p(a)\log_2 p(a)$,  
 $$DS(m,\\tau)=\\mathbb{E}_{c}\\left[1-\\frac{H\\!\\left(p_{c}^{m,\\tau}\\right)}{\\log_{2}|\\mathcal{A}|}\\right], \\qquad H(p)=-\\sum_{a\\in\\mathcal{A}}p(a)\\log_{2}p(a).$$
-\(\mathrm{DS} \to 1\) when the model almost always picks the same strategy; \(\mathrm{DS} \to 0\) when the empirical distribution is nearly uniform.
+$\mathrm{DS} \to 1$ when the model almost always picks the same strategy; $\mathrm{DS} \to 0$ when the empirical distribution is nearly uniform.
 
 **(5) Explanatory framing invariance (EFI).** *Meaning:* When the **chosen strategy is identical** across Generic and Specific, how similar the **rationales** are lexically—higher EFI means less “post-hoc” re-storying under branding.
 
-Implementation-wise, we align rationale pairs on \((s,r,m,\tau,n,a)\): scenario \(s\), repeat \(r\), model \(m\), temperature \(\tau\), context load \(n\), and strategy label \(a\) (**Standard Mapping** in the logs). Generic- and Specific-side texts are optionally **brand-masked**, then tokenized into an \(n\)-gram vocabulary \(\mathcal{V}\) (bigrams in the reported runs). Let \(c_w^{\phi}\) be the **pooled** count of term \(w\) across all aligned pairs in frame \(\phi \in \{\mathrm{Generic},\mathrm{Specific}\}\). Using the same smoothed log-odds construction as the rationale permutation analysis (pooled counts with a term-wise backing-off denominator shared across \(w\)), define a vocabulary-level contrast \(\Delta_w\) between the two frames. Then  
+Implementation-wise, we align rationale pairs on $(s,r,m,\tau,n,a)$: scenario $s$, repeat $r$, model $m$, temperature $\tau$, context load $n$, and strategy label $a$ (**Standard Mapping** in the logs). Generic- and Specific-side texts are optionally **brand-masked**, then tokenized into an $n$-gram vocabulary $\mathcal{V}$ (bigrams in the reported runs). Let $c_w^{\phi}$ be the **pooled** count of term $w$ across all aligned pairs in frame $\phi \in \{\mathrm{Generic},\mathrm{Specific}\}$. Using the same smoothed log-odds construction as the rationale permutation analysis (pooled counts with a term-wise backing-off denominator shared across $w$), define a vocabulary-level contrast $\Delta_w$ between the two frames. Then  
 $$EFD_{raw}(m, \\tau) = \\frac{1}{|\\mathcal{V}|}\\sum_{w\\in\\mathcal{V}} \\left|\\Delta_{w}\\right|, \\qquad EFI(m, \\tau) = \\frac{1}{1 + EFD_{raw}(m, \\tau)}$$
 
 Figure 5 applies these scores in a compact panel view so temperature and model can be compared on the same five spokes.
@@ -213,15 +213,15 @@ Figure 5 applies these scores in a compact panel view so temperature and model c
 ![Figure 5](./final_results/plots/eval_model_profile_radar.png)
 
 **Figure 5. Five-axis profiling radar (one panel per model).**  
-Spokes use **display-only per-axis min–max scaling** over the ten evaluated \((m,\tau)\) configurations (five models × \(T \in \{0.0, 0.7\}\)) so that compressed axes (notably CR and NS) remain visually comparable; **solid** = \(T=0.0\), **dashed** = \(T=0.7\). The figure is for pattern comparison; **absolute axis values** are provided in Table 3 (Appendix).
+Spokes use **display-only per-axis min–max scaling** over the ten evaluated $(m,\tau)$ configurations (five models × $T \in \{0.0, 0.7\}$) so that compressed axes (notably CR and NS) remain visually comparable; **solid** = $T=0.0$, **dashed** = $T=0.7$. The figure is for pattern comparison; **absolute axis values** are provided in Table 3 (Appendix).
 
-Across the panel, raising temperature from **\(T=0.0\)** to **\(T=0.7\)** often increases **FR** and **EFI** while lowering **DS**—a trade-off between **precision-oriented repeatability** and **objectivity-oriented flexibility** in framing and rationale style. Temperature should therefore be documented like any other inference parameter in R&D governance.
+Across the panel, raising temperature from **$T=0.0$** to **$T=0.7$** often increases **FR** and **EFI** while lowering **DS**—a trade-off between **precision-oriented repeatability** and **objectivity-oriented flexibility** in framing and rationale style. Temperature should therefore be documented like any other inference parameter in R&D governance.
 
 **Illustrative personas**
 
-- **Stable functional (Qwen2.5-14B-Instruct).** Keeps a **high DS** spoke at both temperatures (**≈0.91 → 0.79**), reflecting strong run-to-run concentration *within this panel’s relative scale*. **FR** and **EFI** stay **inward** on the radar—e.g. **FR** near the **hub** at **\(T=0.0\)** and **EFI** only **moderate** at **\(T=0.7\)**—so the footprint matches a model that privileges **operational steadiness** over maximal framing or rationale invariance.
-- **Precision-sensitive / sampling-brittle (DeepSeek-LLM-7B-Chat).** At **\(T=0.0\)**, the trace sits **outward** on **FR**, **NS**, and **DS** (**FR ≈0.95**, **NS = 1.00**, **DS ≈0.94** on the scaled spokes). At **\(T=0.7\)**, **DS** and **CR** **collapse toward 0**, while **EFI** moves **outward (≈0.99)**—the dashed curve **deflates** on repeatability and context-response axes. The persona is a **deterministic** specialist more than a stable stochastic partner.
-- **Adaptive resilient (Llama-3.1-8B-Instruct).** **CR** hits the **spoke maximum at \(T=0.0\) (1.00)** under this normalization—the strongest semantic redistribution in the panel when sampling is greedy. **EFI** is **highest at \(T=0.7\) (1.00)**, with **FR** also **high (≈0.92)**, consistent with **situational responsiveness** paired with **stronger cross-frame rationale consistency** when temperature is raised—in this **relative** display only.
+- **Stable functional (Qwen2.5-14B-Instruct).** Keeps a **high DS** spoke at both temperatures (**≈0.91 → 0.79**), reflecting strong run-to-run concentration *within this panel’s relative scale*. **FR** and **EFI** stay **inward** on the radar—e.g. **FR** near the **hub** at **$T=0.0$** and **EFI** only **moderate** at **$T=0.7$**—so the footprint matches a model that privileges **operational steadiness** over maximal framing or rationale invariance.
+- **Precision-sensitive / sampling-brittle (DeepSeek-LLM-7B-Chat).** At **$T=0.0$**, the trace sits **outward** on **FR**, **NS**, and **DS** (**FR ≈0.95**, **NS = 1.00**, **DS ≈0.94** on the scaled spokes). At **$T=0.7$**, **DS** and **CR** **collapse toward 0**, while **EFI** moves **outward (≈0.99)**—the dashed curve **deflates** on repeatability and context-response axes. The persona is a **deterministic** specialist more than a stable stochastic partner.
+- **Adaptive resilient (Llama-3.1-8B-Instruct).** **CR** hits the **spoke maximum at $T=0.0$ (1.00)** under this normalization—the strongest semantic redistribution in the panel when sampling is greedy. **EFI** is **highest at $T=0.7$ (1.00)**, with **FR** also **high (≈0.92)**, consistent with **situational responsiveness** paired with **stronger cross-frame rationale consistency** when temperature is raised—in this **relative** display only.
 
 ### 4.6 Scenario-level heterogeneity: local failures hidden by global averages
 
@@ -286,11 +286,11 @@ LLMs are increasingly deployed in R&D-related workflows that inform strategic de
 
 ## Appendix: Model-level profiling scores (raw)
 
-To support reproducibility and allow readers to interpret the min–max scaled radar (Figure 5) in absolute terms, Table 3 reports the unscaled model-level scores for each \((m,\tau)\). Values correspond to the five axes defined in §4.5 (FR, CR, NS, DS, EFI) and are computed over the full experimental grid under the repeated-inference protocol.
+To support reproducibility and allow readers to interpret the min–max scaled radar (Figure 5) in absolute terms, Table 3 reports the unscaled model-level scores for each $(m,\tau)$. Values correspond to the five axes defined in §4.5 (FR, CR, NS, DS, EFI) and are computed over the full experimental grid under the repeated-inference protocol.
 
 **Table 3. Model-level profiling scores (raw axis values).**
 
-| Model | \(T\) | FR | CR | NS | DS | EFI |
+| Model | $T$ | FR | CR | NS | DS | EFI |
 |:------|-----:|---:|---:|---:|---:|---:|
 | Yi-1.5-9B-Chat | 0.0 | 0.8137 | 0.0796 | 0.0803 | 0.8552 | 0.6366 |
 | Yi-1.5-9B-Chat | 0.7 | 0.8298 | 0.0691 | 0.0430 | 0.6943 | 0.7633 |
