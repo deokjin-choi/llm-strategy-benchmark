@@ -276,16 +276,16 @@ Overall, the results suggest a trade-off between precision-oriented stability an
 
 #### (2) Distinct Model Personas
 
-The models do not respond uniformly to temperature changes. Instead, they display distinct behavioral profiles.
+The models do not respond uniformly to temperature changes. Instead, they display distinct behavioral profiles. The vignettes below use **the same per-axis min–max scaling as the radar** (each spoke is $[0,1]$ **relative to the ten** $(m,\tau)$ **rows in Table 7**), not the raw axis entries in Table 7 itself.
 
 1. **Stable Functional Type**  
-   Qwen2.5-14B is characterized by its ability to maintain its core operational identity despite environmental shifts. While it shows susceptibility to certain framing biases (lower FR/EFI), it excels in preserving its primary decision-making pillars, maintaining high DS (0.91 → 0.79) with remarkable consistency. This suggests Qwen prioritizes functional persistence over stylistic invariance.  
+   Qwen2.5-14B keeps a **high DS** spoke at both temperatures (**≈0.91 → 0.79** on that scaled axis), i.e., strong run-to-run concentration *within this panel*. **FR** and **EFI** remain **inward** on the radar—e.g., **FR** near the hub at $T=0.0$—so the model is less “brand-blind” and less rationale-invariant than some peers in this display. The footprint matches **functional persistence** over maximal framing or stylistic invariance.
 
 2. **Precision-Sensitive Type**  
-   DeepSeek-LLM-7B-Chat embodies a persona of extreme technical precision at $T=0.0$, acting as a cold, analytical observer with near-perfect NS (1.0) and an exceptionally high FR (0.94) for a deterministic setting. However, this intelligence is highly brittle; its DS and CR collapse to near-zero at $T=0.7$. This indicates the model functions most effectively as a deterministic engine rather than a flexible, stochastic partner.  
+   DeepSeek-LLM-7B-Chat at $T=0.0$ pushes **FR**, **NS**, and **DS** toward the outer ring (**FR ≈0.95**, **NS = 1.00**, **DS ≈0.94** on the scaled spokes). At $T=0.7$, **DS** and **CR** **collapse toward 0** while **EFI** moves **outward (≈0.99)**—the dashed trace **deflates** on repeatability and context-response axes. The persona is a **deterministic** specialist more than a stable stochastic partner.
 
 3. **Adaptive Resilient Type**  
-   Meta-Llama-3.1-8B functions as a sophisticated agent with high situational awareness. It leads the cohort in CR (1.0 at $T=0.0$), showing high sensitivity to strategic cues. Notably, Llama reaches peak EFI at $T=0.7$, indicating that its reasoning remains consistent across different frames, proving its resilience as a reliable partner for objective analysis.
+   Meta-Llama-3.1-8B reaches the **CR** spoke maximum at $T=0.0$ (**1.00** under this normalization)—the strongest semantic redistribution in the panel when sampling is greedy. **EFI** is **highest at $T=0.7$** (**1.00** scaled), with **FR** also **high (≈0.92)**, consistent with **situational responsiveness** paired with **stronger cross-frame rationale consistency** when temperature is raised—in this **relative** view only.
 
 These differences imply that model selection should consider not only average performance, but also response stability under different decoding environments.
 
