@@ -10,7 +10,7 @@ Slides: `workshop_slide.md` (SLIDES 1–13, BACKUPS A–F). Use **Emphasis** as 
 - Clear title; name, affiliations, workshop, contact.
 
 **Script**
-Good morning. I’m Deokjin Choi, from Sungkyunkwan University and Samsung Electronics. Today I’ll present work on how large language models respond to **context and framing** when they make **strategic** choices—not just when they summarize text. I’m grateful for the chance to discuss this at the R&D Management Workshop.
+Good morning. Thank you for the opportunity to present my work. My name is Deokjin Choi, a Ph.D. student at Sungkyunkwan University, and I also work for Samsung Electronics as a data scientist. Today, I will talk about how large language models behave as strategic decision-makers, focusing on their sensitivity to **context and framing**.
 
 ---
 
@@ -21,7 +21,7 @@ Good morning. I’m Deokjin Choi, from Sungkyunkwan University and Samsung Elect
 - Gap preview: we care about **stability of strategic stance**, not only task accuracy.
 
 **Script**
-Let me orient us. LLMs are already used for technology assessment, competitive intelligence, long-term scenarios, and portfolio-style recommendations. Adoption is real. What is less clear is whether their **strategic recommendations stay stable** when we rephrase the same dilemma, change emphasis, or name the firm. Most governance still focuses on correctness and hallucination—not on **choice sensitivity**.
+LLMs are increasingly used in R&D and innovation management tasks—such as technology assessment, competitive analysis, and strategic planning. In practice, LLMs are no longer used only to summarize information. They are increasingly asked to recommend strategic directions under uncertainty. However, most existing evaluation studies focus on accuracy, coherence, or task performance, such as factual Q&A tests or instruction-following benchmarks. What we still do not understand well is this: Do LLMs make stable strategic judgments, or do their decisions shift when context or framing changes?
 
 ---
 
@@ -34,7 +34,7 @@ Let me orient us. LLMs are already used for technology assessment, competitive i
 - Close with the **research question** cleanly.
 
 **Script**
-Prior work clusters into four areas: operational decision support, reliability and safety, knowledge-grounded systems, and richer reasoning benchmarks. Each improves how we use LLMs, but they rarely ask: if I hold the **menu of strategies** fixed and only change **wording, context, or firm identity**, how does the **distribution of choices** move? Our gaps are framing robustness, whether narrative beats moderate numeric change, and how decoding temperature interacts. We shift from seeking one best answer to measuring **decision sensitivity**, and we treat models as **conditional decision agents**. The question is: how stable are strategic judgments over established archetypes under contextual and framing shifts?
+Prior work clusters into four areas: operational decision support, reliability and safety, knowledge-grounded systems, and richer reasoning benchmarks. Each improves how we use LLMs, but they rarely ask: How sensitive are LLMs’ strategic decisions to context and framing? Our gaps are framing robustness, narrative-versus-number sensitivity, and operational reliability under different temperature settings. We shift evaluation from correctness to decision sensitivity, and we treat models as **conditional decision agents**.
 
 ---
 
@@ -45,7 +45,13 @@ Prior work clusters into four areas: operational decision support, reliability a
 - Point at the figure: **pipeline** from scenarios to distributions.
 
 **Script**
-Methodologically, we use six Tesla-anchored phases as base scenarios. Every run varies framing—anonymous firm versus Tesla—and one of four context variants, including opportunity emphasis, unfavorable facts, competitive dynamics, and a numeric perturbation control. The model must pick **one** of seven canonical strategy types, with a short rationale. We run five open instruction-tuned models and repeat inference to build **empirical distributions**, not single answers. The slide figure summarizes that pipeline.
+Let me briefly explain the experimental design. We construct six base scenarios grounded in Tesla’s historical development, from EV market pioneer to industry leader. These scenarios are based on Schilling’s textbook on technology and innovation management. Each base scenario represents a fixed strategic dilemma; for example, in the Model 3 case, the firm must decide how to scale production rapidly while maintaining quality, financial stability, and public trust.
+
+On top of that, we introduce four contextual variants: competitive_dynamics adds competitive pressure, count_fact introduces unfavorable constraints, opp_focus highlights positive opportunity signals, and randomized_numbers changes numerical values without changing the meaning. The main problem stays the same; only the surrounding contextual information, such as technology, market, competition, and constraints, is automatically added or removed.
+
+In addition to this pipeline, we apply framing layer. Each scenario is presented either as an anonymous firm or explicitly as Tesla. This allows us to test whether brand identity itself affects the model’s strategic choice.
+
+The LLM is then instructed to choose a single strategy from seven options and provide a brief rationale. We evaluate five open-source LLMs, use two decoding settings, and repeat each configuration 30 times for robustness. The slide figure summarizes that pipeline.
 
 ---
 
@@ -57,8 +63,7 @@ Methodologically, we use six Tesla-anchored phases as base scenarios. Every run 
 - **Numbers alone** barely move the distribution—**semantics** dominate.
 
 **Script**
-First result: models do not collapse on one default. In the baseline, niche and related conservative postures are common; when we emphasize opportunity, technology leadership surges; when we emphasize hard constraints, we see defensive repositioning. Crucially, perturbing numbers by about twenty percent barely shifts the strategy mix. So in this benchmark, **categorical** strategy choice tracks **semantic** context much more than moderate numeric tweaks.
-
+First, LLMs do not rely on a single default strategy. Strategy selection varies systematically across contextual conditions. Opportunity-focused contexts increase leadership-oriented strategies. Unfavorable constraints induce more conservative or follower strategies. Pure numerical perturbations have minimal effect. This suggests that semantic context, not numeric noise, drives strategic shifts.
 ---
 
 ## SLIDE 6 — Finding #2: Structural Separation of Strategic Contexts
@@ -68,7 +73,7 @@ First result: models do not collapse on one default. In the baseline, niche and 
 - Table: **entropy** drops under opportunity; **JSD** shows asymmetric sensitivity; **Spearman = 1** for numbers.
 
 **Script**
-The PCA view reinforces that: opportunity-focused and constraint-focused environments occupy different regions, while the baseline and numeric-perturbation condition cluster together. The metrics table makes this quantitative: lowest entropy under opportunity framing—models look more “decisive”—and the distributional shift from baseline is several times larger for opportunity than for the unfavorable-fact variant here. For randomized numbers, divergence from baseline is essentially zero and rank correlation is one. That is distributional evidence of **numerical insensitivity** relative to semantic framing.
+Second, these shifts are not random. A PCA analysis shows clear structural separation between opportunity-focused scenarios and unfavorable-constraint scenarios. Meanwhile, base scenarios and randomized-number variants cluster closely together. This indicates that LLMs distinguish different strategic environments, especially qualitative shifts in the scenario. The table on the slide shows that LLMs react much more strongly to positive framing than to negative facts. While opportunity scenarios lead to a large shift from the baseline and lower entropy, changing the actual numbers has almost no effect. Therefore, practitioners should be careful, as LLMs may overreact to optimistic information and fail to notice critical changes in numerical data.
 
 ---
 
@@ -79,8 +84,7 @@ The PCA view reinforces that: opportunity-focused and constraint-focused environ
 - **Associative anchoring**: pioneer vs survivor narratives.
 
 **Script**
-Third finding: naming Tesla does not uniformly push innovation or defense. It **amplifies** the prevailing cue—stronger leadership tilt under opportunity, stronger defensive tilt under constraint. Numeric perturbation still does not interact with brand. We interpret this as associative anchoring: pretrained narratives about the firm interact with the scenario, acting as a **sensitivity modulator**, not a constant strategic prior.
-
+Third, brand framing affects decision sensitivity, not absolute rankings. When Tesla is explicitly named, LLMs become more defensive under unfavorable conditions and more aggressive under opportunity-focused contexts. In other words, brand framing amplifies reactions to context, rather than dictating a specific strategy. We interpret this as associative anchoring: the model connects the brand name with familiar narratives, such as an innovative pioneer or a survivor under severe manufacturing and financial pressure. Depending on the context, one of these narratives becomes more salient and pushes the model’s decision in that direction.
 ---
 
 ## SLIDE 8 — Finding #4: Rationales Shift When the Strategy Choice Is Identical
@@ -91,7 +95,7 @@ Third finding: naming Tesla does not uniformly push innovation or defense. It **
 - Keyword table: **vision** vs **operations** language.
 
 **Script**
-Even when the chosen strategy matches across frames, the **rationale language** diverges systematically. After masking brand and number words, we still see a significant shift in word associations—Tesla-side language is more mission- and vision-led; generic language stresses constraints and feasibility. For governance, that means you cannot audit only the label; you must read **how** the model justifies itself.
+Even when the chosen strategy matches across frames, the **rationale language** still changes. We compare same-choice rationales, mask brand and number words, and extract keywords that are more associated with each frame. The pattern is clear: specific-frame language is more mission- and vision-led, while generic-frame language stresses constraints and feasibility. For governance, the issue is not only what the model chooses, but what kind of reasoning it makes salient: ambition, caution, risk, or feasibility.
 
 ---
 
@@ -102,7 +106,7 @@ Even when the chosen strategy matches across frames, the **rationale language** 
 - Radar is **scaled for display**; reported model numbers are **raw** (full grid on backup if asked).
 
 **Script**
-To compare models, we define five axes: robustness to branding, responsiveness to semantic context, sensitivity to numeric perturbation, stability across repeated runs, and invariance of rationales when the choice is fixed. Framing robustness is one minus average Jensen–Shannon divergence across generic and specific runs; the others follow the definitions on the slide. Note that radar plots rescale spokes for readability; the **numeric table** for each model uses raw scores—worth showing from backup if someone wants every cell.
+To compare models, we define five behavioral axes. FR is framing robustness, or robustness to brand naming. CR is context responsiveness, meaning sensitivity to semantic context. NS is numerical sensitivity, DS is decision stability across repeated runs, and EFI is explanatory framing invariance when the choice is fixed. Framing robustness is one minus average Jensen–Shannon divergence across generic and specific runs; the others follow the definitions on the slide. Note that radar plots rescale spokes for readability; the **numeric table** for each model uses raw scores—worth showing from backup if someone wants every cell.
 
 ---
 

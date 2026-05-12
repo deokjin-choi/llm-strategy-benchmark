@@ -225,7 +225,7 @@ Across the panel, raising temperature from **$T=0.0$** to **$T=0.7$** often incr
 
 ### 4.6 Scenario-level heterogeneity: local failures hidden by global averages
 
-Model-level aggregates (§4.5) ease comparison but can **average away** cells where framing collapses, context suddenly reallocates mass, or repeatability breaks down. We therefore map the same choice-level constructs (**FR**, **CR**, **DS**) onto the full **scenario × model** grid at each temperature, so readers can see *where* behavior concentrates rather than only *how high* a global score is.
+Model-level aggregates (§4.5) provide a useful benchmark but often average away critical local failures—specific "cells" where framing robustness collapses, context sensitivity spikes, or repeatability breaks down. We therefore map choice-level constructs (FR, CR, DS) onto the full scenario × model grid
 
 ![Figure 6](./final_results/plots/eval_scenario_model_overview_FR_CR_DS__T0.png)
 
@@ -235,7 +235,7 @@ Model-level aggregates (§4.5) ease comparison but can **average away** cells wh
 
 **Figure 7. Scenario × model heatmaps of framing robustness, context responsiveness, and decision stability (T = 0.7).**
 
-For example, in the mass-market production scenario (`5_model_3_mass_market`) for Qwen 2.5 14B, naming the firm drives a major reallocation (open innovation vs. maintain), while in the Roadster launch scenario (`2_roadster_launch`) for DeepSeek, context load strongly reshapes stability and entropy. These cells motivate “audit-by-representative-scenarios” rather than relying only on global averages.
+For example, in the mass-market production scenario (`5_model_3_mass_market`) for Qwen 2.5 14B, naming the firm drives a major reallocation (open innovation vs. maintain), while in the Roadster launch scenario (`2_roadster_launch`) for DeepSeek, increasing the number of contexts (context load) strongly reshapes stability and entropy. These cells motivate “audit-by-representative-scenarios” rather than relying only on global averages.
 
 ---
 
