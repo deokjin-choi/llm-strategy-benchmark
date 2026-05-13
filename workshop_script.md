@@ -1,6 +1,6 @@
 # Workshop presentation script
 
-Slides: `workshop_slide.md` (SLIDES 1–13, BACKUPS A–F). Use **Emphasis** as delivery cues; **Script** is a spoken guide (trim to time).
+Slides: `workshop_slide.md` (SLIDES 1–14, BACKUPS A–F). Use **Emphasis** as delivery cues; **Script** is a spoken guide (trim to time).
 
 ---
 
@@ -14,7 +14,17 @@ Good morning. Thank you for the opportunity to present my work. My name is Deokj
 
 ---
 
-## SLIDE 2 — LLMs in R&D-Related Workflows
+## SLIDE 2 — Contents
+
+**Emphasis**
+- Roadmap: motivation, prior work and gap, method, findings, implications.
+
+**Script**
+Before going into the details, let me briefly show the structure of the talk. I will start with the motivation: how LLMs are entering R&D workflows. Then I will discuss prior work and the research gap, explain the methodology, present the key findings, and close with implications for R&D management.
+
+---
+
+## SLIDE 3 — LLMs in R&D-Related Workflows
 
 **Emphasis**
 - LLMs are already in the **pipeline** for decisions, not only drafting.
@@ -25,7 +35,7 @@ LLMs are increasingly used in R&D and innovation management tasks—such as tech
 
 ---
 
-## SLIDE 3 — Prior Work, Gap, and This Study
+## SLIDE 4 — Prior Work, Gap, and This Study
 
 **Emphasis**
 - Four streams: **ops DSS**, **safety**, **grounding**, **reasoning benchmarks**—each stops short of **fixed-option strategic choice** under **framing**.
@@ -34,11 +44,11 @@ LLMs are increasingly used in R&D and innovation management tasks—such as tech
 - Close with the **research question** cleanly.
 
 **Script**
-Prior work clusters into four areas: operational decision support, reliability and safety, knowledge-grounded systems, and richer reasoning benchmarks. Each improves how we use LLMs, but they rarely ask: How sensitive are LLMs’ strategic decisions to context and framing? Our gaps are framing robustness, narrative-versus-number sensitivity, and operational reliability under different temperature settings. We shift evaluation from correctness to decision sensitivity, and we treat models as **conditional decision agents**.
+Prior work clusters into four areas: operational decision support, reliability and safety such as hallucination risk, knowledge-grounded systems such as retrieval-grounded answers, and richer reasoning benchmarks. Each improves how we use LLMs, but they rarely ask: How sensitive are LLMs’ strategic decisions to context and framing? Our gaps are framing robustness, narrative-versus-number sensitivity, and operational reliability under different temperature settings. In this study, we shift evaluation from correctness to decision sensitivity.
 
 ---
 
-## SLIDE 4 — Methodology Overview
+## SLIDE 5 — Methodology Overview
 
 **Emphasis**
 - **Six** historical scenarios, **two** framings, **four** context variants, **seven** fixed strategies, **five** models, **repeated** sampling.
@@ -47,15 +57,13 @@ Prior work clusters into four areas: operational decision support, reliability a
 **Script**
 Let me briefly explain the experimental design. We construct six base scenarios grounded in Tesla’s historical development, from EV market pioneer to industry leader. These scenarios are based on Schilling’s textbook on technology and innovation management. Each base scenario represents a fixed strategic dilemma; for example, in the Model 3 case, the firm must decide how to scale production rapidly while maintaining quality, financial stability, and public trust.
 
-On top of that, we introduce four contextual variants: competitive_dynamics adds competitive pressure, count_fact introduces unfavorable constraints, opp_focus highlights positive opportunity signals, and randomized_numbers changes numerical values without changing the meaning. The main problem stays the same; only the surrounding contextual information, such as technology, market, competition, and constraints, is automatically added or removed.
+On top of that, we introduce four contextual variants: competitive_dynamics adds competitive pressure, count_fact introduces unfavorable constraints, opp_focus highlights positive opportunity signals, and randomized_numbers changes numerical values without changing the meaning. The main problem stays the same; only the surrounding contextual information, such as technology, market, and regulation, is automatically added or removed.
 
-In addition to this pipeline, we apply framing layer. Each scenario is presented either as an anonymous firm or explicitly as Tesla. This allows us to test whether brand identity itself affects the model’s strategic choice.
-
-The LLM is then instructed to choose a single strategy from seven options and provide a brief rationale. We evaluate five open-source LLMs, use two decoding settings, and repeat each configuration 30 times for robustness. The slide figure summarizes that pipeline.
+The LLM is then instructed to choose a single strategy from seven options and provide a brief rationale. We evaluate five open-source LLMs, use two decoding settings, and repeat each configuration 30 times for robustness. In addition to this pipeline, we apply framing layer. Each scenario is shown either as an anonymous firm or as Tesla. This allows us to test whether brand identity itself affects the model’s strategic choice. The slide figure summarizes that pipeline.
 
 ---
 
-## SLIDE 5 — Finding #1: Strategy Distribution Shifts by Context
+## SLIDE 6 — Finding #1: Strategy Distribution Shifts by Context
 
 **Emphasis**
 - No single default strategy.
@@ -63,21 +71,22 @@ The LLM is then instructed to choose a single strategy from seven options and pr
 - **Numbers alone** barely move the distribution—**semantics** dominate.
 
 **Script**
-First, LLMs do not rely on a single default strategy. Strategy selection varies systematically across contextual conditions. Opportunity-focused contexts increase leadership-oriented strategies. Unfavorable constraints induce more conservative or follower strategies. Pure numerical perturbations have minimal effect. This suggests that semantic context, not numeric noise, drives strategic shifts.
+Now I will turn to the main findings. First, LLMs do not rely on a single default strategy. Strategy selection varies systematically across contextual conditions. Opportunity-focused contexts increase leadership-oriented strategies. Unfavorable constraints induce more Niche Focus and Fast Follower strategies. Pure numerical perturbations have minimal effect. This suggests that semantic context, not numeric noise, drives strategic shifts.
+
 ---
 
-## SLIDE 6 — Finding #2: Structural Separation of Strategic Contexts
+## SLIDE 7 — Finding #2: Structural Separation of Strategic Contexts
 
 **Emphasis**
 - PCA: **opportunity** vs **constraint** separate; **base** sits with **randomized numbers**.
 - Table: **entropy** drops under opportunity; **JSD** shows asymmetric sensitivity; **Spearman = 1** for numbers.
 
 **Script**
-Second, these shifts are not random. A PCA analysis shows clear structural separation between opportunity-focused scenarios and unfavorable-constraint scenarios. Meanwhile, base scenarios and randomized-number variants cluster closely together. This indicates that LLMs distinguish different strategic environments, especially qualitative shifts in the scenario. The table on the slide shows that LLMs react much more strongly to positive framing than to negative facts. While opportunity scenarios lead to a large shift from the baseline and lower entropy, changing the actual numbers has almost no effect. Therefore, practitioners should be careful, as LLMs may overreact to optimistic information and fail to notice critical changes in numerical data.
+Second, these shifts are not random. A PCA analysis shows clear structural separation between opportunity-focused scenarios and unfavorable-constraint scenarios. Meanwhile, base scenarios and randomized-number variants cluster closely together. This indicates that LLMs distinguish different strategic environments, especially qualitative information changes. The table on the slide shows that LLMs react much more strongly to positive framing than to negative facts. While opportunity scenarios lead to a large shift from the baseline and lower entropy, changing the actual numbers has almost no effect. Therefore, practitioners should be careful, as LLMs may overreact to optimistic information and fail to notice critical changes in numerical data.
 
 ---
 
-## SLIDE 7 — Finding #3: Brand Framing Amplifies Contextual Sensitivity
+## SLIDE 8 — Finding #3: Brand Framing Amplifies Contextual Sensitivity
 
 **Emphasis**
 - Brand is **not** a fixed bias toward one strategy—it **amplifies** whatever the context already suggests.
@@ -85,9 +94,10 @@ Second, these shifts are not random. A PCA analysis shows clear structural separ
 
 **Script**
 Third, brand framing affects decision sensitivity, not absolute rankings. When Tesla is explicitly named, LLMs become more defensive under unfavorable conditions and more aggressive under opportunity-focused contexts. In other words, brand framing amplifies reactions to context, rather than dictating a specific strategy. We interpret this as associative anchoring: the model connects the brand name with familiar narratives, such as an innovative pioneer or a survivor under severe manufacturing and financial pressure. Depending on the context, one of these narratives becomes more salient and pushes the model’s decision in that direction.
+
 ---
 
-## SLIDE 8 — Finding #4: Rationales Shift When the Strategy Choice Is Identical
+## SLIDE 9 — Finding #4: Rationales Shift When the Strategy Choice Is Identical
 
 **Emphasis**
 - **What** vs **why**: same strategy, different **story**.
@@ -95,35 +105,36 @@ Third, brand framing affects decision sensitivity, not absolute rankings. When T
 - Keyword table: **vision** vs **operations** language.
 
 **Script**
-Even when the chosen strategy matches across frames, the **rationale language** still changes. We compare same-choice rationales, mask brand and number words, and extract keywords that are more associated with each frame. The pattern is clear: specific-frame language is more mission- and vision-led, while generic-frame language stresses constraints and feasibility. For governance, the issue is not only what the model chooses, but what kind of reasoning it makes salient: ambition, caution, risk, or feasibility.
+Even when the chosen strategy matches across frames, the **rationale language** still changes. We compare same-choice rationales, mask brand and number words, and extract keywords that are more associated with each frame. The pattern is clear: specific-frame language is more mission- and vision-led, while generic-frame language stresses constraints and feasibility. For governance, the issue is not only what the model chooses, but what kind of reasoning it makes salient.
 
 ---
 
-## SLIDE 9 — Finding #5: Five Behavioral Axes
+## SLIDE 10 — Finding #5: Five Behavioral Axes
 
 **Emphasis**
 - **FR** framing robustness; **CR** context; **NS** numbers; **DS** repeatability; **EFI** rationale invariance.
-- Radar is **scaled for display**; reported model numbers are **raw** (full grid on backup if asked).
+- Higher scores indicate stronger performance on the corresponding behavioral axis.
 
 **Script**
-To compare models, we define five behavioral axes. FR is framing robustness, or robustness to brand naming. CR is context responsiveness, meaning sensitivity to semantic context. NS is numerical sensitivity, DS is decision stability across repeated runs, and EFI is explanatory framing invariance when the choice is fixed. Framing robustness is one minus average Jensen–Shannon divergence across generic and specific runs; the others follow the definitions on the slide. Note that radar plots rescale spokes for readability; the **numeric table** for each model uses raw scores—worth showing from backup if someone wants every cell.
+To compare models, we define five behavioral axes. FR is framing robustness. CR is context responsiveness, meaning sensitivity to semantic context. NS is numerical sensitivity, DS is decision stability across repeated runs, and EFI is explanatory framing invariance when the choice is fixed. Framing robustness is one minus average Jensen–Shannon divergence across generic and specific runs; the others follow the definitions on the slide. Across these axes, a higher score means stronger performance on that behavior.
 
 ---
 
-## SLIDE 10 — Finding #5 (continued): Profiling Radar & Temperature
+## SLIDE 11 — Finding #5 (continued): Profiling Radar & Temperature
 
 **Emphasis**
+- Radar is **scaled for display**; reported model numbers are **raw** (full grid on backup if asked).
 - **T = 0** vs **0.7**: systematic footprint change.
 - Low T: higher **DS**, **CR**, **NS**—sharper, may lock framing.
 - Higher T: often **FR**, **EFI** up; **DS** down—flexibility vs repeatability.
 - Three **personas**: Qwen stable; DeepSeek precise but brittle at high T; Llama adaptive.
 
 **Script**
-Temperature is not a cosmetic knob. Moving from zero to point seven changes the radar shape in structured ways: lower temperature usually means higher decision stability and context responsiveness in this panel, but it may reinforce narrow habits. Higher temperature often raises framing robustness and rationale invariance while hurting repeatability. Among the five models, Qwen shows very stable choice concentration; DeepSeek is extremely strong at zero temperature but its context responsiveness and stability collapse when sampling noise increases; Llama leads context responsiveness at low T and rationale invariance at high T. The practical point: **pick model and temperature together**.
+From here, I use these behavioral axes to discuss the model-level implications. One note before reading the radar: radar plots rescale the spokes for readability, while the numeric table uses raw scores. The full raw grid is available in the backup if needed. Temperature is not a cosmetic knob. Moving from zero to point seven changes the radar shape in structured ways: lower temperature usually means higher decision stability and context responsiveness in this panel, but it may reinforce narrow habits. Higher temperature often raises framing robustness and rationale invariance while hurting repeatability. Among the five models, Qwen shows very stable choice concentration; DeepSeek is extremely strong at zero temperature but its context responsiveness and stability collapse when sampling noise increases; Llama leads context responsiveness at low T and rationale invariance at high T. The practical point: **pick model and temperature together**.
 
 ---
 
-## SLIDE 11 — Scenario-Level Heterogeneity
+## SLIDE 12 — Scenario-Level Heterogeneity
 
 **Emphasis**
 - Heatmaps: same model, different **cells**, very different behavior.
@@ -134,7 +145,7 @@ Aggregate scores smooth over trouble. In these heatmaps, certain scenario-by-mod
 
 ---
 
-## SLIDE 12 — Practical Implications for R&D Management
+## SLIDE 13 — Practical Implications for R&D Management
 
 **Emphasis**
 - **Anonymize** and **A/B** framing; test **opportunity vs constraint**; don’t trust silent numeric edits.
@@ -146,7 +157,7 @@ For R&D practice: anonymize firm names when you want less narrative priming; alw
 
 ---
 
-## SLIDE 13 — Discussion: Questions for Editors
+## SLIDE 14 — Discussion: Questions for Editors
 
 **Emphasis**
 - Invite feedback on **scope**, **methods**, **theory**, **practice**, **outlets**.

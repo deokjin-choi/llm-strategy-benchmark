@@ -9,7 +9,17 @@
 
 ---
 
-## SLIDE 2 — LLMs in R&D-Related Workflows
+## SLIDE 2 — Contents
+
+1. Motivation: LLMs in R&D workflows
+2. Prior work & research gap
+3. Methodology
+4. Key findings
+5. Implications for R&D management
+
+---
+
+## SLIDE 3 — LLMs in R&D-Related Workflows
 
 **LLMs are already embedded in work that feeds strategic and portfolio decisions—not only text generation.**
 
@@ -25,7 +35,7 @@
 
 ---
 
-## SLIDE 3 — Prior Work, Gap, and This Study
+## SLIDE 4 — Prior Work, Gap, and This Study
 
 **Prior research streams**
 
@@ -53,7 +63,7 @@ How stable are LLM **strategic judgments**—over established strategy archetype
 
 ---
 
-## SLIDE 4 — Methodology Overview
+## SLIDE 5 — Methodology Overview
 
 ![Research method](./final_results/plots/research_method.PNG)
 
@@ -66,7 +76,7 @@ How stable are LLM **strategic judgments**—over established strategy archetype
 
 ---
 
-## SLIDE 5 — Finding #1: Strategy Distribution Shifts by Context
+## SLIDE 6 — Finding #1: Strategy Distribution Shifts by Context
 
 ![Strategy ratio by scenario](./final_results/plots/eval_eda_Strategy_Ratio_by_Scenario.png)
 
@@ -83,7 +93,7 @@ Moderate quantitative shifts alone weakly reorient **categorical** strategy choi
 
 ---
 
-## SLIDE 6 — Finding #2: Structural Separation of Strategic Contexts
+## SLIDE 7 — Finding #2: Structural Separation of Strategic Contexts
 
 ![PCA of strategy ratios](./final_results/plots/eval_eda_PCA_of_Strategy_Ratios_2D_Vectorized_Analysis.png)
 
@@ -103,7 +113,7 @@ Moderate quantitative shifts alone weakly reorient **categorical** strategy choi
 
 ---
 
-## SLIDE 7 — Finding #3: Brand Framing Amplifies Contextual Sensitivity
+## SLIDE 8 — Finding #3: Brand Framing Amplifies Contextual Sensitivity
 
 ![Generic vs. Specific Δ by scenario](./final_results/plots/eval_Generic_and_Specific_Δ_by_Scenario.png)
 
@@ -119,7 +129,7 @@ Moderate quantitative shifts alone weakly reorient **categorical** strategy choi
 
 ---
 
-## SLIDE 8 — Finding #4: Rationales Shift When the Strategy Choice Is Identical
+## SLIDE 9 — Finding #4: Rationales Shift When the Strategy Choice Is Identical
 
 ![Rationale permutation global distribution](./final_results/plots/eval_rationale_perm_global_distribution.png)
 
@@ -138,7 +148,7 @@ The **what** can match while the **why** is framed differently.
 
 ---
 
-## SLIDE 9 — Finding #5: Five Behavioral Axes
+## SLIDE 10 — Finding #5: Five Behavioral Axes
 
 | Axis | Measures | Formula |
 |------|----------|---------|
@@ -152,7 +162,7 @@ FR, CR, NS, DS ∈ [0, 1]; EFI ∈ (0, 1]. **Radar:** per-axis scaling for displ
 
 ---
 
-## SLIDE 10 — Finding #5 (continued): Profiling Radar & Temperature
+## SLIDE 11 — Finding #5 (continued): Profiling Radar & Temperature
 
 ![Model profile radar](./final_results/plots/eval_model_profile_radar.png)
 
@@ -173,7 +183,7 @@ Choose **model** and **temperature** together: a strong low-T profile need not c
 
 ---
 
-## SLIDE 11 — Scenario-Level Heterogeneity
+## SLIDE 12 — Scenario-Level Heterogeneity
 
 ![Scenario × model overview at T=0.0](./final_results/plots/eval_scenario_model_overview_FR_CR_DS__T0.png)
 
@@ -191,7 +201,7 @@ Aggregate scores can **hide** local failure modes—audit **scenario × framing 
 
 ---
 
-## SLIDE 12 — Practical Implications for R&D Management
+## SLIDE 13 — Practical Implications for R&D Management
 
 | Challenge | Recommendation |
 |-----------|----------------|
@@ -205,7 +215,7 @@ Aggregate scores can **hide** local failure modes—audit **scenario × framing 
 
 ---
 
-## SLIDE 13 — Discussion: Questions for Editors
+## SLIDE 14 — Discussion: Questions for Editors
 
 | Area | Questions |
 |------|-----------|
