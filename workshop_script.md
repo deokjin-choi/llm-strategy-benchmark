@@ -116,7 +116,7 @@ Even when the chosen strategy matches across frames, the **rationale language** 
 - Higher scores indicate stronger performance on the corresponding behavioral axis.
 
 **Script**
-To compare models, we define five behavioral axes. FR is framing robustness. CR is context responsiveness, meaning sensitivity to semantic context. NS is numerical sensitivity, DS is decision stability across repeated runs, and EFI is explanatory framing invariance when the choice is fixed. Framing robustness is one minus average Jensen–Shannon divergence across generic and specific runs; the others follow the definitions on the slide. Across these axes, a higher score means stronger performance on that behavior.
+To compare models, we define five behavioral axes. FR is framing robustness, meaning whether the choice changes when the firm name changes. CR is context responsiveness, meaning sensitivity to semantic context. NS is numerical sensitivity, DS is decision stability across repeated runs, and EFI is explanatory framing invariance when the choice is fixed. Framing robustness is one minus average Jensen–Shannon divergence across generic and specific runs; the others follow the definitions on the slide. Across these axes, a higher score means stronger performance on that behavior.
 
 ---
 
@@ -130,7 +130,7 @@ To compare models, we define five behavioral axes. FR is framing robustness. CR 
 - Three **personas**: Qwen stable; DeepSeek precise but brittle at high T; Llama adaptive.
 
 **Script**
-From here, I use these behavioral axes to discuss the model-level implications. One note before reading the radar: radar plots rescale the spokes for readability, while the numeric table uses raw scores. The full raw grid is available in the backup if needed. Temperature is not a cosmetic knob. Moving from zero to point seven changes the radar shape in structured ways: lower temperature usually means higher decision stability and context responsiveness in this panel, but it may reinforce narrow habits. Higher temperature often raises framing robustness and rationale invariance while hurting repeatability. Among the five models, Qwen shows very stable choice concentration; DeepSeek is extremely strong at zero temperature but its context responsiveness and stability collapse when sampling noise increases; Llama leads context responsiveness at low T and rationale invariance at high T. The practical point: **pick model and temperature together**.
+From here, I use these behavioral axes to discuss the model-level implications. In this figure, the radar values are min-max rescaled for readability. One noticeable pattern is the role of temperature. Moving from zero to point seven changes the radar shape in structured ways: lower temperature usually means higher decision stability and context responsiveness in this panel, but it may reinforce narrow habits. Higher temperature often raises framing robustness and rationale invariance while hurting repeatability. Among the five models, Qwen shows very stable choice concentration; DeepSeek is extremely strong at zero temperature but its context responsiveness and stability collapse when sampling noise increases; Llama leads context responsiveness at low T and rationale invariance at high T. The practical point: **pick model and temperature together**.
 
 ---
 
@@ -141,7 +141,7 @@ From here, I use these behavioral axes to discuss the model-level implications. 
 - Three **priority** cells: worst FR, highest CR, worst DS—**aggregate profiles hide this**.
 
 **Script**
-Aggregate scores smooth over trouble. In these heatmaps, certain scenario-by-model cells stand out: for example, extreme framing sensitivity in the mass-market production scenario for Qwen, extreme context sensitivity in the Model X launch cell, and very low repeatability for DeepSeek in the early Roadster scenario. If you only look at average radar scores, you miss where the system fails. Deployment checks should probe **specific** scenario, framing, and context-load combinations.
+Aggregate scores smooth over trouble. In these heatmaps, certain scenario-by-model cells stand out: for example, framing robustness breaks down in the mass-market production scenario for Qwen, context sensitivity is very high in the Model X launch cell, and repeatability is very low for DeepSeek in the early Roadster scenario. If you only look at average radar scores, you miss where the system fails. So model evaluation should examine **specific** scenario, framing, and context-load combinations.
 
 ---
 
@@ -153,7 +153,7 @@ Aggregate scores smooth over trouble. In these heatmaps, certain scenario-by-mod
 - Read **rationales**; treat outputs as **exploratory**.
 
 **Script**
-For R&D practice: anonymize firm names when you want less narrative priming; always compare generic and specific prompts when brand matters. Stress-test optimistic versus conservative framings. Do not assume that tweaking percentages will change the strategic class the model recommends—check explicitly. Record temperature and model ID like any other experimental parameter. Compare explanations, not only labels. Overall, treat LLM strategy output as input to human judgment, not a prescription.
+For R&D managers, this study suggests several practical checks. When brand reputation may influence the answer, compare anonymous and named-firm prompts. Because models may react strongly to optimistic information, test both optimistic and conservative framings before relying on a recommendation. Do not assume that small changes in numbers, such as market size or cost figures, will change the model’s strategic choice; check this explicitly. Record temperature and model ID like any other experimental parameter. Compare explanations, not only labels. Overall, treat LLM strategy output as input to human judgment, not a prescription.
 
 ---
 
