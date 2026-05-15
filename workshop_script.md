@@ -71,7 +71,7 @@ The LLM is then instructed to choose a single strategy from seven options and pr
 - **Numbers alone** barely move the distribution—**semantics** dominate.
 
 **Script**
-Now I will turn to the main findings. First, LLMs do not rely on a single default strategy. Strategy selection varies systematically across contextual conditions. Opportunity-focused contexts increase leadership-oriented strategies. Unfavorable constraints induce more Niche Focus and Fast Follower strategies. Pure numerical perturbations have minimal effect. This suggests that semantic context, not numeric noise, drives strategic shifts.
+Now I will turn to the main findings. First, LLMs do not rely on a single default strategy. In the base scenarios, Niche Focus is the most frequent choice, followed by Technology Leadership. But strategy selection varies systematically across contextual conditions. Opportunity-focused contexts increase leadership-oriented strategies. Unfavorable constraints induce more Niche Focus and Fast Follower strategies. Pure numerical perturbations have minimal effect. This suggests that semantic context, not numeric noise, drives strategic shifts.
 
 ---
 
