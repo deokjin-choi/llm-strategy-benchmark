@@ -141,7 +141,7 @@ From here, I use these behavioral axes to discuss the model-level implications. 
 - Three **priority** cells: worst FR, highest CR, worst DS—**aggregate profiles hide this**.
 
 **Script**
-Aggregate scores smooth over trouble. In these heatmaps, certain scenario-by-model cells stand out: for example, framing robustness breaks down in the mass-market production scenario for Qwen, context sensitivity is very high in the Model X launch cell, and repeatability is very low for DeepSeek in the early Roadster scenario. If you only look at average radar scores, you miss where the system fails. So model evaluation should examine **specific** scenario, framing, and context-load combinations.
+Aggregate scores smooth over trouble. In these heatmaps, certain scenario-by-model cells stand out: for example, framing robustness breaks down in the mass-market production scenario for Qwen, context sensitivity is very high in the Model X launch cell, and repeatability is very low for DeepSeek in the early Roadster scenario. If managers only look at average radar scores, they miss where the model fails. In practice, evaluation should probe **specific** combinations of model, decoding temperature, and scenario—including framing and how heavy the context load is.
 
 ---
 
