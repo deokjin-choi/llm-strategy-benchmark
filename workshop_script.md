@@ -71,7 +71,7 @@ The LLM is then instructed to choose a single strategy from seven options and pr
 - **Numbers alone** barely move the distribution—**semantics** dominate.
 
 **Script**
-Now I will turn to the main findings. First, LLMs do not rely on a single default strategy. In the base scenarios, Niche Focus is the most frequent choice, followed by Technology Leadership. But strategy selection varies systematically across contextual conditions. Opportunity-focused contexts increase leadership-oriented strategies. Unfavorable constraints induce more Niche Focus and Fast Follower strategies. Pure numerical perturbations have minimal effect. This suggests that semantic context, not numeric noise, drives strategic shifts.
+Now I will turn to the main findings. The heatmap on this slide shows the strategy selection ratio across all five conditions. LLMs do not rely on a single default strategy. In the base scenarios, Niche Focus is the most frequent choice, followed by Technology Leadership. But strategy selection varies systematically across contextual conditions. Opportunity-focused contexts increase leadership-oriented strategies. Unfavorable constraints induce more Niche Focus and Fast Follower strategies. Pure numerical perturbations have minimal effect. This suggests that semantic context, not numeric noise, drives strategic shifts.
 
 ---
 
@@ -82,7 +82,7 @@ Now I will turn to the main findings. First, LLMs do not rely on a single defaul
 - Table: **entropy** drops under opportunity; **JSD** shows asymmetric sensitivity; **Spearman = 1** for numbers.
 
 **Script**
-Second, these shifts are not random. A PCA analysis shows clear structural separation between opportunity-focused scenarios and unfavorable-constraint scenarios. Meanwhile, base scenarios and randomized-number variants cluster closely together. This indicates that LLMs distinguish different strategic environments, especially qualitative information changes. The table on the slide shows that LLMs react much more strongly to positive framing than to negative facts. While opportunity scenarios lead to a large shift from the baseline and lower entropy, changing the actual numbers has almost no effect. Therefore, practitioners should be careful, as LLMs may overreact to optimistic information and fail to notice critical changes in numerical data.
+These shifts are not random. On the left, the strategy selection distributions from the previous slide are projected into 2D via PCA. On the right, the table shows the entropy of its strategy distribution, the JSD relative to the base scenario, and the Spearman correlation with the base. A PCA analysis shows clear structural separation between opportunity-focused scenarios and unfavorable-constraint scenarios. Meanwhile, base scenarios and randomized-number variants cluster closely together. This indicates that LLMs distinguish different strategic environments, especially qualitative information changes. The table on the slide shows that LLMs react much more strongly to positive framing than to negative facts. While opportunity scenarios lead to a large shift from the baseline and lower entropy, changing the actual numbers has almost no effect. Therefore, managers should be careful, as LLMs may overreact to optimistic information and fail to notice critical changes in numerical data.
 
 ---
 
@@ -93,7 +93,7 @@ Second, these shifts are not random. A PCA analysis shows clear structural separ
 - **Associative anchoring**: pioneer vs survivor narratives.
 
 **Script**
-Third, brand framing affects decision sensitivity, not absolute rankings. When Tesla is explicitly named, LLMs become more defensive under unfavorable conditions and more aggressive under opportunity-focused contexts. In other words, brand framing amplifies reactions to context, rather than dictating a specific strategy. We interpret this as associative anchoring: the model connects the brand name with familiar narratives, such as an innovative pioneer or a survivor under severe manufacturing and financial pressure. Depending on the context, one of these narratives becomes more salient and pushes the model’s decision in that direction.
+Brand framing affects decision sensitivity, not absolute rankings. This slide shows how strategy selection shifts compared to the base scenario across the four contextual variants, with the generic and Tesla-named frames — blue bars represent the generic frame, and orange bars represent the Tesla-specific frame. When Tesla is explicitly named, LLMs become more defensive under unfavorable conditions and more aggressive under opportunity-focused contexts. In other words, brand framing amplifies reactions to context, rather than dictating a specific strategy. We interpret this as associative anchoring: the model connects the brand name with familiar narratives, such as an innovative pioneer or a survivor under severe manufacturing and financial pressure. Depending on the context, one of these narratives becomes more salient and pushes the model’s decision in that direction.
 
 ---
 
@@ -105,7 +105,7 @@ Third, brand framing affects decision sensitivity, not absolute rankings. When T
 - Keyword table: **vision** vs **operations** language.
 
 **Script**
-Even when the chosen strategy matches across frames, the **rationale language** still changes. We compare same-choice rationales, mask brand and number words, and extract keywords that are more associated with each frame. The pattern is clear: specific-frame language is more mission- and vision-led, while generic-frame language stresses constraints and feasibility. For governance, the issue is not only what the model chooses, but what kind of reasoning it makes salient.
+Even when the chosen strategy matches across frames, the **rationale language** still changes. This slide shows a keyword table comparing the language used in specific and generic-frame rationales. We compare same-choice rationales, mask brand and number words, and extract keywords that are more associated with each frame. The pattern is clear: specific-frame language is more mission- and vision-led, while generic-frame language stresses constraints and feasibility. For governance, the issue is not only what the model chooses, but what kind of reasoning it makes salient.
 
 ---
 
@@ -130,7 +130,7 @@ To compare models, we define five behavioral axes. FR is framing robustness, mea
 - Three **personas**: Qwen stable; DeepSeek precise but brittle at high T; Llama adaptive.
 
 **Script**
-From here, I use these behavioral axes to discuss the model-level implications. In this figure, the radar values are min-max rescaled for readability. One noticeable pattern is the role of temperature. Moving from zero to point seven changes the radar shape in structured ways: lower temperature usually means higher decision stability and context responsiveness in this panel, but it may reinforce narrow habits. Higher temperature often raises framing robustness and rationale invariance while hurting repeatability. Among the five models, Qwen shows very stable choice concentration; DeepSeek is extremely strong at zero temperature but its context responsiveness and stability collapse when sampling noise increases; Llama leads context responsiveness at low T and rationale invariance at high T. The practical point: **pick model and temperature together**.
+From here, I use these behavioral axes to discuss the model-level implications. In each radar chart, the solid blue line represents temperature zero, and the dashed red line represents temperature zero point seven. One noticeable pattern is the role of temperature. Moving from zero to point seven changes the radar shape in structured ways: lower temperature usually means higher decision stability and context responsiveness in this panel, but it may reinforce narrow habits. Higher temperature often raises framing robustness and rationale invariance while hurting repeatability. Among the five models, Qwen shows very stable choice concentration; DeepSeek is extremely strong at zero temperature but its context responsiveness and stability collapse when sampling noise increases; Llama leads context responsiveness at low T and rationale invariance at high T. The practical point: **pick model and temperature together**.
 
 ---
 
@@ -141,7 +141,7 @@ From here, I use these behavioral axes to discuss the model-level implications. 
 - Three **priority** cells: worst FR, highest CR, worst DS—**aggregate profiles hide this**.
 
 **Script**
-Aggregate scores smooth over trouble. In these heatmaps, certain scenario-by-model cells stand out: for example, framing robustness breaks down in the mass-market production scenario for Qwen, context sensitivity is very high in the Model X launch cell, and repeatability is very low for DeepSeek in the early Roadster scenario. If managers only look at average radar scores, they miss where the model fails. In practice, evaluation should probe **specific** combinations of model, decoding temperature, and scenario—including framing and how heavy the context load is.
+Aggregate scores smooth over trouble. This slide shows a set of heatmaps where each cell represents a specific model–scenario combination, colored by behavioral axis score. In these heatmaps, certain cells stand out: for example, framing robustness breaks down in the model 3 mass-market production scenario for Qwen, context responsiveness is very high in the Model X launch cell, and decision stability is very low for DeepSeek in the Roadster launch scenario. If managers only look at average radar scores, they miss where the model fails. In practice, evaluation should examine combinations of model, decoding temperature, and scenario.
 
 ---
 
