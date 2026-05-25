@@ -56,9 +56,9 @@ Second, the difference between semantic information and numerical changes. And t
 - Point at the figure: **pipeline** from scenarios to distributions.
 
 **Script**
-Let me briefly explain the methodology. If you look at the figure on the left, the experiment follows this pipeline. We construct six base scenarios grounded in Tesla’s historical development. Then we added different contextual conditions, such as opportunity-focused information, negative constraints, and numerical changes within a twenty percent range. Importantly, the main strategic problem stayed the same. Next, the model had to choose one strategy from seven predefined options and provide breif rationles.
+Let me briefly explain the methodology. If you look at the figure on the left, the experiment followed this pipeline. We constructed six base scenarios grounded in Tesla’s historical development. Each base scenario represented a fixed strategic dilemma; for example, in the Model 3 case, the firm had to decide how to scale production rapidly while maintaining quality and public trust. Then, we made different contextual variants, such as an opportunity-focused scenario, an unfavorable constraints scenario, and a numerical perturbation scenario within a 20% range. Importantly, the main strategic problem stayed the same. Next, the model had to choose one strategy from seven predefined options and provide brief rationales.
 
-We tested five open-source LLMs, used two temperature settings, and repeated each condition 30 times. We also added a framing layer. In some cases, the company was described anonymously. In other cases, it was explicitly described as Tesla. This allowed us to test whether brand identity changes strategic decisions.
+We tested five open-source LLMs, used two temperature settings, and repeated each condition 30 times. We also added a framing layer. In some cases, it was kept anonymous. In other cases, it was explicitly named as 'Tesla'. This allowed us to test whether brand identity changes strategic decisions.
 
 ---
 
