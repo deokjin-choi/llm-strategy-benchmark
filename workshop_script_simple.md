@@ -20,7 +20,7 @@ Good morning. Thank you for the opportunity to present my work. My name is Deokj
 - Roadmap: motivation, prior work and gap, method, findings, implications.
 
 **Script**
-Before going into the details, let me briefly show the structure of the talk. I will start with the motivation: how LLMs are entering R&D workflows. Then I will discuss prior work and the research gap, explain the methodology, present the key findings, and close with implications for R&D management.
+This talk has five parts. First, I’ll explain why this topic matters. Then I’ll briefly discuss the research gap and the methodology. After that, I’ll present the main findings and the implications for R&D management.
 
 ---
 
@@ -31,7 +31,7 @@ Before going into the details, let me briefly show the structure of the talk. I 
 - Gap preview: we care about **stability of strategic stance**, not only task accuracy.
 
 **Script**
-LLMs are increasingly used in R&D and innovation management tasks—such as technology assessment, competitive analysis, and strategic planning. In practice, LLMs are no longer used only to summarize information. They are increasingly asked to recommend strategic directions under uncertainty. However, most existing evaluation studies focus on accuracy, coherence, or task performance, such as factual Q&A tests or instruction-following benchmarks. What we still do not understand well is this: Do LLMs make stable strategic judgments, or do their decisions shift when context or framing changes?
+LLMs are increasingly used in R&D and innovation management tasks—such as technology assessment, competitive analysis, and strategic planning. In practice, LLMs are no longer used only to summarize information. They are  asked to recommend strategic directions under uncertainty. However, most existing evaluation studies focus on accuracy, coherence, or task performance, such as factual Q&A tests. What we still do not understand well is this: Do LLMs make stable strategic judgments, or do their decisions shift when context or framing changes?
 
 ---
 
@@ -44,7 +44,8 @@ LLMs are increasingly used in R&D and innovation management tasks—such as tech
 - Close with the **research question** cleanly.
 
 **Script**
-Prior work clusters into four areas: operational decision support, reliability and safety such as hallucination risk, knowledge-grounded systems such as retrieval-grounded answers, and richer reasoning benchmarks. Each improves how we use LLMs, but they rarely ask: How sensitive are LLMs’ strategic decisions to context and framing? Our gaps are framing robustness, narrative-versus-number sensitivity, and operational reliability under different temperature settings. In this study, we shift evaluation from correctness to decision sensitivity.
+Prior work clusters into four areas: operational decision support, reliability and safety such as hallucination risk, knowledge-grounded systems such as retrieval-grounded answers, and richer reasoning benchmarks. Each improves how we use LLMs, but they rarely ask: How sensitive are LLMs’ strategic decisions to context and framing? This study focuses on that question. Especially, we examine three things: First, the effect of framing.
+Second, the difference between semantic information and numerical changes. And third, the effect of temperature settings.
 
 ---
 
@@ -55,11 +56,9 @@ Prior work clusters into four areas: operational decision support, reliability a
 - Point at the figure: **pipeline** from scenarios to distributions.
 
 **Script**
-Let me briefly explain the experimental design. We construct six base scenarios grounded in Tesla’s historical development, from EV market pioneer to industry leader. These scenarios are based on Schilling’s textbook on technology and innovation management. Each base scenario represents a fixed strategic dilemma; for example, in the Model 3 case, the firm must decide how to scale production rapidly while maintaining quality, financial stability, and public trust.
+Let me briefly explain the methodology. If you look at the figure on the left, the experiment follows this pipeline. We construct six base scenarios grounded in Tesla’s historical development. Then we added different contextual conditions, such as opportunity-focused information, negative constraints, and numerical changes within a twenty percent range. Importantly, the main strategic problem stayed the same. Next, the model had to choose one strategy from seven predefined options and provide breif rationles.
 
-On top of that, we introduce four contextual variants: competitive_dynamics adds competitive pressure, count_fact introduces unfavorable constraints, opp_focus highlights positive opportunity signals, and randomized_numbers changes numerical values without changing the meaning. The main problem stays the same; only the surrounding contextual information, such as technology, market, and regulation, is automatically added or removed.
-
-The LLM is then instructed to choose a single strategy from seven options and provide a brief rationale. We evaluate five open-source LLMs, use two decoding settings, and repeat each configuration 30 times for robustness. In addition to this pipeline, we apply framing layer. Each scenario is shown either as an anonymous firm or as Tesla. This allows us to test whether brand identity itself affects the model’s strategic choice. The slide figure summarizes that pipeline.
+We tested five open-source LLMs, used two temperature settings, and repeated each condition 30 times. We also added a framing layer. In some cases, the company was described anonymously. In other cases, it was explicitly described as Tesla. This allowed us to test whether brand identity changes strategic decisions.
 
 ---
 
@@ -93,7 +92,7 @@ These shifts are not random. On the left, the strategy selection distributions f
 - **Associative anchoring**: pioneer vs survivor narratives.
 
 **Script**
-Brand framing affects decision sensitivity, not absolute rankings. This slide shows how strategy selection shifts compared to the base scenario across the four contextual variants, with the generic and Tesla-named frames — blue bars represent the generic frame, and orange bars represent the Tesla-specific frame. When Tesla is explicitly named, LLMs become more defensive under unfavorable conditions and more aggressive under opportunity-focused contexts. In other words, brand framing amplifies reactions to context, rather than dictating a specific strategy. We interpret this as associative anchoring: the model connects the brand name with familiar narratives, such as an innovative pioneer or a survivor under severe manufacturing and financial pressure. Depending on the context, one of these narratives becomes more salient and pushes the model’s decision in that direction.
+Brand framing affects decision sensitivity, not absolute rankings. This slide shows how strategy selection shifts compared to the base scenario across the four contextual variants. Blue bars represent the generic frame, and orange bars represent the Tesla-specific frame. When Tesla is explicitly named, LLMs become more defensive under unfavorable conditions and more aggressive under opportunity-focused contexts. In other words, brand framing amplifies reactions to context. We interpret this as associative anchoring: the model connects the brand name with familiar narratives, such as an innovative pioneer or a survivor under severe manufacturing and financial pressure. Depending on the context, one of these narratives becomes more salient and pushes the model’s decision in that direction.
 
 ---
 
@@ -105,7 +104,7 @@ Brand framing affects decision sensitivity, not absolute rankings. This slide sh
 - Keyword table: **vision** vs **operations** language.
 
 **Script**
-Even when the chosen strategy matches across frames, the **rationale language** still changes. This slide shows a keyword table comparing the language used in specific and generic-frame rationales. We compare same-choice rationales, mask brand and number words, and extract keywords that are more associated with each frame. The pattern is clear: specific-frame language is more mission- and vision-led, while generic-frame language stresses constraints and feasibility. For governance, the issue is not only what the model chooses, but what kind of reasoning it makes salient.
+Even when the chosen strategy matches across frames, the **rationale language** still changes. This slide shows a keyword table comparing the language used in specific and generic-frame rationales. We collect same-choice rationales, mask brand and number words, and extract keywords that are more associated with each frame. The pattern is clear: specific-frame language is more mission- and vision-led, while generic-frame language stresses constraints and feasibility. For governance, the issue is not only what the model chooses, but what kind of reasoning it makes salient.
 
 ---
 
@@ -130,7 +129,7 @@ To compare models, we define five behavioral axes. FR is framing robustness, mea
 - Three **personas**: Qwen stable; DeepSeek precise but brittle at high T; Llama adaptive.
 
 **Script**
-From here, I use these behavioral axes to discuss the model-level implications. In each radar chart, the blue line represents temperature zero, and the dashed red line represents temperature zero point seven. Moving from zero to point seven changes the radar shape in structured ways: lower temperature usually means higher decision stability and context responsiveness in this panel. Higher temperature often raises framing robustness and EFI while hurting decision stability. Among the five models, Qwen shows very stable choice concentration; DeepSeek is extremely strong at zero temperature but its context responsiveness and stability collapse when sampling noise increases; Llama leads context responsiveness at low T and rationale invariance at high T. The practical point: **pick model and temperature together**.
+From here, I use these behavioral axes. In each radar chart, the blue line represents temperature zero, and the dashed red line represents temperature zero point seven. Moving from zero to point seven changes the radar shape in structured ways: lower temperature usually means higher decision stability and context responsiveness in this panel. Higher temperature often raises framing robustness and EFI while hurting decision stability. Among the five models, Qwen shows very stable choice concentration; DeepSeek is extremely strong at zero temperature but its context responsiveness and stability collapse when sampling noise increases; Llama leads context responsiveness at low T and rationale invariance at high T. The practical point: **pick model and temperature together**.
 
 ---
 
