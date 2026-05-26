@@ -1,0 +1,3 @@
+[Q/A]
+-slide 9
+We quantify lexical differences with log-odds, and validate them with a paired label-swapping permutation test.

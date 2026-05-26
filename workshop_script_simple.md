@@ -104,7 +104,7 @@ Brand framing/ affects/ decision sensitivity, /not absolute rankings. This slide
 - Keyword table: **vision** vs **operations** language.
 
 **Script**
-Even when the chosen strategy/ matches across frames, the **rationale language** /still changes. This slide shows/ a keyword table/ comparing specific and/ generic-frame rationales./ We collect/ same-choice rationales, mask brand/ and number words,/ and extract keywords/ that are/ more associated /with each frame. The pattern is clear/: specific-frame language/ is more mission-/ and/ vision-led,/ while generic-frame language/ stresses constraints /and feasibility/. For governance/, the issue/ is not only/ what the model chooses, /but what kind of reasoning /it makes salient.
+Even when the chosen strategy/ matches across frames, the **rationale language** /still changes. This slide shows/ a keyword table/ comparing specific and/ generic-frame rationales./ We collect/ same-choice rationales, mask brand/ and number words,/ and extract keywords/ that are/ more associated /with each frame. The pattern is clear/: specific-frame language/ is more mission-/ and/ vision-led,/ while generic-frame language/ stresses constraints /and feasibility/. For governance/, the issue/ is not only/ what the model chooses, /but what kind of reasoning /it makes salient. Therefore, managers should carefully/ review two types of information.
 
 ---
 
