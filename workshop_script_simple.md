@@ -140,7 +140,7 @@ From here,/ I use/ these behavioral axes./ In each radar chart,/ the blue line r
 - Three **priority** cells: worst FR, highest CR, worst DS—**aggregate profiles hide this**.
 
 **Script**
-Aggregate scores/ smooth over trouble. This slide shows that/ the same model can behave/ very differently /depending on the scenario. For example, /framing robustness/ breaks down /in the model 3 mass-market scenario/ for Qwen,/ context responsiveness/ is very high/ in the Model X launch scenario,/ and decision stability/ is very low /for DeepSeek/ in the Roadster launch scenario./ If managers /only look at/ average radar scores/, they miss /where the model fails. We also /need to examine /specific scenario-level behaviors.
+Aggregate scores/ smooth over trouble. This slide shows that/ the same model can behave/ very differently /depending on the scenario. For example, /framing robustness/ breaks down /in the model 3 mass-market scenario/ for Qwen,/ and decision stability/ is very low /for DeepSeek/ in the Roadster launch scenario./ If managers /only look at/ average radar scores/, they miss /where the model fails. We /need to examine /specific scenario-level behaviors.
 
 ---
 
@@ -152,7 +152,7 @@ Aggregate scores/ smooth over trouble. This slide shows that/ the same model can
 - Read **rationales**; treat outputs as **exploratory**.
 
 **Script**
-This study suggests /several practical implications./ First,/ companies should compare/ anonymous and /brand-specific prompts/ side by side. Second,/ because models/ may react strongly/ to optimistic information, /managers should test/ both optimistic and conservative framings./ Third,/ do not assume that/ small changes in numbers, /such as market size/ or cost figures,/ will change/ the model's strategic choice./ Finally, /compare explanations, /not only labels. /Overall,/ LLM outputs /should be treated /as exploratory support tools/, not final decision-makers.
+This study suggests /several practical implications./ First,/ compare generic and specific prompts/ side by side. Second, because models/ may over react/ to optimistic information, test/ both optimistic and conservative framings. Third, do not assume that/ small changes in numbers/, such as market size or cost figures/, will change strategic choice. Finally, compare explanations,/ not only labels. Overall, treat LLM outputs/ as exploratory support tools/, not final decision-makers.
 
 ---
 

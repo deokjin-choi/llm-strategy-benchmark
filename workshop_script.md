@@ -153,7 +153,7 @@ Aggregate scores smooth over trouble. This slide shows that the same model can b
 - Read **rationales**; treat outputs as **exploratory**.
 
 **Script**
-This study suggests several practical implications. First, companies should compare anonymous and brand-specific prompts side by side. Second, because models may react strongly to optimistic information, test both optimistic and conservative framings before relying on a recommendation. Third, do not assume that small changes in numbers, such as market size or cost figures, will change the model's strategic choice. Finally, compare explanations, not only labels. Overall, LLM outputs should be treated as exploratory support tools, not final decision-makers.
+Several practical implications. First, compare generic and Specific prompts side by side. Second, because models may react strongly to optimistic information, test both optimistic and conservative framings. Third, do not assume that small changes in numbers, such as market size or cost figures, will change the model's strategic choice. Finally, compare explanations, not only labels. Overall, treat LLM outputs as exploratory support tools, not final decision-makers.
 
 ---
 
