@@ -54,7 +54,7 @@ Synthesizing these strands, three gaps remain salient for R&D management applica
 
 Before detailing each design choice, Figure 1 situates the workflow: how scenarios, framing, and context variants feed repeated closed-choice inference and yield distributions for sensitivity analysis. The figure is a roadmap for the empirical section—it explains the experimental pipeline rather than presenting a substantive empirical finding.
 
-![Figure 1](./final_results/plots/research_method.PNG)
+![Figure 1](../final_results/plots/research_method.PNG)
 
 **Figure 1. Scenario-based benchmarking framework for LLM strategic decision-making.**  
 
@@ -114,7 +114,7 @@ We evaluate five open-weight, instruction-tuned models—**Llama 3.1 8B Instruct
 
 To summarize the overall tendency of strategy choice under **context** changes versus **numeric** perturbations, we first visualize pooled strategy proportions across variants.
 
-![Figure 2](./final_results/plots/eval_eda_Strategy_Ratio_by_Scenario.png)
+![Figure 2](../final_results/plots/eval_eda_Strategy_Ratio_by_Scenario.png)
 
 **Figure 2. Strategy distribution across contextual variants.**  
 Overall, models do not converge on a single default strategy. Strategy distributions shift systematically with contextual emphasis. In base scenarios, conservative postures such as **Niche Focus** tend to be frequent, while **Technology Leadership** is secondary. Under opportunity emphasis (`opp_focus`), leadership-oriented strategies become dominant. Under unfavorable constraints (`count_fact`), models reposition defensively toward **Niche Focus** and **Fast Follower**.
@@ -125,7 +125,7 @@ In contrast, `randomized_numbers` produces minimal redistribution relative to ba
 
 Cell-wise proportions do not show whether **entire strategy profiles**—the full vector of seven archetype shares—separate or clump together across variants. **Figure 3** projects pooled profile vectors in two PCA dimensions. **Table 1** adds entropy, Jensen–Shannon divergence from baseline, and Spearman rank agreement—compact summaries of uncertainty and shift tied to the same profiles.
 
-![Figure 3](./final_results/plots/eval_eda_PCA_of_Strategy_Ratios_2D_Vectorized_Analysis.png)
+![Figure 3](../final_results/plots/eval_eda_PCA_of_Strategy_Ratios_2D_Vectorized_Analysis.png)
 
 **Figure 3. PCA of strategy ratio vectors across scenario variants.**  
 Opportunity-focused and constraint-focused contexts separate, while base and numeric-perturbation conditions cluster closely.
@@ -152,7 +152,7 @@ Three patterns matter for R&D management usage:
 
 **Firm-identity framing** (anonymous vs. naming Tesla) may push models toward a stable bias or mainly **intensify** whatever strategic cue the prompt already emphasizes. **Figure 4** compares Generic and Specific runs as **deltas from each variant’s own baseline**, so we can see whether naming steers choices uniformly or tracks the surrounding context.
 
-![Figure 4](./final_results/plots/eval_Generic_and_Specific_Δ_by_Scenario.png)
+![Figure 4](../final_results/plots/eval_Generic_and_Specific_Δ_by_Scenario.png)
 
 **Figure 4. Effect of firm-identity framing on strategy shifts (delta from base).**  
 Firm naming amplifies context-driven shifts rather than imposing a single fixed directional bias.
@@ -210,7 +210,7 @@ $$EFD_{raw}(m, \tau) = \frac{1}{|\mathcal{V}|}\sum_{w\in\mathcal{V}} \left|\Delt
 
 Figure 5 applies these scores in a compact panel view so temperature and model can be compared on the same five spokes.
 
-![Figure 5](./final_results/plots/eval_model_profile_radar.png)
+![Figure 5](../final_results/plots/eval_model_profile_radar.png)
 
 **Figure 5. Five-axis profiling radar (one panel per model).**  
 Spokes use **display-only per-axis min–max scaling** over the ten evaluated $(m,\tau)$ configurations (five models × $T \in \{0.0, 0.7\}$) so that compressed axes (notably CR and NS) remain visually comparable; **solid** = $T=0.0$, **dashed** = $T=0.7$. The figure is for pattern comparison; **absolute axis values** are provided in Table 3 (Appendix).
@@ -227,11 +227,11 @@ Across the panel, raising temperature from **$T=0.0$** to **$T=0.7$** often incr
 
 Model-level aggregates (§4.5) provide a useful benchmark but often average away critical local failures—specific "cells" where framing robustness collapses, context sensitivity spikes, or repeatability breaks down. We therefore map choice-level constructs (FR, CR, DS) onto the full scenario × model grid
 
-![Figure 6](./final_results/plots/eval_scenario_model_overview_FR_CR_DS__T0.png)
+![Figure 6](../final_results/plots/eval_scenario_model_overview_FR_CR_DS__T0.png)
 
 **Figure 6. Scenario × model heatmaps of framing robustness, context responsiveness, and decision stability (T = 0.0).**
 
-![Figure 7](./final_results/plots/eval_scenario_model_overview_FR_CR_DS__T0.7.png)
+![Figure 7](../final_results/plots/eval_scenario_model_overview_FR_CR_DS__T0.7.png)
 
 **Figure 7. Scenario × model heatmaps of framing robustness, context responsiveness, and decision stability (T = 0.7).**
 

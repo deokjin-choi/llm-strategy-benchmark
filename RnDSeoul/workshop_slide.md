@@ -65,7 +65,7 @@ How stable are LLM **strategic judgments**—over established strategy archetype
 
 ## SLIDE 5 — Methodology Overview
 
-![Research method](./final_results/plots/research_method.PNG)
+![Research method](../final_results/plots/research_method.PNG)
 
 - **6 base scenarios** (Tesla historical phases: Founder, Roadster, Model S, Model X, Model 3, Energy infrastructure)  
 - **2 framing conditions:** Generic (anonymous firm) vs. Specific (Tesla identified)  
@@ -78,7 +78,7 @@ How stable are LLM **strategic judgments**—over established strategy archetype
 
 ## SLIDE 6 — Finding #1: Strategy Distribution Shifts by Context
 
-![Strategy ratio by scenario](./final_results/plots/eval_eda_Strategy_Ratio_by_Scenario.png)
+![Strategy ratio by scenario](../final_results/plots/eval_eda_Strategy_Ratio_by_Scenario.png)
 
 **LLMs do not converge on a single default strategy—choices shift systematically with context.**
 
@@ -95,7 +95,7 @@ Moderate quantitative shifts alone weakly reorient **categorical** strategy choi
 
 ## SLIDE 7 — Finding #2: Structural Separation of Strategic Contexts
 
-![PCA of strategy ratios](./final_results/plots/eval_eda_PCA_of_Strategy_Ratios_2D_Vectorized_Analysis.png)
+![PCA of strategy ratios](../final_results/plots/eval_eda_PCA_of_Strategy_Ratios_2D_Vectorized_Analysis.png)
 
 **Models distinguish qualitatively different strategic environments; base and numeric-perturbation conditions cluster together.**
 
@@ -115,7 +115,7 @@ Moderate quantitative shifts alone weakly reorient **categorical** strategy choi
 
 ## SLIDE 8 — Finding #3: Brand Framing Amplifies Contextual Sensitivity
 
-![Generic vs. Specific Δ by scenario](./final_results/plots/eval_Generic_and_Specific_Δ_by_Scenario.png)
+![Generic vs. Specific Δ by scenario](../final_results/plots/eval_Generic_and_Specific_Δ_by_Scenario.png)
 
 **Brand identity does not push a single fixed strategy—it amplifies the direction the context already suggests.**
 
@@ -131,7 +131,7 @@ Moderate quantitative shifts alone weakly reorient **categorical** strategy choi
 
 ## SLIDE 9 — Finding #4: Rationales Shift When the Strategy Choice Is Identical
 
-![Rationale permutation global distribution](./final_results/plots/eval_rationale_perm_global_distribution.png)
+![Rationale permutation global distribution](../final_results/plots/eval_rationale_perm_global_distribution.png)
 
 **The explanation changes with framing—not only the decision.**
 
@@ -164,7 +164,7 @@ FR, CR, NS, DS ∈ [0, 1]; EFI ∈ (0, 1]. **Radar:** per-axis scaling for displ
 
 ## SLIDE 11 — Finding #5 (continued): Profiling Radar & Temperature
 
-![Model profile radar](./final_results/plots/eval_model_profile_radar.png)
+![Model profile radar](../final_results/plots/eval_model_profile_radar.png)
 
 **Decoding temperature**
 
@@ -185,9 +185,9 @@ Choose **model** and **temperature** together: a strong low-T profile need not c
 
 ## SLIDE 12 — Scenario-Level Heterogeneity
 
-![Scenario × model overview at T=0.0](./final_results/plots/eval_scenario_model_overview_FR_CR_DS__T0.png)
+![Scenario × model overview at T=0.0](../final_results/plots/eval_scenario_model_overview_FR_CR_DS__T0.png)
 
-![Scenario × model overview at T=0.7](./final_results/plots/eval_scenario_model_overview_FR_CR_DS__T0.7.png)
+![Scenario × model overview at T=0.7](../final_results/plots/eval_scenario_model_overview_FR_CR_DS__T0.7.png)
 
 **Priority cells** (mean scaled heatmap score, **T = 0.0** and **T = 0.7** averaged)
 
@@ -295,7 +295,7 @@ Facing an explosive increase in pre-orders, a company must rapidly scale product
 
 **Observed choices (base context, pooled)**  
 
-![FR deep dive Qwen Model 3](./final_results/plots/eval_deepdive_fr_framing_stacks__Qwen2.5-14B__5_model_3_mass_market.png)
+![FR deep dive Qwen Model 3](../final_results/plots/eval_deepdive_fr_framing_stacks__Qwen2.5-14B__5_model_3_mass_market.png)
 
 | Framing | Strategy | Rationale keywords (examples) |
 |---------|----------|--------------------------------|
@@ -326,9 +326,9 @@ A company aims to enter the growing SUV market. However, a complex product desig
 
 **Observed choices (by framing × semantic variant)**  
 
-![CR deep dive strategy stacks](./final_results/plots/eval_deepdive_cr_strategy_stacks_framing__Qwen2.5-14B__4_model_x_launch.png)
+![CR deep dive strategy stacks](../final_results/plots/eval_deepdive_cr_strategy_stacks_framing__Qwen2.5-14B__4_model_x_launch.png)
 
-![CR deep dive JSD by variant](./final_results/plots/eval_deepdive_cr_jsd_by_variant__Qwen2.5-14B__4_model_x_launch.png)
+![CR deep dive JSD by variant](../final_results/plots/eval_deepdive_cr_jsd_by_variant__Qwen2.5-14B__4_model_x_launch.png)
 
 | Context variant | Effect |
 |-----------------|--------|
@@ -360,9 +360,9 @@ A company must manage conflicting goals of product quality and timely delivery d
 
 **Observed choices (by context load / Num Context tiers)**  
 
-![DS deep dive strategy stacks](./final_results/plots/eval_deepdive_ds_strategy_stacks_numcontext_framing__deepseek-llm-7b-chat__2_roadster_launch.png)
+![DS deep dive strategy stacks](../final_results/plots/eval_deepdive_ds_strategy_stacks_numcontext_framing__deepseek-llm-7b-chat__2_roadster_launch.png)
 
-![DS deep dive entropy](./final_results/plots/eval_deepdive_ds_entropy_numcontext_box__deepseek-llm-7b-chat__2_roadster_launch.png)
+![DS deep dive entropy](../final_results/plots/eval_deepdive_ds_entropy_numcontext_box__deepseek-llm-7b-chat__2_roadster_launch.png)
 
 | Context load | Behavior |
 |--------------|----------|

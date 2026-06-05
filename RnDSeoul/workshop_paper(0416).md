@@ -43,7 +43,7 @@ To address these limitations, this study reconceptualizes LLMs as conditional st
 **3\. Methodology**  
 This study adopts a scenario-based benchmarking framework to analyze LLMs make strategic decisions under varying contextual and framing conditions. As illustrated in Fig. 1, the methodology consists of five sequential stages. First, we define six historically grounded base strategic scenarios, each representing a fixed strategic dilemma. Across all scenarios, problem framing is systematically controlled through two conditions: a Generic framing (anonymous firm) and a Specific framing (explicitly identified as Tesla), which are applied consistently throughout the experiment. Second, each base scenario is expanded using four contextual variants that selectively modify competitive, factual, opportunity-related, or numerical information. Third, contextual information related to technology, market competition, policy, and financial conditions is automatically injected or removed while preserving the same core problem structure. Fourth, LLMs are required to select a single strategy from a predefined set of strategic options and to articulate a brief rationale for their choice. Finally, each scenario configuration is evaluated through repeated inference under different decoding settings, and the resulting outputs are aggregated and analyzed to assess decision sensitivity across conditions.
 
-![Research Method](./final_results/plots/research_method.PNG)
+![Research Method](../final_results/plots/research_method.PNG)
 
 Fig 1\. Scenario-based benchmarking framework for LLM strategic decision-making  
 **3.1 Base Strategic Scenarios and Problem Framing**  
@@ -115,12 +115,12 @@ This section synthesizes the central empirical patterns observed across repeated
 **5.1 Strategy Distribution Across Contextual Variants**  
 Fig. 2 shows that the distribution of selected strategies varies across repeated runs, indicating that LLMs do not rely on a single dominant default strategy but respond systematically to contextual framing. In the base scenario, conservative positioning such as Niche Focus is most frequent, while Technology Leadership remains secondary. When opportunity signals are emphasized (opp\_focus), leadership-oriented strategies surge and become dominant. In contrast, unfavorable factual constraints (count\_fact) lead to defensive repositioning toward niche or follower strategies. Notably, numerical perturbations alone (randomized\_numbers) produce minimal change, indicating that semantic context rather than numeric variation drives strategic reorientation. This pattern carries important implications for strategic decision-making. In many real-world R\&D and innovation contexts, proportional numerical changes—such as shifts in cost, market size, or resource availability—often serve as triggers for strategic adjustment. However, the observed stability under numerical perturbations suggests that LLMs may treat moderate quantitative variation as secondary when the overall semantic structure of the scenario remains unchanged. This does not imply an inability to process numbers, but it suggests that, within narrative-based prompts, quantitative signals may exert less influence on categorical strategic choice than semantic framing. For practitioners, this indicates that LLM-generated recommendations in magnitude-sensitive environments should be interpreted with attention to how numerical thresholds are presented and whether they meaningfully alter the underlying decision narrative.
 
-![Strategy_Ratio](./final_results/plots/eval_eda_Strategy_Ratio_by_Scenario.png)  
+![Strategy_Ratio](../final_results/plots/eval_eda_Strategy_Ratio_by_Scenario.png)  
 Fig. 2\. Strategy distribution across contextual scenario variants.
 
 **5.2 Structural Separation and Statistical Dynamics of Strategic Contexts**  
 Fig 3\. examines whether these distributional shifts reflect meaningful structural differences. Principal component analysis reveals clear separation between opportunity-focused and unfavorable scenarios, while the base and randomized-number variants cluster closely together. This suggests that LLMs internally distinguish qualitatively different strategic environments rather than responding to random noise or minor input changes.  
-![Strategy_Ratio_PCA](./final_results/plots/eval_eda_PCA_of_Strategy_Ratios_2D_Vectorized_Analysis.png)  
+![Strategy_Ratio_PCA](../final_results/plots/eval_eda_PCA_of_Strategy_Ratios_2D_Vectorized_Analysis.png)  
 Fig. 3\. PCA-based structural separation of strategy distributions across scenarios.
 
 
@@ -147,7 +147,7 @@ These metrics validate the PCA results: the structural separation observed in Fi
 **5.3 Decision Sensitivity to Brand Framing**  
 Fig. 4 presents the change in strategy selection relative to the base scenario (Delta from Base). Two patterns emerge. First, brand framing does not uniformly shift preferences toward a single strategy; rather, it amplifies reactions to the prevailing contextual cues. Under opportunity-focused conditions (opp_focus), specific (Tesla) framing magnifies the shift toward Technology Leadership. Under constraint-focused conditions (count_fact), it magnifies the shift toward Fast Follower and Niche Focus. Second, numerical perturbations alone (randomized_numbers) produce minimal delta regardless of framing, reinforcing the primacy of semantic cues over quantitative signals in driving brand-sensitive responses.
 
-![Strategy_DELTA_BY_FRAME](./final_results/plots/eval_Generic_and_Specific_Δ_by_Scenario.png)  
+![Strategy_DELTA_BY_FRAME](../final_results/plots/eval_Generic_and_Specific_Δ_by_Scenario.png)  
 Fig. 4\. Effects of brand framing on strategy selection sensitivity (delta from base).
 
  One plausible account is "Associative Anchoring": when a specific brand identity is introduced, the model's behavior appears consistent with drawing upon pre-trained narrative associations tied to that brand's market persona. In the case of Tesla, these associations include both an "innovative pioneer" narrative (tied to its EV market creation) and a "resilient survivor" narrative (tied to near-bankruptcy from manufacturing struggles). Importantly, the absence of a consistent directional bias—framing amplifies whatever direction the context already suggests—indicates that brand identity functions as a sensitivity modulator rather than a fixed strategic preference. These patterns suggest that, under the tested conditions, LLMs may prioritize narrative consistency with brand identity over strictly neutral data evaluation. These findings suggest that for objective strategic foresight, practitioners should consider anonymizing firm identities to mitigate the influence of pre-trained brand associations on LLM-generated strategic recommendations. 
@@ -158,7 +158,7 @@ This section examines whether explanatory rationales shift under brand exposure 
 
 The analysis confirms significant lexical divergence between conditions. The observed global separation (mean |Δlog-odds| = 0.323) exceeded the permutation baseline (0.223, p = 0.003), indicating systematic differences beyond random variation.
 
-![Rationale_DIFF_BY_FRAME](./final_results/plots/eval_rationale_perm_global_distribution.png)
+![Rationale_DIFF_BY_FRAME](../final_results/plots/eval_rationale_perm_global_distribution.png)
 
 Table X summarizes the semantic structure of this divergence. Specific (Tesla) rationales were characterized by high-agency, vision-oriented language—mission lead, leader capturing, world transition—emphasizing proactive market positioning. Generic rationales were characterized by constraint-oriented, operational language—rushed quality, delaying significant, make feasible—emphasizing execution risks and resource management.
 
@@ -258,7 +258,7 @@ The five-axis profiling reveals that LLM behavior in strategic R&D settings is n
 
 By comparing individual footprints against the aggregate Average Profile, we identify three key dimensions of strategic behavior:
 
-![Model_PROFILE](./final_results/plots/eval_model_profile_radar.png)
+![Model_PROFILE](../final_results/plots/eval_model_profile_radar.png)
 
 Figure X. Profiling radar (five-axis): one polar panel per model; solid vs. dashed curves are $T=0.0$ vs. $0.7$ on spokes built from Table 7 after global per-axis min–max.
 
@@ -306,10 +306,10 @@ Sections 5.5.2–5.5.3 compared models using aggregate profiling scores. While u
 
 Fig. 5 and Fig. 6 summarize scenario × model heatmaps at $T=0.0$ and $T=0.7$. Each panel is independently min–max scaled to $[0,1]$.
 
-![Scenario_model_overview_T0](./final_results/plots/eval_scenario_model_overview_FR_CR_DS__T0.png)  
+![Scenario_model_overview_T0](../final_results/plots/eval_scenario_model_overview_FR_CR_DS__T0.png)  
 Fig. 5. Scenario × model heatmaps for $FR_{\mathrm{scenario}}$, $CR_{\mathrm{scenario}}$, and $DS_{\mathrm{scenario}}$ at $T=0.0$.
 
-![Scenario_model_overview_T07](./final_results/plots/eval_scenario_model_overview_FR_CR_DS__T0.7.png)  
+![Scenario_model_overview_T07](../final_results/plots/eval_scenario_model_overview_FR_CR_DS__T0.7.png)  
 Fig. 6. Scenario × model heatmaps for $FR_{\mathrm{scenario}}$, $CR_{\mathrm{scenario}}$, and $DS_{\mathrm{scenario}}$ at $T=0.7$.
 
 **(1) Heterogeneous local behavior.**  
@@ -352,7 +352,7 @@ Table 3. Priority scenario–model cells.
 
 To isolate firm-identity framing effects from semantic context variation, Fig. 7 reports pooled strategy choices under the neutral base context variant only.
 
-![FR_deepdive_Qwen_Model3](./final_results/plots/eval_deepdive_fr_framing_stacks__Qwen2.5-14B__5_model_3_mass_market.png)  
+![FR_deepdive_Qwen_Model3](../final_results/plots/eval_deepdive_fr_framing_stacks__Qwen2.5-14B__5_model_3_mass_market.png)  
 Fig. 7. FR deep-dive for 5_model_3_mass_market.
 
 A paired permutation test on brand-masked token statistics (480 paired runs per cell) confirms that the lexical gap between Generic and Specific rationales is systematic, not a decoding artifact (global separation statistic with p ≈ 0.005 at both T=0.0 and T=0.7).
@@ -390,11 +390,11 @@ Table 5. Strategy menu for 4_model_x_launch.
 
 semantic manipulation is implemented only through the context_variant axis—base, competitive_dynamics, count_fact, and opp_focus—on top of Generic vs. Specific firm-identity framing.
 
-![CR_deepdive_Qwen_ModelX_framing](./final_results/plots/eval_deepdive_cr_strategy_stacks_framing__Qwen2.5-14B__4_model_x_launch.png)  
+![CR_deepdive_Qwen_ModelX_framing](../final_results/plots/eval_deepdive_cr_strategy_stacks_framing__Qwen2.5-14B__4_model_x_launch.png)  
 Fig. 8. CR deep-dive for 4_model_x_launch.
 
 The following plot reports the corresponding mean JSD from base for each semantic variant (CR cue strength), shown separately for $T=0.0$ and $T=0.7$.
-![CR_deepdive_Qwen_ModelX_jsd](./final_results/plots/eval_deepdive_cr_jsd_by_variant__Qwen2.5-14B__4_model_x_launch.png)  
+![CR_deepdive_Qwen_ModelX_jsd](../final_results/plots/eval_deepdive_cr_jsd_by_variant__Qwen2.5-14B__4_model_x_launch.png)  
 
 
 **(4) Inferred rationale and implications (core).** In this CR-max cell, semantic variants do not merely “nudge” choices: they reallocate mass across distinct strategic families. Generic framing remains dominated by Open Innovation, while Specific framing becomes more dispersed—competitive_dynamics lifts Fast Follower, and opp_focus uniquely activates Technology Leadership—consistent with a variant-dependent gating of “innovation-forward” recommendations. Quantitatively, the JSD between Base and each variant confirms a clear hierarchy across temperatures: opp_focus produces the largest shift, followed by competitive_dynamics, while count_fact yields minimal movement. The implication is that the model shows asymmetric cue sensitivity: it over-responds to positive opportunities and competitive pressure (activating new strategic modes) while under-responding to unfavorable factual constraints. Practitioners should therefore verify whether their model discounts critical but negative information, not just whether it reacts to salient cues.
@@ -421,10 +421,10 @@ Table 6. Strategy menu for 2_roadster_launch.
 
 **(3) Observed choices.**
 
-![DS_deepdive_DeepSeek_Roadster_stacks_numctx](./final_results/plots/eval_deepdive_ds_strategy_stacks_numcontext_framing__deepseek-llm-7b-chat__2_roadster_launch.png)  
+![DS_deepdive_DeepSeek_Roadster_stacks_numctx](../final_results/plots/eval_deepdive_ds_strategy_stacks_numcontext_framing__deepseek-llm-7b-chat__2_roadster_launch.png)  
 Fig. 10. Strategy mix across Num Context tiers.
 
-![DS_deepdive_DeepSeek_Roadster_entropy](./final_results/plots/eval_deepdive_ds_entropy_numcontext_box__deepseek-llm-7b-chat__2_roadster_launch.png)  
+![DS_deepdive_DeepSeek_Roadster_entropy](../final_results/plots/eval_deepdive_ds_entropy_numcontext_box__deepseek-llm-7b-chat__2_roadster_launch.png)  
 Fig. 9. Repeat-level entropy across Num Context tiers.
 
 **(4) Inferred rationale and implications (core).** Strategy mass shifts as context blocks accumulate: near-vacuous prompts favor **Open Innovation**, partial context pivots toward **Retrenchment**/**Niche Focus**, and full context yields a **Fast Follower vs. Retrenchment** split, with $T{=}0.7$ producing more diffuse mixtures. This pattern is consistent with the scenario’s explicitly conflicting pressures (speed vs. quality vs. cash vs. supply reliability), where adding non-redundant facts need not select a single modal strategy under sampling. For deployment, DS-type cells indicate that reliability auditing should vary **Num Context** and **framing**, not temperature alone.
