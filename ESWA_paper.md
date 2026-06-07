@@ -217,13 +217,13 @@ $$NS(m, \\tau) \= \\mathbb{E}\_{s,\\phi} \\left\[ JSD\\left( P(m, \\tau, s, \\te
 
 4.Decision Stability (DS)  
 DS measures how predictable a model’s strategic choices are across repeated runs under fixed conditions. In the current implementation, DS is defined using the concentration of the empirical choice distribution across repeats (normalized entropy).  
-Let (\\mathcal{A}) be the set of strategies and let a fixed condition be (c=(s,n,v,\\phi)), where (s) is the scenario, (n) is Num Context, (v) is the context variant, and (\\phi\\in{\\text{Generic},\\text{Specific}}) is framing. For model (m) at temperature (\\tau), define the empirical distribution over repeats:
+Let $\mathcal{A}$ be the set of strategies and let a fixed condition be $c=(s,n,v,\phi)$, where $s$ is the scenario, $n$ is Num Context, $v$ is the context variant, and $\phi\in\{\text{Generic},\text{Specific}\}$ is framing. For model $m$ at temperature $\tau$, define the empirical distribution over repeats:
 
-\[ p\_{c}^{m,\\tau}(a)=\\frac{1}{R}\\sum\_{r=1}^{R}\\mathbf{1}\\big\[\\text{strategy}\_{r}=a\\big\],\\quad a\\in\\mathcal{A}. \]
+$$p_{c}^{m,\tau}(a)=\frac{1}{R}\sum_{r=1}^{R}\mathbf{1}\big[\text{strategy}_{r}=a\big],\quad a\in\mathcal{A}.$$
 
 Then
 
-\[ DS(m,\\tau)=\\mathbb{E}{c}\\left\[1-\\frac{H\!\\left(p{c}^{m,\\tau}\\right)}{\\log\_{2}|\\mathcal{A}|}\\right\], \\qquad H(p)=-\\sum\_{a\\in\\mathcal{A}}p(a)\\log\_{2}p(a). \]
+$$DS(m,\tau)=\mathbb{E}_{c}\left[1-\frac{H\!\left(p_{c}^{m,\tau}\right)}{\log_{2}|\mathcal{A}|}\right], \qquad H(p)=-\sum_{a\in\mathcal{A}}p(a)\log_{2}p(a).$$
 
 * Interpretation: A higher DS indicates that repeated runs under the same condition concentrate on fewer strategies (higher predictability). DS approaches 1 when the model consistently selects the same strategy, and approaches 0 when choices are spread uniformly across strategies.
 
