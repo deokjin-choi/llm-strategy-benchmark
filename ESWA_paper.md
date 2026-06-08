@@ -203,7 +203,7 @@ $$FR(m, \tau) = 1 - \mathbb{E}_{s,n,v} \left[ JSD\left( P(m, \tau, s, n, v, \tex
 2\. Context Responsiveness (CR)  
 CR evaluates how effectively a model updates its strategic distribution when provided with high-value semantic context (e.g., competitive dynamics, factual constraints, or opportunity focus) compared to a baseline scenario.
 
-$$CR(m, \tau) = \mathbb{E}_{s,n,\phi,\,v \in V_{sem}} \left[ JSD\left( P(m, \tau, s, n, \text{Base}, \phi), P(m, \tau, s, n, v, \phi) \right) \right]$$
+$$CR(m,\tau)=E_{s,n,\phi,\,v\in V_{sem}}\Big[JSD\big(P(m,\tau,s,n,\mathrm{Base},\phi),P(m,\tau,s,n,v,\phi)\big)\Big]$$
 where $V_{sem}$ is the semantic-variant set `{competitive_dynamics, count_fact, opp_focus}`.
 
 * Interpretation: A higher CR reflects the model's "strategic intelligence"—its capacity to parse and integrate task-relevant nuances into its decision-making process.
