@@ -572,14 +572,16 @@ Wang, P., Hu, Q., Mei, Q., Wang, S., Yang, Y., Guo, D., Liu, X., Hu, W. and Chen
 Xiong, X., Cai, H., Yu, H., Shen, B. and Hu, P. (2025). DR-RAG: domain-rule-based retrieval-augmented generation for aviation digital model design. Advanced Engineering Informatics, 68, 103688.
 
 **Appendix A. Data Validation and Categorical Compliance**  
-This appendix reports instruction-following validity checks for the categorical strategy-selection task. The models demonstrated stable instruction-following performance, with an overall compliance rate of approximately 89%. Table A1 summarizes the compliance and non-compliance (error) rates across the five experimental scenarios.
+This appendix reports instruction-following validity checks for the categorical strategy-selection task. The models demonstrated stable instruction-following performance, with an overall compliance rate of approximately 97.3% (396,961 valid responses out of 408,000 total inferences). Table A1 summarizes the compliance and non-compliance (error) rates across the five context variants.
 
 | Scenario | Compliance Rate (Valid) | Non-compliance Rate (Error) |
 | :---- | :---- | :---- |
-| Competitive | 91.49% | 8.51% (Lowest) |
-| Count Fact | 89.96% | 10.04% |
-| Randomized | 89.47% | 10.53% |
-| Opportunity | 87.23% | 12.77% |
-| Base | 85.95% | 14.05% (Highest) |
+| Opportunity | 97.57% | 2.43% (Lowest) |
+| Randomized | 97.49% | 2.51% |
+| Competitive | 97.30% | 2.70% |
+| Base | 97.16% | 2.84% |
+| Count Fact | 96.96% | 3.04% (Highest) |
 
-As indicated in Table A1, the non-compliance rate remained within a relatively narrow range, with a maximum deviation of only 5.54 percentage points between the Competitive (8.51%) and Base (14.05%) scenarios. The slightly higher error rate in the Base scenario suggests that in the absence of explicit contextual anchors, LLMs may exhibit a greater tendency for 'strategic drift'—providing descriptive justifications instead of selecting a single category. However, the overall consistency across all scenarios confirms that the models are capable of operating within a constrained decision-making framework. To ensure a rigorous comparison of strategic patterns, subsequent analyses in Section 5 are conducted using the normalized distribution of valid strategic choices, excluding the out-of-set responses.
+Table A1. Categorical compliance and error rates by context variant.
+
+As indicated in Table A1, the non-compliance rate remained within a narrow band, with a maximum deviation of only 0.61 percentage points between the lowest-error (Opportunity, 2.43%) and highest-error (Count Fact, 3.04%) variants. This uniformity indicates that categorical compliance was largely insensitive to contextual framing. The overall consistency across all variants confirms that the models are capable of operating within a constrained decision-making framework. To ensure a rigorous comparison of strategic patterns, subsequent analyses in Section 5 are conducted using the normalized distribution of valid strategic choices, excluding the out-of-set responses.
