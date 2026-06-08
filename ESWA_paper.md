@@ -228,10 +228,9 @@ $$DS(m,\tau)=\mathbb{E}_{c}\left[1-\frac{H\left(p_{c}^{m,\tau}\right)}{\log_{2}|
 * Interpretation: A higher DS indicates that repeated runs under the same condition concentrate on fewer strategies (higher predictability). DS approaches 1 when the model consistently selects the same strategy, and approaches 0 when choices are spread uniformly across strategies.
 
 5\. Explanatory Framing Invariance (EFI)  
-EFI measures the stylistic and lexical stability of the model's rationales. For cases where the strategic choice remains the same, we calculate the lexical divergence ($EFD\_{raw}$) between frames and map it to an invariance score.
+EFI measures the stylistic and lexical stability of the model's rationales when the chosen strategy is held identical across framings. We align rationale pairs on $(s,m,\tau,n,a)$: scenario $s$, model $m$, temperature $\tau$, context load $n$, and strategy label $a$ (the Standard Mapping in the logs), so that only the firm-identity framing differs within a pair. The Generic- and Specific-side texts are brand-masked and tokenized into an $n$-gram vocabulary $\mathcal{V}$ (bigrams in the reported runs). Let $c_w^{\phi}$ be the pooled count of term $w$ across all aligned pairs in frame $\phi \in \{\mathrm{Generic},\mathrm{Specific}\}$. Using a smoothed log-odds construction (pooled counts with a term-wise backing-off denominator shared across $w$), we define a vocabulary-level contrast $\Delta_w$ between the two frames. The raw divergence and the invariance score are then
 
-$$EFI(m, \\tau) \= \\frac{1}{1 \+ EFD\_{raw}(m, \\tau)}$$  
-where $EFD\_{raw}$ is the mean absolute log-odds ratio across the vocabulary $\\mathcal{V}$ for the generated rationales.
+$$EFD_{raw}(m, \tau) = \frac{1}{|\mathcal{V}|}\sum_{w\in\mathcal{V}} \left|\Delta_{w}\right|, \qquad EFI(m, \tau) = \frac{1}{1 + EFD_{raw}(m, \tau)}$$
 
 * Interpretation: A higher EFI signals that the model's underlying logic remains consistent across different frames, avoiding "post-hoc" justifications tailored to specific branding.
 
