@@ -332,7 +332,7 @@ Table 5. Priority scenario–model cells.
 
 ---
 
-### (A) FR Case: Brand Identity Changes Strategic Preference (5_model_3_mass_market)
+**(A) FR Case: Brand Identity Changes Strategic Preference (5_model_3_mass_market)**
 
 **(1) Problem (scenario text)**: Facing an explosive increase in pre-orders, a company must rapidly scale production while maintaining product quality, financial stability, and public trust. The core challenge is to overcome production bottlenecks and reduce costs without sacrificing the brand’s reputation in the mass market.
 
@@ -370,7 +370,7 @@ As shown in Fig. 8, Generic framing leads the model to favor Open Innovation (ex
 
 ---
 
-### (B) CR Case: Semantic Cues Reallocate Strategy Mix (4_model_x_launch)
+**(B) CR Case: Semantic Cues Reallocate Strategy Mix (4_model_x_launch)**
 
 **(1) Problem (scenario text)**: A company aims to enter the growing SUV market. However, a complex product design creates high production difficulty and quality risks, which could severely damage the brand's reputation despite a lack of direct competition.
 
@@ -403,7 +403,7 @@ Fig. 10. CR cue strength: mean JSD from base per semantic variant (T=0.0 vs T=0.
 
 ---
 
-### (C) DS Case: Context Load Shapes Stability (2_roadster_launch)
+**(C) DS Case: Context Load Shapes Stability (2_roadster_launch)**
 
 **(1) Problem (scenario text)**: A company must manage conflicting goals of product quality and timely delivery during its initial product launch. With significant pre-orders already placed, the company faces severe cash flow issues and supply chain delays, jeopardizing brand trust and future investment if not handled correctly.
 
