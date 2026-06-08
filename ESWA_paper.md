@@ -287,7 +287,7 @@ Overall, the results suggest a trade-off between precision-oriented stability an
 
 #### (2) Distinct Model Personas
 
-The models do not respond uniformly to temperature changes. Instead, they display distinct behavioral profiles. The vignettes below use **the same per-axis min–max scaling as the radar** (each spoke is $[0,1]$ **relative to the ten** $(m,\tau)$ **rows in Table 4**), not the raw axis entries in Table 4 itself.
+The models do not respond uniformly to temperature changes. Instead, they display distinct behavioral profiles. The vignettes below use **the same per-axis min–max scaling as the radar** (each spoke is $[0,1]$ **relative to the ten** $(m,\tau)$ **rows in Table 4**)
 
 1. **Stable Functional Type**  
    Qwen2.5-14B keeps a **high DS** spoke at both temperatures (**≈0.91 → 0.79** on that scaled axis), i.e., strong run-to-run concentration *within this panel*. **FR** and **EFI** remain **inward** on the radar—e.g., **FR** near the hub at $T=0.0$—so the model is less “brand-blind” and less rationale-invariant than some peers in this display. The footprint matches **functional persistence** over maximal framing or stylistic invariance.
@@ -299,17 +299,6 @@ The models do not respond uniformly to temperature changes. Instead, they displa
    Meta-Llama-3.1-8B reaches the **CR** spoke maximum at $T=0.0$ (**1.00** under this normalization)—the strongest semantic redistribution in the panel when sampling is greedy. **EFI** is **highest at $T=0.7$** (**1.00** scaled), with **FR** also **high (≈0.92)**, consistent with **situational responsiveness** paired with **stronger cross-frame rationale consistency** when temperature is raised—in this **relative** view only.
 
 These differences imply that model selection should consider not only average performance, but also response stability under different decoding environments.
-
-#### (3) Practical Deployment Implications
-
-The findings indicate that temperature should be selected according to task objectives rather than treated as a universal default parameter.
-
-- **Low temperature ($T=0.0$)** is suitable for factual verification, rule-based workflows, structured extraction, and cases where repeatability is critical.
-- **Mid temperature ($T=0.3$–$0.5$)** may be suitable when organizations require both stable outputs and moderate reasoning flexibility.
-- **Higher temperature ($T=0.7$)** is more suitable for exploratory analysis, alternative generation, or tasks where reducing framing bias is important.
-
-More broadly, organizations should view temperature as a controllable strategic lever. Performance may improve when decoding settings are aligned with task goals such as precision, robustness, or objectivity, rather than relying on a single fixed configuration for all use cases.
-
 
 ### 5.5.4 Scenario-Resolved Behavior: Localizing FR, CR, and DS Across the Experimental Grid
 
@@ -361,7 +350,7 @@ Table 5. Priority scenario–model cells.
 
 Table 6. Strategy menu for 5_model_3_mass_market.
 
-**(3) Observed choices.**
+**(3) Observed behavior**
 
 To isolate firm-identity framing effects from semantic context variation, Fig. 8 reports pooled strategy choices under the neutral base context variant only.
 
@@ -377,7 +366,7 @@ A paired permutation test on brand-masked token statistics (480 paired runs per 
 
 Table 7. FR case summary
 
-**(4) Inferred rationale and implications (core).** The same baseline narrative yields a large reallocation from Open Innovation (Generic) to Maintain (Specific), stable across temperatures in this priority cell. This aligns with a framing-conditional explanatory shift (partner-led scaling vs. controlled ramp-up), and a paired permutation test confirms that the lexical gap between framings is systematic. These results suggest that firm naming can change both the “default” strategic choice and its accompanying rationale, even when embedded facts are held fixed. For deployment, FR-type cells motivate side-by-side Generic/Specific prompting as a minimum audit.
+As shown in Fig. 8, Generic framing leads the model to favor Open Innovation (external partnerships for scaling). Under Specific (Tesla) framing, it shifts to Maintain (gradual expansion with quality focus). This divergence from the aggregate trend in Section 5.3 (where brand framing boosted Technology Leadership) illustrates that local effects can deviate substantially from averages—highlighting the need for scenario-level auditing.
 
 ---
 
@@ -399,7 +388,7 @@ Table 7. FR case summary
 
 Table 8. Strategy menu for 4_model_x_launch.
 
-**(3) Observed choices.**
+**(3) Observed behavior.**
 
 semantic manipulation is implemented only through the context_variant axis—base, competitive_dynamics, count_fact, and opp_focus—on top of Generic vs. Specific firm-identity framing.
 
@@ -410,7 +399,7 @@ The following plot reports the corresponding mean JSD from base for each semanti
 ![CR_deepdive_Qwen_ModelX_jsd](final_results/plots/eval_deepdive_cr_jsd_by_variant__Qwen2.5-14B__4_model_x_launch.png)  
 Fig. 10. CR cue strength: mean JSD from base per semantic variant (T=0.0 vs T=0.7).
 
-**(4) Inferred rationale and implications (core).** In this CR-max cell, semantic variants do not merely “nudge” choices: they reallocate mass across distinct strategic families. Generic framing remains dominated by Open Innovation, while Specific framing becomes more dispersed—competitive_dynamics lifts Fast Follower, and opp_focus uniquely activates Technology Leadership—consistent with a variant-dependent gating of “innovation-forward” recommendations. Quantitatively, the JSD between Base and each variant confirms a clear hierarchy across temperatures: opp_focus produces the largest shift, followed by competitive_dynamics, while count_fact yields minimal movement. The implication is that the model shows asymmetric cue sensitivity: it over-responds to positive opportunities and competitive pressure (activating new strategic modes) while under-responding to unfavorable factual constraints. Practitioners should therefore verify whether their model discounts critical but negative information, not just whether it reacts to salient cues.
+ Fig. 9 shows that Generic framing maintains Open Innovation as the dominant choice across all context variants. Under Specific framing, opp_focus uniquely activates Technology Leadership, while competitive_dynamics lifts Fast Follower. The JSD hierarchy in the accompanying plot (opp_focus > competitive_dynamics > count_fact) confirms asymmetric cue sensitivity: positive opportunities drive larger reallocations than unfavorable constraints.
 
 ---
 
@@ -432,7 +421,7 @@ Fig. 10. CR cue strength: mean JSD from base per semantic variant (T=0.0 vs T=0.
 
 Table 9. Strategy menu for 2_roadster_launch.
 
-**(3) Observed choices.**
+**(3) Observed behavior.**
 
 ![DS_deepdive_DeepSeek_Roadster_stacks_numctx](final_results/plots/eval_deepdive_ds_strategy_stacks_numcontext_framing__deepseek-llm-7b-chat__2_roadster_launch.png)  
 Fig. 11. Strategy mix across Num Context tiers.
@@ -440,7 +429,7 @@ Fig. 11. Strategy mix across Num Context tiers.
 ![DS_deepdive_DeepSeek_Roadster_entropy](final_results/plots/eval_deepdive_ds_entropy_numcontext_box__deepseek-llm-7b-chat__2_roadster_launch.png)  
 Fig. 12. Repeat-level entropy across Num Context tiers.
 
-**(4) Inferred rationale and implications (core).** Strategy mass shifts as context blocks accumulate: near-vacuous prompts favor **Open Innovation**, partial context pivots toward **Retrenchment**/**Niche Focus**, and full context yields a **Fast Follower vs. Retrenchment** split, with $T{=}0.7$ producing more diffuse mixtures. This pattern is consistent with the scenario’s explicitly conflicting pressures (speed vs. quality vs. cash vs. supply reliability), where adding non-redundant facts need not select a single modal strategy under sampling. For deployment, DS-type cells indicate that reliability auditing should vary **Num Context** and **framing**, not temperature alone.
+As shown in Figs. 11–12, strategy mass shifts systematically as context blocks accumulate: near-vacuous prompts favor Open Innovation; partial context pivots toward Retrenchment/Niche Focus; full context yields a Fast Follower vs. Retrenchment split. This demonstrates that decision stability depends not only on temperature but also on the amount of contextual information provided.
 
 **6\. Discussion and Implications**  
 The findings indicate that LLMs adjust strategic recommendations systematically in response to contextual cues, reflecting an ability to distinguish between qualitatively different strategic environments rather than producing rigid outputs.
