@@ -191,33 +191,33 @@ This section extends the scenario-level findings by profiling model-specific beh
 To support this comparative analysis, we formalize the quantitative framework into five specific profiling axes. These axes transition from general descriptive metrics to formal behavioral indicators, allowing for a multidimensional assessment of how each model navigates the trade-offs between contextual responsiveness and framing stability.
 
 5.5.1 Profiling Axes  
-To quantify model behavior, we define a strategy distribution $P(m, \\tau, s, v, \\phi)$ for a given model $m$, temperature $\\tau$, scenario $s$, context variant $v$, and framing type $\\phi \\in \\{\\text{Generic, Specific}\\}$. For decision-level metrics (1–4), we employ the Jensen-Shannon Divergence ($JSD$) to measure the statistical distance between distributions. For the explanation-level metric (5), we measure lexical divergence in the generated rationales.
+To quantify model behavior, we define a strategy distribution $P(m, \tau, s, n, v, \phi)$ for a given model $m$, temperature $\tau$, scenario $s$, context load $n$ (Num Context), context variant $v$, and framing type $\phi \in \{\text{Generic, Specific}\}$. For decision-level metrics (1–4), we employ the Jensen–Shannon Divergence ($JSD$) to measure the statistical distance between distributions. For the explanation-level metric (5), we measure lexical divergence in the generated rationales.
 
 1\. Framing Robustness (FR)  
 FR measures the model's ability to maintain a consistent strategy regardless of arbitrary branding changes (Generic vs. Specific) under identical underlying conditions.
 
-$$FR(m, \\tau) \= 1 \- \\mathbb{E}\_{s,v} \\left\[ JSD\\left( P(m, \\tau, s, v, \\text{Generic}), P(m, \\tau, s, v, \\text{Specific}) \\right) \\right\]$$
+$$FR(m, \tau) = 1 - \mathbb{E}_{s,n,v} \left[ JSD\left( P(m, \tau, s, n, v, \text{Generic}), P(m, \tau, s, n, v, \text{Specific}) \right) \right]$$
 
 * Interpretation: A higher FR indicates that the model's strategic choice is invariant to framing manipulations, focusing on the core problem rather than brand-level biases.
 
 2\. Context Responsiveness (CR)  
 CR evaluates how effectively a model updates its strategic distribution when provided with high-value semantic context (e.g., competitive dynamics, factual constraints, or opportunity focus) compared to a baseline scenario.
 
-$$CR(m, \\tau) \= \\mathbb{E}\_{s,\\phi,v \\in \\mathcal{V}\_{sem}} \\left\[ JSD\\left( P(m, \\tau, s, \\text{Base}, \\phi), P(m, \\tau, s, v, \\phi) \\right) \\right\]$$  
-where $\\mathcal{V}\_{sem} \= \\{\\text{competitive\\\_dynamics, count\\\_fact, opp\\\_focus}\\}$.
+$$CR(m, \tau) = \mathbb{E}_{s,n,\phi,\,v \in \mathcal{V}_{sem}} \left[ JSD\left( P(m, \tau, s, n, \text{Base}, \phi), P(m, \tau, s, n, v, \phi) \right) \right]$$  
+where $\mathcal{V}_{sem} = \{\text{competitive\_dynamics, count\_fact, opp\_focus}\}$.
 
 * Interpretation: A higher CR reflects the model's "strategic intelligence"—its capacity to parse and integrate task-relevant nuances into its decision-making process.
 
 3\. Numerical Sensitivity (NS)  
 NS quantifies the degree to which a model's decisions are driven by quantitative data. It measures the distributional shift when numerical inputs are intentionally perturbed (Randomized condition) relative to the baseline.
 
-$$NS(m, \\tau) \= \\mathbb{E}\_{s,\\phi} \\left\[ JSD\\left( P(m, \\tau, s, \\text{Base}, \\phi), P(m, \\tau, s, \\text{Randomized}, \\phi) \\right) \\right\]$$
+$$NS(m, \tau) = \mathbb{E}_{s,n,\phi} \left[ JSD\left( P(m, \tau, s, n, \text{Base}, \phi), P(m, \tau, s, n, \text{Randomized}, \phi) \right) \right]$$
 
 * Interpretation: A higher NS indicates that the model is sensitive to quantitative shifts, suggesting a data-driven approach rather than relying solely on qualitative narratives.
 
 4.Decision Stability (DS)  
 DS measures how predictable a model’s strategic choices are across repeated runs under fixed conditions. In the current implementation, DS is defined using the concentration of the empirical choice distribution across repeats (normalized entropy).  
-Let $\mathcal{A}$ be the set of strategies and let a fixed condition be $c=(s,n,v,\phi)$, where $s$ is the scenario, $n$ is Num Context, $v$ is the context variant, and $\phi\in\{\text{Generic},\text{Specific}\}$ is framing. For model $m$ at temperature $\tau$, define the empirical distribution over repeats:
+Let $\mathcal{A}$ be the set of strategies and let a fixed condition be $c=(s,n,v,\phi)$, where $s$ is the scenario, $n$ is context load, $v$ is the context variant, and $\phi\in\{\text{Generic},\text{Specific}\}$ is framing. For model $m$ at temperature $\tau$, define the empirical distribution over repeats:
 
 $$p_{c}^{m,\tau}(a)=\frac{1}{R}\sum_{r=1}^{R}\mathbf{1}\big[\text{strategy}_{r}=a\big],\quad a\in\mathcal{A}.$$
 
