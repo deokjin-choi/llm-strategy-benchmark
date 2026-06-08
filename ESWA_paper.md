@@ -521,8 +521,6 @@ LLMs offer substantial potential as strategic decision-support tools in R&D and 
 
 Chang, Y., Wang, X., Wang, J., Wu, Y., Yang, L., Zhu, K., Chen, H., Yi, X., Wang, C. and Wang, Y. et al. (2024). A survey on evaluation of large language models. ACM Transactions on Intelligent Systems and Technology, 15(3), Article 39, pp. 1–45. 
 
-Lieberman, M.B. and Montgomery, D.B. (1988). First-mover advantages. Strategic Management Journal, 9(S1), pp. 41–58.
-
 Schilling, M.A. (2019). Strategic Management of Technological Innovation (6th ed.). New York: McGraw-Hill Education.
 
 **Appendix A. Data Validation and Categorical Compliance**  

@@ -300,7 +300,7 @@ The models do not respond uniformly to temperature changes. Instead, they displa
 
 These differences imply that model selection should consider not only average performance, but also response stability under different decoding environments.
 
-### 5.5.4 Scenario-Resolved Behavior: Localizing FR, CR, and DS Across the Experimental Grid
+5.5.4 Scenario-Resolved Behavior: Localizing FR, CR, and DS Across the Experimental Grid
 
 Sections 5.5.2–5.5.3 compared models using aggregate profiling scores. While useful for benchmarking, aggregate averages do not reveal where framing sensitivity, context adaptation, or instability emerge within the experimental grid. To address this limitation, we examine scenario-level behavior for three choice-level metrics: FR, CR, and DS.(NS and EFI are omitted here—Section 5.5 shows NS effects are minimal and EFI focuses on rationale text, not choice-level heterogeneity.)
 
@@ -540,8 +540,6 @@ Heo, S., Son, S. and Park, H. (2025). HaluCheck: explainable and verifiable auto
 Kahneman, D. (2011). Thinking, Fast and Slow. New York: Farrar, Straus and Giroux.
 
 Kong, L., Zhang, Y., Zhong, X., Fu, H., Wang, Y. and Liu, H. (2026). HaluGNN: hallucination detection in large language models using graph neural network. Expert Systems with Applications, 306, 130857.
-
-Lieberman, M.B. and Montgomery, D.B. (1988). First-mover advantages. Strategic Management Journal, 9(S1), pp. 41–58.
 
 Liu, J., Hao, W., Cheng, K., Chen, G. and Xie, X. (2026). CART: a traceable zero-shot planning framework for large language models with adaptive replanning. Knowledge-Based Systems, 336, 115189.
 
