@@ -188,7 +188,7 @@ These findings indicate that LLM-generated strategic rationales are not neutral 
 **5.5 Model-Level Behavioral Profiling and Temperature Robustness**  
 This section extends the scenario-level findings by profiling model-specific behavioral signatures under the same strategic benchmark. Rather than relying on pooled trends, we compare models as distinct strategic reasoners and evaluate whether their behavioral profiles remain stable across decoding temperatures.
 
-To support this comparative analysis, we now formalize the quantitative framework introduced in Section 4.3 into five specific profiling axes. These axes transition from general descriptive metrics to formal behavioral indicators, allowing for a multidimensional assessment of how each model navigates the trade-offs between contextual responsiveness and framing stability.
+To support this comparative analysis, we formalize the quantitative framework into five specific profiling axes. These axes transition from general descriptive metrics to formal behavioral indicators, allowing for a multidimensional assessment of how each model navigates the trade-offs between contextual responsiveness and framing stability.
 
 5.5.1 Profiling Axes  
 To quantify model behavior, we define a strategy distribution $P(m, \\tau, s, v, \\phi)$ for a given model $m$, temperature $\\tau$, scenario $s$, context variant $v$, and framing type $\\phi \\in \\{\\text{Generic, Specific}\\}$. For decision-level metrics (1–4), we employ the Jensen-Shannon Divergence ($JSD$) to measure the statistical distance between distributions. For the explanation-level metric (5), we measure lexical divergence in the generated rationales.
@@ -223,7 +223,7 @@ $$p_{c}^{m,\tau}(a)=\frac{1}{R}\sum_{r=1}^{R}\mathbf{1}\big[\text{strategy}_{r}=
 
 Then
 
-$$DS(m,\tau)=\mathbb{E}_{c}\left[1-\frac{H\!\left(p_{c}^{m,\tau}\right)}{\log_{2}|\mathcal{A}|}\right], \qquad H(p)=-\sum_{a\in\mathcal{A}}p(a)\log_{2}p(a).$$
+$$DS(m,\tau)=\mathbb{E}_{c}\left[1-\frac{H\left(p_{c}^{m,\tau}\right)}{\log_{2}|\mathcal{A}|}\right], \qquad H(p)=-\sum_{a\in\mathcal{A}}p(a)\log_{2}p(a).$$
 
 * Interpretation: A higher DS indicates that repeated runs under the same condition concentrate on fewer strategies (higher predictability). DS approaches 1 when the model consistently selects the same strategy, and approaches 0 when choices are spread uniformly across strategies.
 
