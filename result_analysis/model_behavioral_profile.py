@@ -580,6 +580,141 @@ def plot_radar_by_temperature(
     plt.close(fig)
 
 
+def plot_primary_axes_radar(
+    profile_df: pd.DataFrame,
+    save_path: str,
+):
+    """
+    Primary three-axis radar (FR, CR, DS): one polar panel per model, with each
+    decoding temperature overlaid (color + linestyle). A spare cell shows the
+    per-temperature mean profile across all models.
+
+    Each axis is min–max scaled across the ten (model, temperature) rows so the
+    triangular "fingerprint" is comparable across panels (same convention as the
+    previous five-axis radar). Absolute magnitudes remain available in the raw
+    score table.
+    """
+    os.makedirs(os.path.dirname(save_path), exist_ok=True)
+
+    metrics = [
+        "FR_framing_robustness",
+        "CR_context_responsiveness",
+        "DS_decision_stability",
+    ]
+    label_map = {
+        "FR_framing_robustness": "FR",
+        "CR_context_responsiveness": "CR",
+        "DS_decision_stability": "DS",
+    }
+    axis_labels = [label_map[m] for m in metrics]
+
+    d = profile_df.copy()
+    d["TempKey"] = d["Temperature"].round(3)
+    for m in metrics:
+        d[m + "_scaled"] = _minmax_scale(d[m])
+
+    temps = sorted([float(t) for t in d["Temperature"].dropna().unique().tolist()])
+    if len(temps) == 0:
+        return
+
+    n_axes = len(metrics)
+    angles = np.linspace(0, 2 * np.pi, n_axes, endpoint=False).tolist()
+    angles += angles[:1]
+
+    temp_linestyles = ["-", "--", "-.", ":"]
+    cmap_t = plt.get_cmap("coolwarm")
+    temp_colors = [cmap_t(0.15 + 0.7 * i / max(1, len(temps) - 1)) for i in range(len(temps))]
+
+    def _style_polar_ax(ax):
+        ax.set_theta_offset(np.pi / 2)
+        ax.set_theta_direction(-1)
+        ax.set_xticks(angles[:-1])
+        ax.set_xticklabels(axis_labels, fontsize=10, fontweight="600")
+        ax.set_ylim(0, 1)
+        ax.set_yticks([0.25, 0.5, 0.75, 1.0])
+        ax.set_yticklabels(["0.25", "0.5", "0.75", "1.0"], fontsize=7, color="#888")
+
+    def _draw(ax, scaled_vals, color, ls):
+        vals = list(scaled_vals) + [scaled_vals[0]]
+        ax.plot(angles, vals, linewidth=2.0, color=color, linestyle=ls)
+        ax.fill(angles, vals, color=color, alpha=0.14)
+
+    model_order = sorted(d["Model"].dropna().unique().tolist())
+    n_models = len(model_order)
+    ncols = min(3, max(1, n_models))
+    nrows = max(1, math.ceil((n_models + 1) / ncols))
+    fig, axes = plt.subplots(
+        nrows,
+        ncols,
+        subplot_kw={"projection": "polar"},
+        figsize=(4.2 * ncols + 0.6, 4.0 * nrows + 1.0),
+    )
+    axes_flat = np.atleast_1d(axes).ravel().tolist()
+
+    legend_handles = [
+        Line2D(
+            [0],
+            [0],
+            color=temp_colors[ti],
+            linestyle=temp_linestyles[ti % len(temp_linestyles)],
+            linewidth=2.2,
+            label=f"T = {temps[ti]:g}",
+        )
+        for ti in range(len(temps))
+    ]
+
+    for idx, model in enumerate(model_order):
+        ax = axes_flat[idx]
+        _style_polar_ax(ax)
+        ax.set_title(_short_model_name(model), y=1.14, fontsize=11, fontweight="600")
+        for ti, t in enumerate(temps):
+            tk = round(float(t), 3)
+            sub = d[(d["Model"] == model) & (d["TempKey"] == tk)]
+            if len(sub) == 0:
+                continue
+            r = sub.iloc[0]
+            scaled_vals = [float(r[m + "_scaled"]) for m in metrics]
+            _draw(ax, scaled_vals, temp_colors[ti], temp_linestyles[ti % len(temp_linestyles)])
+
+    # spare cell: per-temperature mean profile across models
+    n_slots = len(axes_flat)
+    if n_models < n_slots:
+        ax_avg = axes_flat[n_models]
+        _style_polar_ax(ax_avg)
+        ax_avg.set_title("Mean profile\n(all models)", y=1.14, fontsize=11, fontweight="600")
+        for ti, t in enumerate(temps):
+            tk = round(float(t), 3)
+            block = d[d["TempKey"] == tk]
+            if len(block) == 0:
+                continue
+            scaled_vals = [float(np.nanmean(block[m + "_scaled"].to_numpy())) for m in metrics]
+            _draw(ax_avg, scaled_vals, temp_colors[ti], temp_linestyles[ti % len(temp_linestyles)])
+        start_hide = n_models + 1
+    else:
+        start_hide = n_models
+
+    for j in range(start_hide, n_slots):
+        axes_flat[j].set_visible(False)
+
+    fig.legend(
+        handles=legend_handles,
+        loc="lower center",
+        bbox_to_anchor=(0.5, 0.02),
+        ncol=min(4, len(legend_handles)),
+        fontsize=10,
+        frameon=False,
+    )
+    fig.suptitle(
+        "Model behavioral fingerprints — primary axes FR/CR/DS\n"
+        "(per-axis min–max scaled across models and temperatures)",
+        y=0.995,
+        fontsize=13,
+    )
+    plt.subplots_adjust(top=0.86, bottom=0.12, wspace=0.40, hspace=0.55)
+    plt.savefig(save_path, dpi=300, bbox_inches="tight")
+    plt.close(fig)
+
+
 def build_temperature_delta_table(profile_df: pd.DataFrame) -> pd.DataFrame:
     """
     Build per-model temperature comparison table:
@@ -1152,10 +1287,18 @@ def run_model_profile_analysis(
     delta_df.to_csv(delta_path, index=False)
     print(f"Saved: {delta_path}")
 
-    print("Plotting radar chart...")
-    radar_path = os.path.join(plots_dir, "eval_model_profile_radar.png")
-    plot_radar_by_temperature(profile_df, radar_path, facet_by=radar_facet_by)
-    print(f"Saved: {radar_path}")
+    # --- 5-axis radar (FR/CR/NS/DS/EFI), min–max scaled. Disabled: NS/EFI are
+    #     redundant/low-variance; we now report the three primary axes (FR/CR/DS).
+    #     Re-enable by uncommenting if the five-axis view is needed again.
+    # print("Plotting radar chart (5-axis)...")
+    # radar_path = os.path.join(plots_dir, "eval_model_profile_radar.png")
+    # plot_radar_by_temperature(profile_df, radar_path, facet_by=radar_facet_by)
+    # print(f"Saved: {radar_path}")
+
+    print("Plotting primary three-axis radar (FR/CR/DS)...")
+    primary3_path = os.path.join(plots_dir, "eval_model_profile_primary3_radar.png")
+    plot_primary_axes_radar(profile_df, primary3_path)
+    print(f"Saved: {primary3_path}")
 
     # --- Localization on the experimental grid (DS, FR directionality, CR-by-scenario):
     #     run `python -m result_analysis.fr_cr_ds_localization_analysis` (or import
