@@ -33,6 +33,9 @@ Outputs:
   - final_results/summary/fr_directionality_overall_compare_by_strategy.csv  (A + B merged)
   - final_results/plots/eval_fr_directionality_bars__ALL.png                 (Method A only)
   - final_results/plots/eval_fr_directionality_bars__ALL_compare.png         (A vs B grouped)
+  - final_results/summary/fr_directionality_by_context_variant_long.csv      (interaction long)
+  - final_results/summary/fr_directionality_by_context_variant_matrix.csv   (heatmap matrix)
+  - final_results/plots/eval_fr_directionality_heatmap_by_context_variant__ALL.png
 
 Run:
   python -m result_analysis.fr_directionality_overall
@@ -50,6 +53,7 @@ import pandas as pd
 
 try:
     from result_analysis.model_behavioral_profile import (
+        CONTEXT_VARIANTS,
         FIXED_CONDITION_ID_COLS,
         load_profile_data,
         valid_strategies,
@@ -57,6 +61,7 @@ try:
     )
 except ImportError:
     from model_behavioral_profile import (
+        CONTEXT_VARIANTS,
         FIXED_CONDITION_ID_COLS,
         load_profile_data,
         valid_strategies,
@@ -173,6 +178,153 @@ def build_fr_directionality_summary_overall_pooled(df: pd.DataFrame) -> pd.DataF
     return out.sort_values(
         "mean_delta_specific_minus_generic_pooled", ascending=False
     ).reset_index(drop=True)
+
+
+def build_fr_directionality_by_variant(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Context × brand-framing interaction: Δp = p(Specific) - p(Generic) per strategy,
+    stratified by context_variant.
+
+    Uses the same condition-weighted (macro) logic as
+    `build_fr_directionality_summary_overall`, but averages Δp only within each
+    context_variant instead of pooling all variants together.
+
+    A condition is (Model, Temperature, scenario, Num Context, context_variant).
+    For each variant we compute one Δp vector per condition, then macro-average
+    across conditions in that variant.
+
+    Returns one row per (context_variant, Strategy):
+      - mean_delta_specific_minus_generic
+      - consistency_sign : fraction of conditions in that variant agreeing with mean sign
+      - n_conditions     : contributing conditions in that variant
+    """
+    cond_cols = ["Model", "Temperature", *FIXED_CONDITION_ID_COLS, "context_variant"]
+    rows: List[Dict[str, object]] = []
+
+    for variant, dv in df.groupby("context_variant", dropna=False):
+        per_cond: List[np.ndarray] = []
+        for _, g in dv.groupby(cond_cols, dropna=False):
+            gg = g[g["problem_type"] == "generic"]["Standard Mapping"]
+            ss = g[g["problem_type"] == "specific"]["Standard Mapping"]
+            if len(gg) == 0 or len(ss) == 0:
+                continue
+            pg = _strategy_distribution(gg)
+            ps = _strategy_distribution(ss)
+            per_cond.append(ps - pg)
+
+        if len(per_cond) == 0:
+            continue
+
+        D = np.vstack(per_cond)
+        mean_delta = np.nanmean(D, axis=0)
+        sign_mean = np.sign(mean_delta)
+        with np.errstate(invalid="ignore"):
+            consistency = np.nanmean(np.sign(D) == sign_mean, axis=0)
+
+        for i, strat in enumerate(valid_strategies):
+            rows.append(
+                {
+                    "context_variant": variant,
+                    "Strategy": strat,
+                    "mean_delta_specific_minus_generic": float(mean_delta[i]),
+                    "consistency_sign": float(consistency[i]),
+                    "n_conditions": int(D.shape[0]),
+                }
+            )
+
+    out = pd.DataFrame(rows)
+    if len(out) == 0:
+        return out
+
+    variant_order = {v: i for i, v in enumerate(CONTEXT_VARIANTS)}
+    out["__variant_order"] = out["context_variant"].map(variant_order)
+    strat_order = {s: i for i, s in enumerate(valid_strategies)}
+    out["__strat_order"] = out["Strategy"].map(strat_order)
+    return out.sort_values(["__variant_order", "__strat_order"]).drop(
+        columns=["__variant_order", "__strat_order"]
+    ).reset_index(drop=True)
+
+
+def build_fr_directionality_variant_matrix(
+    fr_by_variant_df: pd.DataFrame,
+) -> pd.DataFrame:
+    """
+    Pivot long `build_fr_directionality_by_variant` output to a heatmap matrix:
+    rows = context_variant, columns = Strategy.
+    """
+    if fr_by_variant_df is None or len(fr_by_variant_df) == 0:
+        return pd.DataFrame()
+
+    mat = fr_by_variant_df.pivot(
+        index="context_variant",
+        columns="Strategy",
+        values="mean_delta_specific_minus_generic",
+    )
+    row_order = [v for v in CONTEXT_VARIANTS if v in mat.index]
+    col_order = [s for s in valid_strategies if s in mat.columns]
+    return mat.reindex(index=row_order, columns=col_order)
+
+
+def plot_fr_directionality_heatmap_by_variant(
+    fr_by_variant_df: pd.DataFrame,
+    save_dir: str,
+    filename: str = "eval_fr_directionality_heatmap_by_context_variant__ALL.png",
+):
+    """
+    Heatmap of Δp (Specific − Generic) by context_variant × strategy.
+
+    Rows are context variants (base included); columns are strategies in canonical
+    order. Diverging colormap centered at zero highlights interaction patterns:
+    e.g. whether Technology Leadership gains under opp_focus are amplified by
+    brand framing relative to base.
+    """
+    os.makedirs(save_dir, exist_ok=True)
+    mat = build_fr_directionality_variant_matrix(fr_by_variant_df)
+    if mat.empty:
+        print("No per-variant directionality data to plot.")
+        return None
+
+    fig, ax = plt.subplots(figsize=(10.5, 4.8))
+    vals = mat.to_numpy(dtype=float)
+    vmax = float(np.nanmax(np.abs(vals))) if np.isfinite(vals).any() else 1.0
+    if not np.isfinite(vmax) or vmax <= 0:
+        vmax = 1.0
+
+    im = ax.imshow(vals, aspect="auto", cmap="RdBu_r", vmin=-vmax, vmax=vmax)
+    ax.set_xticks(np.arange(mat.shape[1]))
+    ax.set_xticklabels(mat.columns.tolist(), rotation=30, ha="right", fontsize=9)
+    ax.set_yticks(np.arange(mat.shape[0]))
+    ax.set_yticklabels(mat.index.tolist(), fontsize=9)
+    ax.set_xlabel("Strategy")
+    ax.set_ylabel("context_variant")
+    ax.set_title(
+        "Brand framing effect by context variant\n"
+        "Δp = p(Specific) − p(Generic), macro-averaged over conditions within each variant"
+    )
+
+    for i in range(mat.shape[0]):
+        for j in range(mat.shape[1]):
+            v = vals[i, j]
+            if np.isfinite(v):
+                txt_color = "white" if abs(v) > 0.55 * vmax else "#222"
+                ax.text(
+                    j,
+                    i,
+                    f"{v:+.2f}",
+                    ha="center",
+                    va="center",
+                    fontsize=8,
+                    color=txt_color,
+                )
+
+    cbar = fig.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
+    cbar.set_label("Δp (percentage points)", fontsize=9)
+    plt.tight_layout()
+
+    out = os.path.join(save_dir, filename)
+    plt.savefig(out, dpi=300, bbox_inches="tight")
+    plt.close(fig)
+    return out
 
 
 def build_fr_directionality_compare(df: pd.DataFrame) -> pd.DataFrame:
@@ -365,9 +517,24 @@ def run_fr_directionality_overall(
     print("Building whole-dataset FR directionality (Method B: pooled)...")
     compare_df = build_fr_directionality_compare(df)
 
+    print("Building FR directionality by context_variant (interaction slice)...")
+    fr_by_variant_df = build_fr_directionality_by_variant(df)
+
     csv_path = os.path.join(summary_dir, "fr_directionality_overall_compare_by_strategy.csv")
     compare_df.to_csv(csv_path, index=False)
     print(f"Saved: {csv_path}")
+
+    csv_variant_path = os.path.join(
+        summary_dir, "fr_directionality_by_context_variant_long.csv"
+    )
+    fr_by_variant_df.to_csv(csv_variant_path, index=False)
+    print(f"Saved: {csv_variant_path}")
+
+    csv_variant_matrix_path = os.path.join(
+        summary_dir, "fr_directionality_by_context_variant_matrix.csv"
+    )
+    build_fr_directionality_variant_matrix(fr_by_variant_df).to_csv(csv_variant_matrix_path)
+    print(f"Saved: {csv_variant_matrix_path}")
 
     print("Plotting Method A bars...")
     out_a = plot_fr_directionality_bars_overall(fr_dir_df, save_dir=plots_dir, top_k=top_k)
@@ -378,6 +545,13 @@ def run_fr_directionality_overall(
     out_cmp = plot_fr_directionality_compare(compare_df, save_dir=plots_dir, top_k=top_k)
     if out_cmp:
         print(f"Saved: {out_cmp}")
+
+    print("Plotting context_variant × strategy interaction heatmap...")
+    out_hm = plot_fr_directionality_heatmap_by_variant(
+        fr_by_variant_df, save_dir=plots_dir
+    )
+    if out_hm:
+        print(f"Saved: {out_hm}")
 
     print("\nPreview: fr_directionality_overall_compare_by_strategy")
     print(compare_df.round(4).to_string(index=False))

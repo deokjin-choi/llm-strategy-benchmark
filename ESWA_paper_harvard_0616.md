@@ -166,7 +166,27 @@ Fig. 4\. Strategic reallocation under brand framing.
 
 This pattern reveals two characteristics of how brand framing operates. First, the effect is concentrated and asymmetric: the 9.5 pp gain for Technology Leadership nearly offsets the combined losses of Open Innovation and Niche Focus (10.4 pp), suggesting a winner-take-most reallocation dynamic rather than a diffuse shift across multiple strategies. Second, brand framing does not simply "nudge" preferences uniformly; it systematically downweights collaborative and focused strategies (Open Innovation, Niche Focus) while favoring a singular, high-visibility archetype (Technology Leadership).
 
-**5.4 Rationale Framing Shift Under Brand Exposure**
+**5.4 Context–Framing Interaction: Moderation of Brand Effects**
+
+To examine whether brand framing operates independently of context or is moderated by it, we disaggregate the Δp = p(Specific) − p(Generic) computed in Section 5.3 by context variant. For each variant, the same condition-weighted macro-average procedure is applied, restricting the average to conditions within that variant only. Table 4 presents the resulting interaction matrix, with mean |Δp| summarizing overall framing intensity per context.
+
+| Context variant | Maintain | Retrenchment | Niche Focus | Diversification | Open Innovation | Fast Follower | Technology Leadership | mean \|Δp\| |
+| :---- | :----: | :----: | :----: | :----: | :----: | :----: | :----: | :----: |
+| base | −0.019 | −0.015 | −0.061 | +0.013 | −0.047 | +0.012 | +0.117 | 0.041 |
+| competitive\_dynamics | −0.008 | −0.003 | −0.079 | +0.005 | −0.068 | +0.031 | +0.122 | 0.045 |
+| count\_fact | −0.013 | +0.004 | −0.016 | +0.008 | −0.059 | +0.027 | +0.050 | 0.025 |
+| opp\_focus | −0.012 | −0.003 | −0.046 | +0.009 | −0.061 | +0.015 | +0.099 | 0.035 |
+| randomized\_numbers | −0.021 | −0.006 | −0.033 | +0.009 | −0.051 | +0.016 | +0.086 | 0.032 |
+
+Table 4. Brand framing effect (Δp = p(Specific) − p(Generic)) by context variant and strategy.
+
+Two findings emerge from Table 4. First, the directional signature of brand framing is fully consistent across all five context variants: Technology Leadership gains and Open Innovation and Niche Focus lose in every row without exception. Pairwise Spearman rank correlations between variant-level Δp profiles range from 0.93 to 1.00, confirming that brand framing does not change *which* strategies are systematically favored or penalized regardless of the surrounding narrative.
+
+Second, the magnitude of brand framing varies substantially by context. Mean |Δp| is highest under competitive\_dynamics (0.045) and lowest under count\_fact (0.025)—a 1.8-fold difference. The effect on Technology Leadership is most sensitive to this moderation: Δp ranges from +12.2 pp under competitive\_dynamics to +5.0 pp under count\_fact, a 2.4-fold difference. Under opp\_focus, Technology Leadership Δp (+9.9 pp) is lower than under base (+11.7 pp), consistent with a cue-redundancy interpretation: when the narrative already favors proactive leadership, the marginal contribution of brand identity is attenuated. The sharpest context-specific moderation appears in Niche Focus suppression: brand framing reduces Niche Focus by −7.9 pp under competitive\_dynamics but only −1.6 pp under count\_fact.
+
+Together, these results characterize the relationship between context and brand framing as moderation rather than independence or qualitative reversal. Context does not change the direction of brand framing; it adjusts its intensity. This implies that auditing brand framing under a single context condition will systematically over- or underestimate framing risk depending on which narrative is active, reinforcing the case for multi-context audit protocols.
+
+**5.5 Rationale Framing Shift Under Brand Exposure**
 
 This section examines whether explanatory rationales shift under brand exposure even when the strategic choice remains identical. We constructed matched pairs holding all experimental conditions constant—model, temperature, scenario, context variant, number of context blocks, and chosen strategy—while varying only firm identification (Specific vs. Generic). Firm-referential tokens (e.g., Tesla, company) and numeric terms were masked to minimize superficial lexical artifacts. Lexical divergence was quantified using log-odds ratios, with statistical significance assessed via paired permutation tests(146,429 samples; 59,819 terms) and Benjamini–Hochberg false discovery rate correction. Both global separation (mean absolute log-odds difference) and keyword-level effects were evaluated.
 
@@ -185,12 +205,12 @@ Table 3. Semantic framing differences in rationale keywords
 
 These findings indicate that LLM-generated strategic rationales are not neutral analytical outputs but reflect framing-consistent narrative patterns. Notably, the effect persists after masking brand-referential terms, suggesting that firm identity cues trigger distinct explanatory styles rather than mere lexical priming.
 
-**5.5 Model-Level Behavioral Profiling and Temperature Robustness**  
+**5.6 Model-Level Behavioral Profiling and Temperature Robustness**  
 This section extends the scenario-level findings by profiling model-specific behavioral signatures under the same strategic benchmark. Rather than relying on pooled trends, we compare models as distinct strategic reasoners and evaluate whether their behavioral profiles remain stable across decoding temperatures.
 
 To support this comparative analysis, we formalize the quantitative framework into three specific profiling axes. These axes transition from general descriptive metrics to formal behavioral indicators, allowing for a multidimensional assessment of how each model navigates the trade-offs between contextual responsiveness, framing stability, and decision stability.
 
-5.5.1 Profiling Axes  
+5.6.1 Profiling Axes  
 To quantify model behavior, we define a strategy distribution $P(m, \tau, s, n, v, \phi)$ for a given model $m$, temperature $\tau$, scenario $s$, context load $n$ (Num Context), context variant $v$, and framing type $\phi \in \{\text{Generic, Specific}\}$. we employ the Jensen–Shannon Divergence ($JSD$) to measure the statistical distance between distributions.
 
 1\. Framing Robustness (FR)  
@@ -220,10 +240,10 @@ $$DS(m,\tau)=\mathbb{E}_{c}\left[1-\frac{H\left(p_{c}^{m,\tau}\right)}{\log_{2}|
 
 * Interpretation: A higher DS indicates that repeated runs under the same condition concentrate on fewer strategies (higher predictability). DS approaches 1 when the model consistently selects the same strategy, and approaches 0 when choices are spread uniformly across strategies.
 
-5.5.2 Cross-Model and Cross-Temperature Comparison  
+5.6.2 Cross-Model and Cross-Temperature Comparison  
 We evaluate each model’s "strategic fingerprint" by calculating the three-axis scores at both $T=0.0$ and $T=0.7$. This comparison reveals whether a model’s behavior is rooted in its structural reasoning logic or merely a byproduct of stochastic decoding.
 
-Table 4 lists the three-axis scores for each model $m$ and temperature $\tau$. By construction, FR, CR,and DS lie in $[0,1]$
+Table 5 lists the three-axis scores for each model $m$ and temperature $\tau$. By construction, FR, CR,and DS lie in $[0,1]$
 
 | Model | $T$ | FR | CR | DS |
 | :---- | :--: | :----: | :----: | :----: |
@@ -238,7 +258,7 @@ Table 4 lists the three-axis scores for each model $m$ and temperature $\tau$. B
 | Mistral-7B-Instruct-v0.3 | 0.0 | 0.7594 | 0.1325 | 0.9178 |
 | Mistral-7B-Instruct-v0.3 | 0.7 | 0.8195 | 0.1078 | 0.8336 |
 
-Table 4\. model-level profiling scores (three axes)
+Table 5\. model-level profiling scores (three axes)
 
 Three patterns stand out.
 
@@ -248,7 +268,7 @@ Second, CR is the most variable and model-dependent axis. Llama achieves the hig
 
 Third, models exhibit distinct prioritization patterns. DeepSeek maximizes FR (0.9405 at T=0.0; 0.9560 at T=0.7)—the most "brand-blind" model—making it suitable for impartial audits. Qwen leads on DS (0.8932 at T=0.0; 0.8600 at T=0.7)—the most repeatable—ideal for compliance workflows. Llama maximizes CR (0.1750 at T=0.0; 0.1206 at T=0.7)—the most context-responsive—best for exploratory analysis. No single model dominates all axes; selection depends on organizational priorities.
 
-5.5.3 Scenario-Resolved Behavior: Localizing FR, CR, and DS Across the Experimental Grid
+5.6.3 Scenario-Resolved Behavior: Localizing FR, CR, and DS Across the Experimental Grid
 
 Section 5.5.2 compared models using aggregate profiling scores. While useful for benchmarking, aggregate averages do not reveal where framing sensitivity, context adaptation, or instability emerge within the experimental grid. To address this limitation, we examine scenario-level behavior for three metrics.
 
@@ -268,7 +288,7 @@ The relative spatial structure of FR and CR is broadly preserved across temperat
 
 **Priority cells for case analysis.**
 
-The patterns above motivate a closer look at specific scenario–model pairs where each metric's characteristic behavior is most pronounced. For FR and DS, we select the cells with the lowest scaled scores—where framing robustness or decision stability fails most visibly. For CR, we select the cell with the highest scaled score—where semantic context most strongly reallocates strategy choices. Table 5 lists the resulting three priority cells, averaging across T=0.0 and T=0.7 to reflect both decoding regimes.
+The patterns above motivate a closer look at specific scenario–model pairs where each metric's characteristic behavior is most pronounced. For FR and DS, we select the cells with the lowest scaled scores—where framing robustness or decision stability fails most visibly. For CR, we select the cell with the highest scaled score—where semantic context most strongly reallocates strategy choices. Table 6 lists the resulting three priority cells, averaging across T=0.0 and T=0.7 to reflect both decoding regimes.
 
 | Metric | Model | Scenario | Mean scaled value (Figs. 5–6, avg.) |
 | :---- | :---- | :---- | :---- |
@@ -276,7 +296,7 @@ The patterns above motivate a closer look at specific scenario–model pairs whe
 | $CR_{\mathrm{scenario}}$ (max) | Qwen2.5-14B-Instruct | 4_model_x_launch | 0.935 |
 | $DS_{\mathrm{scenario}}$ (min) | deepseek-llm-7b-chat | 2_roadster_launch | 0.184 |
 
-Table 5. Priority scenario–model cells.
+Table 6. Priority scenario–model cells.
 
 ---
 
@@ -296,7 +316,7 @@ Table 5. Priority scenario–model cells.
 | Retrenchment | Scale down Model 3 volume targets to protect financial stability |
 | Maintain | Expand production gradually while prioritizing quality and profitability |
 
-Table 6. Strategy menu for 5_model_3_mass_market.
+Table 7. Strategy menu for 5_model_3_mass_market.
 
 **(3) Observed behavior**
 
@@ -312,7 +332,7 @@ A paired permutation test on brand-masked token statistics (480 paired runs per 
 | **Generic** | High demand, production pressure | Keywords (2-grams): manufacturing partners, scale production, quickly scale, utilizing manufacturing, production rapidly. | **Open Innovation** — Utilize manufacturing partners (OEM) to scale production. External partnerships as the main scaling lever.|
 | **Specific** | High demand, production pressure | Keywords (2-grams): quality profitability, maintaining reputation, long term, crucial maintaining.  | **Maintain** — Expand production gradually while prioritizing quality and profitability. Internal cadence and safeguards over fastest-possible scale-out. |
 
-Table 7. FR case summary
+Table 8. FR case summary
 
 As shown in Fig. 7, Generic framing leads the model to favor Open Innovation (external partnerships for scaling). Under Specific (Tesla) framing, it shifts to Maintain (gradual expansion with quality focus). This divergence from the aggregate trend in Section 5.3 (where brand framing boosted Technology Leadership) illustrates that local effects can deviate substantially from averages—highlighting the need for scenario-level auditing.
 
@@ -334,7 +354,7 @@ As shown in Fig. 7, Generic framing leads the model to favor Open Innovation (ex
 | Retrenchment | Reduce scope of SUV project, scale down features to cut risk |
 | Maintain | Postpone the SUV launch, focus on stabilizing Model S production first |
 
-Table 8. Strategy menu for 4_model_x_launch.
+Table 9. Strategy menu for 4_model_x_launch.
 
 **(3) Observed behavior.**
 
@@ -367,7 +387,7 @@ Fig. 9. CR cue strength: mean JSD from base per semantic variant (T=0.0 vs T=0.7
 | Retrenchment | Scale back launch volume until supply chain stabilizes |
 | Maintain | Delay full-scale launch, focus on stabilizing operations and cash position |
 
-Table 9. Strategy menu for 2_roadster_launch.
+Table 10. Strategy menu for 2_roadster_launch.
 
 **(3) Observed behavior.**
 
@@ -383,7 +403,7 @@ As shown in Figs. 10–11, strategy mass shifts systematically as context blocks
 
 **6.1 Summary of Findings**
 
-This study introduced a scenario-based audit framework to examine how LLMs respond to contextual and framing variations in R&D strategic decisions. Three main findings emerged. First, LLMs exhibit strong context sensitivity: opportunity framing (opp_focus) shifted strategy distributions toward Technology Leadership (lowest entropy = 1.7030), while unfavorable factual constraints (count_fact) triggered defensive repositioning toward niche or follower strategies. Numerical perturbations alone produced minimal change (JSD = 0.0002, Spearman = 1.00), confirming that semantic context—not numeric variation—drives strategic reorientation (Section 5.1–5.2). Second, brand framing asymmetrically amplified these patterns: identifying the firm as Tesla increased Technology Leadership by 9.5 percentage points while suppressing Open Innovation and Niche Focus by 5.7 pp and 4.7 pp, respectively (Section 5.3). Third, these framing effects persisted in model-generated rationales and varied systematically across models and temperature settings, with temperature 0.7 generally improving framing robustness (FR) at the cost of decision stability (DS) (Section 5.4–5.5). Collectively, these results characterize LLMs as conditional strategic agents rather than stable default reasoners.
+This study introduced a scenario-based audit framework to examine how LLMs respond to contextual and framing variations in R&D strategic decisions. Four main findings emerged. First, LLMs exhibit strong context sensitivity: opportunity framing (opp_focus) shifted strategy distributions toward Technology Leadership (lowest entropy = 1.7030), while unfavorable factual constraints (count_fact) triggered defensive repositioning toward niche or follower strategies. Numerical perturbations alone produced minimal change (JSD = 0.0002, Spearman = 1.00), confirming that semantic context—not numeric variation—drives strategic reorientation (Section 5.1–5.2). Second, brand framing asymmetrically amplified these patterns: identifying the firm as Tesla increased Technology Leadership by 9.5 percentage points while suppressing Open Innovation and Niche Focus by 5.7 pp and 4.7 pp, respectively (Section 5.3). Third, context and brand framing interact through moderation rather than operating independently: the directional signature of brand framing is consistent across all context variants (Spearman rank correlation ≥ 0.93), but its magnitude varies up to 2.4-fold—most attenuated under constraint framing (count_fact, Technology Leadership Δp = +5.0 pp) and strongest under competitive context (+12.2 pp) (Section 5.4). Fourth, these framing effects persisted in model-generated rationales and varied systematically across models and temperature settings, with temperature 0.7 generally improving framing robustness (FR) at the cost of decision stability (DS) (Section 5.5–5.6). Collectively, these results characterize LLMs as conditional strategic agents rather than stable default reasoners.
 
 **6.2 Interpreting Context Sensitivity: Asymmetric Responsiveness, Competition, and Numerical Insensitivity**
 
@@ -399,7 +419,7 @@ The finding that brand framing (Tesla vs. anonymous) reallocates strategy choice
 
 First, the *halo effect* (Thorndike, 1920) occurs when a salient positive attribute—Tesla's reputation for innovation and market disruption—biases overall strategic evaluation. The model does not evaluate the situation de novo; it retrieves pre-trained associations that paint Tesla as a "technology pioneer" and applies this narrative to the strategic choice, systematically downweighting collaborative (Open Innovation) or focused (Niche Focus) alternatives.
 
-Second, *associative anchoring* (Tversky & Kahneman, 1974) amplifies this effect. The brand name serves as an anchor that shapes subsequent reasoning. The scenario-resolved analysis (Section 5.5.3) provides illustrative evidence: in the CR-max cell (Qwen2.5-14B on the Model X launch scenario), opp_focus uniquely activated Technology Leadership under Specific framing, while constraint-focused variants produced smaller shifts. This suggests that brand framing interacts with contextual cues, though the specific interaction patterns require further investigation across the full experimental grid.
+Second, *associative anchoring* (Tversky & Kahneman, 1974) amplifies this effect. The brand name serves as an anchor that shapes subsequent reasoning. The scenario-resolved analysis (Section 5.6.3) provides illustrative evidence: in the CR-max cell (Qwen2.5-14B on the Model X launch scenario), opp_focus uniquely activated Technology Leadership under Specific framing, while constraint-focused variants produced smaller shifts. Section 5.4 examines this interaction systematically across the full experimental grid, confirming that the pattern reflects moderation of brand framing magnitude by context rather than qualitative reversal of its direction.
 
 **6.4 Algorithmic Bounded Rationality: A Conceptual Framework**
 
@@ -415,9 +435,9 @@ For organizations deploying LLMs in R&D strategy workflows, our results support 
 
 *Context variant stress-testing.* Given the hierarchy of responsiveness (opportunity > competition > constraint), teams should not rely solely on optimistic framings. We recommend stress-testing strategic recommendations under all three context variants: upside (opp_focus), competitive (competitive_dynamics), and downside (count_fact). If the model heavily discounts unfavorable information (i.e., produces similar recommendations under baseline and constraint conditions), human reviewers should explicitly flag missing or downweighted risk factors.
 
-*Temperature as a documented decision parameter.* Section 5.5 demonstrates a clear trade-off: temperature 0.0 maximizes repeatability (DS) but may preserve framing biases; temperature 0.7 improves framing robustness (FR) but reduces decision stability. Organizations should document decoding settings in AI-assisted strategic decisions and align them with task purpose—repeatability-critical tasks (e.g., compliance checks) use T=0.0; exploratory or bias-auditing tasks use T=0.7.
+*Temperature as a documented decision parameter.* Section 5.6 demonstrates a clear trade-off: temperature 0.0 maximizes repeatability (DS) but may preserve framing biases; temperature 0.7 improves framing robustness (FR) but reduces decision stability. Organizations should document decoding settings in AI-assisted strategic decisions and align them with task purpose—repeatability-critical tasks (e.g., compliance checks) use T=0.0; exploratory or bias-auditing tasks use T=0.7.
 
-*Model selection guidance.* Section 5.5.2 identifies distinct prioritization patterns across models. DeepSeek-LLM-7B leads on FR and is most suitable for impartial audits; Qwen2.5-14B leads on DS and is preferred for compliance workflows; Llama-3.1-8B leads on CR and is best for exploratory analysis. No single model dominates all axes; selection should reflect organizational priorities.
+*Model selection guidance.* Section 5.6.2 identifies distinct prioritization patterns across models. DeepSeek-LLM-7B leads on FR and is most suitable for impartial audits; Qwen2.5-14B leads on DS and is preferred for compliance workflows; Llama-3.1-8B leads on CR and is best for exploratory analysis. No single model dominates all axes; selection should reflect organizational priorities.
 
 *Human-in-the-loop integration.* The audit protocol assumes human oversight at three critical junctures: (i) before deployment, comparing Generic vs. Specific prompts to detect brand bias; (ii) during stress-testing, reviewing whether the model discounted unfavorable constraints; and (iii) after generation, examining whether rationales reflect brand-consistent narratives rather than neutral evaluation. Organizations should document these audit steps as part of their AI governance framework.
 
@@ -453,7 +473,7 @@ These limitations suggest four immediate research directions.
 
 This study introduced a scenario-based audit framework for examining how LLMs respond to contextual and framing variations in R&D strategic decisions. Using six historically grounded scenarios and seven canonical strategic archetypes, we systematically manipulated semantic context, brand framing, and numerical inputs across five open-weight LLMs under two decoding temperatures.
 
-Three main contributions emerge. First, we demonstrate that LLMs exhibit strong context sensitivity—opportunity framing shifts choices toward Technology Leadership, while unfavorable constraints induce defensive positioning—with a clear responsiveness hierarchy (opportunity > competition > constraint). Numerical insensitivity (±20% perturbations) confirms that semantic framing dominates quantitative signals in narrative prompts. Second, brand framing (Tesla vs. anonymous) asymmetrically amplifies these patterns, increasing Technology Leadership by 9.5 percentage points while suppressing collaborative and niche strategies. This effect operates as a sensitivity modulator (halo effect + associative anchoring) rather than a fixed bias. Third, these framing effects persist in model-generated rationales and vary systematically across models and temperature settings, with temperature 0.7 generally improving framing robustness at the cost of decision stability.
+Four main contributions emerge. First, we demonstrate that LLMs exhibit strong context sensitivity—opportunity framing shifts choices toward Technology Leadership, while unfavorable constraints induce defensive positioning—with a clear responsiveness hierarchy (opportunity > competition > constraint). Numerical insensitivity (±20% perturbations) confirms that semantic framing dominates quantitative signals in narrative prompts. Second, brand framing (Tesla vs. anonymous) asymmetrically amplifies these patterns, increasing Technology Leadership by 9.5 percentage points while suppressing collaborative and niche strategies. This effect operates as a sensitivity modulator (halo effect + associative anchoring) rather than a fixed bias. Third, context and brand framing interact through moderation: the directional signature of brand framing is robust across all context variants (Spearman r ≥ 0.93), while its magnitude varies up to 2.4-fold, being most attenuated under constraint framing and most pronounced under competitive framing. Fourth, these framing effects persist in model-generated rationales and vary systematically across models and temperature settings, with temperature 0.7 generally improving framing robustness at the cost of decision stability.
 
 **8.2 Key Practical Message for R&D Management**
 
