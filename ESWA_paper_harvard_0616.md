@@ -207,17 +207,25 @@ These findings indicate that LLM-generated strategic rationales are not neutral 
 
 To quantify the degree of narrative divergence beyond keyword inspection, we introduce the Rationale Divergence Score (RDS)—the cosine distance between SentenceTransformer embeddings of matched Generic and Specific rationale pairs. RDS ∈ [0, 1], where 0 indicates semantically identical justifications and 1 indicates maximal divergence. Because pairs are matched on all experimental conditions (model, temperature, scenario, context variant, context load, and chosen strategy), any RDS above zero reflects the effect of framing alone on the explanatory narrative.
 
-Across 141,209 matched pairs, the overall mean RDS is 0.157 (median = 0.146, SD = 0.090), confirming that the rationale shift documented in Table 3 is not confined to a narrow set of keywords but constitutes a pervasive, semantically measurable divergence. Fig. 5 presents mean RDS disaggregated by strategy and context variant.
+Across 141,209 matched pairs, the overall mean RDS is 0.157 (median = 0.146, SD = 0.090), confirming that the rationale shift documented in Table 3 is not confined to a narrow set of keywords but constitutes a pervasive, semantically measurable divergence. To interpret this magnitude, we compare RDS against two reference distributions using the same embedding pipeline and preprocessing (brand-term masking only). All pair types are defined within run-level cells—model, temperature, context load, scenario, and context variant held fixed—with one random pair per eligible cell for each baseline (seed = 42).
+
+The repeat-noise lower bound (n = 5,790; median = 0.101) additionally fixes chosen strategy and firm framing and contrasts two independent repeats, isolating decoding variability absent intentional manipulation. The strategy-ceiling upper bound (n = 1,702; median = 0.364) fixes firm framing but compares rationales from two different chosen strategies, approximating embedding distance when the strategic commitment itself changes. RDS holds repeat and strategy fixed and varies Generic vs. Specific framing alone.
+
+Fig. 5 overlays the three distributions. RDS (median = 0.146) lies clearly above repeat noise and well below the cross-strategy ceiling, indicating that brand framing induces semantically measurable narrative shift beyond stochastic repetition, yet does not reframe justifications to the same extent as changing the chosen strategy itself. Fig. 6 presents mean RDS disaggregated by strategy and context variant.
+
+![RDS_calibration_histogram](final_results/plots/eval_rationale_rds_calibration_histogram.png)
+
+Fig. 5. Rationale embedding distance: framing (RDS) vs. repeat noise vs. cross-strategy ceiling (matched preprocessing; noise and ceiling baselines: one random pair per eligible cell).
 
 ![RDS_heatmap](final_results/plots/eval_rationale_rds_heatmap.png)
 
-Fig. 5. Mean Rationale Divergence Score (RDS) by context variant and strategy (matched pairs; same strategy chosen, only brand framing varies).
+Fig. 6. Mean Rationale Divergence Score (RDS) by context variant and strategy (matched pairs; same strategy chosen, only brand framing varies).
 
-Two structural patterns emerge from Fig. 5. First, RDS differs substantially across strategies. Niche Focus (mean RDS = 0.185) and Diversification (0.177) show the highest narrative divergence, while Open Innovation (0.103) and Retrenchment (0.113) show the lowest—a nearly two-fold spread across the strategy axis. This indicates that the degree of framing-induced narrative shift is conditioned on strategic content: strategies that require explicit competitive positioning (Niche Focus, Diversification) are more susceptible to framing-induced narrative drift than strategies framed in terms of restraint or collaboration (Retrenchment, Open Innovation).
+Two structural patterns emerge from Fig. 6. First, RDS differs substantially across strategies. Niche Focus (mean RDS = 0.185) and Diversification (0.177) show the highest narrative divergence, while Open Innovation (0.103) and Retrenchment (0.113) show the lowest—a nearly two-fold spread across the strategy axis. This indicates that the degree of framing-induced narrative shift is conditioned on strategic content: strategies that require explicit competitive positioning (Niche Focus, Diversification) are more susceptible to framing-induced narrative drift than strategies framed in terms of restraint or collaboration (Retrenchment, Open Innovation).
 
 Second, and in contrast to the strategy-selection findings in §5.4, context variant exerts negligible influence on RDS. Within any given strategy, RDS values across the five context variants span at most 0.02 (e.g., Maintain ranges from 0.165 to 0.198). This asymmetry is theoretically significant: whereas contextual framing moderates which strategy LLMs choose (§5.4), it does not moderate how differently they justify the same choice. Rationale bias is structurally tied to strategic content and persists regardless of the surrounding narrative context. Consequently, enriching the prompt context—a common mitigation strategy—cannot be expected to reduce framing-induced narrative divergence.
 
-The Maintain × count\_fact cell (mean RDS = 0.198, the highest in Fig. 5) illustrates the phenomenon concretely. The following pair, drawn from this cell and representing its most divergent instance (individual RDS = 0.689), captures the pattern at its sharpest: when both Generic and Specific prompts lead to the same "maintain operations" choice, Generic rationales frame the decision around operational risk and cash-flow stabilization ("delaying the full-scale launch allows the company to stabilize operations and cash position"), while Specific rationales invoke brand-stewardship imperatives ("ensuring high-quality product delivery is crucial for maintaining brand trust and reputation"). The strategic conclusion is identical; the explanatory frame is not.
+The Maintain × count\_fact cell (mean RDS = 0.198, the highest in Fig. 6) illustrates the phenomenon concretely. The following pair, drawn from this cell and representing its most divergent instance (individual RDS = 0.689), captures the pattern at its sharpest: when both Generic and Specific prompts lead to the same "maintain operations" choice, Generic rationales frame the decision around operational risk and cash-flow stabilization ("delaying the full-scale launch allows the company to stabilize operations and cash position"), while Specific rationales invoke brand-stewardship imperatives ("ensuring high-quality product delivery is crucial for maintaining brand trust and reputation"). The strategic conclusion is identical; the explanatory frame is not.
 
 **5.6 Model-Level Behavioral Profiling and Temperature Robustness**  
 This section extends the scenario-level findings by profiling model-specific behavioral signatures under the same strategic benchmark. Rather than relying on pooled trends, we compare models as distinct strategic reasoners and evaluate whether their behavioral profiles remain stable across decoding temperatures.
@@ -286,13 +294,13 @@ Third, models exhibit distinct prioritization patterns. DeepSeek maximizes FR (0
 
 Section 5.5.2 compared models using aggregate profiling scores. While useful for benchmarking, aggregate averages do not reveal where framing sensitivity, context adaptation, or instability emerge within the experimental grid. To address this limitation, we examine scenario-level behavior for three metrics.
 
-Fig. 6 and Fig. 7 summarize scenario × model heatmaps at $T=0.0$ and $T=0.7$. Each panel is independently min–max scaled to $[0,1]$.
+Fig. 7 and Fig. 8 summarize scenario × model heatmaps at $T=0.0$ and $T=0.7$. Each panel is independently min–max scaled to $[0,1]$.
 
 ![Scenario_model_overview_T0](final_results/plots/eval_scenario_model_overview_FR_CR_DS__T0.png)  
-Fig. 6. Scenario × model heatmaps for $FR_{\mathrm{scenario}}$, $CR_{\mathrm{scenario}}$, and $DS_{\mathrm{scenario}}$ at $T=0.0$.
+Fig. 7. Scenario × model heatmaps for $FR_{\mathrm{scenario}}$, $CR_{\mathrm{scenario}}$, and $DS_{\mathrm{scenario}}$ at $T=0.0$.
 
 ![Scenario_model_overview_T07](final_results/plots/eval_scenario_model_overview_FR_CR_DS__T0.7.png)  
-Fig. 7. Scenario × model heatmaps for $FR_{\mathrm{scenario}}$, $CR_{\mathrm{scenario}}$, and $DS_{\mathrm{scenario}}$ at $T=0.7$.
+Fig. 8. Scenario × model heatmaps for $FR_{\mathrm{scenario}}$, $CR_{\mathrm{scenario}}$, and $DS_{\mathrm{scenario}}$ at $T=0.7$.
 
 **(1) Heterogeneous local behavior.**  
 FR and DS remain relatively high across most cells, while CR is sparse—only a few scenario–model pairs (e.g., 4_model_x_launch) show strong context-driven redistribution. CR's concentration in specific cells (not uniform across all cells) reveals that context responsiveness is situation-dependent. This conditional dependence supports treating models as conditional decision agents: the three axes do not co-move; aggregate profiling scores therefore pool qualitatively different local behaviors. Consequently, a model that appears "moderately context-sensitive" on aggregate may in fact be highly responsive in a few critical scenarios and entirely unresponsive in others—a distinction that only scenario-resolved analysis can reveal.
@@ -304,7 +312,7 @@ The relative spatial structure of FR and CR is broadly preserved across temperat
 
 The patterns above motivate a closer look at specific scenario–model pairs where each metric's characteristic behavior is most pronounced. For FR and DS, we select the cells with the lowest scaled scores—where framing robustness or decision stability fails most visibly. For CR, we select the cell with the highest scaled score—where semantic context most strongly reallocates strategy choices. Table 6 lists the resulting three priority cells, averaging across T=0.0 and T=0.7 to reflect both decoding regimes.
 
-| Metric | Model | Scenario | Mean scaled value (Figs. 6–7, avg.) |
+| Metric | Model | Scenario | Mean scaled value (Figs. 7–8, avg.) |
 | :---- | :---- | :---- | :---- |
 | $FR_{\mathrm{scenario}}$ (min) | Qwen2.5-14B-Instruct | 5_model_3_mass_market | 0.000 |
 | $CR_{\mathrm{scenario}}$ (max) | Qwen2.5-14B-Instruct | 4_model_x_launch | 0.935 |
@@ -334,10 +342,10 @@ Table 7. Strategy menu for 5_model_3_mass_market.
 
 **(3) Observed behavior**
 
-To isolate firm-identity framing effects from semantic context variation, Fig. 8 reports pooled strategy choices under the neutral base context variant only.
+To isolate firm-identity framing effects from semantic context variation, Fig. 9 reports pooled strategy choices under the neutral base context variant only.
 
 ![FR_deepdive_Qwen_Model3](final_results/plots/eval_deepdive_fr_framing_stacks__Qwen2.5-14B__5_model_3_mass_market.png)  
-Fig. 8. FR deep-dive for 5_model_3_mass_market.
+Fig. 9. FR deep-dive for 5_model_3_mass_market.
 
 A paired permutation test on brand-masked token statistics (480 paired runs per cell) confirms that the lexical gap between Generic and Specific rationales is systematic, not a decoding artifact (global separation statistic with p ≈ 0.005 at both T=0.0 and T=0.7).
 
@@ -348,7 +356,7 @@ A paired permutation test on brand-masked token statistics (480 paired runs per 
 
 Table 8. FR case summary
 
-As shown in Fig. 8, Generic framing leads the model to favor Open Innovation (external partnerships for scaling). Under Specific (Tesla) framing, it shifts to Maintain (gradual expansion with quality focus). This divergence from the aggregate trend in Section 5.3 (where brand framing boosted Technology Leadership) illustrates that local effects can deviate substantially from averages—highlighting the need for scenario-level auditing.
+As shown in Fig. 9, Generic framing leads the model to favor Open Innovation (external partnerships for scaling). Under Specific (Tesla) framing, it shifts to Maintain (gradual expansion with quality focus). This divergence from the aggregate trend in Section 5.3 (where brand framing boosted Technology Leadership) illustrates that local effects can deviate substantially from averages—highlighting the need for scenario-level auditing.
 
 ---
 
@@ -375,13 +383,13 @@ Table 9. Strategy menu for 4_model_x_launch.
 semantic manipulation is implemented only through the context_variant axis—base, competitive_dynamics, count_fact, and opp_focus—on top of Generic vs. Specific firm-identity framing.
 
 ![CR_deepdive_Qwen_ModelX_framing](final_results/plots/eval_deepdive_cr_strategy_stacks_framing__Qwen2.5-14B__4_model_x_launch.png)  
-Fig. 9. CR deep-dive for 4_model_x_launch.
+Fig. 10. CR deep-dive for 4_model_x_launch.
 
 The following plot reports the corresponding mean JSD from base for each semantic variant (CR cue strength), shown separately for $T=0.0$ and $T=0.7$.
 ![CR_deepdive_Qwen_ModelX_jsd](final_results/plots/eval_deepdive_cr_jsd_by_variant__Qwen2.5-14B__4_model_x_launch.png)  
-Fig. 10. CR cue strength: mean JSD from base per semantic variant (T=0.0 vs T=0.7).
+Fig. 11. CR cue strength: mean JSD from base per semantic variant (T=0.0 vs T=0.7).
 
- Fig. 9 shows that Generic framing maintains Open Innovation as the dominant choice across all context variants. Under Specific framing, opp_focus uniquely activates Technology Leadership, while competitive_dynamics lifts Fast Follower. The JSD hierarchy in the accompanying plot (opp_focus > competitive_dynamics > count_fact) confirms asymmetric cue sensitivity: positive opportunities drive larger reallocations than unfavorable constraints.
+ Fig. 10 shows that Generic framing maintains Open Innovation as the dominant choice across all context variants. Under Specific framing, opp_focus uniquely activates Technology Leadership, while competitive_dynamics lifts Fast Follower. The JSD hierarchy in the accompanying plot (opp_focus > competitive_dynamics > count_fact) confirms asymmetric cue sensitivity: positive opportunities drive larger reallocations than unfavorable constraints.
 
 ---
 
@@ -406,12 +414,12 @@ Table 10. Strategy menu for 2_roadster_launch.
 **(3) Observed behavior.**
 
 ![DS_deepdive_DeepSeek_Roadster_stacks_numctx](final_results/plots/eval_deepdive_ds_strategy_stacks_numcontext_framing__deepseek-llm-7b-chat__2_roadster_launch.png)  
-Fig. 11. Strategy mix across Num Context tiers.
+Fig. 12. Strategy mix across Num Context tiers.
 
 ![DS_deepdive_DeepSeek_Roadster_entropy](final_results/plots/eval_deepdive_ds_entropy_numcontext_box__deepseek-llm-7b-chat__2_roadster_launch.png)  
-Fig. 12. Repeat-level entropy across Num Context tiers.
+Fig. 13. Repeat-level entropy across Num Context tiers.
 
-As shown in Figs. 11–12, strategy mass shifts systematically as context blocks accumulate: near-vacuous prompts favor Open Innovation; partial context pivots toward Retrenchment/Niche Focus; full context yields a Fast Follower vs. Retrenchment split. This demonstrates that decision stability depends not only on temperature but also on the amount of contextual information provided. This variation across context loads explains why DS is low in this cell: even small changes in information quantity produce different strategic responses, making repeatability under identical conditions difficult to achieve.
+As shown in Figs. 12–13, strategy mass shifts systematically as context blocks accumulate: near-vacuous prompts favor Open Innovation; partial context pivots toward Retrenchment/Niche Focus; full context yields a Fast Follower vs. Retrenchment split. This demonstrates that decision stability depends not only on temperature but also on the amount of contextual information provided. This variation across context loads explains why DS is low in this cell: even small changes in information quantity produce different strategic responses, making repeatability under identical conditions difficult to achieve.
 
 **6. Discussion**
 
