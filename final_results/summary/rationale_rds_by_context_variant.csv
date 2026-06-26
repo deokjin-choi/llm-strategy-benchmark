@@ -1,0 +1,6 @@
+context_variant,mean_rds,median_rds,n_pairs
+base,0.15729973,0.1479899,27394
+competitive_dynamics,0.15299925,0.13793123,26057
+count_fact,0.16141197,0.15483737,30580
+opp_focus,0.15834275,0.1443364,28988
+randomized_numbers,0.1559896,0.14406157,28190
