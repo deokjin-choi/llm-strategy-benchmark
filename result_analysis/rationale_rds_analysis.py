@@ -21,6 +21,7 @@ Outputs
   final_results/summary/rationale_rds_heatmap.csv
   final_results/summary/rationale_rds_calibration_summary.csv
   final_results/plots/eval_rationale_rds_heatmap.png
+  final_results/plots/eval_rationale_rds_strategy_boxplot.png
   final_results/plots/eval_rationale_rds_calibration_histogram.png
 
 Usage
@@ -41,9 +42,9 @@ import matplotlib.patches as mpatches
 import seaborn as sns
 
 try:
-    from result_analysis.rationale_analysis import load_rationale_data, mask_brand_terms
+    from result_analysis.rationale_analysis import load_rationale_data, mask_brand_terms, valid_strategies
 except ImportError:
-    from rationale_analysis import load_rationale_data, mask_brand_terms
+    from rationale_analysis import load_rationale_data, mask_brand_terms, valid_strategies
 
 # ── constants ──────────────────────────────────────────────────────────────────
 PAIR_GROUP_COLS = [
@@ -62,16 +63,27 @@ CEILING_CELL_COLS = [
 ]
 
 CONTEXT_ORDER = [
-    "base", "opp_focus", "count_fact",
-    "competitive_dynamics", "randomized_numbers",
+    "base",
+    "competitive_dynamics",
+    "count_fact",
+    "opp_focus",
+    "randomized_numbers",
 ]
 CONTEXT_LABELS = {
     "base":                  "Base",
-    "opp_focus":             "Opp. Focus",
-    "count_fact":            "Count. Fact",
     "competitive_dynamics":  "Comp. Dynamics",
+    "count_fact":            "Count. Fact",
+    "opp_focus":             "Opp. Focus",
     "randomized_numbers":    "Rand. Numbers",
 }
+CONTEXT_COLORS = {
+    "base":                  "#377eb8",
+    "competitive_dynamics":  "#ff7f00",
+    "count_fact":            "#4daf4a",
+    "opp_focus":             "#e41a1c",
+    "randomized_numbers":    "#984ea3",
+}
+STRATEGY_ORDER = list(valid_strategies)
 
 SUMMARY_DIR = "./final_results/summary"
 PLOTS_DIR   = "./final_results/plots"
@@ -324,6 +336,187 @@ def _plot_calibration_histogram(
     plt.close(fig)
 
 
+def _build_rds_heatmap_df(rds_df: pd.DataFrame) -> pd.DataFrame:
+    """Rows = context_variant, columns = strategy (same layout as other paper heatmaps)."""
+    mat = (
+        rds_df.groupby(["context_variant", "strategy"])["rds"]
+        .mean()
+        .reset_index()
+        .pivot(index="context_variant", columns="strategy", values="rds")
+    )
+    row_order = [v for v in CONTEXT_ORDER if v in mat.index]
+    col_order = [s for s in STRATEGY_ORDER if s in mat.columns]
+    return mat.reindex(index=row_order, columns=col_order)
+
+
+def _plot_rds_heatmap(heatmap_df: pd.DataFrame, out_path: str) -> None:
+    fig, ax = plt.subplots(figsize=(10, 6))
+    vals = heatmap_df.to_numpy(dtype=float)
+    vmin = float(np.nanmin(vals)) if np.isfinite(vals).any() else 0.0
+    vmax = float(np.nanmax(vals)) if np.isfinite(vals).any() else 1.0
+    # YlGnBu: same family as Strategy Ratio heatmaps; easier on the eyes than YlOrRd.
+    im = ax.imshow(vals, aspect="auto", cmap="YlGnBu", vmin=vmin, vmax=vmax)
+    ax.set_xticks(np.arange(heatmap_df.shape[1]))
+    ax.set_xticklabels(heatmap_df.columns.tolist(), rotation=25, ha="right", fontsize=9)
+    ax.set_yticks(np.arange(heatmap_df.shape[0]))
+    ax.set_yticklabels(heatmap_df.index.tolist(), fontsize=9)
+    ax.set_xlabel("Strategy (Chosen Option)", fontsize=9)
+    ax.set_ylabel("Context Variant", fontsize=9)
+    ax.set_title(
+        "Rationale Divergence Score (RDS) by Context Variant × Strategy\n"
+        "Matched pairs: same strategy chosen, only brand framing varies",
+        fontsize=10, pad=10,
+    )
+    span = max(vmax - vmin, 1e-9)
+    for i in range(heatmap_df.shape[0]):
+        for j in range(heatmap_df.shape[1]):
+            v = vals[i, j]
+            if np.isfinite(v):
+                norm = (v - vmin) / span
+                txt_color = "white" if norm > 0.62 else "#222222"
+                ax.text(j, i, f"{v:.3f}", va="center", ha="center", fontsize=8, color=txt_color)
+    cbar = fig.colorbar(im, ax=ax)
+    cbar.set_label("Mean RDS (cosine distance)", fontsize=9)
+    plt.tight_layout()
+    plt.savefig(out_path, dpi=300, bbox_inches="tight")
+    plt.close(fig)
+
+
+def _heatmap_df_to_long(heatmap_df: pd.DataFrame) -> pd.DataFrame:
+    """Melt context×strategy matrix to long format (one row per cell mean)."""
+    long = heatmap_df.stack(future_stack=True).reset_index()
+    long.columns = ["context_variant", "strategy", "rds"]
+    return long
+
+
+def _load_rds_heatmap_df(csv_path: str | None = None) -> pd.DataFrame:
+    """Load context×strategy RDS matrix from rationale_rds_heatmap.csv."""
+    path = csv_path or os.path.join(SUMMARY_DIR, "rationale_rds_heatmap.csv")
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"RDS heatmap CSV not found: {path}")
+    raw = pd.read_csv(path)
+    heatmap_df = _legacy_heatmap_csv_to_matrix(raw)
+    if heatmap_df.empty:
+        raise ValueError(f"Could not load RDS heatmap data from {path}")
+    return heatmap_df
+
+
+def _plot_rds_strategy_boxplot(heatmap_df: pd.DataFrame, out_path: str) -> None:
+    """
+    Box plot of RDS by strategy using heatmap cell means only.
+
+    Each strategy has five observations (one mean RDS per context variant),
+    taken directly from rationale_rds_heatmap.csv — no re-embedding required.
+    """
+    cell_long = _heatmap_df_to_long(heatmap_df)
+    order = [s for s in STRATEGY_ORDER if s in cell_long["strategy"].unique()]
+    ctx_order = [v for v in CONTEXT_ORDER if v in cell_long["context_variant"].unique()]
+    palette = {v: CONTEXT_COLORS[v] for v in ctx_order}
+
+    fig, ax = plt.subplots(figsize=(11, 5.5))
+    sns.boxplot(
+        data=cell_long,
+        x="strategy",
+        y="rds",
+        order=order,
+        ax=ax,
+        color="#dde7f0",
+        linewidth=1.2,
+        width=0.55,
+        showfliers=False,
+        boxprops={"alpha": 0.85},
+        zorder=1,
+    )
+    sns.stripplot(
+        data=cell_long,
+        x="strategy",
+        y="rds",
+        hue="context_variant",
+        hue_order=ctx_order,
+        order=order,
+        palette=palette,
+        ax=ax,
+        size=7,
+        jitter=0.08,
+        alpha=0.95,
+        dodge=False,
+        linewidth=0.6,
+        edgecolor="white",
+        zorder=3,
+    )
+    handles, labels = ax.get_legend_handles_labels()
+    ax.legend(
+        handles,
+        labels,
+        title="Context Variant",
+        fontsize=8,
+        title_fontsize=8,
+        loc="upper right",
+        framealpha=0.95,
+    )
+    ax.set_xlabel("Strategy (Chosen Option)", fontsize=9)
+    ax.set_ylabel("Mean RDS (cosine distance)", fontsize=9)
+    ax.set_title(
+        "Rationale Divergence Score (RDS) by Strategy\n"
+        "Five context-variant cell means per strategy; matched pairs, brand framing only",
+        fontsize=10,
+        pad=10,
+    )
+    ax.tick_params(axis="x", labelrotation=25)
+    plt.setp(ax.get_xticklabels(), ha="right")
+    ax.grid(True, axis="y", linestyle="--", alpha=0.25)
+    plt.tight_layout()
+    plt.savefig(out_path, dpi=300, bbox_inches="tight")
+    plt.close(fig)
+
+
+def _legacy_heatmap_csv_to_matrix(df: pd.DataFrame) -> pd.DataFrame:
+    """Load heatmap matrix from CSV (supports legacy strategy×context or current context×strategy)."""
+    label_to_ctx = {v: k for k, v in CONTEXT_LABELS.items()}
+    if "context_variant" in df.columns:
+        mat = df.set_index("context_variant")
+    elif "strategy" in df.columns:
+        mat = df.set_index("strategy").rename(columns=label_to_ctx).T
+    elif set(df.index).issubset(set(CONTEXT_ORDER)):
+        mat = df.copy()
+    else:
+        mat = df.rename(columns=label_to_ctx).T
+    row_order = [v for v in CONTEXT_ORDER if v in mat.index]
+    col_order = [s for s in STRATEGY_ORDER if s in mat.columns]
+    return mat.reindex(index=row_order, columns=col_order)
+
+
+def replot_rds_boxplot() -> None:
+    """Regenerate strategy box plot from rationale_rds_heatmap.csv only (no re-embedding)."""
+    os.makedirs(PLOTS_DIR, exist_ok=True)
+    heatmap_df = _load_rds_heatmap_df()
+    box_path = os.path.join(PLOTS_DIR, "eval_rationale_rds_strategy_boxplot.png")
+    _plot_rds_strategy_boxplot(heatmap_df, box_path)
+    print(f"Saved box plot → {box_path}")
+
+
+def replot_rds_figures() -> None:
+    """Regenerate RDS heatmap and strategy box plot from saved CSV (no re-embedding)."""
+    os.makedirs(PLOTS_DIR, exist_ok=True)
+    heatmap_df = _load_rds_heatmap_df()
+
+    long_path = os.path.join(SUMMARY_DIR, "rationale_rds_strategy_context_long.csv")
+    _heatmap_df_to_long(heatmap_df).to_csv(long_path, index=False)
+
+    heatmap_path = os.path.join(PLOTS_DIR, "eval_rationale_rds_heatmap.png")
+    _plot_rds_heatmap(heatmap_df, heatmap_path)
+    print(f"Saved heatmap → {heatmap_path}")
+
+    box_path = os.path.join(PLOTS_DIR, "eval_rationale_rds_strategy_boxplot.png")
+    _plot_rds_strategy_boxplot(heatmap_df, box_path)
+    print(f"Saved box plot → {box_path}")
+
+
+def replot_rds_heatmap() -> None:
+    """Backward-compatible alias."""
+    replot_rds_figures()
+
+
 # ── main ───────────────────────────────────────────────────────────────────────
 def run(input_dir: str = "infer_results") -> None:
     from sentence_transformers import SentenceTransformer
@@ -416,36 +609,19 @@ def run(input_dir: str = "infer_results") -> None:
                  .reset_index())
     rds_strat.to_csv(os.path.join(SUMMARY_DIR, "rationale_rds_by_strategy.csv"), index=False)
 
-    heatmap_df = (rds_df.groupby(["context_variant", "strategy"])["rds"]
-                  .mean()
-                  .reset_index()
-                  .pivot(index="strategy", columns="context_variant", values="rds"))
-    col_order = [c for c in CONTEXT_ORDER if c in heatmap_df.columns]
-    heatmap_df = heatmap_df[col_order]
-    heatmap_df.columns = [CONTEXT_LABELS.get(c, c) for c in heatmap_df.columns]
+    heatmap_df = _build_rds_heatmap_df(rds_df)
     heatmap_df.to_csv(os.path.join(SUMMARY_DIR, "rationale_rds_heatmap.csv"))
+    _heatmap_df_to_long(heatmap_df).to_csv(
+        os.path.join(SUMMARY_DIR, "rationale_rds_strategy_context_long.csv"), index=False,
+    )
 
-    fig, ax = plt.subplots(figsize=(9, 5))
-    sns.heatmap(
-        heatmap_df, ax=ax, annot=True, fmt=".3f", cmap="YlOrRd",
-        linewidths=0.4, linecolor="#dddddd",
-        cbar_kws={"label": "Mean RDS (cosine distance)", "shrink": 0.8},
-        annot_kws={"size": 8},
-    )
-    ax.set_title(
-        "Rationale Divergence Score (RDS) by Context Variant × Strategy\n"
-        "Matched pairs: same strategy chosen, only brand framing varies",
-        fontsize=10, pad=10,
-    )
-    ax.set_xlabel("Context Variant", fontsize=9)
-    ax.set_ylabel("Strategy (Chosen Option)", fontsize=9)
-    ax.tick_params(axis="x", labelsize=8, rotation=20)
-    ax.tick_params(axis="y", labelsize=8, rotation=0)
-    plt.tight_layout()
     heatmap_path = os.path.join(PLOTS_DIR, "eval_rationale_rds_heatmap.png")
-    plt.savefig(heatmap_path, dpi=300, bbox_inches="tight")
-    plt.close(fig)
+    _plot_rds_heatmap(heatmap_df, heatmap_path)
     print(f"Saved heatmap → {heatmap_path}")
+
+    box_path = os.path.join(PLOTS_DIR, "eval_rationale_rds_strategy_boxplot.png")
+    _plot_rds_strategy_boxplot(heatmap_df, box_path)
+    print(f"Saved box plot → {box_path}")
 
 
 def replot_calibration() -> None:
@@ -480,10 +656,19 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Rationale Divergence Score analysis")
     parser.add_argument("--input_dir", default="infer_results")
     parser.add_argument("--plot-only", action="store_true",
-                        help="Regenerate histograms from saved .npz (no re-embedding)")
+                        help="Regenerate plots from saved outputs (no re-embedding)")
+    parser.add_argument("--heatmap-only", action="store_true",
+                        help="Regenerate RDS heatmap and box plot from saved CSV")
+    parser.add_argument("--boxplot-only", action="store_true",
+                        help="Regenerate RDS strategy box plot from rationale_rds_heatmap.csv only")
     args = parser.parse_args()
 
-    if args.plot_only:
+    if args.boxplot_only:
+        replot_rds_boxplot()
+    elif args.heatmap_only:
+        replot_rds_figures()
+    elif args.plot_only:
         replot_calibration()
+        replot_rds_figures()
     else:
         run(args.input_dir)

@@ -1,0 +1,36 @@
+context_variant,strategy,rds
+base,Maintain,0.17235209976396404
+base,Retrenchment,0.11532544090791985
+base,Niche Focus,0.18929356188330135
+base,Diversification,0.18072543038957728
+base,Open Innovation,0.10363718671190295
+base,Fast Follower,0.16432905576132625
+base,Technology Leadership,0.13957751471837648
+competitive_dynamics,Maintain,0.16503718233472311
+competitive_dynamics,Retrenchment,0.10368499285416585
+competitive_dynamics,Niche Focus,0.18093821319588738
+competitive_dynamics,Diversification,0.1834081865457538
+competitive_dynamics,Open Innovation,0.10590507476303582
+competitive_dynamics,Fast Follower,0.15345480941957043
+competitive_dynamics,Technology Leadership,0.1545337649690697
+count_fact,Maintain,0.19749735936114324
+count_fact,Retrenchment,0.12695046370866156
+count_fact,Niche Focus,0.18972011055355859
+count_fact,Diversification,0.1652810042925018
+count_fact,Open Innovation,0.09955182606067885
+count_fact,Fast Follower,0.13562038702761725
+count_fact,Technology Leadership,0.13994556787408435
+opp_focus,Maintain,0.17130911049971037
+opp_focus,Retrenchment,0.10470161013172687
+opp_focus,Niche Focus,0.17553558660152016
+opp_focus,Diversification,0.1760109459884912
+opp_focus,Open Innovation,0.10268885229429628
+opp_focus,Fast Follower,0.17499210104742885
+opp_focus,Technology Leadership,0.1628268214223603
+randomized_numbers,Maintain,0.1698548805109081
+randomized_numbers,Retrenchment,0.10982914632401611
+randomized_numbers,Niche Focus,0.18295378923857564
+randomized_numbers,Diversification,0.17543105498042744
+randomized_numbers,Open Innovation,0.10387143345821175
+randomized_numbers,Fast Follower,0.1724652309554169
+randomized_numbers,Technology Leadership,0.1518056133053578
