@@ -31,7 +31,7 @@ difference is explicit:
 
 Outputs:
   - final_results/summary/fr_directionality_overall_compare_by_strategy.csv  (A + B merged)
-  - final_results/plots/eval_fr_directionality_bars__ALL.png                 (Method A only)
+  - final_results/plots/eval_fr_directionality_bars__ALL_methodA.png          (Method A only; NOT the paper Fig. 4, which carries CI/stars from specific_generic_delta_ci.py)
   - final_results/plots/eval_fr_directionality_bars__ALL_compare.png         (A vs B grouped)
   - final_results/summary/fr_directionality_by_context_variant_long.csv      (interaction long)
   - final_results/summary/fr_directionality_by_context_variant_matrix.csv   (heatmap matrix)
@@ -367,7 +367,7 @@ def plot_fr_directionality_bars_overall(
     fr_dir_df: pd.DataFrame,
     save_dir: str,
     top_k: int = 8,
-    filename: str = "eval_fr_directionality_bars__ALL.png",
+    filename: str = "eval_fr_directionality_bars__ALL_methodA.png",
 ):
     """
     Single, paper-style bar plot for Method A (condition-weighted) Δp over the whole

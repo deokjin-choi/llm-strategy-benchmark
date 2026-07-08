@@ -161,14 +161,18 @@ def plot_specific_generic_delta_bars(
     right = max(0.0, float(np.nanmax(ci_hi))) + 0.40 * span
     ax.set_xlim(left, right)
 
-    gap = 0.015 * span
+    gap = 0.03 * span
     for i, (v, star) in enumerate(zip(vals, stars)):
-        label_x = v + (gap if v >= 0 else -gap)
-        ha = "left" if v >= 0 else "right"
-        ax.text(label_x, i, f"{v:+.2f}", va="center", ha=ha, fontsize=8, color="#333")
-        if star:
-            star_x = ci_hi[i] + 0.04 * span if v >= 0 else ci_lo[i] - 0.04 * span
-            ax.text(star_x, i, star, va="center", ha="center", fontsize=11, color="#111")
+        # Place a single combined label just beyond the error-bar cap so the
+        # value and stars never overlap the bar or the CI whiskers.
+        text = f"{v:+.2f}{(' ' + star) if star else ''}"
+        if v >= 0:
+            label_x = ci_hi[i] + gap
+            ha = "left"
+        else:
+            label_x = ci_lo[i] - gap
+            ha = "right"
+        ax.text(label_x, i, text, va="center", ha=ha, fontsize=8, color="#222")
 
     ax.set_yticks(y)
     ax.set_yticklabels(labels, fontsize=9)
