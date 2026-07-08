@@ -172,17 +172,10 @@ Fig. 4\. Strategic reallocation under brand framing (bootstrap 95% CI from condi
 
 **5.4 Context–Framing Interaction: Moderation of Brand Effects**
 
-To examine whether brand framing operates independently of context or is moderated by it, we disaggregate the Δp = p(Specific) − p(Generic) computed in Section 5.3 by context variant. Table 4 presents the resulting framing-effect matrix, with mean |Δp| summarizing overall intensity per context. To test moderation formally, we compute a difference-in-differences interaction relative to base: $\Delta p_{\mathrm{interaction}} = \Delta p(\mathrm{variant}) - \Delta p(\mathrm{base})$ for each strategy. Bootstrap 95% confidence intervals (10,000 condition-level resamples per variant) and Benjamini–Hochberg FDR correction across the 28 interaction terms (four non-base variants × seven strategies) assess whether context reliably shifts framing effects beyond base (Table 5).
+To examine whether brand framing operates independently of context or is moderated by it, we disaggregate the Δp = p(Specific) − p(Generic) computed in Section 5.3 by context variant. Fig. 5 presents the resulting framing-effect matrix as a context variant × strategy heatmap. To test moderation formally, we compute a difference-in-differences interaction relative to base: $\Delta p_{\mathrm{interaction}} = \Delta p(\mathrm{variant}) - \Delta p(\mathrm{base})$ for each strategy. Bootstrap 95% confidence intervals (10,000 condition-level resamples per variant) and Benjamini–Hochberg FDR correction across the 28 interaction terms (four non-base variants × seven strategies) assess whether context reliably shifts framing effects beyond base (Table 5).
 
-| Context variant | Maintain | Retrenchment | Niche Focus | Diversification | Open Innovation | Fast Follower | Technology Leadership | mean \|Δp\| |
-| :---- | :----: | :----: | :----: | :----: | :----: | :----: | :----: | :----: |
-| base | −0.019 | −0.015 | −0.061 | +0.013 | −0.047 | +0.012 | +0.117 | 0.041 |
-| competitive\_dynamics | −0.008 | −0.003 | −0.079 | +0.005 | −0.068 | +0.031 | +0.122 | 0.045 |
-| count\_fact | −0.013 | +0.004 | −0.016 | +0.008 | −0.059 | +0.027 | +0.050 | 0.025 |
-| opp\_focus | −0.012 | −0.003 | −0.046 | +0.009 | −0.061 | +0.015 | +0.099 | 0.035 |
-| randomized\_numbers | −0.021 | −0.006 | −0.033 | +0.009 | −0.051 | +0.016 | +0.086 | 0.032 |
-
-Table 4. Brand framing effect (Δp = p(Specific) − p(Generic)) by context variant and strategy.
+![Brand_framing_by_context_variant](final_results/plots/eval_fr_directionality_heatmap_by_context_variant__ALL.png)  
+Fig. 5\. Brand framing effect (Δp = p(Specific) − p(Generic)) by context variant and strategy (macro-averaged over conditions within each variant; diverging scale centered at zero).
 
 | Context variant | Maintain | Retrenchment | Niche Focus | Diversification | Open Innovation | Fast Follower | Technology Leadership |
 | :---- | :----: | :----: | :----: | :----: | :----: | :----: | :----: |
@@ -193,9 +186,9 @@ Table 4. Brand framing effect (Δp = p(Specific) − p(Generic)) by context vari
 
 Table 5. Context–framing interaction ($\Delta p_{\mathrm{interaction}} = \Delta p(\mathrm{variant}) - \Delta p(\mathrm{base})$) by context variant and strategy. Stars denote FDR-corrected significance at *q* < .01 (**). Bootstrap 95% CIs for significant terms: Technology Leadership under count\_fact [−0.104, −0.029]; Niche Focus under count\_fact [0.018, 0.072].
 
-Three findings emerge. First, the directional signature of brand framing is fully consistent across all five context variants in Table 4: Technology Leadership gains and Open Innovation and Niche Focus lose in every row without exception. Pairwise Spearman rank correlations between variant-level Δp profiles range from 0.93 to 1.00, confirming that context does not reverse which strategies are favored or penalized under Specific framing.
+Three findings emerge. First, the directional signature of brand framing is fully consistent across all five context variants in Fig. 5: Technology Leadership gains and Open Innovation and Niche Focus lose in every row without exception. Pairwise Spearman rank correlations between variant-level Δp profiles range from 0.93 to 1.00, confirming that context does not reverse which strategies are favored or penalized under Specific framing.
 
-Second, descriptive magnitudes in Table 4 vary by context—mean |Δp| is highest under competitive\_dynamics (0.045) and lowest under count\_fact (0.025)—and Technology Leadership Δp ranges from +12.2 pp to +5.0 pp across variants. Table 5 shows, however, that most of these context differences are not statistically distinguishable from zero after FDR correction: only two of 28 interaction terms are significant. Under count\_fact, Technology Leadership interaction is −0.067 (95% CI [−0.104, −0.029]; FDR *q* < .01), indicating that unfavorable factual constraints attenuate Tesla's leadership amplification relative to base by 6.7 pp—a formal difference-in-differences confirmation that constraint context weakens brand-driven Technology Leadership gains. The same context significantly moderates Niche Focus (+0.045; 95% CI [0.018, 0.072]; FDR *q* < .01), meaning the brand penalty on Niche Focus is 4.5 pp smaller under count\_fact than under base (consistent with defensive repositioning already salient in the narrative). Opportunity-focused (opp\_focus) and competitive contexts show attenuation of Technology Leadership interaction in the expected direction (−0.018 and +0.005, respectively), but neither departs reliably from zero at FDR *q* < .05. Open Innovation suppression remains interaction-invariant across variants (all FDR *q* > .05).
+Second, descriptive magnitudes in Fig. 5 vary by context—row-wise mean |Δp| is highest under competitive\_dynamics (0.045) and lowest under count\_fact (0.025)—and Technology Leadership Δp ranges from +12.2 pp to +5.0 pp across variants. Table 5 shows, however, that most of these context differences are not statistically distinguishable from zero after FDR correction: only two of 28 interaction terms are significant. Under count\_fact, Technology Leadership interaction is −0.067 (95% CI [−0.104, −0.029]; FDR *q* < .01), indicating that unfavorable factual constraints attenuate Tesla's leadership amplification relative to base by 6.7 pp—a formal difference-in-differences confirmation that constraint context weakens brand-driven Technology Leadership gains. The same context significantly moderates Niche Focus (+0.045; 95% CI [0.018, 0.072]; FDR *q* < .01), meaning the brand penalty on Niche Focus is 4.5 pp smaller under count\_fact than under base (consistent with defensive repositioning already salient in the narrative). Opportunity-focused (opp\_focus) and competitive contexts show attenuation of Technology Leadership interaction in the expected direction (−0.018 and +0.005, respectively), but neither departs reliably from zero at FDR *q* < .05. Open Innovation suppression remains interaction-invariant across variants (all FDR *q* > .05).
 
 Third, these results characterize context and brand framing as moderation of intensity rather than qualitative reversal. Context adjusts how strongly Specific framing reallocates choices—most clearly and statistically for Technology Leadership under constraint—but does not change the sign of the dominant framing pattern. Auditing brand framing under a single context condition can therefore over- or underestimate framing risk depending on which narrative is active, reinforcing multi-context audit protocols; the count\_fact interaction results provide the strongest statistical evidence that constraint narratives specifically dampen leadership-oriented brand amplification.
 
@@ -224,23 +217,23 @@ Across 141,209 matched pairs, the overall mean RDS is 0.157 (median = 0.146, SD 
 
 The repeat-noise lower bound (n = 5,790; median = 0.101) additionally fixes chosen strategy and firm framing and contrasts two independent repeats, isolating decoding variability absent intentional manipulation. The strategy-ceiling upper bound (n = 1,702; median = 0.364) fixes firm framing but compares rationales from two different chosen strategies, approximating embedding distance when the strategic commitment itself changes. RDS holds repeat and strategy fixed and varies Generic vs. Specific framing alone.
 
-Fig. 5 overlays the three distributions. RDS (median = 0.146) lies clearly above repeat noise and well below the cross-strategy ceiling, indicating that brand framing induces semantically measurable narrative shift beyond stochastic repetition, yet does not reframe justifications to the same extent as changing the chosen strategy itself. Fig. 6 summarizes mean RDS by strategy, with the five context-variant cell means overlaid.
+Fig. 6 overlays the three distributions. RDS (median = 0.146) lies clearly above repeat noise and well below the cross-strategy ceiling, indicating that brand framing induces semantically measurable narrative shift beyond stochastic repetition, yet does not reframe justifications to the same extent as changing the chosen strategy itself. Fig. 7 summarizes mean RDS by strategy, with the five context-variant cell means overlaid.
 
 ![RDS_calibration_histogram](final_results/plots/eval_rationale_rds_calibration_histogram.png)
 
-Fig. 5. Rationale embedding distance: framing (RDS) vs. repeat noise vs. cross-strategy ceiling (matched preprocessing; noise and ceiling baselines: one random pair per eligible cell).
+Fig. 6. Rationale embedding distance: framing (RDS) vs. repeat noise vs. cross-strategy ceiling (matched preprocessing; noise and ceiling baselines: one random pair per eligible cell).
 
 ![RDS_strategy_boxplot](final_results/plots/eval_rationale_rds_strategy_boxplot.png)
 
-Fig. 6. Mean Rationale Divergence Score (RDS) by strategy. Boxes span the five context-variant cell means; colored points indicate base, competitive_dynamics, count_fact, opp_focus, and randomized_numbers (matched pairs; same strategy chosen, only brand framing varies).
+Fig. 7. Mean Rationale Divergence Score (RDS) by strategy. Boxes span the five context-variant cell means; colored points indicate base, competitive_dynamics, count_fact, opp_focus, and randomized_numbers (matched pairs; same strategy chosen, only brand framing varies).
 
-Three structural patterns emerge from Fig. 6. First, RDS differs substantially across strategies. Niche Focus (mean RDS = 0.185) and Diversification (0.177) show the highest narrative divergence, while Open Innovation (0.103) and Retrenchment (0.113) show the lowest—a nearly two-fold spread across the strategy axis. This indicates that the degree of framing-induced narrative shift is conditioned on strategic content.
+Three structural patterns emerge from Fig. 7. First, RDS differs substantially across strategies. Niche Focus (mean RDS = 0.185) and Diversification (0.177) show the highest narrative divergence, while Open Innovation (0.103) and Retrenchment (0.113) show the lowest—a nearly two-fold spread across the strategy axis. This indicates that the degree of framing-induced narrative shift is conditioned on strategic content.
 
 Second, context variants do shift RDS within a strategy, but the size of that shift is strategy-dependent rather than uniform. For Open Innovation the five context means are nearly coincident (span ≈ 0.01), whereas for Fast Follower they range from 0.136 to 0.175 (span ≈ 0.039), with Technology Leadership and Retrenchment intermediate (span ≈ 0.024). Context is therefore a second-order factor layered on the strategy-driven baseline, with the room it has to move the rationale set by the chosen strategy.
 
-Third, the count\_fact variant produces the most pronounced outliers, but not in a uniform direction: under unfavorable factual constraints, rationale divergence becomes more tightly coupled to the chosen strategy rather than globally inflated or deflated. In Fig. 6, count_fact simultaneously marks the highest cell mean (Maintain = 0.197) and one of the lowest within-strategy means (Fast Follower = 0.136; Open Innovation = 0.100). This pattern indicates that constraint framing does not “spread” narrative divergence evenly across decisions; instead, it amplifies strategy-specific narrative anchoring, pushing some strategies toward sharper framing divergence while compressing others.
+Third, the count\_fact variant produces the most pronounced outliers, but not in a uniform direction: under unfavorable factual constraints, rationale divergence becomes more tightly coupled to the chosen strategy rather than globally inflated or deflated. In Fig. 7, count_fact simultaneously marks the highest cell mean (Maintain = 0.197) and one of the lowest within-strategy means (Fast Follower = 0.136; Open Innovation = 0.100). This pattern indicates that constraint framing does not “spread” narrative divergence evenly across decisions; instead, it amplifies strategy-specific narrative anchoring, pushing some strategies toward sharper framing divergence while compressing others.
 
-These figures capture the size of rationale divergence, not its substance. The Maintain × count\_fact point (mean RDS = 0.197, the highest in Fig. 6) illustrates the phenomenon concretely. The following pair, drawn from this cell and representing its most divergent instance (individual RDS = 0.689), captures the pattern at its sharpest: when both Generic and Specific prompts lead to the same "Maintain" choice, Generic rationales frame the decision around operational risk and cash-flow stabilization ("delaying the full-scale launch allows the company to stabilize operations and cash position"), while Specific rationales invoke brand-stewardship imperatives ("ensuring high-quality product delivery is crucial for maintaining brand trust and reputation"). The strategic conclusion is identical; the explanatory frame is not.
+These figures capture the size of rationale divergence, not its substance. The Maintain × count\_fact point (mean RDS = 0.197, the highest in Fig. 7) illustrates the phenomenon concretely. The following pair, drawn from this cell and representing its most divergent instance (individual RDS = 0.689), captures the pattern at its sharpest: when both Generic and Specific prompts lead to the same "Maintain" choice, Generic rationales frame the decision around operational risk and cash-flow stabilization ("delaying the full-scale launch allows the company to stabilize operations and cash position"), while Specific rationales invoke brand-stewardship imperatives ("ensuring high-quality product delivery is crucial for maintaining brand trust and reputation"). The strategic conclusion is identical; the explanatory frame is not.
 
 **5.6 Model-Level Behavioral Profiling and Temperature Robustness**  
 This section extends the scenario-level findings by profiling model-specific behavioral signatures under the same strategic benchmark. Rather than relying on pooled trends, we compare models as distinct strategic reasoners and evaluate whether their behavioral profiles remain stable across decoding temperatures.
@@ -309,13 +302,13 @@ Third, models exhibit distinct prioritization patterns. DeepSeek maximizes FR (0
 
 Section 5.5.2 compared models using aggregate profiling scores. While useful for benchmarking, aggregate averages do not reveal where framing sensitivity, context adaptation, or instability emerge within the experimental grid. To address this limitation, we examine scenario-level behavior for three metrics.
 
-Fig. 7 and Fig. 8 summarize scenario × model heatmaps at $T=0.0$ and $T=0.7$. Each panel is independently min–max scaled to $[0,1]$.
+Fig. 8 and Fig. 9 summarize scenario × model heatmaps at $T=0.0$ and $T=0.7$. Each panel is independently min–max scaled to $[0,1]$.
 
 ![Scenario_model_overview_T0](final_results/plots/eval_scenario_model_overview_FR_CR_DS__T0.png)  
-Fig. 7. Scenario × model heatmaps for $FR_{\mathrm{scenario}}$, $CR_{\mathrm{scenario}}$, and $DS_{\mathrm{scenario}}$ at $T=0.0$.
+Fig. 8. Scenario × model heatmaps for $FR_{\mathrm{scenario}}$, $CR_{\mathrm{scenario}}$, and $DS_{\mathrm{scenario}}$ at $T=0.0$.
 
 ![Scenario_model_overview_T07](final_results/plots/eval_scenario_model_overview_FR_CR_DS__T0.7.png)  
-Fig. 8. Scenario × model heatmaps for $FR_{\mathrm{scenario}}$, $CR_{\mathrm{scenario}}$, and $DS_{\mathrm{scenario}}$ at $T=0.7$.
+Fig. 9. Scenario × model heatmaps for $FR_{\mathrm{scenario}}$, $CR_{\mathrm{scenario}}$, and $DS_{\mathrm{scenario}}$ at $T=0.7$.
 
 **(1) Heterogeneous local behavior.**  
 FR and DS remain relatively high across most cells, while CR is sparse—only a few scenario–model pairs (e.g., 4_model_x_launch) show strong context-driven redistribution. CR's concentration in specific cells (not uniform across all cells) reveals that context responsiveness is situation-dependent. This conditional dependence supports treating models as conditional decision agents: the three axes do not co-move; aggregate profiling scores therefore pool qualitatively different local behaviors. Consequently, a model that appears "moderately context-sensitive" on aggregate may in fact be highly responsive in a few critical scenarios and entirely unresponsive in others—a distinction that only scenario-resolved analysis can reveal.
@@ -327,7 +320,7 @@ The relative spatial structure of FR and CR is broadly preserved across temperat
 
 The patterns above motivate a closer look at specific scenario–model pairs where each metric's characteristic behavior is most pronounced. For FR and DS, we select the cells with the lowest scaled scores—where framing robustness or decision stability fails most visibly. For CR, we select the cell with the highest scaled score—where semantic context most strongly reallocates strategy choices. Table 6 lists the resulting three priority cells, averaging across T=0.0 and T=0.7 to reflect both decoding regimes.
 
-| Metric | Model | Scenario | Mean scaled value (Figs. 7–8, avg.) |
+| Metric | Model | Scenario | Mean scaled value (Figs. 8–9, avg.) |
 | :---- | :---- | :---- | :---- |
 | $FR_{\mathrm{scenario}}$ (min) | Qwen2.5-14B-Instruct | 5_model_3_mass_market | 0.000 |
 | $CR_{\mathrm{scenario}}$ (max) | Qwen2.5-14B-Instruct | 4_model_x_launch | 0.935 |
@@ -357,10 +350,10 @@ Table 7. Strategy menu for 5_model_3_mass_market.
 
 **(3) Observed behavior**
 
-To isolate firm-identity framing effects from semantic context variation, Fig. 9 reports pooled strategy choices under the neutral base context variant only.
+To isolate firm-identity framing effects from semantic context variation, Fig. 10 reports pooled strategy choices under the neutral base context variant only.
 
 ![FR_deepdive_Qwen_Model3](final_results/plots/eval_deepdive_fr_framing_stacks__Qwen2.5-14B__5_model_3_mass_market.png)  
-Fig. 9. FR deep-dive for 5_model_3_mass_market.
+Fig. 10. FR deep-dive for 5_model_3_mass_market.
 
 A paired permutation test on brand-masked token statistics (480 paired runs per cell) confirms that the lexical gap between Generic and Specific rationales is systematic, not a decoding artifact (global separation statistic with p ≈ 0.005 at both T=0.0 and T=0.7).
 
@@ -371,7 +364,7 @@ A paired permutation test on brand-masked token statistics (480 paired runs per 
 
 Table 8. FR case summary
 
-As shown in Fig. 9, Generic framing leads the model to favor Open Innovation (external partnerships for scaling). Under Specific (Tesla) framing, it shifts to Maintain (gradual expansion with quality focus). This divergence from the aggregate trend in Section 5.3 (where brand framing boosted Technology Leadership) illustrates that local effects can deviate substantially from averages—highlighting the need for scenario-level auditing.
+As shown in Fig. 10, Generic framing leads the model to favor Open Innovation (external partnerships for scaling). Under Specific (Tesla) framing, it shifts to Maintain (gradual expansion with quality focus). This divergence from the aggregate trend in Section 5.3 (where brand framing boosted Technology Leadership) illustrates that local effects can deviate substantially from averages—highlighting the need for scenario-level auditing.
 
 ---
 
@@ -398,13 +391,13 @@ Table 9. Strategy menu for 4_model_x_launch.
 semantic manipulation is implemented only through the context_variant axis—base, competitive_dynamics, count_fact, and opp_focus—on top of Generic vs. Specific firm-identity framing.
 
 ![CR_deepdive_Qwen_ModelX_framing](final_results/plots/eval_deepdive_cr_strategy_stacks_framing__Qwen2.5-14B__4_model_x_launch.png)  
-Fig. 10. CR deep-dive for 4_model_x_launch.
+Fig. 11. CR deep-dive for 4_model_x_launch.
 
 The following plot reports the corresponding mean JSD from base for each semantic variant (CR cue strength), shown separately for $T=0.0$ and $T=0.7$.
 ![CR_deepdive_Qwen_ModelX_jsd](final_results/plots/eval_deepdive_cr_jsd_by_variant__Qwen2.5-14B__4_model_x_launch.png)  
-Fig. 11. CR cue strength: mean JSD from base per semantic variant (T=0.0 vs T=0.7).
+Fig. 12. CR cue strength: mean JSD from base per semantic variant (T=0.0 vs T=0.7).
 
- Fig. 10 shows that Generic framing maintains Open Innovation as the dominant choice across all context variants. Under Specific framing, opp_focus uniquely activates Technology Leadership, while competitive_dynamics lifts Fast Follower. The JSD hierarchy in the accompanying plot (opp_focus > competitive_dynamics > count_fact) confirms asymmetric cue sensitivity: positive opportunities drive larger reallocations than unfavorable constraints.
+ Fig. 11 shows that Generic framing maintains Open Innovation as the dominant choice across all context variants. Under Specific framing, opp_focus uniquely activates Technology Leadership, while competitive_dynamics lifts Fast Follower. The JSD hierarchy in the accompanying plot (opp_focus > competitive_dynamics > count_fact) confirms asymmetric cue sensitivity: positive opportunities drive larger reallocations than unfavorable constraints.
 
 ---
 
@@ -429,12 +422,12 @@ Table 10. Strategy menu for 2_roadster_launch.
 **(3) Observed behavior.**
 
 ![DS_deepdive_DeepSeek_Roadster_stacks_numctx](final_results/plots/eval_deepdive_ds_strategy_stacks_numcontext_framing__deepseek-llm-7b-chat__2_roadster_launch.png)  
-Fig. 12. Strategy mix across Num Context tiers.
+Fig. 13. Strategy mix across Num Context tiers.
 
 ![DS_deepdive_DeepSeek_Roadster_entropy](final_results/plots/eval_deepdive_ds_entropy_numcontext_box__deepseek-llm-7b-chat__2_roadster_launch.png)  
-Fig. 13. Repeat-level entropy across Num Context tiers.
+Fig. 14. Repeat-level entropy across Num Context tiers.
 
-As shown in Figs. 12–13, strategy mass shifts systematically as context blocks accumulate: near-vacuous prompts favor Open Innovation; partial context pivots toward Retrenchment/Niche Focus; full context yields a Fast Follower vs. Retrenchment split. This demonstrates that decision stability depends not only on temperature but also on the amount of contextual information provided. This variation across context loads explains why DS is low in this cell: even small changes in information quantity produce different strategic responses, making repeatability under identical conditions difficult to achieve.
+As shown in Figs. 13–14, strategy mass shifts systematically as context blocks accumulate: near-vacuous prompts favor Open Innovation; partial context pivots toward Retrenchment/Niche Focus; full context yields a Fast Follower vs. Retrenchment split. This demonstrates that decision stability depends not only on temperature but also on the amount of contextual information provided. This variation across context loads explains why DS is low in this cell: even small changes in information quantity produce different strategic responses, making repeatability under identical conditions difficult to achieve.
 
 **6. Discussion**
 

@@ -284,7 +284,7 @@ def plot_fr_directionality_heatmap_by_variant(
         print("No per-variant directionality data to plot.")
         return None
 
-    fig, ax = plt.subplots(figsize=(10.5, 4.8))
+    fig, ax = plt.subplots(figsize=(10, 6))
     vals = mat.to_numpy(dtype=float)
     vmax = float(np.nanmax(np.abs(vals))) if np.isfinite(vals).any() else 1.0
     if not np.isfinite(vmax) or vmax <= 0:
@@ -292,21 +292,24 @@ def plot_fr_directionality_heatmap_by_variant(
 
     im = ax.imshow(vals, aspect="auto", cmap="RdBu_r", vmin=-vmax, vmax=vmax)
     ax.set_xticks(np.arange(mat.shape[1]))
-    ax.set_xticklabels(mat.columns.tolist(), rotation=30, ha="right", fontsize=9)
+    ax.set_xticklabels(mat.columns.tolist(), rotation=25, ha="right", fontsize=9)
     ax.set_yticks(np.arange(mat.shape[0]))
     ax.set_yticklabels(mat.index.tolist(), fontsize=9)
-    ax.set_xlabel("Strategy")
-    ax.set_ylabel("context_variant")
+    ax.set_xlabel("Strategy", fontsize=9)
+    ax.set_ylabel("Context Variant", fontsize=9)
     ax.set_title(
-        "Brand framing effect by context variant\n"
-        "Δp = p(Specific) − p(Generic), macro-averaged over conditions within each variant"
+        "Brand framing effect by context variant × strategy\n"
+        "Δp = p(Specific) − p(Generic), macro-averaged over conditions within each variant",
+        fontsize=10,
+        pad=10,
     )
 
     for i in range(mat.shape[0]):
         for j in range(mat.shape[1]):
             v = vals[i, j]
             if np.isfinite(v):
-                txt_color = "white" if abs(v) > 0.55 * vmax else "#222"
+                norm = abs(v) / vmax if vmax > 0 else 0.0
+                txt_color = "white" if norm > 0.55 else "#222222"
                 ax.text(
                     j,
                     i,
@@ -317,7 +320,7 @@ def plot_fr_directionality_heatmap_by_variant(
                     color=txt_color,
                 )
 
-    cbar = fig.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
+    cbar = fig.colorbar(im, ax=ax)
     cbar.set_label("Δp (percentage points)", fontsize=9)
     plt.tight_layout()
 
