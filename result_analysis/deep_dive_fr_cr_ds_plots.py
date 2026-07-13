@@ -735,13 +735,21 @@ def run_deep_dive_fr_cr_ds(
 def run_audit_case_deepdives(
     input_dir: str = "infer_results",
     plots_dir: str = "./final_results/plots",
+    summary_dir: str = "./final_results/summary",
     *,
     firm_identity_cell: Tuple[str, str] = ("Qwen/Qwen2.5-14B-Instruct", "5_model_3_mass_market"),
     context_cell: Tuple[str, str] = ("meta-llama/Meta-Llama-3.1-8B-Instruct", "4_model_x_launch"),
+    rationale_cell: Tuple[str, str, str, str] = (
+        "Qwen/Qwen2.5-14B-Instruct",
+        "2_roadster_launch",
+        "Maintain",
+        "count_fact",
+    ),
     temperatures: Sequence[float] = TEMPERATURES_DEFAULT,
 ) -> None:
-    """Audit-named deep-dive figures for §5.6.3 Cases I–II (no FR/CR legacy labels)."""
+    """Audit-named deep-dive figures for §5.6.3 Cases I–III (no FR/CR legacy labels)."""
     os.makedirs(plots_dir, exist_ok=True)
+    os.makedirs(summary_dir, exist_ok=True)
     df = load_profile_data(input_dir=input_dir)
 
     m, s = firm_identity_cell
@@ -777,6 +785,26 @@ def run_audit_case_deepdives(
             plots_dir,
             f"eval_deepdive_context_strategy_stacks_framing__{_safe_filename(_short_model_name(m))}__{_safe_filename(s)}.png",
         ),
+    )
+
+    try:
+        from result_analysis.rationale_rds_analysis import plot_rds_case_cell_from_infer
+    except ImportError:
+        from rationale_rds_analysis import plot_rds_case_cell_from_infer
+
+    rm, rs, rstrat, rcv = rationale_cell
+    plot_rds_case_cell_from_infer(
+        input_dir,
+        model=rm,
+        scenario=rs,
+        strategy=rstrat,
+        context_variant=rcv,
+        temperatures=temperatures,
+        save_path=os.path.join(
+            plots_dir,
+            f"eval_deepdive_rds_matched_choice__{_safe_filename(_short_model_name(rm))}__{_safe_filename(rs)}__{_safe_filename(rstrat)}__{_safe_filename(rcv)}.png",
+        ),
+        summary_path=os.path.join(summary_dir, "deepdive_rds_case_cell_summary.csv"),
     )
     print("Audit case deep-dive plots written to:", plots_dir)
 
