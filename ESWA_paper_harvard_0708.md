@@ -233,8 +233,6 @@ Second, context variants do shift RDS within a strategy, but the size of that sh
 
 Third, the count\_fact variant produces the most pronounced outliers, but not in a uniform direction: under unfavorable factual constraints, rationale divergence becomes more tightly coupled to the chosen strategy rather than globally inflated or deflated. In Fig. 7, count_fact simultaneously marks the highest cell mean (Maintain = 0.197) and one of the lowest within-strategy means (Fast Follower = 0.136; Open Innovation = 0.100). This pattern indicates that constraint framing does not “spread” narrative divergence evenly across decisions; instead, it amplifies strategy-specific narrative anchoring, pushing some strategies toward sharper framing divergence while compressing others.
 
-These figures capture the size of rationale divergence, not its substance. The Maintain × count\_fact point (mean RDS = 0.197, the highest in Fig. 7) illustrates the phenomenon concretely. The following pair, drawn from this cell and representing its most divergent instance (individual RDS = 0.689), captures the pattern at its sharpest: when both Generic and Specific prompts lead to the same "Maintain" choice, Generic rationales frame the decision around operational risk and cash-flow stabilization ("delaying the full-scale launch allows the company to stabilize operations and cash position"), while Specific rationales invoke brand-stewardship imperatives ("ensuring high-quality product delivery is crucial for maintaining brand trust and reputation"). The strategic conclusion is identical; the explanatory frame is not.
-
 **5.6 Localized Sensitivity Profiles and Deployment Risk Cases**
 
 Sections 5.1–5.5 establish that LLM strategy recommendations and matched-choice rationales shift under semantic context and firm-identity cues when the underlying dilemma and closed strategy menu are held fixed. Those results are population-level: they macro-average over models, scenarios, temperatures, and context loads. For deployment, however, the operative question is not whether sensitivity exists on average but *where* it concentrates in the experimental grid—and whether a production configuration (model, temperature, scenario template, and prompt framing) would inherit a localized failure mode invisible in pooled benchmarks. This section answers that question by re-expressing the audit metrics from Sections 5.1–5.5 and Table 12—context JSD, firm-identity Δ*p*, and rationale RDS—at the model × scenario × temperature level, then examining three priority cells that illustrate distinct deployment risk archetypes.
@@ -359,7 +357,7 @@ Under Generic framing, Open Innovation remains dominant across all context varia
 ![RDS_heatmap](final_results/plots/eval_rationale_rds_heatmap.png)  
 Fig. 11. Rationale sensitivity case: mean RDS by strategy and context variant (Maintain × *count\_fact* peak).
 
-When both Generic and Specific prompts select Maintain, rationales diverge in managerial frame rather than strategic label. A representative high-divergence pair (individual RDS = 0.689; Section 5.5) illustrates the pattern:
+When both Generic and Specific prompts select Maintain, rationales diverge in managerial frame rather than strategic label. A representative high-divergence pair (individual RDS = 0.689) illustrates the pattern:
 
 | Framing | Illustrative rationale | Managerial frame |
 | :---- | :---- | :---- |
