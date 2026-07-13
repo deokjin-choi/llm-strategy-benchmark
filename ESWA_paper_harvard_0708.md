@@ -128,7 +128,7 @@ To mitigate option-order bias, alphabetic labels (A–G) were rotated across sce
 Each experimental condition was repeated 30 times per model at two decoding temperatures. Temperature 0.0 produces deterministic responses, establishing a baseline of each model's stable strategic preferences under identical inputs. Temperature 0.7 introduces controlled randomness to assess whether the observed patterns remain stable when responses are allowed to vary, and to compare models' sensitivity to decoding temperature. Maximum output length was fixed at 256 tokens.
 
 **5\. Key Findings**  
-This section synthesizes the central empirical patterns observed across repeated runs. We first characterize how strategy selections shift across contextual variants and whether those shifts form distinct structural regimes (distributional profiles and PCA separation). We then quantify decision uncertainty and rank stability using entropy, Jensen–Shannon divergence, and Spearman correlation, and separately examine the pure effect of brand framing on strategy reallocation. Finally, we test whether brand exposure alters the rationale framing even when the selected strategy is held constant, and we extend the analysis to model-level behavioral profiling and temperature robustness. (Instruction-following compliance and categorical validity checks are reported in Appendix A.)
+This section synthesizes the central empirical patterns observed across repeated runs. We first characterize how strategy selections shift across contextual variants and whether those shifts form distinct structural regimes (distributional profiles and PCA separation). We then quantify decision uncertainty and rank stability using entropy, Jensen–Shannon divergence, and Spearman correlation, and separately examine the pure effect of brand framing on strategy reallocation. Finally, we test whether brand exposure alters the rationale framing even when the selected strategy is held constant, and we localize population-level sensitivity patterns to specific model–scenario–temperature cells that motivate the audit framework in Section 6. (Instruction-following compliance and categorical validity checks are reported in Appendix A.)
 
 **5.1 Strategy Distribution Across Contextual Variants**  
 Fig. 2 shows that the distribution of selected strategies varies across repeated runs, indicating that LLMs do not rely on a single dominant default strategy but respond systematically to contextual framing. In the base scenario, conservative positioning such as Niche Focus is most frequent, while Technology Leadership remains secondary. When opportunity signals are emphasized (opp\_focus), leadership-oriented strategies surge and become dominant. In contrast, unfavorable factual constraints (count\_fact) lead to defensive repositioning toward niche or follower strategies. Notably, numerical perturbations alone (randomized\_numbers) produce minimal change, indicating that semantic context rather than numeric variation drives strategic reorientation. This pattern carries important implications for strategic decision-making. In many real-world R\&D and innovation contexts, proportional numerical changes—such as shifts in cost, market size, or resource availability—often serve as triggers for strategic adjustment. However, the observed stability under numerical perturbations suggests that LLMs may treat moderate quantitative variation as secondary when the overall semantic structure of the scenario remains unchanged. This does not imply an inability to process numbers, but it suggests that, within narrative-based prompts, quantitative signals may exert less influence on categorical strategic choice than semantic framing. For practitioners, this indicates that LLM-generated recommendations in magnitude-sensitive environments should be interpreted with attention to how numerical thresholds are presented and whether they meaningfully alter the underlying decision narrative.
@@ -235,106 +235,66 @@ Third, the count\_fact variant produces the most pronounced outliers, but not in
 
 These figures capture the size of rationale divergence, not its substance. The Maintain × count\_fact point (mean RDS = 0.197, the highest in Fig. 7) illustrates the phenomenon concretely. The following pair, drawn from this cell and representing its most divergent instance (individual RDS = 0.689), captures the pattern at its sharpest: when both Generic and Specific prompts lead to the same "Maintain" choice, Generic rationales frame the decision around operational risk and cash-flow stabilization ("delaying the full-scale launch allows the company to stabilize operations and cash position"), while Specific rationales invoke brand-stewardship imperatives ("ensuring high-quality product delivery is crucial for maintaining brand trust and reputation"). The strategic conclusion is identical; the explanatory frame is not.
 
-**5.6 Model-Level Behavioral Profiling and Temperature Robustness**  
-This section extends the scenario-level findings by profiling model-specific behavioral signatures under the same strategic benchmark. Rather than relying on pooled trends, we compare models as distinct strategic reasoners and evaluate whether their behavioral profiles remain stable across decoding temperatures.
+**5.6 Localized Sensitivity Profiles and Deployment Risk Cases**
 
-To support this comparative analysis, we formalize the quantitative framework into three specific profiling axes. These axes transition from general descriptive metrics to formal behavioral indicators, allowing for a multidimensional assessment of how each model navigates the trade-offs between contextual responsiveness, framing stability, and decision stability.
+Sections 5.1–5.5 establish that LLM strategy recommendations and matched-choice rationales shift under semantic context and firm-identity cues when the underlying dilemma and closed strategy menu are held fixed. Those results are population-level: they macro-average over models, scenarios, temperatures, and context loads. For deployment, however, the operative question is not whether sensitivity exists on average but *where* it concentrates in the experimental grid—and whether a production configuration (model, temperature, scenario template, and prompt framing) would inherit a localized failure mode invisible in pooled benchmarks. This section answers that question by re-expressing the audit metrics from Sections 5.1–5.5 and Table 12—context JSD, firm-identity Δ*p*, and rationale RDS—at the model × scenario × temperature level, then examining three priority cells that illustrate distinct deployment risk archetypes.
 
-5.6.1 Profiling Axes  
-To quantify model behavior, we define a strategy distribution $P(m, \tau, s, n, v, \phi)$ for a given model $m$, temperature $\tau$, scenario $s$, context load $n$ (Num Context), context variant $v$, and framing type $\phi \in \{\text{Generic, Specific}\}$. we employ the Jensen–Shannon Divergence ($JSD$) to measure the statistical distance between distributions.
+**5.6.1 From Population Patterns to Localized Audit Cells**
 
-1\. Framing Robustness (FR)  
-FR measures the model's ability to maintain a consistent strategy regardless of arbitrary branding changes (Generic vs. Specific) under identical underlying conditions.
+The population patterns in Sections 5.1–5.5 already imply that no single correctness score can certify an LLM-assisted strategy DSS for production. Opportunity framing reallocates strategy mass more than constraint framing (JSD ≈ 0.047 vs. 0.008); firm-identity exposure reallocates the menu toward Technology Leadership (+9.5 pp) and away from Open Innovation (−5.7 pp); and matched-choice rationales diverge above repeat-noise levels (macro mean RDS = 0.156). Yet these aggregates can mask sharp local contrasts. A model–temperature pair that appears moderately firm-identity-invariant on average may still flip from Open Innovation to Maintain under Specific framing in a single high-stakes scenario; a scenario that is context-invariant for one model may exhibit large JSD shifts for another; and rationale divergence can peak for a particular strategy × context combination even when the chosen archetype is unchanged.
 
-$$FR(m, \tau) = 1 - \mathbb{E}_{s,n,v} \left[ JSD\left( P(m, \tau, s, n, v, \text{Generic}), P(m, \tau, s, n, v, \text{Specific}) \right) \right]$$
+We therefore profile localization using the same audit metrics applied in Section 6.4, computed within each model × scenario × temperature cell:
 
-* Interpretation: A higher FR indicates that the model's strategic choice is invariant to framing manipulations, focusing on the core problem rather than brand-level biases.
+*Context sensitivity* — maximum Jensen–Shannon divergence from *base* to any semantic variant (*competitive\_dynamics*, *count\_fact*, *opp\_focus*) within the cell.
 
-2\. Context Responsiveness (CR)  
-CR evaluates how effectively a model updates its strategic distribution when provided with high-value semantic context (e.g., competitive dynamics, factual constraints, or opportunity focus) compared to a baseline scenario.
+*Firm-identity sensitivity* — maximum \|Δ*p*\| = \|*p*(Specific) − *p*(Generic)\| across archetypes within the cell.
 
-$$CR(m,\tau)=E_{s,n,\phi,\,v\in V_{sem}}\Big[JSD\big(P(m,\tau,s,n,\mathrm{Base},\phi),P(m,\tau,s,n,v,\phi)\big)\Big]$$
-where $V_{sem}$ is the semantic-variant set `{competitive_dynamics, count_fact, opp_focus}`.
+*Rationale sensitivity* — mean RDS over matched Generic–Specific rationale pairs within the cell (strategy and context variant held fixed).
 
-* Interpretation: A higher CR reflects the model's "strategic intelligence"—its capacity to parse and integrate task-relevant nuances into its decision-making process.
+Table 6 summarizes model-level summaries macro-averaged over scenarios for each architecture at $T=0.0$ and $T=0.7$. Mean semantic JSD is the average context-shift magnitude (equivalent to the prior context-responsiveness index); mean firm-identity JSD is the average Generic–Specific distributional distance; and mean explanatory framing divergence (EFD) summarizes rationale-level separation using the same keyword pipeline as Section 5.5. No model–temperature pair minimizes all three indices simultaneously.
 
-3\. Decision Stability (DS)  
-DS measures how predictable a model’s strategic choices are across repeated runs under fixed conditions. In the current implementation, DS is defined using the concentration of the empirical choice distribution across repeats (normalized entropy).  
-Let $\mathcal{A}$ be the set of strategies and let a fixed condition be $c=(s,n,v,\phi)$, where $s$ is the scenario, $n$ is context load, $v$ is the context variant, and $\phi\in\{\text{Generic},\text{Specific}\}$ is framing. For model $m$ at temperature $\tau$, define the empirical distribution over repeats:
-
-$$p_{c}^{m,\tau}(a)=\frac{1}{R}\sum_{r=1}^{R}\mathbf{1}\big[\text{strategy}_{r}=a\big],\quad a\in\mathcal{A}.$$
-
-Then
-
-$$DS(m,\tau)=\mathbb{E}_{c}\left[1-\frac{H\left(p_{c}^{m,\tau}\right)}{\log_{2}|\mathcal{A}|}\right], \qquad H(p)=-\sum_{a\in\mathcal{A}}p(a)\log_{2}p(a).$$
-
-* Interpretation: A higher DS indicates that repeated runs under the same condition concentrate on fewer strategies (higher predictability). DS approaches 1 when the model consistently selects the same strategy, and approaches 0 when choices are spread uniformly across strategies.
-
-5.6.2 Cross-Model and Cross-Temperature Comparison  
-We evaluate each model’s "strategic fingerprint" by calculating the three-axis scores at both $T=0.0$ and $T=0.7$. This comparison reveals whether a model’s behavior is rooted in its structural reasoning logic or merely a byproduct of stochastic decoding.
-
-Table 5 lists the three-axis scores for each model $m$ and temperature $\tau$. By construction, FR, CR,and DS lie in $[0,1]$
-
-| Model | $T$ | FR | CR | DS |
+| Model | $T$ | Mean semantic JSD | Mean firm-identity JSD | Mean EFD |
 | :---- | :--: | :----: | :----: | :----: |
-| Yi-1.5-9B-Chat | 0.0 | 0.8137 | 0.0796 | 0.8552 |
-| Yi-1.5-9B-Chat | 0.7 | 0.8298 | 0.0691 | 0.6943 |
-| Qwen2.5-14B-Instruct | 0.0 | 0.6749 | 0.1485 | 0.8932 |
-| Qwen2.5-14B-Instruct | 0.7 | 0.7066 | 0.1340 | 0.8600 |
-| DeepSeek-LLM-7B-Chat | 0.0 | 0.9405 | 0.1138 | 0.9015 |
-| DeepSeek-LLM-7B-Chat | 0.7 | 0.9560 | 0.0582 | 0.6423 |
-| Llama-3.1-8B-Instruct | 0.0 | 0.8515 | 0.1750 | 0.8759 |
-| Llama-3.1-8B-Instruct | 0.7 | 0.9334 | 0.1206 | 0.7273 |
-| Mistral-7B-Instruct-v0.3 | 0.0 | 0.7594 | 0.1325 | 0.9178 |
-| Mistral-7B-Instruct-v0.3 | 0.7 | 0.8195 | 0.1078 | 0.8336 |
+| Yi-1.5-9B-Chat | 0.0 | 0.080 | 0.186 | 0.571 |
+| Yi-1.5-9B-Chat | 0.7 | 0.069 | 0.170 | 0.310 |
+| Qwen2.5-14B-Instruct | 0.0 | 0.149 | 0.325 | 0.566 |
+| Qwen2.5-14B-Instruct | 0.7 | 0.134 | 0.293 | 0.414 |
+| DeepSeek-LLM-7B-Chat | 0.0 | 0.114 | 0.059 | 0.548 |
+| DeepSeek-LLM-7B-Chat | 0.7 | 0.058 | 0.044 | 0.298 |
+| Llama-3.1-8B-Instruct | 0.0 | 0.175 | 0.148 | 0.535 |
+| Llama-3.1-8B-Instruct | 0.7 | 0.121 | 0.067 | 0.295 |
+| Mistral-7B-Instruct-v0.3 | 0.0 | 0.133 | 0.241 | 0.558 |
+| Mistral-7B-Instruct-v0.3 | 0.7 | 0.108 | 0.181 | 0.311 |
 
-Table 5\. model-level profiling scores (three axes)
+Table 6. Model-level audit-metric summaries (macro-averaged over scenarios).
 
-Three patterns stand out.
+Three patterns follow. First, Qwen2.5-14B-Instruct shows the highest mean firm-identity JSD at both temperatures (0.325 at $T=0.0$; 0.293 at $T=0.7$), indicating that brand exposure moves strategy mass more for this architecture than for DeepSeek (0.059; 0.044), even though lower firm-identity JSD does not imply uniformly low context or rationale sensitivity. Second, Llama-3.1-8B-Instruct leads on mean semantic JSD at $T=0.0$ (0.175), confirming that context-shift magnitude varies independently of firm-identity shift. Third, raising temperature from 0.0 to 0.7 reduces mean firm-identity JSD and mean EFD for every model (e.g., Qwen: 0.325 → 0.293 and 0.566 → 0.414), attenuating both choice-level and rationale-level brand separation without eliminating localized hotspots below.
 
-First, temperature consistently improves FR but degrades DS. Every model shows higher FR at T=0.7 (e.g., Llama: 0.8515 → 0.9334; DeepSeek: 0.9405 → 0.9560), while DS declines across all models—most sharply for DeepSeek (0.9015 → 0.6423) and Yi (0.8552 → 0.6943). This confirms a systematic trade-off: stochasticity reduces brand sensitivity at the cost of repeatability.
+**5.6.2 Model×Scenario Landscape**
 
-Second, CR is the most variable and model-dependent axis. Llama achieves the highest CR at T=0.0 (0.1750), nearly double that of Yi (0.0796). At T=0.7, DeepSeek's CR collapses by nearly half (0.1138 → 0.0582), while Llama and Qwen maintain moderate responsiveness (0.1206 and 0.1340, respectively). This suggests that context integration is not a stable model property but varies substantially across architectures and temperatures.
+Aggregates in Table 6 conceal which scenario drives each elevation. Scenario-resolved profiling shows that context JSD, firm-identity \|Δ*p*\|, and RDS do not co-move across the grid: a cell with low firm-identity separation can exhibit high context JSD, and rationale divergence can peak even when strategy labels are stable.
 
-Third, models exhibit distinct prioritization patterns. DeepSeek maximizes FR (0.9405 at T=0.0; 0.9560 at T=0.7)—the most "brand-blind" model—making it suitable for impartial audits. Qwen leads on DS (0.8932 at T=0.0; 0.8600 at T=0.7)—the most repeatable—ideal for compliance workflows. Llama maximizes CR (0.1750 at T=0.0; 0.1206 at T=0.7)—the most context-responsive—best for exploratory analysis. No single model dominates all axes; selection depends on organizational priorities.
+Context sensitivity is sparse but intense: only a subset of scenario–model pairs—notably *4\_model\_x\_launch* under Qwen2.5-14B-Instruct—show semantic-variant JSD levels that would trigger REMEDIATE under Table 12 (≥ 0.03). Firm-identity hotspots concentrate on *5\_model\_3\_mass\_market* for the same model, where Generic vs. Specific framing shifts the modal strategy (Section 5.6.3, Case I). Rationale sensitivity is more diffuse across strategies but peaks for Maintain under *count\_fact* (mean RDS = 0.197 in Fig. 7), the highest strategy × context cell in the benchmark. Because no model dominates all three metrics, pre-deployment audit must be scoped to the production scenario set and model–temperature configuration.
 
-5.6.3 Scenario-Resolved Behavior: Localizing FR, CR, and DS Across the Experimental Grid
+Table 7 lists the three priority cells selected for case analysis.
 
-Section 5.5.2 compared models using aggregate profiling scores. While useful for benchmarking, aggregate averages do not reveal where framing sensitivity, context adaptation, or instability emerge within the experimental grid. To address this limitation, we examine scenario-level behavior for three metrics.
-
-Fig. 8 and Fig. 9 summarize scenario × model heatmaps at $T=0.0$ and $T=0.7$. Each panel is independently min–max scaled to $[0,1]$.
-
-![Scenario_model_overview_T0](final_results/plots/eval_scenario_model_overview_FR_CR_DS__T0.png)  
-Fig. 8. Scenario × model heatmaps for $FR_{\mathrm{scenario}}$, $CR_{\mathrm{scenario}}$, and $DS_{\mathrm{scenario}}$ at $T=0.0$.
-
-![Scenario_model_overview_T07](final_results/plots/eval_scenario_model_overview_FR_CR_DS__T0.7.png)  
-Fig. 9. Scenario × model heatmaps for $FR_{\mathrm{scenario}}$, $CR_{\mathrm{scenario}}$, and $DS_{\mathrm{scenario}}$ at $T=0.7$.
-
-**(1) Heterogeneous local behavior.**  
-FR and DS remain relatively high across most cells, while CR is sparse—only a few scenario–model pairs (e.g., 4_model_x_launch) show strong context-driven redistribution. CR's concentration in specific cells (not uniform across all cells) reveals that context responsiveness is situation-dependent. This conditional dependence supports treating models as conditional decision agents: the three axes do not co-move; aggregate profiling scores therefore pool qualitatively different local behaviors. Consequently, a model that appears "moderately context-sensitive" on aggregate may in fact be highly responsive in a few critical scenarios and entirely unresponsive in others—a distinction that only scenario-resolved analysis can reveal.
-
-**(2) Temperature effects.**  
-The relative spatial structure of FR and CR is broadly preserved across temperatures (e.g., Qwen2.5-14B's FR dip on 5_model_3_mass_market persists, and its CR hotspot on 4_model_x_launch remains equally prominent), whereas DS weakens at T=0.7. This indicates that stochastic decoding primarily erodes run-to-run repeatability without fundamentally altering which scenarios trigger framing sensitivity or context-driven redistribution.
-
-**Priority cells for case analysis.**
-
-The patterns above motivate a closer look at specific scenario–model pairs where each metric's characteristic behavior is most pronounced. For FR and DS, we select the cells with the lowest scaled scores—where framing robustness or decision stability fails most visibly. For CR, we select the cell with the highest scaled score—where semantic context most strongly reallocates strategy choices. Table 6 lists the resulting three priority cells, averaging across T=0.0 and T=0.7 to reflect both decoding regimes.
-
-| Metric | Model | Scenario | Mean scaled value (Figs. 8–9, avg.) |
+| Audit axis | Model | Scenario | Localization signal |
 | :---- | :---- | :---- | :---- |
-| $FR_{\mathrm{scenario}}$ (min) | Qwen2.5-14B-Instruct | 5_model_3_mass_market | 0.000 |
-| $CR_{\mathrm{scenario}}$ (max) | Qwen2.5-14B-Instruct | 4_model_x_launch | 0.935 |
-| $DS_{\mathrm{scenario}}$ (min) | deepseek-llm-7b-chat | 2_roadster_launch | 0.184 |
+| Firm-identity (\|Δ*p*\|) | Qwen2.5-14B-Instruct | 5\_model\_3\_mass\_market | Generic → Open Innovation; Specific → Maintain |
+| Context (JSD) | Qwen2.5-14B-Instruct | 4\_model\_x\_launch | *opp\_focus* activates Technology Leadership under Specific framing |
+| Rationale (RDS) | All models (macro cell) | 2\_roadster\_launch; Maintain × *count\_fact* | Mean RDS = 0.197; peak matched-choice divergence |
 
-Table 6. Priority scenario–model cells.
+Table 7. Priority scenario–model cells for deployment risk cases.
 
----
+**5.6.3 Three Deployment Risk Archetypes**
 
-**(A) FR Case: Brand Identity Changes Strategic Preference (5_model_3_mass_market)**
+The priority cells in Table 7 instantiate three deployment risk archetypes aligned with the gate metrics in Table 12. Each case holds the strategy menu fixed and varies only legitimate deployment inputs—firm identity, semantic context, or both—demonstrating why population-level classifications can fail locally.
 
-**(1) Problem (scenario text)**: Facing an explosive increase in pre-orders, a company must rapidly scale production while maintaining product quality, financial stability, and public trust. The core challenge is to overcome production bottlenecks and reduce costs without sacrificing the brand’s reputation in the mass market.
+*Case I: Firm-identity-coupled strategy reallocation (5\_model\_3\_mass\_market).*
 
-**(2) Strategy menu (options).**
+**(1) Problem.** Facing an explosive increase in pre-orders, a company must rapidly scale production while maintaining product quality, financial stability, and public trust. The core challenge is to overcome production bottlenecks and reduce costs without sacrificing the brand’s reputation in the mass market.
+
+**(2) Strategy menu.**
 
 | Mapped strategy | Execution option |
 | :---- | :---- |
@@ -346,33 +306,27 @@ Table 6. Priority scenario–model cells.
 | Retrenchment | Scale down Model 3 volume targets to protect financial stability |
 | Maintain | Expand production gradually while prioritizing quality and profitability |
 
-Table 7. Strategy menu for 5_model_3_mass_market.
+Table 8. Strategy menu for 5\_model\_3\_mass\_market.
 
-**(3) Observed behavior**
-
-To isolate firm-identity framing effects from semantic context variation, Fig. 10 reports pooled strategy choices under the neutral base context variant only.
+**(3) Observed behavior.** To isolate firm-identity effects, Fig. 8 reports strategy choices under the neutral *base* context variant only (Qwen2.5-14B-Instruct).
 
 ![FR_deepdive_Qwen_Model3](final_results/plots/eval_deepdive_fr_framing_stacks__Qwen2.5-14B__5_model_3_mass_market.png)  
-Fig. 10. FR deep-dive for 5_model_3_mass_market.
+Fig. 8. Firm-identity sensitivity case: strategy mix under Generic vs. Specific framing (*5\_model\_3\_mass\_market*, *base* context).
 
-A paired permutation test on brand-masked token statistics (480 paired runs per cell) confirms that the lexical gap between Generic and Specific rationales is systematic, not a decoding artifact (global separation statistic with p ≈ 0.005 at both T=0.0 and T=0.7).
+Generic framing concentrates mass on Open Innovation (external manufacturing partnerships as the scaling lever). Specific (Tesla) framing shifts the modal choice to Maintain (gradual expansion with quality and profitability safeguards). The strategy label itself changes—not merely its rationale—so this cell exceeds REMEDIATE thresholds on the firm-identity Δ*p* axis (Table 12). The pattern also departs from the population-level trend in Section 5.3, where Specific framing boosted Technology Leadership on average: local firm-identity effects can reorder archetypes relative to macro-averages.
 
-| Framing | Contexts | Rationale | Strategy choice |
-| :---- | :---- | :---- | :---- |
-| **Generic** | High demand, production pressure | Keywords (2-grams): manufacturing partners, scale production, quickly scale, utilizing manufacturing, production rapidly. | **Open Innovation** — Utilize manufacturing partners (OEM) to scale production. External partnerships as the main scaling lever.|
-| **Specific** | High demand, production pressure | Keywords (2-grams): quality profitability, maintaining reputation, long term, crucial maintaining.  | **Maintain** — Expand production gradually while prioritizing quality and profitability. Internal cadence and safeguards over fastest-possible scale-out. |
+| Framing | Rationale keywords (2-grams) | Strategy choice |
+| :---- | :---- | :---- |
+| **Generic** | manufacturing partners, scale production, quickly scale | **Open Innovation** — OEM partnerships to scale production |
+| **Specific** | quality profitability, maintaining reputation, long term | **Maintain** — gradual expansion prioritizing quality and profitability |
 
-Table 8. FR case summary
+Table 9. Firm-identity case: contrasting rationales and strategy labels.
 
-As shown in Fig. 10, Generic framing leads the model to favor Open Innovation (external partnerships for scaling). Under Specific (Tesla) framing, it shifts to Maintain (gradual expansion with quality focus). This divergence from the aggregate trend in Section 5.3 (where brand framing boosted Technology Leadership) illustrates that local effects can deviate substantially from averages—highlighting the need for scenario-level auditing.
+*Case II: Context-driven menu rewrite (4\_model\_x\_launch).*
 
----
+**(1) Problem.** A company aims to enter the growing SUV market. However, a complex product design creates high production difficulty and quality risks, which could severely damage the brand's reputation despite a lack of direct competition.
 
-**(B) CR Case: Semantic Cues Reallocate Strategy Mix (4_model_x_launch)**
-
-**(1) Problem (scenario text)**: A company aims to enter the growing SUV market. However, a complex product design creates high production difficulty and quality risks, which could severely damage the brand's reputation despite a lack of direct competition.
-
-**(2) Strategy menu (options).**
+**(2) Strategy menu.**
 
 | Mapped strategy | Execution option |
 | :---- | :---- |
@@ -384,50 +338,43 @@ As shown in Fig. 10, Generic framing leads the model to favor Open Innovation (e
 | Retrenchment | Reduce scope of SUV project, scale down features to cut risk |
 | Maintain | Postpone the SUV launch, focus on stabilizing Model S production first |
 
-Table 9. Strategy menu for 4_model_x_launch.
+Table 10. Strategy menu for 4\_model\_x\_launch.
 
-**(3) Observed behavior.**
-
-semantic manipulation is implemented only through the context_variant axis—base, competitive_dynamics, count_fact, and opp_focus—on top of Generic vs. Specific firm-identity framing.
+**(3) Observed behavior.** Semantic manipulation is implemented through the *context\_variant* axis—*base*, *competitive\_dynamics*, *count\_fact*, and *opp\_focus*—on top of Generic vs. Specific firm-identity framing (Qwen2.5-14B-Instruct). Fig. 9 shows strategy stacks; Fig. 10 reports mean JSD from *base* for each semantic variant.
 
 ![CR_deepdive_Qwen_ModelX_framing](final_results/plots/eval_deepdive_cr_strategy_stacks_framing__Qwen2.5-14B__4_model_x_launch.png)  
-Fig. 11. CR deep-dive for 4_model_x_launch.
+Fig. 9. Context sensitivity case: strategy mix across semantic variants and framing types (*4\_model\_x\_launch*).
 
-The following plot reports the corresponding mean JSD from base for each semantic variant (CR cue strength), shown separately for $T=0.0$ and $T=0.7$.
 ![CR_deepdive_Qwen_ModelX_jsd](final_results/plots/eval_deepdive_cr_jsd_by_variant__Qwen2.5-14B__4_model_x_launch.png)  
-Fig. 12. CR cue strength: mean JSD from base per semantic variant (T=0.0 vs T=0.7).
+Fig. 10. Context sensitivity case: mean JSD from *base* by semantic variant ($T=0.0$ vs. $T=0.7$).
 
- Fig. 11 shows that Generic framing maintains Open Innovation as the dominant choice across all context variants. Under Specific framing, opp_focus uniquely activates Technology Leadership, while competitive_dynamics lifts Fast Follower. The JSD hierarchy in the accompanying plot (opp_focus > competitive_dynamics > count_fact) confirms asymmetric cue sensitivity: positive opportunities drive larger reallocations than unfavorable constraints.
+Under Generic framing, Open Innovation remains dominant across all context variants. Under Specific framing, *opp\_focus* uniquely activates Technology Leadership, while *competitive\_dynamics* elevates Fast Follower. The JSD hierarchy (*opp\_focus* > *competitive\_dynamics* > *count\_fact*) mirrors the population-level asymmetry in Section 5.1 and would trigger REMEDIATE on the context JSD axis (Table 12). Context–identity moderation (Section 5.4) appears in miniature: brand exposure does not uniformly amplify all variants but interacts with narrative emphasis—leadership activation requires both Specific identification and opportunity framing.
 
----
+*Case III: Rationale divergence under matched choice (2\_roadster\_launch; Maintain × *count\_fact*).*
 
-**(C) DS Case: Context Load Shapes Stability (2_roadster_launch)**
+**(1) Problem.** A company must manage conflicting goals of product quality and timely delivery during its initial product launch. With significant pre-orders already placed, the company faces severe cash flow issues and supply chain delays, jeopardizing brand trust and future investment if not handled correctly.
 
-**(1) Problem (scenario text)**: A company must manage conflicting goals of product quality and timely delivery during its initial product launch. With significant pre-orders already placed, the company faces severe cash flow issues and supply chain delays, jeopardizing brand trust and future investment if not handled correctly.
+**(2) Observed behavior.** Case III isolates rationale sensitivity when the chosen archetype is held constant. Across models and temperatures, the highest strategy × context RDS cell in Fig. 7 is Maintain under *count\_fact* (mean RDS = 0.197) in the *2\_roadster\_launch* scenario—exceeding the REMEDIATE threshold in Table 12 (> 0.18). Fig. 11 situates this cell within the full strategy × context RDS landscape.
 
-**(2) Strategy menu (options).**
+![RDS_heatmap](final_results/plots/eval_rationale_rds_heatmap.png)  
+Fig. 11. Rationale sensitivity case: mean RDS by strategy and context variant (Maintain × *count\_fact* peak).
 
-| Mapped strategy | Execution option |
-| :---- | :---- |
-| Technology Leadership | Prioritize product quality and performance, accepting launch delays |
-| Fast Follower | Accelerate launch to meet demand, accepting potential quality compromises |
-| Open Innovation | Expand manufacturing partnerships to share risk |
-| Niche Focus | Limit deliveries to early adopters first, delaying mass rollout |
-| Diversification | Introduce parallel revenue streams (e.g., licensing tech, consulting) to ease cash flow |
-| Retrenchment | Scale back launch volume until supply chain stabilizes |
-| Maintain | Delay full-scale launch, focus on stabilizing operations and cash position |
+When both Generic and Specific prompts select Maintain, rationales diverge in managerial frame rather than strategic label. A representative high-divergence pair (individual RDS = 0.689; Section 5.5) illustrates the pattern:
 
-Table 10. Strategy menu for 2_roadster_launch.
+| Framing | Illustrative rationale | Managerial frame |
+| :---- | :---- | :---- |
+| **Generic** | “Delaying the full-scale launch allows the company to stabilize operations and cash position.” | Operational risk and cash-flow stabilization |
+| **Specific** | “Ensuring high-quality product delivery is crucial for maintaining brand trust and reputation.” | Brand stewardship and reputation protection |
 
-**(3) Observed behavior.**
+Table 11. Rationale sensitivity case: matched-choice Maintain rationales (*2\_roadster\_launch*, *count\_fact*).
 
-![DS_deepdive_DeepSeek_Roadster_stacks_numctx](final_results/plots/eval_deepdive_ds_strategy_stacks_numcontext_framing__deepseek-llm-7b-chat__2_roadster_launch.png)  
-Fig. 13. Strategy mix across Num Context tiers.
+Identical strategy labels therefore fail a decision-support transparency test: an audit that inspects only chosen archetypes could PASS while a rationale review would flag REMEDIATE. This case connects directly to Step 5 of the deployment protocol (Section 6.4).
 
-![DS_deepdive_DeepSeek_Roadster_entropy](final_results/plots/eval_deepdive_ds_entropy_numcontext_box__deepseek-llm-7b-chat__2_roadster_launch.png)  
-Fig. 14. Repeat-level entropy across Num Context tiers.
+**5.6.4 Temperature as Audited Run Condition**
 
-As shown in Figs. 13–14, strategy mass shifts systematically as context blocks accumulate: near-vacuous prompts favor Open Innovation; partial context pivots toward Retrenchment/Niche Focus; full context yields a Fast Follower vs. Retrenchment split. This demonstrates that decision stability depends not only on temperature but also on the amount of contextual information provided. This variation across context loads explains why DS is low in this cell: even small changes in information quantity produce different strategic responses, making repeatability under identical conditions difficult to achieve.
+Across Table 6 and the three cases, temperature does not remove sensitivity but attenuates its magnitude. Raising $T$ from 0.0 to 0.7 lowers mean firm-identity JSD and mean EFD for every model, consistent with stochastic smoothing of brand-associated mass. However, the priority cells in Table 7 persist in structure across temperatures: Qwen’s firm-identity flip on *5\_model\_3\_mass\_market* and context-driven leadership activation on *4\_model\_x\_launch* remain visible at both $T=0.0$ and $T=0.7$ (Figs. 8–10). RDS peaks are strategy- and context-conditioned rather than temperature-erased (Fig. 11).
+
+For deployment, decoding settings must be documented as audited run conditions alongside prompt templates (Section 6.4, Step 6). A lower-temperature configuration is not a substitute for multi-context or firm-identity audit, and a higher-temperature configuration does not license single-framing production use. The localized cases above motivate the protocol in Section 6.4: sensitivity is measurable and governable only when audit metrics are evaluated on the specific model, scenario, and temperature intended for production—not when inferred from population averages alone.
 
 **6. Discussion**
 
@@ -465,24 +412,24 @@ Fourth, rationale sensitivity shows that identical strategy labels need not impl
 
 For organizations preparing to use LLMs as R&D strategy DSS components, the framework implies a reusable pre-deployment protocol rather than ad hoc prompt debugging. Fig. 15 summarizes the workflow: freeze the dilemma and strategy menu, apply matched firm-identity and multi-context perturbations, measure the four sensitivity axes from Section 6.2, and gate deployment with human review. Three principles govern how the protocol should be applied.
 
-First, the protocol measures *sensitivity*, not correctness. Its purpose is to profile how recommendations shift under legitimate prompt variations, not to declare any single output right or wrong. Second, empirical anchors are context-dependent. The illustrative thresholds in Table 11 partition our Tesla-anchored benchmark (*N* = 408,000 inferences) into tertiary PASS/REVIEW/REMEDIATE bands; organizations should treat them as calibration starting points and re-estimate the partitions on their own scenario sets before production use. Third, thresholds should be risk-adjusted: a smaller shift may be acceptable for exploratory ideation but unacceptable for capital-allocation decisions.
+First, the protocol measures *sensitivity*, not correctness. Its purpose is to profile how recommendations shift under legitimate prompt variations, not to declare any single output right or wrong. Second, empirical anchors are context-dependent. The illustrative thresholds in Table 12 partition our Tesla-anchored benchmark (*N* = 408,000 inferences) into tertiary PASS/REVIEW/REMEDIATE bands; organizations should treat them as calibration starting points and re-estimate the partitions on their own scenario sets before production use. Third, thresholds should be risk-adjusted: a smaller shift may be acceptable for exploratory ideation but unacceptable for capital-allocation decisions.
 
 ![Decision_sensitivity_audit_framework](final_results/plots/eval_decision_sensitivity_audit_framework.png)  
 Fig. 15\. Scenario-based decision sensitivity audit framework for LLM-based R&D strategic decision support. Steps 1–3 freeze the design and apply controlled firm-identity and context perturbations; Steps 4–5 measure context sensitivity, firm-identity sensitivity, context–identity moderation, and rationale sensitivity; Step 6 applies a human-in-the-loop gate (pass / remediate / withhold) before deployment.
 
 *Step 1: Freeze the dilemma and strategy menu.* Hold the core problem statement and the closed seven-archetype menu fixed, with alphabetically rotated option labels per scenario to mitigate order bias and a fixed JSON output schema (one strategy + brief rationale). If decision contexts differ materially from automotive/EV history, validate the menu with domain experts.
 
-*Step 2: Run matched Generic vs. Specific prompts.* Under identical model, temperature, scenario, and context load, compute Δ*p* = *p*(Specific) − *p*(Generic) for each archetype with 95% bootstrap CIs and FDR correction (Benjamini–Hochberg, α = 0.05). Apply the Δ*p* row in Table 11. Positive Δ*p* on identity-congruent archetypes signals brand amplification; negative Δ*p* signals avoidance—both are audit findings, not errors.
+*Step 2: Run matched Generic vs. Specific prompts.* Under identical model, temperature, scenario, and context load, compute Δ*p* = *p*(Specific) − *p*(Generic) for each archetype with 95% bootstrap CIs and FDR correction (Benjamini–Hochberg, α = 0.05). Apply the Δ*p* row in Table 12. Positive Δ*p* on identity-congruent archetypes signals brand amplification; negative Δ*p* signals avoidance—both are audit findings, not errors.
 
-*Step 3: Stress-test semantic context variants.* At minimum, evaluate base, opportunity (*opp\_focus*), competition (*competitive\_dynamics*), and constraint (*count\_fact*) narratives, plus *randomized\_numbers* (±20% perturbation) when quantitative inputs matter operationally. For each variant, report JSD from base and apply the JSD row in Table 11. Also report Spearman rank correlation with base as a supplementary diagnostic—not a separate gate metric—and flag context-dependent rank reordering when Spearman < 0.70 (e.g., *count\_fact* = 0.64 in our benchmark). If opportunity JSD exceeds twice constraint JSD, flag optimism bias; if numerical perturbation JSD remains near zero, semantic framing—not moderate magnitudes—drives reorientation.
+*Step 3: Stress-test semantic context variants.* At minimum, evaluate base, opportunity (*opp\_focus*), competition (*competitive\_dynamics*), and constraint (*count\_fact*) narratives, plus *randomized\_numbers* (±20% perturbation) when quantitative inputs matter operationally. For each variant, report JSD from base and apply the JSD row in Table 12. Also report Spearman rank correlation with base as a supplementary diagnostic—not a separate gate metric—and flag context-dependent rank reordering when Spearman < 0.70 (e.g., *count\_fact* = 0.64 in our benchmark). If opportunity JSD exceeds twice constraint JSD, flag optimism bias; if numerical perturbation JSD remains near zero, semantic framing—not moderate magnitudes—drives reorientation.
 
-*Step 4: Test moderation, not only main effects.* Recompute Δ*p* within each context variant and test difference-in-differences interactions versus base, Δ*p*<sub>interaction</sub> = Δ*p*(variant) − Δ*p*(base), with bootstrap CIs and FDR correction. Apply the interaction row in Table 11. Directional consistency of Δ*p* across variants matters more than magnitude; any sign reversal is a qualitative escalation requiring context-specific controls or human review.
+*Step 4: Test moderation, not only main effects.* Recompute Δ*p* within each context variant and test difference-in-differences interactions versus base, Δ*p*<sub>interaction</sub> = Δ*p*(variant) − Δ*p*(base), with bootstrap CIs and FDR correction. Apply the interaction row in Table 12. Directional consistency of Δ*p* across variants matters more than magnitude; any sign reversal is a qualitative escalation requiring context-specific controls or human review.
 
-*Step 5: Audit rationales under matched choices.* For cells where Generic and Specific runs select the same archetype, compute RDS (cosine distance between SentenceTransformer embeddings of matched rationale pairs, with brand-referential tokens masked) and inspect keyword polarity (vision/leadership vs. operational/constraint terms). Calibrate RDS against repeat-noise (median 0.101) and cross-strategy ceiling (0.364) benchmarks from Section 5.5; apply the RDS row in Table 11.
+*Step 5: Audit rationales under matched choices.* For cells where Generic and Specific runs select the same archetype, compute RDS (cosine distance between SentenceTransformer embeddings of matched rationale pairs, with brand-referential tokens masked) and inspect keyword polarity (vision/leadership vs. operational/constraint terms). Calibrate RDS against repeat-noise (median 0.101) and cross-strategy ceiling (0.364) benchmarks from Section 5.5; apply the RDS row in Table 12.
 
-*Step 6: Gate with human review and documentation.* Compile a Decision Sensitivity Audit Report with four components—one per sensitivity axis: (i) multi-context JSD summary (include Spearman as supplementary rank-stability diagnostic), (ii) Generic–Specific Δ*p* table, (iii) moderation interaction table, and (iv) RDS-by-archetype note. Classify each component using the corresponding row in Table 11. Human reviewers should explicitly flag downside blindness (constraint contexts that barely move recommendations), optimism over-reaction (opportunity JSD ≫ constraint JSD), brand sign reversal, archetype-specific rationale divergence, and context-dependent rank reordering (Spearman < 0.70). Document temperature and sampling settings as audited run conditions.
+*Step 6: Gate with human review and documentation.* Compile a Decision Sensitivity Audit Report with four components—one per sensitivity axis: (i) multi-context JSD summary (include Spearman as supplementary rank-stability diagnostic), (ii) Generic–Specific Δ*p* table, (iii) moderation interaction table, and (iv) RDS-by-archetype note. Classify each component using the corresponding row in Table 12. Human reviewers should explicitly flag downside blindness (constraint contexts that barely move recommendations), optimism over-reaction (opportunity JSD ≫ constraint JSD), brand sign reversal, archetype-specific rationale divergence, and context-dependent rank reordering (Spearman < 0.70). Document temperature and sampling settings as audited run conditions.
 
-*Calibration of illustrative thresholds.* The PASS/REVIEW/REMEDIATE cutoffs in Table 11 are not universal constants; they partition the observed metric ranges in our benchmark into tertiary bands for deployment triage—one primary gate metric per sensitivity axis. For context effects, JSD cutoffs of 0.01 and 0.03 fall between the observed variant levels—*count\_fact* (0.008), *competitive\_dynamics* (0.011), and *opp\_focus* (0.047)—so that moderate narrative reframing triggers REVIEW while the largest semantic shift triggers REMEDIATE. For firm-identity effects, the 2 pp and 5 pp boundaries separate the seven archetype-level \|Δ*p*\| values into small reallocations (≤1.5 pp: Retrenchment, Diversification, Maintain), intermediate shifts (2.0–4.7 pp: Fast Follower, Niche Focus), and large reallocations (≥5.7 pp: Open Innovation, Technology Leadership). For interactions, the count thresholds reflect our empirical pattern—two FDR-significant moderation terms without sign reversal—while reserving REMEDIATE for widespread interaction or qualitative reversal. For rationale divergence, 0.12 and 0.18 bracket the repeat-noise median (0.101) and the highest archetype mean (Maintain, 0.183), placing the macro framing effect (mean RDS = 0.156) in the REVIEW band. Spearman rank correlation is reported alongside JSD as a supplementary rank-stability diagnostic but does not carry separate gate thresholds. Organizations deploying in other industries should re-estimate these partitions during an initial calibration phase (Section 7.1).
+*Calibration of illustrative thresholds.* The PASS/REVIEW/REMEDIATE cutoffs in Table 12 are not universal constants; they partition the observed metric ranges in our benchmark into tertiary bands for deployment triage—one primary gate metric per sensitivity axis. For context effects, JSD cutoffs of 0.01 and 0.03 fall between the observed variant levels—*count\_fact* (0.008), *competitive\_dynamics* (0.011), and *opp\_focus* (0.047)—so that moderate narrative reframing triggers REVIEW while the largest semantic shift triggers REMEDIATE. For firm-identity effects, the 2 pp and 5 pp boundaries separate the seven archetype-level \|Δ*p*\| values into small reallocations (≤1.5 pp: Retrenchment, Diversification, Maintain), intermediate shifts (2.0–4.7 pp: Fast Follower, Niche Focus), and large reallocations (≥5.7 pp: Open Innovation, Technology Leadership). For interactions, the count thresholds reflect our empirical pattern—two FDR-significant moderation terms without sign reversal—while reserving REMEDIATE for widespread interaction or qualitative reversal. For rationale divergence, 0.12 and 0.18 bracket the repeat-noise median (0.101) and the highest archetype mean (Maintain, 0.183), placing the macro framing effect (mean RDS = 0.156) in the REVIEW band. Spearman rank correlation is reported alongside JSD as a supplementary rank-stability diagnostic but does not carry separate gate thresholds. Organizations deploying in other industries should re-estimate these partitions during an initial calibration phase (Section 7.1).
 
 | Metric (sensitivity axis) | PASS (proceed) | REVIEW (flag; pilot with human-in-the-loop) | REMEDIATE (revise prompt/architecture before deployment) | Benchmark example |
 | :---- | :---- | :---- | :---- | :---- |
@@ -491,9 +438,9 @@ Fig. 15\. Scenario-based decision sensitivity audit framework for LLM-based R&D 
 | Interactions — context–identity moderation | 0 FDR-significant | 1–2 (stable Δ*p* direction) | ≥ 3, or any sign reversal | *count\_fact* × Technology Leadership −0.067 → REVIEW |
 | RDS — rationale sensitivity | ≤ 0.12 | 0.12–0.18 | > 0.18 | Maintain 0.183 → REMEDIATE |
 
-Table 11. Illustrative audit thresholds as tertiary bands calibrated to observed ranges in our benchmark—one primary gate metric per sensitivity axis. Values are starting points for organizational calibration, not universal standards; see Section 7.1 for scope limits.
+Table 12. Illustrative audit thresholds as tertiary bands calibrated to observed ranges in our benchmark—one primary gate metric per sensitivity axis. Values are starting points for organizational calibration, not universal standards; see Section 7.1 for scope limits.
 
-*Final gate.* PASS if all four metric rows in Table 11 meet PASS criteria—deploy with scheduled re-audit (e.g., quarterly) and after model or prompt updates. REMEDIATE if any row is in REVIEW or one to two rows are in REMEDIATE—revise and re-audit, then pilot with mandatory human review. WITHHOLD if unresolved REMEDIATE signals persist or qualitative sign reversal is detected—do not deploy until governance review. Under our benchmark configuration, opportunity JSD, firm-identity Δ*p*, and Maintain RDS already exceed REMEDIATE thresholds, and constraint narratives show supplementary rank instability (Spearman = 0.64); a conservative audit therefore favors ensemble prompting, anonymized production templates, or human-authored rationales rather than single-framing deployment.
+*Final gate.* PASS if all four metric rows in Table 12 meet PASS criteria—deploy with scheduled re-audit (e.g., quarterly) and after model or prompt updates. REMEDIATE if any row is in REVIEW or one to two rows are in REMEDIATE—revise and re-audit, then pilot with mandatory human review. WITHHOLD if unresolved REMEDIATE signals persist or qualitative sign reversal is detected—do not deploy until governance review. Under our benchmark configuration, opportunity JSD, firm-identity Δ*p*, and Maintain RDS already exceed REMEDIATE thresholds, and constraint narratives show supplementary rank instability (Spearman = 0.64); a conservative audit therefore favors ensemble prompting, anonymized production templates, or human-authored rationales rather than single-framing deployment.
 
 The goal of this protocol is not to eliminate sensitivity—exploratory scenario work may productively exploit it—but to make context and firm-identity effects measurable, reportable, and governable before LLM outputs enter R&D decision processes. Better audits, not just better models, are required.
 
@@ -529,7 +476,7 @@ This study proposed a scenario-based audit framework for evaluating context and 
 
 Empirically, semantic context redistributes strategy mass asymmetrically (opportunity > competition > constraint), while moderate numerical perturbations leave rankings essentially unchanged. Firm-identity exposure reallocates the menu toward Technology Leadership and away from Open Innovation and Niche Focus; context moderates the intensity of these effects without reversing their direction. Even when the chosen strategy is held constant, Generic and Specific rationales diverge in vocabulary and in Rationale Divergence Score (RDS), so identical labels need not imply identical managerial narratives.
 
-The practical implication is straightforward: for LLM-assisted strategy DSS, pre-deployment *decision sensitivity audit* is a first-order requirement. Section 6.4 operationalizes this as a six-step protocol with illustrative PASS/REVIEW/REMEDIATE thresholds (Table 11)—one primary gate metric per sensitivity axis (RQ1–RQ4), whose cutoffs partition observed benchmark ranges into tertiary calibration bands—and a human-in-the-loop gate before deployment. Under our benchmark configuration, opportunity JSD, firm-identity Δ*p*, and Maintain RDS already exceed REMEDIATE thresholds; a conservative audit therefore favors ensemble prompting, anonymized templates, or human-authored rationales rather than single-framing production use. The goal is not to eliminate sensitivity—which can be useful for exploratory scenario work—but to make context and firm-identity effects measurable, reportable, and governable before model outputs enter R&D decision processes. Better audits, not just better models, are required.
+The practical implication is straightforward: for LLM-assisted strategy DSS, pre-deployment *decision sensitivity audit* is a first-order requirement. Section 6.4 operationalizes this as a six-step protocol with illustrative PASS/REVIEW/REMEDIATE thresholds (Table 12)—one primary gate metric per sensitivity axis, whose cutoffs partition observed benchmark ranges into tertiary calibration bands—and a human-in-the-loop gate before deployment. Under our benchmark configuration, opportunity JSD, firm-identity Δ*p*, and Maintain RDS already exceed REMEDIATE thresholds; a conservative audit therefore favors ensemble prompting, anonymized templates, or human-authored rationales rather than single-framing production use. The goal is not to eliminate sensitivity—which can be useful for exploratory scenario work—but to make context and firm-identity effects measurable, reportable, and governable before model outputs enter R&D decision processes. Better audits, not just better models, are required.
 
 **References**
 
