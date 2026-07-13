@@ -50,6 +50,8 @@ CONTEXT_VARIANTS = [
 ]
 
 SEMANTIC_VARIANTS = ["competitive_dynamics", "count_fact", "opp_focus"]
+# Non-base context perturbations used in audit context-sensitivity (§5.6).
+PERTURBATION_VARIANTS = [*SEMANTIC_VARIANTS, "randomized_numbers"]
 # In this file, repeat is treated as stochastic replicate.
 # Fixed-condition keys intentionally exclude `Chosen Option` because it can move
 # together with `Standard Mapping` (label leakage risk for stability/profiling).

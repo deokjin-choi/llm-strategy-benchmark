@@ -51,6 +51,7 @@ import pandas as pd
 
 try:
     from result_analysis.model_behavioral_profile import (
+        PERTURBATION_VARIANTS,
         SEMANTIC_VARIANTS,
         build_condition_level_ds_diagnostics,
         load_profile_data,
@@ -61,6 +62,7 @@ try:
     )
 except ImportError:
     from model_behavioral_profile import (
+        PERTURBATION_VARIANTS,
         SEMANTIC_VARIANTS,
         build_condition_level_ds_diagnostics,
         load_profile_data,
@@ -124,7 +126,8 @@ def build_jsd_base_vs_semantic_long(
     scenario: Optional[str] = None,
 ) -> pd.DataFrame:
     """
-    Mean JSD(base, v) for each semantic variant v, mean over (Num Context, problem_type).
+    Mean JSD(base, v) for each perturbation variant v (including randomized_numbers),
+    mean over (Num Context, problem_type).
 
     If model is None: cohort-wide mean for each (Model, Temperature, variant).
     If model and scenario set: restrict to that slice (still mean over Num Context, problem_type).
@@ -147,7 +150,7 @@ def build_jsd_base_vs_semantic_long(
             mod, temp = keys
             scen = scenario
 
-        for v in SEMANTIC_VARIANTS:
+        for v in PERTURBATION_VARIANTS:
             jvals = []
             for _, gp in g.groupby(["Num Context", "problem_type"], dropna=False):
                 base = gp[gp["context_variant"] == "base"]["Standard Mapping"]
@@ -162,7 +165,8 @@ def build_jsd_base_vs_semantic_long(
                 "Model": mod,
                 "Temperature": float(temp),
                 "scenario": scen,
-                "semantic_variant": v,
+                "perturbation_variant": v,
+                "semantic_variant": v,  # backward-compatible alias
                 "mean_jsd_from_base": jm,
                 "n_conditions": len(jvals),
             }
@@ -172,7 +176,7 @@ def build_jsd_base_vs_semantic_long(
     if len(out) == 0:
         return out
     return out.sort_values(
-        ["Model", "Temperature", "scenario", "semantic_variant"]
+        ["Model", "Temperature", "scenario", "perturbation_variant"]
     ).reset_index(drop=True)
 
 
@@ -198,6 +202,63 @@ def _stacked_bars(
     ax.set_title(title, fontsize=10)
     ax.set_ylim(0.0, 1.0 if y_max is None else y_max)
     ax.grid(True, axis="y", linestyle="--", alpha=0.3)
+
+
+PERTURBATION_BAR_COLORS = {
+    "competitive_dynamics": "#3182bd",
+    "count_fact": "#31a354",
+    "opp_focus": "#fd8d3c",
+    "randomized_numbers": "#984ea3",
+}
+
+
+def plot_firm_identity_framing_strategy_stacks(
+    df: pd.DataFrame,
+    *,
+    model: str,
+    scenario: str,
+    temperatures: Sequence[float] = TEMPERATURES_DEFAULT,
+    context_variants_for_framing: Sequence[str] = ("base",),
+    save_path: str,
+) -> None:
+    """Firm-identity audit deep-dive (Generic vs Specific under neutral base context)."""
+    os.makedirs(os.path.dirname(save_path), exist_ok=True)
+    fig, axes = plt.subplots(1, len(temperatures), figsize=(5.2 * len(temperatures), 4.4), sharey=True)
+    if len(temperatures) == 1:
+        axes = np.array([axes])
+
+    for ax, temp in zip(axes, temperatures):
+        sub = df[
+            (df["Model"] == model)
+            & (df["scenario"] == scenario)
+            & (df["Temperature"].apply(lambda x: _same_temp(x, temp)))
+        ]
+        rows = []
+        for ptype in ("generic", "specific"):
+            rows.append(
+                pool_strategy_proportions(
+                    sub, problem_type=ptype, context_variants=context_variants_for_framing
+                )
+            )
+        mat = np.vstack(rows)
+        _stacked_bars(
+            ax,
+            ["Generic", "Specific"],
+            mat,
+            title=f"T={float(temp):g}  (context_variant={','.join(context_variants_for_framing)})",
+        )
+
+    fig.suptitle(
+        f"Firm-identity sensitivity: strategy mix (Generic vs Specific)\n"
+        f"{_short_model_name(model)} — {scenario}",
+        fontsize=11,
+        y=1.02,
+    )
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="center left", bbox_to_anchor=(1.02, 0.5), fontsize=8)
+    plt.tight_layout()
+    plt.savefig(save_path, dpi=300, bbox_inches="tight")
+    plt.close(fig)
 
 
 def plot_fr_framing_strategy_stacks(
@@ -260,11 +321,13 @@ def plot_cr_jsd_by_variant_bars(
     temperatures: Sequence[float] = TEMPERATURES_DEFAULT,
     save_path: str,
 ) -> None:
-    """Grouped bars: mean JSD(base, v) for each semantic variant, per temperature."""
+    """Grouped bars: mean JSD(base, v) for each perturbation variant, per temperature."""
     os.makedirs(os.path.dirname(save_path), exist_ok=True)
-    fig, axes = plt.subplots(1, len(temperatures), figsize=(4.2 * len(temperatures), 3.8), sharey=True)
+    fig, axes = plt.subplots(1, len(temperatures), figsize=(4.8 * len(temperatures), 3.8), sharey=True)
     if len(temperatures) == 1:
         axes = np.array([axes])
+
+    variant_col = "perturbation_variant" if "perturbation_variant" in jsd_long.columns else "semantic_variant"
 
     for ax, temp in zip(axes, temperatures):
         sub = jsd_long[
@@ -272,18 +335,29 @@ def plot_cr_jsd_by_variant_bars(
             & (jsd_long["scenario"] == scenario)
             & (jsd_long["Temperature"].apply(lambda x: _same_temp(x, temp)))
         ]
-        order = SEMANTIC_VARIANTS
-        ys = [float(sub[sub["semantic_variant"] == v]["mean_jsd_from_base"].iloc[0]) if len(sub[sub["semantic_variant"] == v]) else np.nan for v in order]
+        order = PERTURBATION_VARIANTS
+        ys = [
+            float(sub[sub[variant_col] == v]["mean_jsd_from_base"].iloc[0])
+            if len(sub[sub[variant_col] == v])
+            else np.nan
+            for v in order
+        ]
         x = np.arange(len(order))
-        ax.bar(x, ys, color=["#3182bd", "#31a354", "#fd8d3c"], width=0.6)
+        colors = [PERTURBATION_BAR_COLORS.get(v, "#888888") for v in order]
+        ax.bar(x, ys, color=colors, width=0.6)
         ax.set_xticks(x)
-        ax.set_xticklabels(order, rotation=25, ha="right", fontsize=8)
+        ax.set_xticklabels(
+            ["comp_dyn", "count_fact", "opp_focus", "rand_nums"],
+            rotation=25,
+            ha="right",
+            fontsize=8,
+        )
         ax.set_ylabel("mean JSD from base")
         ax.set_title(f"T={float(temp):g}")
         ax.grid(True, axis="y", linestyle="--", alpha=0.3)
 
     fig.suptitle(
-        f"CR deep-dive: semantic cue strength (mean JSD from base)\n"
+        f"Context sensitivity: perturbation strength (mean JSD from base)\n"
         f"{_short_model_name(model)} — {scenario}",
         fontsize=11,
         y=1.05,
@@ -656,6 +730,55 @@ def run_deep_dive_fr_cr_ds(
                 show_progress=False,
             )
         print("Rationale keyword CSVs written under:", summary_dir)
+
+
+def run_audit_case_deepdives(
+    input_dir: str = "infer_results",
+    plots_dir: str = "./final_results/plots",
+    *,
+    firm_identity_cell: Tuple[str, str] = ("Qwen/Qwen2.5-14B-Instruct", "5_model_3_mass_market"),
+    context_cell: Tuple[str, str] = ("Qwen/Qwen2.5-14B-Instruct", "4_model_x_launch"),
+    temperatures: Sequence[float] = TEMPERATURES_DEFAULT,
+) -> None:
+    """Audit-named deep-dive figures for §5.6.3 Cases I–II (no FR/CR legacy labels)."""
+    os.makedirs(plots_dir, exist_ok=True)
+    df = load_profile_data(input_dir=input_dir)
+
+    m, s = firm_identity_cell
+    plot_firm_identity_framing_strategy_stacks(
+        df,
+        model=m,
+        scenario=s,
+        temperatures=temperatures,
+        save_path=os.path.join(
+            plots_dir,
+            f"eval_deepdive_firm_identity_framing_stacks__{_safe_filename(_short_model_name(m))}__{_safe_filename(s)}.png",
+        ),
+    )
+
+    m, s = context_cell
+    jsd_scen = build_jsd_base_vs_semantic_long(df, model=m, scenario=s)
+    plot_cr_jsd_by_variant_bars(
+        jsd_scen,
+        model=m,
+        scenario=s,
+        temperatures=temperatures,
+        save_path=os.path.join(
+            plots_dir,
+            f"eval_deepdive_context_jsd_by_variant__{_safe_filename(_short_model_name(m))}__{_safe_filename(s)}.png",
+        ),
+    )
+    plot_cr_strategy_mix_by_variant_framing_split(
+        df,
+        model=m,
+        scenario=s,
+        temperatures=temperatures,
+        save_path=os.path.join(
+            plots_dir,
+            f"eval_deepdive_context_strategy_stacks_framing__{_safe_filename(_short_model_name(m))}__{_safe_filename(s)}.png",
+        ),
+    )
+    print("Audit case deep-dive plots written to:", plots_dir)
 
 
 if __name__ == "__main__":
