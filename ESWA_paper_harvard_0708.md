@@ -249,24 +249,24 @@ We therefore profile localization using the same audit metrics applied in Sectio
 
 *Rationale sensitivity* — mean RDS over matched Generic–Specific rationale pairs within the cell (strategy and context variant held fixed).
 
-Table 6 summarizes model-level summaries macro-averaged over scenarios for each architecture at $T=0.0$ and $T=0.7$. Mean semantic JSD is the average context-shift magnitude (equivalent to the prior context-responsiveness index); mean firm-identity JSD is the average Generic–Specific distributional distance; and mean explanatory framing divergence (EFD) summarizes rationale-level separation using the same keyword pipeline as Section 5.5. No model–temperature pair minimizes all three indices simultaneously.
+Table 6 summarizes model-level audit metrics macro-averaged over scenarios for each architecture at $T=0.0$ and $T=0.7$. Mean semantic JSD is the average context-shift magnitude (semantic-variant JSD from *base*); mean firm-identity JSD is the average Generic–Specific distributional distance; and mean RDS applies the Section 5.5 procedure—macro-averaging condition × strategy cell means of matched-pair cosine distances (equal weight per cell). No model–temperature pair minimizes all three indices simultaneously.
 
-| Model | $T$ | Mean semantic JSD | Mean firm-identity JSD | Mean EFD |
+| Model | $T$ | Mean semantic JSD | Mean firm-identity JSD | Mean RDS |
 | :---- | :--: | :----: | :----: | :----: |
-| Yi-1.5-9B-Chat | 0.0 | 0.080 | 0.186 | 0.571 |
-| Yi-1.5-9B-Chat | 0.7 | 0.069 | 0.170 | 0.310 |
-| Qwen2.5-14B-Instruct | 0.0 | 0.149 | 0.325 | 0.566 |
-| Qwen2.5-14B-Instruct | 0.7 | 0.134 | 0.293 | 0.414 |
-| DeepSeek-LLM-7B-Chat | 0.0 | 0.114 | 0.059 | 0.548 |
-| DeepSeek-LLM-7B-Chat | 0.7 | 0.058 | 0.044 | 0.298 |
-| Llama-3.1-8B-Instruct | 0.0 | 0.175 | 0.148 | 0.535 |
-| Llama-3.1-8B-Instruct | 0.7 | 0.121 | 0.067 | 0.295 |
-| Mistral-7B-Instruct-v0.3 | 0.0 | 0.133 | 0.241 | 0.558 |
-| Mistral-7B-Instruct-v0.3 | 0.7 | 0.108 | 0.181 | 0.311 |
+| Yi-1.5-9B-Chat | 0.0 | 0.080 | 0.186 | 0.131 |
+| Yi-1.5-9B-Chat | 0.7 | 0.069 | 0.170 | 0.175 |
+| Qwen2.5-14B-Instruct | 0.0 | 0.149 | 0.325 | 0.172 |
+| Qwen2.5-14B-Instruct | 0.7 | 0.134 | 0.293 | 0.198 |
+| DeepSeek-LLM-7B-Chat | 0.0 | 0.114 | 0.059 | 0.110 |
+| DeepSeek-LLM-7B-Chat | 0.7 | 0.058 | 0.044 | 0.149 |
+| Llama-3.1-8B-Instruct | 0.0 | 0.175 | 0.148 | 0.108 |
+| Llama-3.1-8B-Instruct | 0.7 | 0.121 | 0.067 | 0.161 |
+| Mistral-7B-Instruct-v0.3 | 0.0 | 0.133 | 0.241 | 0.149 |
+| Mistral-7B-Instruct-v0.3 | 0.7 | 0.108 | 0.181 | 0.194 |
 
-Table 6. Model-level audit-metric summaries (macro-averaged over scenarios).
+Table 6. Model-level audit-metric summaries (macro-averaged over scenarios). Mean RDS follows the cell macro-average in Section 5.5.
 
-Three patterns follow. First, Qwen2.5-14B-Instruct shows the highest mean firm-identity JSD at both temperatures (0.325 at $T=0.0$; 0.293 at $T=0.7$), indicating that brand exposure moves strategy mass more for this architecture than for DeepSeek (0.059; 0.044), even though lower firm-identity JSD does not imply uniformly low context or rationale sensitivity. Second, Llama-3.1-8B-Instruct leads on mean semantic JSD at $T=0.0$ (0.175), confirming that context-shift magnitude varies independently of firm-identity shift. Third, raising temperature from 0.0 to 0.7 reduces mean firm-identity JSD and mean EFD for every model (e.g., Qwen: 0.325 → 0.293 and 0.566 → 0.414), attenuating both choice-level and rationale-level brand separation without eliminating localized hotspots below.
+Three patterns follow. First, Qwen2.5-14B-Instruct shows the highest mean firm-identity JSD at both temperatures (0.325 at $T=0.0$; 0.293 at $T=0.7$), indicating that brand exposure moves strategy mass more for this architecture than for DeepSeek (0.059; 0.044), even though lower firm-identity JSD does not imply uniformly low context or rationale sensitivity. Second, Llama-3.1-8B-Instruct leads on mean semantic JSD at $T=0.0$ (0.175), confirming that context-shift magnitude varies independently of firm-identity shift. Third, raising temperature from 0.0 to 0.7 reduces mean firm-identity JSD for every model (e.g., Qwen: 0.325 → 0.293) but does not uniformly lower mean RDS (e.g., Qwen: 0.172 → 0.198)—choice-level brand separation and rationale-level divergence therefore decouple under stochastic decoding, and localized hotspots remain below.
 
 **5.6.2 Model×Scenario Landscape**
 
@@ -370,7 +370,7 @@ Identical strategy labels therefore fail a decision-support transparency test: a
 
 **5.6.4 Temperature as Audited Run Condition**
 
-Across Table 6 and the three cases, temperature does not remove sensitivity but attenuates its magnitude. Raising $T$ from 0.0 to 0.7 lowers mean firm-identity JSD and mean EFD for every model, consistent with stochastic smoothing of brand-associated mass. However, the priority cells in Table 7 persist in structure across temperatures: Qwen’s firm-identity flip on *5\_model\_3\_mass\_market* and context-driven leadership activation on *4\_model\_x\_launch* remain visible at both $T=0.0$ and $T=0.7$ (Figs. 8–10). RDS peaks are strategy- and context-conditioned rather than temperature-erased (Fig. 11).
+Across Table 6 and the three cases, temperature does not remove sensitivity but reshapes its profile. Raising $T$ from 0.0 to 0.7 lowers mean firm-identity JSD for every model while mean RDS does not fall uniformly (Table 6)—choice-level brand separation and rationale-level divergence therefore decouple under stochastic decoding. However, the priority cells in Table 7 persist in structure across temperatures: Qwen’s firm-identity flip on *5\_model\_3\_mass\_market* and context-driven leadership activation on *4\_model\_x\_launch* remain visible at both $T=0.0$ and $T=0.7$ (Figs. 8–10). RDS peaks are strategy- and context-conditioned rather than temperature-erased (Fig. 11).
 
 For deployment, decoding settings must be documented as audited run conditions alongside prompt templates (Section 6.4, Step 6). A lower-temperature configuration is not a substitute for multi-context or firm-identity audit, and a higher-temperature configuration does not license single-framing production use. The localized cases above motivate the protocol in Section 6.4: sensitivity is measurable and governable only when audit metrics are evaluated on the specific model, scenario, and temperature intended for production—not when inferred from population averages alone.
 
