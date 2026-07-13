@@ -272,20 +272,22 @@ Three patterns follow. First, Qwen2.5-14B-Instruct shows the highest mean firm-i
 
 Aggregates in Table 6 conceal which scenario drives each elevation. Scenario-resolved profiling shows that context JSD, firm-identity \|Δ*p*\|, and RDS do not co-move across the grid: a cell with low firm-identity separation can exhibit high context JSD, and rationale divergence can peak even when strategy labels are stable.
 
-Context sensitivity is sparse but intense: only a subset of scenario–model pairs—notably *4\_model\_x\_launch* under Qwen2.5-14B-Instruct—show perturbation-variant JSD levels at or above 0.03. Firm-identity hotspots concentrate on *5\_model\_3\_mass\_market* for the same model, where Generic vs. Specific framing shifts the modal strategy (Section 5.6.3, Case I). Rationale sensitivity peaks for Maintain under *count\_fact* in *2\_roadster\_launch* under Qwen2.5-14B-Instruct (Case III), while cohort-wide the same strategy × context cell is highest in Fig. 7 (mean RDS = 0.197). Because no model dominates all three metrics, localized profiling must be scoped to the production scenario set and model–temperature configuration. Fig. 8 maps the full scenario × model grid on the three sensitivity axes at $T=0.0$ and $T=0.7$ (each panel min–max scaled separately).
+Context sensitivity is sparse but intense: the largest perturbation-variant JSD in the benchmark grid reaches 0.651 (*4\_model\_x\_launch*, Llama-3.1-8B-Instruct, $T=0.0$). Firm-identity hotspots concentrate on *5\_model\_3\_mass\_market* under Qwen2.5-14B-Instruct, where Generic vs. Specific framing shifts the modal strategy (Section 5.6.3, Case I). Rationale sensitivity peaks for Maintain under *count\_fact* in *2\_roadster\_launch* under Qwen2.5-14B-Instruct (Case III), while cohort-wide the same strategy × context cell is highest in Fig. 7 (mean RDS = 0.197). Because no model dominates all three metrics, localized profiling must be scoped to the production scenario set and model–temperature configuration. Fig. 8 maps the full scenario × model grid on the three sensitivity axes at $T=0.0$ and $T=0.7$ (each panel min–max scaled separately).
 
 ![Audit_scenario_model_landscape](final_results/plots/eval_audit_scenario_model_landscape__paper.png)  
 Fig. 8. Scenario × model audit landscape: context sensitivity (max JSD from *base* over perturbation variants, including *randomized\_numbers*), firm-identity sensitivity (max \|Δ*p*\|), and rationale sensitivity (mean RDS). Each panel is min–max scaled independently; rows = $T=0.0$ (top) and $T=0.7$ (bottom).
+
+Priority cells in Table 7 are selected as follows. For each audit axis, candidate model × scenario pairs are ranked by the **mean** of the axis metric over $T \in \{0.0, 0.7\}$; case figures report both temperatures. A qualitative filter then retains cells that exhibit an interpretable deployment-risk pattern (firm-identity modal strategy flip; context-driven menu rewrite; matched-choice rationale divergence with exemplar pairs). Where the top-ranked models would repeat across axes, the next eligible candidate within 85% of the axis maximum is preferred so that the three cases span distinct architectures when the data support it.
 
 Table 7 lists the three priority cells selected for case analysis.
 
 | Audit axis | Model | Scenario | Localization signal |
 | :---- | :---- | :---- | :---- |
-| Firm-identity (\|Δ*p*\|) | Qwen2.5-14B-Instruct | 5\_model\_3\_mass\_market | Generic → Open Innovation; Specific → Maintain |
-| Context (JSD) | Qwen2.5-14B-Instruct | 4\_model\_x\_launch | *opp\_focus* activates Technology Leadership under Specific framing |
+| Firm-identity (\|Δ*p*\|) | Qwen2.5-14B-Instruct | 5\_model\_3\_mass\_market | Generic → Open Innovation; Specific → Maintain (mean \|Δ*p\| = 0.94) |
+| Context (JSD) | Llama-3.1-8B-Instruct | 4\_model\_x\_launch | *opp\_focus* peak JSD = 0.651 at $T=0.0$; Specific framing activates Technology Leadership |
 | Rationale (RDS) | Qwen2.5-14B-Instruct | 2\_roadster\_launch | Maintain × *count\_fact*; matched-choice rationales diverge (peak pair RDS = 0.689) |
 
-Table 7. Priority scenario–model cells for deployment risk cases.
+Table 7. Priority scenario–model cells for deployment risk cases (axis means macro-averaged over $T=0.0$ and $T=0.7$).
 
 **5.6.3 Three Deployment Risk Archetypes**
 
@@ -323,7 +325,7 @@ Generic framing concentrates mass on Open Innovation (external manufacturing par
 
 Table 9. Firm-identity case: contrasting rationales and strategy labels.
 
-*Case II: Context-driven menu rewrite (4\_model\_x\_launch).*
+*Case II: Context-driven menu rewrite (Llama-3.1-8B-Instruct; 4\_model\_x\_launch).*
 
 **(1) Problem.** A company aims to enter the growing SUV market. However, a complex product design creates high production difficulty and quality risks, which could severely damage the brand's reputation despite a lack of direct competition.
 
@@ -341,21 +343,21 @@ Table 9. Firm-identity case: contrasting rationales and strategy labels.
 
 Table 10. Strategy menu for 4\_model\_x\_launch.
 
-**(3) Observed behavior.** Context perturbations are implemented through the *context\_variant* axis—*base*, *competitive\_dynamics*, *count\_fact*, *opp\_focus*, and *randomized\_numbers*—on top of Generic vs. Specific firm-identity framing (Qwen2.5-14B-Instruct). Fig. 10 shows strategy stacks; Fig. 11 reports mean JSD from *base* for each perturbation variant.
+**(3) Observed behavior.** Context perturbations are implemented through the *context\_variant* axis—*base*, *competitive\_dynamics*, *count\_fact*, *opp\_focus*, and *randomized\_numbers*—on top of Generic vs. Specific firm-identity framing (Llama-3.1-8B-Instruct). Fig. 10 shows strategy stacks; Fig. 11 reports mean JSD from *base* for each perturbation variant.
 
-![Context_deepdive_Qwen_ModelX_framing](final_results/plots/eval_deepdive_context_strategy_stacks_framing__Qwen2.5-14B__4_model_x_launch.png)  
-Fig. 10. Context sensitivity case: strategy mix across context perturbations and framing types (*4\_model\_x\_launch*).
+![Context_deepdive_Llama_ModelX_framing](final_results/plots/eval_deepdive_context_strategy_stacks_framing__Meta-Llama-3.1-8B__4_model_x_launch.png)  
+Fig. 10. Context sensitivity case: strategy mix across context perturbations and framing types (*4\_model\_x\_launch*, Llama-3.1-8B-Instruct).
 
-![Context_deepdive_Qwen_ModelX_jsd](final_results/plots/eval_deepdive_context_jsd_by_variant__Qwen2.5-14B__4_model_x_launch.png)  
+![Context_deepdive_Llama_ModelX_jsd](final_results/plots/eval_deepdive_context_jsd_by_variant__Meta-Llama-3.1-8B__4_model_x_launch.png)  
 Fig. 11. Context sensitivity case: mean JSD from *base* by perturbation variant ($T=0.0$ vs. $T=0.7$); *randomized\_numbers* remains near zero.
 
-Under Generic framing, Open Innovation remains dominant across all context variants. Under Specific framing, *opp\_focus* uniquely activates Technology Leadership, while *competitive\_dynamics* elevates Fast Follower. The JSD hierarchy (*opp\_focus* > *competitive\_dynamics* > *count\_fact* ≫ *randomized\_numbers*) mirrors the population-level asymmetry in Section 5.1, with the largest perturbation producing the highest shift in this cell. Context–identity moderation (Section 5.4) appears in miniature: brand exposure does not uniformly amplify all variants but interacts with narrative emphasis—leadership activation requires both Specific identification and opportunity framing.
+Under Generic framing, Retrenchment remains modal across *base*, *competitive\_dynamics*, and *count\_fact*; only under *opp\_focus* does Technology Leadership emerge as the modal choice. Under Specific framing, Technology Leadership becomes modal under all three semantic perturbations—reaching 69% mass share under *opp\_focus*—while *base* remains Retrenchment-dominant. The JSD hierarchy at $T=0.0$ (*opp\_focus* = 0.651 > *count\_fact* = 0.394 > *competitive\_dynamics* = 0.339 ≫ *randomized\_numbers* = 0.002) mirrors the population-level asymmetry in Section 5.1 and peaks at the highest context-shift magnitude in the benchmark grid. Context–identity moderation (Section 5.4) appears in miniature: firm identification does not uniformly amplify all variants but unlocks leadership-oriented mass under semantic perturbation that stays defensive under Generic framing.
 
 *Case III: Rationale divergence under matched choice (Qwen2.5-14B-Instruct; 2\_roadster\_launch; Maintain × *count\_fact*).*
 
 **(1) Problem.** A company must manage conflicting goals of product quality and timely delivery during its initial product launch. With significant pre-orders already placed, the company faces severe cash flow issues and supply chain delays, jeopardizing brand trust and future investment if not handled correctly.
 
-**(2) Observed behavior.** Case III isolates rationale sensitivity when the chosen archetype is held constant (Qwen2.5-14B-Instruct; *2\_roadster\_launch*; Maintain × *count\_fact*). Cohort-wide, this strategy × context combination marks the highest mean RDS in Fig. 7 (0.197); within the case cell, a representative matched pair reaches RDS = 0.689 at $T=0.7$. Fig. 12 situates this cell within the full strategy × context RDS landscape.
+**(2) Observed behavior.** Case III isolates rationale sensitivity when the chosen archetype is held constant (Qwen2.5-14B-Instruct; *2\_roadster\_launch*; Maintain × *count\_fact*). Cohort-wide, this strategy × context combination marks the highest mean RDS in Fig. 7 (0.197). Within the case cell, Qwen yields the richest matched-pair sample and a representative high-divergence pair (RDS = 0.689 at $T=0.7$); DeepSeek-LLM-7B-Chat shows a slightly higher Maintain × *count\_fact* cell mean at the same scenario (0.337) but only one eligible matched pair. Fig. 12 situates this cell within the full strategy × context RDS landscape.
 
 ![RDS_heatmap](final_results/plots/eval_rationale_rds_heatmap.png)  
 Fig. 12. Rationale sensitivity case: mean RDS by strategy and context variant (Maintain × *count\_fact* peak).
@@ -373,7 +375,7 @@ Identical strategy labels therefore fail a decision-support transparency test: r
 
 **5.6.4 Temperature as Audited Run Condition**
 
-Across Table 6 and the three cases, temperature does not remove sensitivity but reshapes its profile. Raising $T$ from 0.0 to 0.7 lowers mean context JSD and mean firm-identity JSD for every model while mean RDS does not fall uniformly (Table 6)—choice-level brand separation, context-shift magnitude, and rationale-level divergence therefore decouple under stochastic decoding. However, the priority cells in Table 7 persist in structure across temperatures: Qwen’s firm-identity flip on *5\_model\_3\_mass\_market* and context-driven leadership activation on *4\_model\_x\_launch* remain visible at both $T=0.0$ and $T=0.7$ (Figs. 9–11). RDS peaks are strategy- and context-conditioned rather than temperature-erased (Fig. 12).
+Across Table 6 and the three cases, temperature does not remove sensitivity but reshapes its profile. Raising $T$ from 0.0 to 0.7 lowers mean context JSD and mean firm-identity JSD for every model while mean RDS does not fall uniformly (Table 6)—choice-level brand separation, context-shift magnitude, and rationale-level divergence therefore decouple under stochastic decoding. However, the priority cells in Table 7 persist in structure across temperatures: Qwen’s firm-identity flip on *5\_model\_3\_mass\_market* (Fig. 9), Llama’s context-driven Technology Leadership activation on *4\_model\_x\_launch* (Figs. 10–11), and Qwen’s Maintain × *count\_fact* rationale divergence (Fig. 12) remain visible at both $T=0.0$ and $T=0.7$, with peak context JSD for Case II occurring at $T=0.0$.
 
 For deployment, decoding settings must be documented as audited run conditions alongside prompt templates (Section 6.4, Step 6). A lower-temperature configuration is not a substitute for multi-context or firm-identity audit, and a higher-temperature configuration does not license single-framing production use. The localized cases above motivate the protocol in Section 6.4: sensitivity is measurable and governable only when audit metrics are evaluated on the specific model, scenario, and temperature intended for production—not when inferred from population averages alone.
 

@@ -737,7 +737,7 @@ def run_audit_case_deepdives(
     plots_dir: str = "./final_results/plots",
     *,
     firm_identity_cell: Tuple[str, str] = ("Qwen/Qwen2.5-14B-Instruct", "5_model_3_mass_market"),
-    context_cell: Tuple[str, str] = ("Qwen/Qwen2.5-14B-Instruct", "4_model_x_launch"),
+    context_cell: Tuple[str, str] = ("meta-llama/Meta-Llama-3.1-8B-Instruct", "4_model_x_launch"),
     temperatures: Sequence[float] = TEMPERATURES_DEFAULT,
 ) -> None:
     """Audit-named deep-dive figures for §5.6.3 Cases I–II (no FR/CR legacy labels)."""
