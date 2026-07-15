@@ -283,9 +283,9 @@ Table 7 lists the three priority cells selected for case analysis.
 
 | Audit axis | Model | Scenario | Localization signal |
 | :---- | :---- | :---- | :---- |
-| Context (JSD) | Llama-3.1-8B-Instruct | 4\_model\_x\_launch | *opp\_focus* peak JSD = 0.651 at $T=0.0$; Specific framing activates Technology Leadership |
+| Context | Llama-3.1-8B-Instruct | 4\_model\_x\_launch | *opp\_focus* peak JSD = 0.651 at $T=0.0$; Specific framing activates Technology Leadership |
 | Firm-identity (\|Δ*p*\|) | Qwen2.5-14B-Instruct | 5\_model\_3\_mass\_market | Generic → Open Innovation; Specific → Maintain (mean \|Δ*p\| = 0.94) |
-| Rationale (RDS) | Qwen2.5-14B-Instruct | 2\_roadster\_launch | Maintain × *count\_fact*; matched-choice rationales diverge (peak pair RDS = 0.689) |
+| Rationale | Qwen2.5-14B-Instruct | 2\_roadster\_launch | Maintain × *count\_fact*; matched-choice rationales diverge (peak pair RDS = 0.689) |
 
 Table 7. Priority scenario–model cells for deployment risk cases (axis means macro-averaged over $T=0.0$ and $T=0.7$).
 
@@ -319,7 +319,7 @@ Fig. 9. Context sensitivity case: strategy mix across context perturbations and 
 ![Context_deepdive_Llama_ModelX_jsd](final_results/plots/eval_deepdive_context_jsd_by_variant__Meta-Llama-3.1-8B__4_model_x_launch.png)  
 Fig. 10. Context sensitivity case: mean JSD from *base* by perturbation variant ($T=0.0$ vs. $T=0.7$); *randomized\_numbers* remains near zero.
 
-Under Generic framing, Retrenchment remains modal across *base*, *competitive\_dynamics*, and *count\_fact*; only under *opp\_focus* does Technology Leadership emerge as the modal choice. Under Specific framing, Technology Leadership becomes modal under all three semantic perturbations—reaching 69% mass share under *opp\_focus*—while *base* remains Retrenchment-dominant. The JSD hierarchy at $T=0.0$ (*opp\_focus* = 0.651 > *count\_fact* = 0.394 > *competitive\_dynamics* = 0.339 ≫ *randomized\_numbers* = 0.002) mirrors the population-level asymmetry in Section 5.1 and peaks at the highest context-shift magnitude in the benchmark grid. Context–identity moderation (Section 5.4) appears in miniature: firm identification does not uniformly amplify all variants but unlocks leadership-oriented mass under semantic perturbation that stays defensive under Generic framing.
+Under Generic framing, Retrenchment remains modal across *base*, *competitive\_dynamics*, and *count\_fact*; only under *opp\_focus* does Technology Leadership emerge as the modal choice. Under Specific framing, Technology Leadership becomes modal under all three semantic perturbations—reaching 69% mass share under *opp\_focus*—while *base* remains Retrenchment-dominant. The JSD hierarchy at $T=0.0$ (*opp\_focus* = 0.651 > *count\_fact* = 0.394 > *competitive\_dynamics* = 0.339 ≫ *randomized\_numbers* = 0.002) mirrors the population-level asymmetry in Section 5.1 and peaks at the highest context-shift magnitude in the benchmark grid. Context–identity moderation (Section 5.4) appears in miniature: firm identification does not uniformly amplify all variants but unlocks leadership-oriented mass under semantic perturbation that stays defensive under Generic framing. In this cell, the base dilemma already anchors Retrenchment; opportunity framing then unlocks Technology Leadership, producing the largest context-driven menu rewrite in the grid.
 
 *Case II: Firm-identity-coupled strategy reallocation (5\_model\_3\_mass\_market).*
 
