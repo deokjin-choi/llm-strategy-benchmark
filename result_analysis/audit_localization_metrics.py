@@ -21,7 +21,7 @@ firm-identity uses mean max |Δp| per scenario cell (§5.3); RDS follows Section
 from __future__ import annotations
 
 import os
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -179,6 +179,29 @@ def _minmax01_2d(a: np.ndarray) -> np.ndarray:
     return out
 
 
+def _metric_limits(
+    d: pd.DataFrame,
+    metrics: List[str],
+    *,
+    pad_frac: float = 0.05,
+) -> Dict[str, Tuple[float, float]]:
+    """Shared vmin/vmax per metric column (raw scale, lower bound 0)."""
+    limits: Dict[str, Tuple[float, float]] = {}
+    for col in metrics:
+        vals = d[col].astype(float)
+        hi = float(np.nanmax(vals)) if np.isfinite(vals).any() else 1.0
+        hi = hi * (1.0 + pad_frac) if hi > 0 else 1.0
+        limits[col] = (0.0, hi)
+    return limits
+
+
+METRIC_CBAR_LABELS = {
+    "context_sensitivity": "JSD",
+    "firm_identity_max_delta_p": "max |Δp|",
+    "mean_rds": "RDS",
+}
+
+
 def plot_scenario_model_audit_landscape(
     scenario_audit: pd.DataFrame,
     save_dir: str,
@@ -207,6 +230,8 @@ def plot_scenario_model_audit_landscape(
             "Rationale sensitivity\nmean RDS (matched pairs)",
         ),
     ]
+    metric_cols = [m[0] for m in metrics]
+    limits = _metric_limits(d, metric_cols)
 
     for temp, dt in d.groupby("Temperature", dropna=False):
         scenarios = sorted(dt["scenario"].astype(str).unique())
@@ -226,20 +251,19 @@ def plot_scenario_model_audit_landscape(
                     v = sub[col].astype(float)
                     mat[i, j] = float(v.iloc[0]) if np.isfinite(v.iloc[0]) else np.nan
 
-            scaled = _minmax01_2d(mat)
-            masked = np.ma.masked_invalid(scaled)
-
-            im = ax.imshow(masked, vmin=0.0, vmax=1.0, cmap=cmap, aspect="auto")
+            vmin, vmax = limits[col]
+            masked = np.ma.masked_invalid(mat)
+            im = ax.imshow(masked, vmin=vmin, vmax=vmax, cmap=cmap, aspect="auto")
             ax.set_xticks(np.arange(len(models)))
             ax.set_xticklabels(col_labels, rotation=35, ha="right", fontsize=8)
             ax.set_yticks(np.arange(len(scenarios)))
             ax.set_yticklabels(scenarios, fontsize=8)
             ax.set_title(title, fontsize=10)
             cbar = fig.colorbar(im, ax=ax, fraction=0.046, pad=0.02)
-            cbar.set_label("min–max scaled", fontsize=8)
+            cbar.set_label(METRIC_CBAR_LABELS[col], fontsize=8)
 
         fig.suptitle(
-            f"Scenario × model audit landscape (each panel scaled separately) @ T={tfloat:g}",
+            f"Scenario × model audit landscape (raw metric values) @ T={tfloat:g}",
             fontsize=12,
         )
         out = os.path.join(
@@ -268,6 +292,8 @@ def plot_scenario_model_audit_landscape_paper(
         ("firm_identity_max_delta_p", "Firm-identity sensitivity"),
         ("mean_rds", "Rationale sensitivity"),
     ]
+    metric_cols = [m[0] for m in metrics]
+    limits = _metric_limits(d, metric_cols)
     scenarios = sorted(d["scenario"].astype(str).unique())
     models = sorted(d["Model"].astype(str).unique())
     col_labels = [_short_model_name(m) for m in models]
@@ -291,9 +317,9 @@ def plot_scenario_model_audit_landscape_paper(
                     v = sub[col].astype(float)
                     mat[si, mj] = float(v.iloc[0]) if np.isfinite(v.iloc[0]) else np.nan
 
-            scaled = _minmax01_2d(mat)
-            masked = np.ma.masked_invalid(scaled)
-            im = ax.imshow(masked, vmin=0.0, vmax=1.0, cmap=cmap, aspect="auto")
+            vmin, vmax = limits[col]
+            masked = np.ma.masked_invalid(mat)
+            im = ax.imshow(masked, vmin=vmin, vmax=vmax, cmap=cmap, aspect="auto")
             ax.set_xticks(np.arange(len(models)))
             ax.set_xticklabels(col_labels, rotation=35, ha="right", fontsize=7)
             ax.set_yticks(np.arange(len(scenarios)))
@@ -301,10 +327,11 @@ def plot_scenario_model_audit_landscape_paper(
             row_title = f"T={float(temp):g} — {title}" if j == 0 else title
             ax.set_title(row_title if j == 0 else title, fontsize=9)
             if j == len(metrics) - 1:
-                fig.colorbar(im, ax=ax, fraction=0.046, pad=0.02)
+                cbar = fig.colorbar(im, ax=ax, fraction=0.046, pad=0.02)
+                cbar.set_label(METRIC_CBAR_LABELS[col], fontsize=8)
 
     fig.suptitle(
-        "Scenario × model audit landscape (each panel min–max scaled separately)",
+        "Scenario × model audit landscape (raw metric values)",
         fontsize=12,
     )
     plt.savefig(save_path, dpi=300, bbox_inches="tight")
