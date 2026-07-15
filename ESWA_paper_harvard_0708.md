@@ -249,7 +249,7 @@ We therefore profile localization using the same sensitivity metrics computed wi
 
 *Rationale sensitivity* — mean RDS over matched Generic–Specific rationale pairs within the cell (strategy and context variant held fixed).
 
-Table 6 summarizes model-level audit metrics macro-averaged over scenarios for each architecture at $T=0.0$ and $T=0.7$. Mean context JSD applies the cell-level maximum-over-perturbations rule above, then macro-averages across scenarios; mean max \|Δ*p*\| applies the cell-level maximum-over-archetypes rule in Section 5.3 (condition means within each scenario cell, then scenario macro-average); and mean RDS applies the Section 5.5 procedure—macro-averaging condition × strategy cell means of matched-pair cosine distances (equal weight per cell). No model–temperature pair minimizes all three indices simultaneously.
+Table 6 reports these three sensitivity magnitudes for each architecture at $T=0.0$ and $T=0.7$, after macro-averaging the cell-level values across scenarios. Columns correspond to mean context JSD, mean max \|Δ*p*\|, and mean RDS; a model that ranks high on one axis need not rank high on the others.
 
 | Model | $T$ | Mean context JSD | Mean max \|Δ*p*\| | Mean RDS |
 | :---- | :--: | :----: | :----: | :----: |
@@ -264,7 +264,7 @@ Table 6 summarizes model-level audit metrics macro-averaged over scenarios for e
 | Mistral-7B-Instruct-v0.3 | 0.0 | 0.244 | 0.288 | 0.149 |
 | Mistral-7B-Instruct-v0.3 | 0.7 | 0.215 | 0.290 | 0.196 |
 
-Table 6. Model-level audit-metric summaries (macro-averaged over scenarios). Mean context JSD uses max JSD(base, *v*) over perturbation variants *v* (including *randomized\_numbers*) within each scenario cell; mean max \|Δ*p*\| uses max \|Δ*p\| across archetypes within each condition, then macro-averages within and across scenario cells; mean RDS follows the cell macro-average in Section 5.5.
+Table 6. Model-level summaries of context sensitivity (mean max JSD from *base*), firm-identity sensitivity (mean max \|Δ*p*\|), and rationale sensitivity (mean RDS), each macro-averaged over scenarios.
 
 Three patterns follow. First, Qwen2.5-14B-Instruct shows the highest mean max \|Δ*p*\| at both temperatures (0.404 at $T=0.0$; 0.394 at $T=0.7$), indicating that brand exposure can swing individual archetype probabilities more for this architecture than for DeepSeek (0.103; 0.123), even though lower firm-identity \|Δ*p*\| does not imply uniformly low context or rationale sensitivity. Second, DeepSeek-LLM-7B-Chat and Qwen2.5-14B-Instruct lead on mean context JSD at $T=0.0$ (0.278 and 0.270), confirming that context-shift magnitude varies independently of firm-identity shift. Third, raising temperature from 0.0 to 0.7 reduces mean context JSD for every model (e.g., Qwen: 0.270 → 0.255) but does not uniformly lower mean max \|Δ*p*\| or mean RDS—Qwen firm-identity peaks fall slightly (0.404 → 0.394) while Yi rises (0.265 → 0.301), and mean RDS increases for Qwen (0.171 → 0.199) and Yi (0.131 → 0.179)—choice-level brand separation, context-shift magnitude, and rationale-level divergence therefore decouple under stochastic decoding, and localized hotspots remain below.
 
