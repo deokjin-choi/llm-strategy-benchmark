@@ -3,12 +3,14 @@ result_analysis/rationale_rds_analysis.py
 
 Rationale Divergence Score (RDS) Analysis
 ==========================================
-For each matched pair (same scenario / repeat / model / temperature /
-num_context / context_variant / chosen_strategy), compute the cosine
-distance between the Generic and Specific rationale embeddings.
+For each matched pair (same model / temperature / scenario / num_context /
+context_variant / Standard Mapping archetype), compute the cosine distance
+between the Generic and Specific rationale embeddings. Repeats are pooled
+within each cell (not aligned by repeat index). Only the seven valid
+archetypes in ``valid_strategies`` are included (same filter as §5.3–5.4).
 
 Calibration histogram (three distributions, identical preprocessing):
-  - RDS (framing):     Generic vs Specific, same strategy & repeat
+  - RDS (framing):     Generic vs Specific, same Standard Mapping archetype
   - Noise (lower):     same cell, same framing & strategy, different repeats
   - Ceiling (upper):   same cell, same framing, different strategies
 
@@ -48,8 +50,8 @@ except ImportError:
 
 # ── constants ──────────────────────────────────────────────────────────────────
 PAIR_GROUP_COLS = [
-    "scenario", "repeat", "Model", "Temperature",
-    "Num Context", "context_variant", "Chosen Option",
+    "scenario", "Model", "Temperature",
+    "Num Context", "context_variant", "Standard Mapping",
 ]
 
 NOISE_CELL_COLS = [
@@ -101,28 +103,17 @@ def _clean(text: str) -> str:
 
 
 def _prepare_df(df: pd.DataFrame) -> pd.DataFrame:
-    """Keep generic/specific rows; ensure Standard Mapping and cleaned text."""
+    """Keep generic/specific rows with valid archetypes; ensure cleaned text."""
     d = df[df["problem_type"].isin(["generic", "specific"])].copy()
+    d["Standard Mapping"] = d["Standard Mapping"].fillna("N/A")
+    d = d[d["Standard Mapping"].isin(valid_strategies)].copy()
     d["Rationale"] = d["Rationale"].fillna("").astype(str)
     d["clean_text"] = d["Rationale"].map(_clean)
-    if d["Standard Mapping"].isna().any():
-        strat_map = (
-            d[["scenario", "Chosen Option", "Standard Mapping"]]
-            .dropna(subset=["Standard Mapping"])
-            .drop_duplicates(subset=["scenario", "Chosen Option"])
-            .set_index(["scenario", "Chosen Option"])["Standard Mapping"]
-            .to_dict()
-        )
-        miss = d["Standard Mapping"].isna()
-        d.loc[miss, "Standard Mapping"] = d.loc[miss].apply(
-            lambda r: strat_map.get((r["scenario"], r["Chosen Option"]), r["Chosen Option"]),
-            axis=1,
-        )
     return d
 
 
 def _build_rds_pair_df(df: pd.DataFrame) -> pd.DataFrame:
-    """Matched Generic vs Specific pairs (Fig. 5 pipeline)."""
+    """Matched Generic vs Specific pairs within condition×strategy cells."""
     rows = []
     for key, g in df.groupby(PAIR_GROUP_COLS, dropna=False):
         gen = g.loc[g["problem_type"] == "generic", "clean_text"].tolist()
@@ -131,7 +122,7 @@ def _build_rds_pair_df(df: pd.DataFrame) -> pd.DataFrame:
         if m == 0:
             continue
         key_dict = dict(zip(PAIR_GROUP_COLS, key))
-        strategy = g["Standard Mapping"].iloc[0]
+        strategy = key_dict["Standard Mapping"]
         for i in range(m):
             rows.append({
                 **key_dict,
