@@ -7,8 +7,9 @@ Mean RDS uses the same cell macro-average as Section 5.5:
   2. Mean RDS within each cell
   3. Equal-weight macro-average across cells per (Model, Temperature)
 
-Mean context JSD and mean firm-identity JSD use audit_localization_metrics
-(max JSD over perturbation variants including randomized_numbers; scenario-macro-average).
+Mean context JSD and mean firm-identity max |Δp| use audit_localization_metrics
+(max JSD over perturbation variants including randomized_numbers; max |Δp| over
+archetypes within each condition, then scenario-macro-average).
 
 Output: final_results/summary/audit_metrics_by_model_temp.csv
 """

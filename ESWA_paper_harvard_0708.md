@@ -211,11 +211,11 @@ Table 3. Semantic framing differences in rationale keywords
 
 These findings indicate that LLM-generated strategic rationales are not neutral analytical outputs but reflect framing-consistent narrative patterns. Notably, the effect persists after masking brand-referential terms, suggesting that firm identity cues trigger distinct explanatory styles rather than mere lexical priming.
 
-To quantify the degree of narrative divergence beyond keyword inspection, we introduce the Rationale Divergence Score (RDS)—the cosine distance between SentenceTransformer embeddings of matched Generic and Specific rationale pairs. RDS ∈ [0, 1], where 0 indicates semantically identical justifications and 1 indicates maximal divergence. Pairs are matched on model, temperature, scenario, context variant, context load (Num Context), and Standard Mapping archetype (the seven validated strategy labels); independent repeats within each cell are pooled rather than aligned by repeat index. Any RDS above zero therefore reflects the effect of firm framing alone on the explanatory narrative.
+To quantify the degree of narrative divergence beyond keyword inspection, we introduce the Rationale Divergence Score (RDS)—the cosine distance between SentenceTransformer embeddings of matched Generic and Specific rationale pairs. RDS ∈ [0, 1], where 0 indicates semantically identical justifications and 1 indicates maximal divergence. Any RDS above zero therefore reflects the effect of firm framing alone on the explanatory narrative.
 
-Across 146,565 matched pairs, the overall mean RDS is 0.158 (median = 0.146, SD = 0.090); macro-averaged over 2,545 condition×strategy cells, mean RDS = 0.158 (95% CI [0.156, 0.161]), confirming that the rationale shift documented in Table 3 is not confined to a narrow set of keywords but constitutes a pervasive, semantically measurable divergence. To interpret this magnitude, we compare RDS against two reference distributions using the same embedding pipeline and preprocessing (brand-term masking only). Noise and ceiling baselines each draw one random pair per eligible cell (seed = 42).
+Across 146,565 matched pairs spanning 2,545 condition×strategy cells, mean RDS is 0.158 (median = 0.146, SD = 0.090; bootstrap 95% CI on cell-level macro means [0.156, 0.161]), confirming that the rationale shift documented in Table 3 is not confined to a narrow set of keywords but constitutes a pervasive, semantically measurable divergence. To interpret this magnitude, we compare RDS against two reference distributions using the same embedding pipeline and preprocessing (brand-term masking only). Noise and ceiling baselines each draw one random pair per eligible cell (seed = 42).
 
-The repeat-noise lower bound (n = 5,790; median = 0.101) fixes Standard Mapping and firm framing and contrasts two independent repeats, isolating decoding variability absent intentional manipulation. The strategy-ceiling upper bound (n = 1,702; median = 0.364) fixes firm framing but compares rationales from two different chosen strategies, approximating embedding distance when the strategic commitment itself changes. RDS holds Standard Mapping fixed and varies Generic vs. Specific framing alone.
+The repeat-noise lower bound (n = 5,790; median = 0.101) fixes Standard Mapping and firm framing and contrasts two independent repeats, isolating decoding variability absent intentional manipulation. The strategy-ceiling upper bound (n = 1,702; median = 0.364) fixes firm framing but compares rationales from two different chosen strategies, approximating embedding distance when the strategic commitment itself changes.
 
 Fig. 6 overlays the three distributions. RDS (median = 0.146) lies clearly above repeat noise and well below the cross-strategy ceiling, indicating that brand framing induces semantically measurable narrative shift beyond stochastic repetition, yet does not reframe justifications to the same extent as changing the chosen strategy itself. Cell-level bootstrap 95% confidence intervals (10,000 resamples) and Benjamini–Hochberg FDR correction confirm that macro-averaged mean RDS is reliably distinguishable from zero for all seven strategies (all FDR *q* < .001; strategy-level means and CIs are reported below). Fig. 7 visualizes how these strategy-level means distribute across context variants.
 
@@ -249,24 +249,24 @@ We therefore profile localization using the same sensitivity metrics computed wi
 
 *Rationale sensitivity* — mean RDS over matched Generic–Specific rationale pairs within the cell (strategy and context variant held fixed).
 
-Table 6 summarizes model-level audit metrics macro-averaged over scenarios for each architecture at $T=0.0$ and $T=0.7$. Mean context JSD applies the cell-level maximum-over-perturbations rule above, then macro-averages across scenarios; mean firm-identity JSD is the average Generic–Specific distributional distance; and mean RDS applies the Section 5.5 procedure—macro-averaging condition × strategy cell means of matched-pair cosine distances (equal weight per cell). No model–temperature pair minimizes all three indices simultaneously.
+Table 6 summarizes model-level audit metrics macro-averaged over scenarios for each architecture at $T=0.0$ and $T=0.7$. Mean context JSD applies the cell-level maximum-over-perturbations rule above, then macro-averages across scenarios; mean max \|Δ*p*\| applies the cell-level maximum-over-archetypes rule in Section 5.3 (condition means within each scenario cell, then scenario macro-average); and mean RDS applies the Section 5.5 procedure—macro-averaging condition × strategy cell means of matched-pair cosine distances (equal weight per cell). No model–temperature pair minimizes all three indices simultaneously.
 
-| Model | $T$ | Mean context JSD | Mean firm-identity JSD | Mean RDS |
+| Model | $T$ | Mean context JSD | Mean max \|Δ*p*\| | Mean RDS |
 | :---- | :--: | :----: | :----: | :----: |
-| Yi-1.5-9B-Chat | 0.0 | 0.175 | 0.202 | 0.131 |
-| Yi-1.5-9B-Chat | 0.7 | 0.152 | 0.183 | 0.179 |
-| Qwen2.5-14B-Instruct | 0.0 | 0.270 | 0.333 | 0.171 |
-| Qwen2.5-14B-Instruct | 0.7 | 0.255 | 0.294 | 0.199 |
-| DeepSeek-LLM-7B-Chat | 0.0 | 0.278 | 0.059 | 0.109 |
-| DeepSeek-LLM-7B-Chat | 0.7 | 0.123 | 0.044 | 0.153 |
-| Llama-3.1-8B-Instruct | 0.0 | 0.262 | 0.137 | 0.108 |
-| Llama-3.1-8B-Instruct | 0.7 | 0.189 | 0.064 | 0.160 |
-| Mistral-7B-Instruct-v0.3 | 0.0 | 0.244 | 0.241 | 0.149 |
-| Mistral-7B-Instruct-v0.3 | 0.7 | 0.215 | 0.178 | 0.196 |
+| Yi-1.5-9B-Chat | 0.0 | 0.175 | 0.265 | 0.131 |
+| Yi-1.5-9B-Chat | 0.7 | 0.152 | 0.301 | 0.179 |
+| Qwen2.5-14B-Instruct | 0.0 | 0.270 | 0.404 | 0.171 |
+| Qwen2.5-14B-Instruct | 0.7 | 0.255 | 0.394 | 0.199 |
+| DeepSeek-LLM-7B-Chat | 0.0 | 0.278 | 0.103 | 0.109 |
+| DeepSeek-LLM-7B-Chat | 0.7 | 0.123 | 0.123 | 0.153 |
+| Llama-3.1-8B-Instruct | 0.0 | 0.262 | 0.179 | 0.108 |
+| Llama-3.1-8B-Instruct | 0.7 | 0.189 | 0.163 | 0.160 |
+| Mistral-7B-Instruct-v0.3 | 0.0 | 0.244 | 0.288 | 0.149 |
+| Mistral-7B-Instruct-v0.3 | 0.7 | 0.215 | 0.290 | 0.196 |
 
-Table 6. Model-level audit-metric summaries (macro-averaged over scenarios). Mean context JSD uses max JSD(base, *v*) over perturbation variants *v* (including *randomized\_numbers*) within each scenario cell; mean RDS follows the cell macro-average in Section 5.5.
+Table 6. Model-level audit-metric summaries (macro-averaged over scenarios). Mean context JSD uses max JSD(base, *v*) over perturbation variants *v* (including *randomized\_numbers*) within each scenario cell; mean max \|Δ*p*\| uses max \|Δ*p\| across archetypes within each condition, then macro-averages within and across scenario cells; mean RDS follows the cell macro-average in Section 5.5.
 
-Three patterns follow. First, Qwen2.5-14B-Instruct shows the highest mean firm-identity JSD at both temperatures (0.333 at $T=0.0$; 0.294 at $T=0.7$), indicating that brand exposure moves strategy mass more for this architecture than for DeepSeek (0.059; 0.044), even though lower firm-identity JSD does not imply uniformly low context or rationale sensitivity. Second, DeepSeek-LLM-7B-Chat and Qwen2.5-14B-Instruct lead on mean context JSD at $T=0.0$ (0.278 and 0.270), confirming that context-shift magnitude varies independently of firm-identity shift. Third, raising temperature from 0.0 to 0.7 reduces mean context JSD and mean firm-identity JSD for every model (e.g., Qwen context: 0.270 → 0.255; firm-identity: 0.333 → 0.294) but does not uniformly lower mean RDS (e.g., Qwen: 0.171 → 0.199; Yi: 0.131 → 0.179)—choice-level brand separation, context-shift magnitude, and rationale-level divergence therefore decouple under stochastic decoding, and localized hotspots remain below.
+Three patterns follow. First, Qwen2.5-14B-Instruct shows the highest mean max \|Δ*p*\| at both temperatures (0.404 at $T=0.0$; 0.394 at $T=0.7$), indicating that brand exposure can swing individual archetype probabilities more for this architecture than for DeepSeek (0.103; 0.123), even though lower firm-identity \|Δ*p*\| does not imply uniformly low context or rationale sensitivity. Second, DeepSeek-LLM-7B-Chat and Qwen2.5-14B-Instruct lead on mean context JSD at $T=0.0$ (0.278 and 0.270), confirming that context-shift magnitude varies independently of firm-identity shift. Third, raising temperature from 0.0 to 0.7 reduces mean context JSD for every model (e.g., Qwen: 0.270 → 0.255) but does not uniformly lower mean max \|Δ*p*\| or mean RDS—Qwen firm-identity peaks fall slightly (0.404 → 0.394) while Yi rises (0.265 → 0.301), and mean RDS increases for Qwen (0.171 → 0.199) and Yi (0.131 → 0.179)—choice-level brand separation, context-shift magnitude, and rationale-level divergence therefore decouple under stochastic decoding, and localized hotspots remain below.
 
 **5.6.2 Model×Scenario Landscape**
 
@@ -389,7 +389,7 @@ Identical strategy labels therefore fail a decision-support transparency test: r
 
 **5.6.4 Temperature as Audited Run Condition**
 
-Across Table 6 and the three cases, temperature does not remove sensitivity but reshapes its profile. Raising $T$ from 0.0 to 0.7 lowers mean context JSD and mean firm-identity JSD for every model while mean RDS does not fall uniformly (Table 6)—choice-level brand separation, context-shift magnitude, and rationale-level divergence therefore decouple under stochastic decoding. However, the priority cells in Table 7 persist in structure across temperatures: Qwen’s firm-identity flip on *5\_model\_3\_mass\_market* (Fig. 9), Llama’s context-driven Technology Leadership activation on *4\_model\_x\_launch* (Figs. 10–11), and Qwen’s Maintain × *count\_fact* rationale divergence (Fig. 12; mean pair-level RDS rises from 0.235 to 0.321) remain visible at both $T=0.0$ and $T=0.7$, with peak context JSD for Case II occurring at $T=0.0$.
+Across Table 6 and the three cases, temperature does not remove sensitivity but reshapes its profile. Raising $T$ from 0.0 to 0.7 lowers mean context JSD for every model while mean max \|Δ*p*\| and mean RDS do not fall uniformly (Table 6)—choice-level brand separation, context-shift magnitude, and rationale-level divergence therefore decouple under stochastic decoding. However, the priority cells in Table 7 persist in structure across temperatures: Qwen’s firm-identity flip on *5\_model\_3\_mass\_market* (Fig. 9), Llama’s context-driven Technology Leadership activation on *4\_model\_x\_launch* (Figs. 10–11), and Qwen’s Maintain × *count\_fact* rationale divergence (Fig. 12; mean pair-level RDS rises from 0.235 to 0.321) remain visible at both $T=0.0$ and $T=0.7$, with peak context JSD for Case II occurring at $T=0.0$.
 
 For deployment, decoding settings must be documented as audited run conditions alongside prompt templates (Section 6.4, Step 6). A lower-temperature configuration is not a substitute for multi-context or firm-identity audit, and a higher-temperature configuration does not license single-framing production use. The localized cases above motivate the protocol in Section 6.4: sensitivity is measurable and governable only when audit metrics are evaluated on the specific model, scenario, and temperature intended for production—not when inferred from population averages alone.
 

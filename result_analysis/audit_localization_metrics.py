@@ -15,7 +15,7 @@ Rationale sensitivity (per cell):
   Mean RDS over matched Generic–Specific pairs in the cell.
 
 Table 6 macro-averages context and firm-identity metrics over scenarios;
-RDS follows the Section 5.5 cell macro-average at model × temperature.
+firm-identity uses mean max |Δp| per scenario cell (§5.3); RDS follows Section 5.5.
 """
 
 from __future__ import annotations
@@ -155,7 +155,7 @@ def build_model_temp_audit_table(scenario_audit: pd.DataFrame, rds_cells: pd.Dat
         scenario_audit.groupby(["Model", "Temperature"], dropna=False)
         .agg(
             mean_context_jsd=("context_sensitivity", "mean"),
-            mean_firm_identity_jsd=("mean_firm_identity_jsd", "mean"),
+            mean_firm_identity_max_delta_p=("firm_identity_max_delta_p", "mean"),
         )
         .reset_index()
     )
@@ -342,7 +342,7 @@ def run_audit_localization(
             "model_short",
             "Temperature",
             "mean_context_jsd",
-            "mean_firm_identity_jsd",
+            "mean_firm_identity_max_delta_p",
             "mean_rds_macro",
         ]
     ].to_csv(mt_path, index=False)
