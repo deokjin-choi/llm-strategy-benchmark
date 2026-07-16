@@ -180,10 +180,10 @@ def plot_ratio_pca(df):
 
 
     # 7. 플롯 마무리
-    title = "PCA of Strategy Ratios 2D (Vectorized Analysis)"
+    title = "PCA of Strategy Ratios 2D"
     ax.set_title(title, fontsize=14)
-    ax.set_xlabel("PCA 1")
-    ax.set_ylabel("PCA 2")
+    ax.set_xlabel("PC1")
+    ax.set_ylabel("PC2")
     plt.tight_layout()
     save_fig(fig, title)
     plt.show()

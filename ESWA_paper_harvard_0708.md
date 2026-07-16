@@ -138,19 +138,19 @@ Fig. 2\. Strategy distribution across contextual scenario variants.
 
 **5.2 Structural Separation and Statistical Dynamics of Strategic Contexts**  
 Fig 3\. examines whether these distributional shifts reflect meaningful structural differences. Principal component analysis reveals clear separation between opportunity-focused and unfavorable scenarios, while the base and randomized-number variants cluster closely together. This suggests that LLMs internally distinguish qualitatively different strategic environments rather than responding to random noise or minor input changes.  
-![Strategy_Ratio_PCA](final_results/plots/eval_eda_PCA_of_Strategy_Ratios_2D_Vectorized_Analysis.png)  
+![Strategy_Ratio_PCA](final_results/plots/eval_eda_PCA_of_Strategy_Ratios_2D.png)  
 Fig. 3\. PCA-based structural separation of strategy distributions across scenarios.
 
 
-To further quantify these shifts and the underlying decision uncertainty, we calculated Shannon entropy, Jensen-Shannon Divergence (JSD), and Spearman rank correlation for each scenario relative to the base (Table 2). Bootstrap 95% confidence intervals for JSD from base (10,000 resamples; row-level nonparametric bootstrap) are reported alongside the point estimates.
+To further quantify these shifts and the underlying decision uncertainty, we calculated Shannon entropy, Total Variation Distance (TVD) from base, and Spearman rank correlation for each scenario relative to the base (Table 2). TVD(*p*, *base*) = 0.5 Σ|*p<sub>i</sub>* − *base<sub>i</sub>*| directly measures the share of strategy mass that shifted away from the base distribution—e.g., a TVD of 0.25 means roughly 25% of choices moved to a different strategy. Bootstrap 95% confidence intervals for TVD from base (10,000 resamples; row-level nonparametric bootstrap) are reported alongside the point estimates.
 
-| Scenario | entropy | jsd\_from\_base | 95% CI | spearman\_vs\_base |
+| Scenario | entropy | tvd\_from\_base | 95% CI | spearman\_vs\_base |
 | :---: | :---: | :---: | :---: | :---: |
 | base | 1.8422 | 0 | — | 1 |
-| competitive\_dynamics | 1.8211 | 0.0107 | [0.0101, 0.0115] | 0.8214 |
-| count\_fact | 1.7818 | 0.0081 | [0.0075, 0.0088] | 0.6429 |
-| opp\_focus | 1.7030 | 0.0471 | [0.0457, 0.0486] | 0.6786 |
-| randomized\_numbers | 1.8328 | 0.0002 | [0.0002, 0.0004] | 1 |
+| competitive\_dynamics | 1.8211 | 0.1121 | [0.1077, 0.1172] | 0.8214 |
+| count\_fact | 1.7818 | 0.1002 | [0.0958, 0.1047] | 0.6429 |
+| opp\_focus | 1.7030 | 0.2550 | [0.2505, 0.2595] | 0.6786 |
+| randomized\_numbers | 1.8328 | 0.0206 | [0.0164, 0.0258] | 1 |
 
 Table 2\. Quantitative metrics for strategic decision consistency and shift.
 
@@ -158,7 +158,7 @@ The quantitative analysis provides several key insights into the models' decisio
 
 * Context-Driven Certainty (Entropy): The opp\_focus scenario exhibited the lowest entropy (1.7030), compared to the base scenario (1.8422). This suggests that while LLMs are generally cautious (high entropy) in ambiguous settings, they become significantly more "confident" and decisive when presented with growth-oriented opportunities.
 
-* Sensitivity to Narrative vs. Magnitude (JSD & Spearman): The jsd\_from\_base for opp\_focus (0.0471) was nearly six times higher than that of count\_fact (0.0081), indicating that LLMs are disproportionately sensitive to optimistic framing. Conversely, the randomized\_numbers scenario showed a perfect Spearman correlation (1.0000) and near-zero JSD (0.0002) relative to the base. This statistically confirms "numerical insensitivity," where the models' strategic ranking remains frozen despite quantitative fluctuations.
+* Sensitivity to Narrative vs. Magnitude (TVD & Spearman): The tvd\_from\_base for opp\_focus (0.2550) was roughly 2.5× that of count\_fact (0.1002)—i.e., about 25.5% of strategy mass was reallocated from base under opportunity framing, versus about 10.0% under unfavorable constraints—indicating that LLMs are disproportionately sensitive to optimistic framing. Conversely, the randomized\_numbers scenario showed a perfect Spearman correlation (1.0000) and a comparatively small TVD (0.0206, roughly one-fifth of count\_fact's shift, or about 2.1% of strategy mass) relative to the base. This statistically confirms "numerical insensitivity," where the models' strategic ranking remains frozen despite quantitative fluctuations.
 
 These metrics validate the PCA results: the structural separation observed in Fig. 3 is not merely visual but is rooted in distinct changes in decision certainty and rank stability across different semantic contexts.
 
@@ -235,15 +235,15 @@ Third, the count\_fact variant produces the most pronounced outliers, but not in
 
 **5.6 Localized Sensitivity Profiles and Deployment Risk Cases**
 
-Sections 5.1–5.5 establish that LLM strategy recommendations and matched-choice rationales shift under semantic context and firm-identity cues when the underlying dilemma and closed strategy menu are held fixed. Those results are population-level: they macro-average over models, scenarios, temperatures, and context loads. For deployment, however, the operative question is not whether sensitivity exists on average but *where* it concentrates in the experimental grid—and whether a production configuration (model, temperature, scenario template, and prompt framing) would inherit a localized failure mode invisible in pooled benchmarks. This section answers that question by re-expressing the sensitivity metrics from Sections 5.1–5.5—context JSD, firm-identity Δ*p*, and rationale RDS—at the model × scenario × temperature level, then examining three priority cells that illustrate distinct deployment risk archetypes.
+Sections 5.1–5.5 establish that LLM strategy recommendations and matched-choice rationales shift under semantic context and firm-identity cues when the underlying dilemma and closed strategy menu are held fixed. Those results are population-level: they macro-average over models, scenarios, temperatures, and context loads. For deployment, however, the operative question is not whether sensitivity exists on average but *where* it concentrates in the experimental grid—and whether a production configuration (model, temperature, scenario template, and prompt framing) would inherit a localized failure mode invisible in pooled benchmarks. This section answers that question by re-expressing the sensitivity metrics from Sections 5.1–5.5—context TVD, firm-identity Δ*p*, and rationale RDS—at the model × scenario × temperature level, then examining three priority cells that illustrate distinct deployment risk archetypes.
 
 **5.6.1 From Population Patterns to Localized Audit Cells**
 
-The population patterns in Sections 5.1–5.5 already imply that no single correctness score can certify an LLM-assisted strategy DSS for production. Opportunity framing reallocates strategy mass more than constraint framing (JSD ≈ 0.047 vs. 0.008); firm-identity exposure reallocates the menu toward Technology Leadership (+9.5 pp) and away from Open Innovation (−5.7 pp); and matched-choice rationales diverge above repeat-noise levels (macro mean RDS = 0.158). Yet these aggregates can mask sharp local contrasts. A model–temperature pair that appears moderately firm-identity-invariant on average may still flip from Open Innovation to Maintain under Specific framing in a single high-stakes scenario; a scenario that is context-invariant for one model may exhibit large JSD shifts for another; and rationale divergence can peak for a particular strategy × context combination even when the chosen archetype is unchanged.
+The population patterns in Sections 5.1–5.5 already imply that no single correctness score can certify an LLM-assisted strategy DSS for production. Opportunity framing reallocates strategy mass more than constraint framing (TVD ≈ 0.255 vs. 0.100); firm-identity exposure reallocates the menu toward Technology Leadership (+9.5 pp) and away from Open Innovation (−5.7 pp); and matched-choice rationales diverge above repeat-noise levels (macro mean RDS = 0.158). Yet these aggregates can mask sharp local contrasts. A model–temperature pair that appears moderately firm-identity-invariant on average may still flip from Open Innovation to Maintain under Specific framing in a single high-stakes scenario; a scenario that is context-invariant for one model may exhibit large TVD shifts for another; and rationale divergence can peak for a particular strategy × context combination even when the chosen archetype is unchanged.
 
 We therefore profile localization using the same sensitivity metrics computed within each model × scenario × temperature cell:
 
-*Context sensitivity* — maximum Jensen–Shannon divergence from *base* to any context perturbation variant (*competitive\_dynamics*, *count\_fact*, *opp\_focus*, *randomized\_numbers*) within the cell.
+*Context sensitivity* — maximum Total Variation Distance from *base* to any context perturbation variant (*competitive\_dynamics*, *count\_fact*, *opp\_focus*, *randomized\_numbers*) within the cell; TVD is the share of strategy mass reallocated relative to base (Section 5.1).
 
 *Firm-identity sensitivity* — maximum \|Δ*p*\| = \|*p*(Specific) − *p*(Generic)\| across archetypes within the cell.
 
@@ -253,29 +253,29 @@ Table 6 reports these three sensitivity magnitudes for each architecture at $T=0
 
 | Model | $T$ | Context sensitivity | Firm-identity sensitivity | Rationale sensitivity |
 | :---- | :--: | :----: | :----: | :----: |
-| Yi-1.5-9B-Chat | 0.0 | 0.175 | 0.265 | 0.131 |
-| Yi-1.5-9B-Chat | 0.7 | 0.152 | 0.301 | 0.179 |
-| Qwen2.5-14B-Instruct | 0.0 | 0.270 | 0.404 | 0.171 |
-| Qwen2.5-14B-Instruct | 0.7 | 0.255 | 0.394 | 0.199 |
-| DeepSeek-LLM-7B-Chat | 0.0 | 0.278 | 0.103 | 0.109 |
-| DeepSeek-LLM-7B-Chat | 0.7 | 0.123 | 0.123 | 0.153 |
-| Llama-3.1-8B-Instruct | 0.0 | 0.262 | 0.179 | 0.108 |
-| Llama-3.1-8B-Instruct | 0.7 | 0.189 | 0.163 | 0.160 |
-| Mistral-7B-Instruct-v0.3 | 0.0 | 0.244 | 0.288 | 0.149 |
-| Mistral-7B-Instruct-v0.3 | 0.7 | 0.215 | 0.290 | 0.196 |
+| Yi-1.5-9B-Chat | 0.0 | 0.238 | 0.265 | 0.131 |
+| Yi-1.5-9B-Chat | 0.7 | 0.272 | 0.301 | 0.179 |
+| Qwen2.5-14B-Instruct | 0.0 | 0.345 | 0.404 | 0.171 |
+| Qwen2.5-14B-Instruct | 0.7 | 0.349 | 0.394 | 0.199 |
+| DeepSeek-LLM-7B-Chat | 0.0 | 0.336 | 0.103 | 0.109 |
+| DeepSeek-LLM-7B-Chat | 0.7 | 0.263 | 0.123 | 0.153 |
+| Llama-3.1-8B-Instruct | 0.0 | 0.319 | 0.179 | 0.108 |
+| Llama-3.1-8B-Instruct | 0.7 | 0.326 | 0.163 | 0.160 |
+| Mistral-7B-Instruct-v0.3 | 0.0 | 0.308 | 0.288 | 0.149 |
+| Mistral-7B-Instruct-v0.3 | 0.7 | 0.316 | 0.290 | 0.196 |
 
-Table 6. Model-level summaries of context sensitivity (mean max JSD from *base*), firm-identity sensitivity (mean max \|Δ*p*\|), and rationale sensitivity (mean RDS), each macro-averaged over scenarios.
+Table 6. Model-level summaries of context sensitivity (mean max TVD from *base*), firm-identity sensitivity (mean max \|Δ*p*\|), and rationale sensitivity (mean RDS), each macro-averaged over scenarios.
 
-Three patterns emerge from Table 6. First, DeepSeek-LLM-7B-Chat and Qwen2.5-14B-Instruct show the highest context sensitivity at $T=0.0$ (0.278 and 0.270). Second, Qwen2.5-14B-Instruct shows the highest firm-identity sensitivity at both temperatures (0.404 at $T=0.0$; 0.394 at $T=0.7$), whereas DeepSeek-LLM-7B-Chat records the lowest (0.103; 0.123). Third, raising temperature from 0.0 to 0.7 reduces context sensitivity for every model (e.g., Qwen: 0.270 → 0.255) but does not uniformly lower firm-identity or rationale sensitivity—Qwen firm-identity sensitivity falls slightly (0.404 → 0.394) while Yi rises (0.265 → 0.301), and rationale sensitivity increases for Qwen (0.171 → 0.199) and Yi (0.131 → 0.179).
+Three patterns emerge from Table 6. First, Qwen2.5-14B-Instruct and DeepSeek-LLM-7B-Chat show the highest context sensitivity at $T=0.0$ (0.345 and 0.336)—roughly a third of strategy mass reallocated away from base under the most disruptive perturbation variant—while Yi-1.5-9B-Chat is lowest (0.238). Second, Qwen2.5-14B-Instruct shows the highest firm-identity sensitivity at both temperatures (0.404 at $T=0.0$; 0.394 at $T=0.7$), whereas DeepSeek-LLM-7B-Chat records the lowest (0.103; 0.123). Third, raising temperature from 0.0 to 0.7 does not uniformly move context, firm-identity, or rationale sensitivity in the same direction: context sensitivity falls only for DeepSeek (0.336 → 0.263), while it rises for Yi (0.238 → 0.272), Llama (0.319 → 0.326), Mistral (0.308 → 0.316), and stays roughly flat for Qwen (0.345 → 0.349); firm-identity sensitivity falls slightly for Qwen (0.404 → 0.394) while rising for Yi (0.265 → 0.301); and rationale sensitivity increases for Qwen (0.171 → 0.199) and Yi (0.131 → 0.179). Temperature therefore reshapes each sensitivity axis idiosyncratically per model rather than uniformly damping or amplifying sensitivity.
 
 **5.6.2 Model×Scenario Landscape**
 
 Architecture-wide means average over scenarios and therefore hide which model × scenario × temperature cells drive each elevation. We next resolve the same three metrics at that cell level and map where sensitivity concentrates in specific deployment contexts. Fig. 8 displays the full scenario × model grid at $T=0.0$ and $T=0.7$ on the raw metric scale.
 
-Context JSD, firm-identity \|Δ*p*\|, and RDS do not co-move across the grid: a cell with low firm-identity separation can exhibit high context JSD, and rationale divergence can peak even when strategy labels are stable. Context sensitivity is sparse but intense—the largest perturbation-variant JSD in the benchmark grid reaches 0.651 (*4\_model\_x\_launch*, Llama-3.1-8B-Instruct, $T=0.0$; Case I, below). Firm-identity hotspots concentrate on *5\_model\_3\_mass\_market* under Qwen2.5-14B-Instruct, where Generic vs. Specific framing shifts the modal strategy (Case II, below). Cohort-wide, Maintain under *count\_fact* marks the highest mean RDS in Fig. 7 (0.197); Case III localizes this pattern in *2\_roadster\_launch* under Qwen2.5-14B-Instruct, where matched-choice rationales diverge sharply (peak pair RDS = 0.689). Localized profiling must therefore be scoped to the production scenario set and model–temperature configuration rather than inferred from architecture-wide means alone.
+Context TVD, firm-identity \|Δ*p*\|, and RDS do not co-move across the grid: a cell with low firm-identity separation can exhibit high context TVD, and rationale divergence can peak even when strategy labels are stable. Context sensitivity is sparse but intense—the largest perturbation-variant TVD in the benchmark grid reaches 0.686 (*4\_model\_x\_launch*, Llama-3.1-8B-Instruct, $T=0.0$; Case I, below), meaning roughly two-thirds of strategy mass reallocates away from base in that cell's most disruptive variant. Firm-identity hotspots concentrate on *5\_model\_3\_mass\_market* under Qwen2.5-14B-Instruct, where Generic vs. Specific framing shifts the modal strategy (Case II, below). Cohort-wide, Maintain under *count\_fact* marks the highest mean RDS in Fig. 7 (0.197); Case III localizes this pattern in *2\_roadster\_launch* under Qwen2.5-14B-Instruct, where matched-choice rationales diverge sharply (peak pair RDS = 0.689). Localized profiling must therefore be scoped to the production scenario set and model–temperature configuration rather than inferred from architecture-wide means alone.
 
 ![Audit_scenario_model_landscape](final_results/plots/eval_audit_scenario_model_landscape__paper.png)  
-Fig. 8. Scenario × model audit landscape: context sensitivity (max JSD from *base* over perturbation variants, including *randomized\_numbers*), firm-identity sensitivity (max \|Δ*p*\|), and rationale sensitivity (mean RDS). Raw metric values with a shared color scale per column across temperatures; rows = $T=0.0$ (top) and $T=0.7$ (bottom).
+Fig. 8. Scenario × model audit landscape: context sensitivity (max TVD from *base* over perturbation variants, including *randomized\_numbers*), firm-identity sensitivity (max \|Δ*p*\|), and rationale sensitivity (mean RDS). Raw metric values with a shared color scale per column across temperatures; rows = $T=0.0$ (top) and $T=0.7$ (bottom).
 
 Priority cells in Table 7 are selected as follows. For each audit axis, candidate model × scenario pairs are ranked by the **mean** of the axis metric over $T \in \{0.0, 0.7\}$; case figures report both temperatures. A qualitative filter then retains cells that exhibit an interpretable deployment-risk pattern (context-driven menu rewrite; firm-identity modal strategy flip; matched-choice rationale divergence with exemplar pairs). Where the top-ranked models would repeat across axes, the next eligible candidate within 85% of the axis maximum is preferred so that the three cases span distinct architectures when the data support it.
 
@@ -283,8 +283,8 @@ Table 7 lists the three priority cells selected for case analysis.
 
 | Audit axis | Model | Scenario | Localization signal |
 | :---- | :---- | :---- | :---- |
-| Context | Llama-3.1-8B-Instruct | 4\_model\_x\_launch | *opp\_focus* peak JSD = 0.651 at $T=0.0$; Specific framing activates Technology Leadership |
-| Firm-identity (\|Δ*p*\|) | Qwen2.5-14B-Instruct | 5\_model\_3\_mass\_market | Generic → Open Innovation; Specific → Maintain (mean \|Δ*p\| = 0.94) |
+| Context | Llama-3.1-8B-Instruct | 4\_model\_x\_launch | *opp\_focus* peak TVD = 0.686 at $T=0.0$; Specific framing activates Technology Leadership |
+| Firm-identity | Qwen2.5-14B-Instruct | 5\_model\_3\_mass\_market | Generic → Open Innovation; Specific → Maintain (mean \|Δ*p\| = 0.94) |
 | Rationale | Qwen2.5-14B-Instruct | 2\_roadster\_launch | Maintain × *count\_fact*; matched-choice rationales diverge (peak pair RDS = 0.689) |
 
 Table 7. Priority scenario–model cells for deployment risk cases (axis means macro-averaged over $T=0.0$ and $T=0.7$).
@@ -311,15 +311,15 @@ The priority cells in Table 7 instantiate three deployment risk archetypes—con
 
 Table 8. Strategy menu for 4\_model\_x\_launch.
 
-**(3) Observed behavior.** Context perturbations are implemented through the *context\_variant* axis—*base*, *competitive\_dynamics*, *count\_fact*, *opp\_focus*, and *randomized\_numbers*—on top of Generic vs. Specific firm-identity framing (Llama-3.1-8B-Instruct). Fig. 9 shows strategy stacks; Fig. 10 reports mean JSD from *base* for each perturbation variant.
+**(3) Observed behavior.** Context perturbations are implemented through the *context\_variant* axis—*base*, *competitive\_dynamics*, *count\_fact*, *opp\_focus*, and *randomized\_numbers*—on top of Generic vs. Specific firm-identity framing (Llama-3.1-8B-Instruct). Fig. 9 shows strategy stacks; Fig. 10 reports mean TVD from *base* for each perturbation variant.
 
 ![Context_deepdive_Llama_ModelX_framing](final_results/plots/eval_deepdive_context_strategy_stacks_framing__Meta-Llama-3.1-8B__4_model_x_launch.png)  
 Fig. 9. Context sensitivity case: strategy mix across context perturbations and framing types (*4\_model\_x\_launch*, Llama-3.1-8B-Instruct).
 
-![Context_deepdive_Llama_ModelX_jsd](final_results/plots/eval_deepdive_context_jsd_by_variant__Meta-Llama-3.1-8B__4_model_x_launch.png)  
-Fig. 10. Context sensitivity case: mean JSD from *base* by perturbation variant ($T=0.0$ vs. $T=0.7$); *randomized\_numbers* remains near zero.
+![Context_deepdive_Llama_ModelX_tvd](final_results/plots/eval_deepdive_context_tvd_by_variant__Meta-Llama-3.1-8B__4_model_x_launch.png)  
+Fig. 10. Context sensitivity case: mean TVD from *base* by perturbation variant ($T=0.0$ vs. $T=0.7$); *randomized\_numbers* remains the weakest perturbation at both temperatures.
 
-Under Generic framing, Retrenchment remains modal across *base*, *competitive\_dynamics*, and *count\_fact*; only under *opp\_focus* does Technology Leadership emerge as the modal choice. Under Specific framing, Technology Leadership becomes modal under all three semantic perturbations—reaching 69% mass share under *opp\_focus*—while *base* remains Retrenchment-dominant. The JSD hierarchy at $T=0.0$ (*opp\_focus* = 0.651 > *count\_fact* = 0.394 > *competitive\_dynamics* = 0.339 ≫ *randomized\_numbers* = 0.002) mirrors the population-level asymmetry in Section 5.1 and peaks at the highest context-shift magnitude in the benchmark grid. Context–identity moderation (Section 5.4) appears in miniature: firm identification does not uniformly amplify all variants but unlocks leadership-oriented mass under semantic perturbation that stays defensive under Generic framing. In this cell, the base dilemma already anchors Retrenchment; opportunity framing then unlocks Technology Leadership, producing the largest context-driven menu rewrite in the grid.
+Under Generic framing, Retrenchment remains modal across *base*, *competitive\_dynamics*, and *count\_fact*; only under *opp\_focus* does Technology Leadership emerge as the modal choice. Under Specific framing, Technology Leadership becomes modal under all three semantic perturbations—reaching 69% mass share under *opp\_focus*—while *base* remains Retrenchment-dominant. The TVD hierarchy at $T=0.0$ (*opp\_focus* = 0.686 > *count\_fact* = 0.500 > *competitive\_dynamics* = 0.417 ≫ *randomized\_numbers* = 0.004) mirrors the population-level asymmetry in Section 5.1 and peaks at the highest context-shift magnitude in the benchmark grid—under *opp\_focus*, roughly two-thirds of strategy mass reallocates away from base. Context–identity moderation (Section 5.4) appears in miniature: firm identification does not uniformly amplify all variants but unlocks leadership-oriented mass under semantic perturbation that stays defensive under Generic framing. In this cell, the base dilemma already anchors Retrenchment; opportunity framing then unlocks Technology Leadership, producing the largest context-driven menu rewrite in the grid.
 
 *Case II: Firm-identity-coupled strategy reallocation (5\_model\_3\_mass\_market).*
 
@@ -389,7 +389,7 @@ Identical strategy labels therefore fail a decision-support transparency test: r
 
 **5.6.4 Temperature as Audited Run Condition**
 
-Across Table 6 and the three cases, temperature does not remove sensitivity but reshapes its profile. Raising $T$ from 0.0 to 0.7 lowers mean context JSD for every model while mean max \|Δ*p*\| and mean RDS do not fall uniformly (Table 6)—context-shift magnitude, choice-level brand separation, and rationale-level divergence therefore decouple under stochastic decoding. However, the priority cells in Table 7 persist in structure across temperatures: Llama’s context-driven Technology Leadership activation on *4\_model\_x\_launch* (Figs. 9–10), Qwen’s firm-identity flip on *5\_model\_3\_mass\_market* (Fig. 11), and Qwen’s Maintain × *count\_fact* rationale divergence (Fig. 12; mean pair-level RDS rises from 0.235 to 0.321) remain visible at both $T=0.0$ and $T=0.7$, with peak context JSD for Case I occurring at $T=0.0$.
+Across Table 6 and the three cases, temperature does not remove sensitivity but reshapes its profile without moving any axis uniformly. Raising $T$ from 0.0 to 0.7 shifts mean context TVD, mean max \|Δ*p*\|, and mean RDS by model-specific amounts and in model-specific directions rather than damping them uniformly (Table 6)—context-shift magnitude, choice-level brand separation, and rationale-level divergence therefore decouple under stochastic decoding. However, the priority cells in Table 7 persist in structure across temperatures: Llama’s context-driven Technology Leadership activation on *4\_model\_x\_launch* (Figs. 9–10), Qwen’s firm-identity flip on *5\_model\_3\_mass\_market* (Fig. 11), and Qwen’s Maintain × *count\_fact* rationale divergence (Fig. 12; mean pair-level RDS rises from 0.235 to 0.321) remain visible at both $T=0.0$ and $T=0.7$, with peak context TVD for Case I occurring at $T=0.0$ (0.686, vs. 0.586 at $T=0.7$).
 
 For deployment, decoding settings must be documented as audited run conditions alongside prompt templates (Section 6.4, Step 6). A lower-temperature configuration is not a substitute for multi-context or firm-identity audit, and a higher-temperature configuration does not license single-framing production use. The localized cases above motivate the protocol in Section 6.4: sensitivity is measurable and governable only when audit metrics are evaluated on the specific model, scenario, and temperature intended for production—not when inferred from population averages alone.
 

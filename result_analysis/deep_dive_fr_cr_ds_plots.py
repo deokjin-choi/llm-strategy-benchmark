@@ -11,12 +11,13 @@ Design notes (logic / alignment with main axes)
    - Default here: context_variant == "base" only, so the plot isolates **firm-identify framing**
      on the **neutral** narrative (aligned with how readers think about “brand on/off”).
 
-2) CR — JSD(base → v) and strategy mixes
-   - Matches `compute_cr` / scenario CR: within (scenario, Num Context, problem_type), JSD between
-     base and each semantic variant; we report **means over Num Context × problem_type** for the
-     chosen scenario (and optionally cohort-wide means for a compact bar chart).
+2) CR — TVD(base → v) and strategy mixes
+   - Matches `compute_cr` / scenario CR: within (scenario, Num Context, problem_type), Total
+     Variation Distance between base and each semantic variant; we report **means over
+     Num Context × problem_type** for the chosen scenario (and optionally cohort-wide means for a
+     compact bar chart). TVD is directly interpretable as the share of strategy mass reallocated.
    - Showing **base + all three semantic variants** (stacked strategy bars) is usually better than
-     only the single largest-JSD variant: readers see *which* cue moves mass and whether the pattern
+     only the single largest-TVD variant: readers see *which* cue moves mass and whether the pattern
      is asymmetric (e.g. opp_focus vs count_fact).
 
 3) DS — entropy vs Num Context
@@ -27,11 +28,11 @@ Design notes (logic / alignment with main axes)
 
 Outputs (default paths under final_results/plots and final_results/summary):
   eval_deepdive_fr_framing_stacks__{model}__{scenario}__.png
-  eval_deepdive_cr_jsd_by_variant__{model}__{scenario}__.png
+  eval_deepdive_cr_tvd_by_variant__{model}__{scenario}__.png
   eval_deepdive_cr_strategy_stacks__{model}__{scenario}__.png
   eval_deepdive_ds_entropy_numcontext_box__{model}__{scenario}__.png
   eval_deepdive_ds_strategy_stacks_numcontext_framing__{model}__{scenario}__.png
-  deepdive_cr_jsd_by_variant_long.csv (optional cohort / scenario long table)
+  deepdive_cr_tvd_by_variant_long.csv (optional cohort / scenario long table)
 
 Optional (``rationale_audit=True``): FR cell **generic vs specific** rationale keyword tables
 and permutation sidecar CSVs via ``rationale_analysis.run_framing_keyword_slice_audit`` (same
@@ -56,10 +57,10 @@ try:
         build_condition_level_ds_diagnostics,
         load_profile_data,
         _safe_filename,
-        _safe_jsd,
         _short_model_name,
         _strategy_distribution,
     )
+    from result_analysis.tvd_from_base_ci import total_variation_distance
 except ImportError:
     from model_behavioral_profile import (
         PERTURBATION_VARIANTS,
@@ -67,10 +68,10 @@ except ImportError:
         build_condition_level_ds_diagnostics,
         load_profile_data,
         _safe_filename,
-        _safe_jsd,
         _short_model_name,
         _strategy_distribution,
     )
+    from tvd_from_base_ci import total_variation_distance
 
 # Always load project rationale via package path — avoid bare `import rationale_analysis`
 # (can resolve to an unrelated PyPI package missing our helpers).
@@ -104,6 +105,15 @@ def _rationale_context_variant(fr_context_variants: Sequence[str]) -> str:
     return str(fr_context_variants[0])
 
 
+def _safe_tvd(p: np.ndarray, q: np.ndarray) -> float:
+    """Total Variation Distance; NaN if either side has zero mass."""
+    p = np.asarray(p, dtype=float)
+    q = np.asarray(q, dtype=float)
+    if p.sum() == 0 or q.sum() == 0:
+        return np.nan
+    return total_variation_distance(p, q)
+
+
 def pool_strategy_proportions(
     df: pd.DataFrame,
     *,
@@ -119,14 +129,14 @@ def pool_strategy_proportions(
     return _strategy_distribution(g["Standard Mapping"])
 
 
-def build_jsd_base_vs_semantic_long(
+def build_tvd_base_vs_semantic_long(
     df: pd.DataFrame,
     *,
     model: Optional[str] = None,
     scenario: Optional[str] = None,
 ) -> pd.DataFrame:
     """
-    Mean JSD(base, v) for each perturbation variant v (including randomized_numbers),
+    Mean TVD(base, v) for each perturbation variant v (including randomized_numbers),
     mean over (Num Context, problem_type).
 
     If model is None: cohort-wide mean for each (Model, Temperature, variant).
@@ -151,24 +161,24 @@ def build_jsd_base_vs_semantic_long(
             scen = scenario
 
         for v in PERTURBATION_VARIANTS:
-            jvals = []
+            tvals = []
             for _, gp in g.groupby(["Num Context", "problem_type"], dropna=False):
                 base = gp[gp["context_variant"] == "base"]["Standard Mapping"]
                 dv = gp[gp["context_variant"] == v]["Standard Mapping"]
                 if len(base) == 0 or len(dv) == 0:
                     continue
-                jvals.append(
-                    _safe_jsd(_strategy_distribution(base), _strategy_distribution(dv))
+                tvals.append(
+                    _safe_tvd(_strategy_distribution(base), _strategy_distribution(dv))
                 )
-            jm = float(np.nanmean(jvals)) if len(jvals) else np.nan
+            tm = float(np.nanmean(tvals)) if len(tvals) else np.nan
             row = {
                 "Model": mod,
                 "Temperature": float(temp),
                 "scenario": scen,
                 "perturbation_variant": v,
                 "semantic_variant": v,  # backward-compatible alias
-                "mean_jsd_from_base": jm,
-                "n_conditions": len(jvals),
+                "mean_tvd_from_base": tm,
+                "n_conditions": len(tvals),
             }
             rows.append(row)
 
@@ -313,31 +323,31 @@ def plot_fr_framing_strategy_stacks(
     plt.close(fig)
 
 
-def plot_cr_jsd_by_variant_bars(
-    jsd_long: pd.DataFrame,
+def plot_cr_tvd_by_variant_bars(
+    tvd_long: pd.DataFrame,
     *,
     model: str,
     scenario: str,
     temperatures: Sequence[float] = TEMPERATURES_DEFAULT,
     save_path: str,
 ) -> None:
-    """Grouped bars: mean JSD(base, v) for each perturbation variant, per temperature."""
+    """Grouped bars: mean TVD(base, v) for each perturbation variant, per temperature."""
     os.makedirs(os.path.dirname(save_path), exist_ok=True)
     fig, axes = plt.subplots(1, len(temperatures), figsize=(4.8 * len(temperatures), 3.8), sharey=True)
     if len(temperatures) == 1:
         axes = np.array([axes])
 
-    variant_col = "perturbation_variant" if "perturbation_variant" in jsd_long.columns else "semantic_variant"
+    variant_col = "perturbation_variant" if "perturbation_variant" in tvd_long.columns else "semantic_variant"
 
     for ax, temp in zip(axes, temperatures):
-        sub = jsd_long[
-            (jsd_long["Model"] == model)
-            & (jsd_long["scenario"] == scenario)
-            & (jsd_long["Temperature"].apply(lambda x: _same_temp(x, temp)))
+        sub = tvd_long[
+            (tvd_long["Model"] == model)
+            & (tvd_long["scenario"] == scenario)
+            & (tvd_long["Temperature"].apply(lambda x: _same_temp(x, temp)))
         ]
         order = PERTURBATION_VARIANTS
         ys = [
-            float(sub[sub[variant_col] == v]["mean_jsd_from_base"].iloc[0])
+            float(sub[sub[variant_col] == v]["mean_tvd_from_base"].iloc[0])
             if len(sub[sub[variant_col] == v])
             else np.nan
             for v in order
@@ -352,12 +362,12 @@ def plot_cr_jsd_by_variant_bars(
             ha="right",
             fontsize=8,
         )
-        ax.set_ylabel("mean JSD from base")
+        ax.set_ylabel("mean TVD from base")
         ax.set_title(f"T={float(temp):g}")
         ax.grid(True, axis="y", linestyle="--", alpha=0.3)
 
     fig.suptitle(
-        f"Context sensitivity: perturbation strength (mean JSD from base)\n"
+        f"Context sensitivity: perturbation strength (mean TVD from base)\n"
         f"{_short_model_name(model)} — {scenario}",
         fontsize=11,
         y=1.05,
@@ -638,21 +648,21 @@ def run_deep_dive_fr_cr_ds(
         ),
     )
 
-    # --- CR: JSD table + plots for cr_cell; also save cohort-long for appendix-style tables
-    jsd_long = build_jsd_base_vs_semantic_long(df)
-    jsd_path = os.path.join(summary_dir, "deepdive_cr_jsd_by_variant_long.csv")
-    jsd_long.to_csv(jsd_path, index=False)
+    # --- CR: TVD table + plots for cr_cell; also save cohort-long for appendix-style tables
+    tvd_long = build_tvd_base_vs_semantic_long(df)
+    tvd_path = os.path.join(summary_dir, "deepdive_cr_tvd_by_variant_long.csv")
+    tvd_long.to_csv(tvd_path, index=False)
 
     m, s = cr_cell
-    jsd_scen = build_jsd_base_vs_semantic_long(df, model=m, scenario=s)
-    plot_cr_jsd_by_variant_bars(
-        jsd_scen,
+    tvd_scen = build_tvd_base_vs_semantic_long(df, model=m, scenario=s)
+    plot_cr_tvd_by_variant_bars(
+        tvd_scen,
         model=m,
         scenario=s,
         temperatures=temperatures,
         save_path=os.path.join(
             plots_dir,
-            f"eval_deepdive_cr_jsd_by_variant__{_safe_filename(_short_model_name(m))}__{_safe_filename(s)}.png",
+            f"eval_deepdive_cr_tvd_by_variant__{_safe_filename(_short_model_name(m))}__{_safe_filename(s)}.png",
         ),
     )
     plot_cr_strategy_mix_by_variant(
@@ -700,7 +710,7 @@ def run_deep_dive_fr_cr_ds(
         ),
     )
 
-    print(f"Saved CR JSD long table: {jsd_path}")
+    print(f"Saved CR TVD long table: {tvd_path}")
     print("Deep-dive plots written to:", plots_dir)
 
     if rationale_audit:
@@ -765,15 +775,15 @@ def run_audit_case_deepdives(
     )
 
     m, s = context_cell
-    jsd_scen = build_jsd_base_vs_semantic_long(df, model=m, scenario=s)
-    plot_cr_jsd_by_variant_bars(
-        jsd_scen,
+    tvd_scen = build_tvd_base_vs_semantic_long(df, model=m, scenario=s)
+    plot_cr_tvd_by_variant_bars(
+        tvd_scen,
         model=m,
         scenario=s,
         temperatures=temperatures,
         save_path=os.path.join(
             plots_dir,
-            f"eval_deepdive_context_jsd_by_variant__{_safe_filename(_short_model_name(m))}__{_safe_filename(s)}.png",
+            f"eval_deepdive_context_tvd_by_variant__{_safe_filename(_short_model_name(m))}__{_safe_filename(s)}.png",
         ),
     )
     plot_cr_strategy_mix_by_variant_framing_split(

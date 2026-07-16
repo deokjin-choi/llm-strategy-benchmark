@@ -2,10 +2,11 @@
 Audit localization metrics for §5.6 (Table 6, scenario × model landscape).
 
 Context sensitivity (per model × temperature × scenario cell):
-  For each fixed (Num Context, problem_type), compute JSD(base, v) for each
+  For each fixed (Num Context, problem_type), compute TVD(base, v) for each
   perturbation variant v ∈ {competitive_dynamics, count_fact, opp_focus,
   randomized_numbers}, take the maximum over v, then macro-average those
-  condition-level maxima within the cell.
+  condition-level maxima within the cell. TVD(p, q) = 0.5 * sum|p_i - q_i| is
+  the share of strategy mass reallocated relative to base (see Section 5.1).
 
 Firm-identity sensitivity (per cell):
   For each fixed (Num Context, context_variant), compute |Δp| per strategy,
@@ -54,22 +55,33 @@ SUMMARY_DIR = "./final_results/summary"
 PLOTS_DIR = "./final_results/plots"
 
 
+def _safe_tvd(p: np.ndarray, q: np.ndarray) -> float:
+    """Total Variation Distance = 0.5 * sum|p_i - q_i|; NaN if either side is empty."""
+    p = np.asarray(p, dtype=float)
+    q = np.asarray(q, dtype=float)
+    if p.sum() == 0 or q.sum() == 0:
+        return np.nan
+    p = p / p.sum()
+    q = q / q.sum()
+    return 0.5 * float(np.sum(np.abs(p - q)))
+
+
 def compute_context_sensitivity_cell(g: pd.DataFrame) -> float:
-    """Max JSD(base, v) over perturbation variants, averaged over conditions."""
+    """Max TVD(base, v) over perturbation variants, averaged over conditions."""
     vals: List[float] = []
     for _, gp in g.groupby(["Num Context", "problem_type"], dropna=False):
         base = gp[gp["context_variant"] == "base"]["Standard Mapping"]
         if len(base) == 0:
             continue
         p_base = _strategy_distribution(base)
-        jsd_by_v: List[float] = []
+        tvd_by_v: List[float] = []
         for v in PERTURBATION_VARIANTS:
             dv = gp[gp["context_variant"] == v]["Standard Mapping"]
             if len(dv) == 0:
                 continue
-            jsd_by_v.append(_safe_jsd(p_base, _strategy_distribution(dv)))
-        if jsd_by_v:
-            vals.append(float(max(jsd_by_v)))
+            tvd_by_v.append(_safe_tvd(p_base, _strategy_distribution(dv)))
+        if tvd_by_v:
+            vals.append(float(max(tvd_by_v)))
     return float(np.nanmean(vals)) if vals else np.nan
 
 
@@ -154,7 +166,7 @@ def build_model_temp_audit_table(scenario_audit: pd.DataFrame, rds_cells: pd.Dat
     ctx_fi = (
         scenario_audit.groupby(["Model", "Temperature"], dropna=False)
         .agg(
-            mean_context_jsd=("context_sensitivity", "mean"),
+            mean_context_tvd=("context_sensitivity", "mean"),
             mean_firm_identity_max_delta_p=("firm_identity_max_delta_p", "mean"),
         )
         .reset_index()
@@ -196,7 +208,7 @@ def _metric_limits(
 
 
 METRIC_CBAR_LABELS = {
-    "context_sensitivity": "JSD",
+    "context_sensitivity": "TVD",
     "firm_identity_max_delta_p": "max |Δp|",
     "mean_rds": "RDS",
 }
@@ -219,7 +231,7 @@ def plot_scenario_model_audit_landscape(
     metrics = [
         (
             "context_sensitivity",
-            "Context sensitivity\nmax JSD(base, perturbation variants)",
+            "Context sensitivity\nmax TVD(base, perturbation variants)",
         ),
         (
             "firm_identity_max_delta_p",
@@ -368,7 +380,7 @@ def run_audit_localization(
         [
             "model_short",
             "Temperature",
-            "mean_context_jsd",
+            "mean_context_tvd",
             "mean_firm_identity_max_delta_p",
             "mean_rds_macro",
         ]

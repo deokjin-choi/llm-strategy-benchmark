@@ -5,6 +5,11 @@ import matplotlib.pyplot as plt
 import os
 import glob
 
+try:
+    from result_analysis.rationale_analysis import valid_strategies
+except ImportError:
+    from rationale_analysis import valid_strategies
+
 # -----------------------------
 # 1) Helper functions for analysis
 # -----------------------------
@@ -83,9 +88,11 @@ def build_summary_from_infer():
 
     print(f"\n--- Combined analysis running. Results will be saved in '{output_dir}' ---")
 
-    # Overall ratio
+    # Overall ratio (restricted to the seven valid archetypes so rows sum to 1;
+    # excludes N/A and malformed "Standard Mapping" strings from the denominator)
     print("\n=== Overall Standard Mapping Ratio by Scenario Type ===")
-    df_overall = ratio_table(df_combined, ["scenario_type"])
+    df_valid_only = df_combined[df_combined["Standard Mapping"].isin(valid_strategies)].copy()
+    df_overall = ratio_table(df_valid_only, ["scenario_type"])
     print(df_overall.round(3).to_string())
     df_overall.to_csv(os.path.join(summary_dir, "analysis_overall_ratio.csv"))
 
