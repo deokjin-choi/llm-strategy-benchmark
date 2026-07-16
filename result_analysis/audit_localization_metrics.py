@@ -338,9 +338,8 @@ def plot_scenario_model_audit_landscape_paper(
             ax.set_yticklabels(scenarios, fontsize=7)
             row_title = f"T={float(temp):g} — {title}" if j == 0 else title
             ax.set_title(row_title if j == 0 else title, fontsize=9)
-            if j == len(metrics) - 1:
-                cbar = fig.colorbar(im, ax=ax, fraction=0.046, pad=0.02)
-                cbar.set_label(METRIC_CBAR_LABELS[col], fontsize=8)
+            cbar = fig.colorbar(im, ax=ax, fraction=0.046, pad=0.02)
+            cbar.set_label(METRIC_CBAR_LABELS[col], fontsize=8)
 
     fig.suptitle(
         "Scenario × model audit landscape (raw metric values)",

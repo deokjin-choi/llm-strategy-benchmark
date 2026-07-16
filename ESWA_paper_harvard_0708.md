@@ -283,9 +283,9 @@ Table 7 lists the three priority cells selected for case analysis.
 
 | Audit axis | Model | Scenario | Localization signal |
 | :---- | :---- | :---- | :---- |
-| Context | Llama-3.1-8B-Instruct | 4\_model\_x\_launch | *opp\_focus* peak TVD = 0.686 at $T=0.0$; Specific framing activates Technology Leadership |
-| Firm-identity | Qwen2.5-14B-Instruct | 5\_model\_3\_mass\_market | Generic → Open Innovation; Specific → Maintain (mean \|Δ*p\| = 0.94) |
-| Rationale | Qwen2.5-14B-Instruct | 2\_roadster\_launch | Maintain × *count\_fact*; matched-choice rationales diverge (peak pair RDS = 0.689) |
+| Context | Llama-3.1-8B-Instruct | 4\_model\_x\_launch | context TVD = 0.636; *opp\_focus* is the dominant driver; Specific framing activates Technology Leadership |
+| Firm-identity | Qwen2.5-14B-Instruct | 5\_model\_3\_mass\_market | firm-identity Δp = 0.944; Generic → Open Innovation, Specific → Maintain |
+| Rationale | Qwen2.5-14B-Instruct | 2\_roadster\_launch | rationale RDS = 0.246; Maintain × *count\_fact* matched-choice rationales diverge |
 
 Table 7. Priority scenario–model cells for deployment risk cases (axis means macro-averaged over $T=0.0$ and $T=0.7$).
 

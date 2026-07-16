@@ -61,6 +61,11 @@ try:
         _strategy_distribution,
     )
     from result_analysis.tvd_from_base_ci import total_variation_distance
+    from result_analysis.context_sensitivity_case_plots import (
+        build_context_tvd_from_base_long,
+        plot_context_strategy_stacks_framing_split,
+        plot_context_tvd_by_variant_bars,
+    )
 except ImportError:
     from model_behavioral_profile import (
         PERTURBATION_VARIANTS,
@@ -72,6 +77,11 @@ except ImportError:
         _strategy_distribution,
     )
     from tvd_from_base_ci import total_variation_distance
+    from context_sensitivity_case_plots import (
+        build_context_tvd_from_base_long,
+        plot_context_strategy_stacks_framing_split,
+        plot_context_tvd_by_variant_bars,
+    )
 
 # Always load project rationale via package path — avoid bare `import rationale_analysis`
 # (can resolve to an unrelated PyPI package missing our helpers).
@@ -775,8 +785,8 @@ def run_audit_case_deepdives(
     )
 
     m, s = context_cell
-    tvd_scen = build_tvd_base_vs_semantic_long(df, model=m, scenario=s)
-    plot_cr_tvd_by_variant_bars(
+    tvd_scen = build_context_tvd_from_base_long(df, model=m, scenario=s)
+    plot_context_tvd_by_variant_bars(
         tvd_scen,
         model=m,
         scenario=s,
@@ -786,7 +796,7 @@ def run_audit_case_deepdives(
             f"eval_deepdive_context_tvd_by_variant__{_safe_filename(_short_model_name(m))}__{_safe_filename(s)}.png",
         ),
     )
-    plot_cr_strategy_mix_by_variant_framing_split(
+    plot_context_strategy_stacks_framing_split(
         df,
         model=m,
         scenario=s,
