@@ -154,7 +154,7 @@ def plot_audit_framework(
         1.05,
         "Semantic context stress grid\n"
         "base · opportunity · competition · constraint\n"
-        "(+ numerical control)   Artifact: JSD / rank vs base",
+        "(+ numerical control)   Artifact: TVD / rank vs base",
         fc="#ffffff",
         ec="#2b6cb0",
         fontsize=7.7,
@@ -175,7 +175,7 @@ def plot_audit_framework(
     )
 
     axis_specs = [
-        (2.0, "A. Context\nsensitivity\n\nJSD · entropy\nSpearman vs base"),
+        (2.0, "A. Context\nsensitivity\n\nTVD · entropy\nSpearman vs base"),
         (4.5, "B. Firm-identity\nsensitivity\n\nStrategy-level Δp\nCI · FDR"),
         (7.0, "C. Context×identity\nmoderation\n\nΔp by context\nInteraction vs base"),
         (9.5, "D. Rationale\nsensitivity\n\nLog-odds · RDS\nvs noise / ceiling"),
