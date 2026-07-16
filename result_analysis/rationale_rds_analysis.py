@@ -703,7 +703,7 @@ def plot_rds_matched_choice_case_cell_swarm(
     if sub.empty:
         raise ValueError("No RDS pairs in case cell for requested temperatures.")
 
-    sub["x"] = 0
+    sub["panel"] = 0
     palette = {"T=0": "#e74c3c", "T=0.7": "#c0392b"}
 
     fig, axes = plt.subplots(1, len(temps), figsize=(4.6 * len(temps), 4.2), sharey=True)
@@ -721,7 +721,7 @@ def plot_rds_matched_choice_case_cell_swarm(
 
         sns.boxplot(
             data=g,
-            x="x",
+            x="panel",
             y="rds",
             ax=ax,
             width=0.22,
@@ -735,7 +735,7 @@ def plot_rds_matched_choice_case_cell_swarm(
         )
         sns.swarmplot(
             data=g,
-            x="x",
+            x="panel",
             y="rds",
             color=palette.get(label, "#c0392b"),
             ax=ax,
@@ -762,6 +762,8 @@ def plot_rds_matched_choice_case_cell_swarm(
         )
         ax.set_xticks([0])
         ax.set_xticklabels([label], fontsize=9)
+        ax.set_xlabel("")
+        ax.xaxis.label.set_visible(False)
         ax.set_xlim(-0.55, 0.55)
         ax.set_ylim(0, y_max)
         ax.set_ylabel("RDS (cosine distance)" if ax is axes[0] else "")
@@ -769,18 +771,21 @@ def plot_rds_matched_choice_case_cell_swarm(
         ax.grid(True, axis="y", linestyle="--", alpha=0.25)
 
     handles = [
-        mpatches.Patch(color="#c0392b", alpha=0.75, label="Pair-level RDS (swarm)"),
+        mpatches.Patch(color="#c0392b", alpha=0.75, label="Pair-level RDS"),
         plt.Line2D([0], [0], color="#7f8c8d", linestyle="--", linewidth=1.4, label="Repeat-noise median"),
         plt.Line2D([0], [0], color="#2471a3", linestyle=":", linewidth=1.2, label="Cell median"),
     ]
     fig.legend(handles=handles, loc="upper center", bbox_to_anchor=(0.5, 1.02), ncol=3, fontsize=8)
     fig.suptitle(
-        f"Rationale sensitivity: matched-choice RDS distribution (swarm)\n"
+        f"Rationale sensitivity: matched-choice RDS distribution\n"
         f"{_short_model_name(model)} — {scenario} — {strategy} × {context_variant}",
         fontsize=10.5,
         y=1.12,
     )
     plt.tight_layout()
+    for ax in axes:
+        ax.set_xlabel("")
+        ax.xaxis.label.set_visible(False)
     plt.savefig(save_path, dpi=300, bbox_inches="tight")
     plt.close(fig)
     return _summarize_rds_case_cell(sub)
@@ -842,7 +847,7 @@ def plot_rds_matched_choice_case_cell_swarm_envelope(
     if sub.empty:
         raise ValueError("No RDS pairs in case cell for requested temperatures.")
 
-    sub["x"] = 0
+    sub["panel"] = 0
     palette = {"T=0": "#e74c3c", "T=0.7": "#c0392b"}
     edge_palette = {"T=0": "#922b21", "T=0.7": "#7b241c"}
 
@@ -885,7 +890,7 @@ def plot_rds_matched_choice_case_cell_swarm_envelope(
 
         sns.swarmplot(
             data=g,
-            x="x",
+            x="panel",
             y="rds",
             color=fill_color,
             ax=ax,
@@ -912,6 +917,8 @@ def plot_rds_matched_choice_case_cell_swarm_envelope(
         )
         ax.set_xticks([0])
         ax.set_xticklabels([label], fontsize=9)
+        ax.set_xlabel("")
+        ax.xaxis.label.set_visible(False)
         ax.set_xlim(-0.55, 0.55)
         ax.set_ylim(0, y_max)
         ax.set_ylabel("RDS (cosine distance)" if ax is axes[0] else "")
@@ -919,18 +926,21 @@ def plot_rds_matched_choice_case_cell_swarm_envelope(
         ax.grid(True, axis="y", linestyle="--", alpha=0.25)
 
     handles = [
-        mpatches.Patch(color="#c0392b", alpha=0.55, label="KDE envelope + pair-level swarm"),
+        mpatches.Patch(color="#c0392b", alpha=0.55, label="Pair-level RDS"),
         plt.Line2D([0], [0], color="#7f8c8d", linestyle="--", linewidth=1.4, label="Repeat-noise median"),
         plt.Line2D([0], [0], color="#2471a3", linestyle=":", linewidth=1.2, label="Cell median"),
     ]
     fig.legend(handles=handles, loc="upper center", bbox_to_anchor=(0.5, 1.02), ncol=3, fontsize=8)
     fig.suptitle(
-        f"Rationale sensitivity: matched-choice RDS distribution (swarm + envelope)\n"
+        f"Rationale sensitivity: matched-choice RDS distribution\n"
         f"{_short_model_name(model)} — {scenario} — {strategy} × {context_variant}",
         fontsize=10.5,
         y=1.12,
     )
     plt.tight_layout()
+    for ax in axes:
+        ax.set_xlabel("")
+        ax.xaxis.label.set_visible(False)
     plt.savefig(save_path, dpi=300, bbox_inches="tight")
     plt.close(fig)
     return _summarize_rds_case_cell(sub)
