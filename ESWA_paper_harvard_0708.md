@@ -376,6 +376,9 @@ Table 11. Strategy menu for 2\_roadster\_launch.
 ![RDS_case_cell_violin](final_results/plots/eval_deepdive_rds_matched_choice__Qwen2.5-14B__2_roadster_launch__Maintain__count_fact.png)  
 Fig. 12. Rationale sensitivity case: pair-level RDS distribution for matched Maintain choices (Qwen2.5-14B-Instruct; *2\_roadster\_launch* × *count\_fact*; $T=0.0$ vs. $T=0.7$). Dashed line: repeat-noise median; dotted line: cell median; annotated point: maximum pair.
 
+![RDS_case_cell_swarm_envelope](final_results/plots/eval_deepdive_rds_matched_choice_swarm_envelope__Qwen2.5-14B__2_roadster_launch__Maintain__count_fact.png)  
+Fig. 12 (test). Same cell as Fig. 12 with pair-level swarm (each dot = one matched Generic–Specific pair) and a mirrored KDE envelope; dashed/dotted reference lines unchanged. *Draft for layout review—not for submission.*
+
 When both Generic and Specific prompts select Maintain, rationales diverge in managerial frame rather than strategic label. A representative high-divergence pair from the $T=0.7$ tail (individual RDS = 0.689) illustrates the pattern:
 
 | Framing | Illustrative rationale | Managerial frame |

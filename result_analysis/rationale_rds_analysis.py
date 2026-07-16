@@ -670,6 +670,272 @@ def plot_rds_matched_choice_case_cell(
     return _summarize_rds_case_cell(sub)
 
 
+def plot_rds_matched_choice_case_cell_swarm(
+    rds_cell_df: pd.DataFrame,
+    *,
+    model: str,
+    scenario: str,
+    strategy: str,
+    context_variant: str,
+    save_path: str,
+    temperatures: Sequence[float] = (0.0, 0.7),
+    noise_median: float | None = None,
+) -> pd.DataFrame:
+    """
+    Swarm plot of pair-level RDS for a localized matched-choice case cell.
+
+    Each dot is one matched Generic–Specific pair; horizontal spread reflects
+    local point density (no KDE smoothing). Reference lines match the violin
+    deep-dive figure for direct comparison.
+    """
+    try:
+        from result_analysis.model_behavioral_profile import _short_model_name
+    except ImportError:
+        from model_behavioral_profile import _short_model_name
+
+    os.makedirs(os.path.dirname(save_path) or ".", exist_ok=True)
+    noise_med = float(noise_median if noise_median is not None else _load_noise_median())
+
+    sub = rds_cell_df.copy()
+    sub["Temperature"] = sub["Temperature"].astype(float)
+    temps = [float(t) for t in temperatures]
+    sub = sub[sub["Temperature"].apply(lambda x: any(abs(x - t) < 1e-6 for t in temps))]
+    if sub.empty:
+        raise ValueError("No RDS pairs in case cell for requested temperatures.")
+
+    sub["x"] = 0
+    palette = {"T=0": "#e74c3c", "T=0.7": "#c0392b"}
+
+    fig, axes = plt.subplots(1, len(temps), figsize=(4.6 * len(temps), 4.2), sharey=True)
+    if len(temps) == 1:
+        axes = np.array([axes])
+
+    y_max = max(float(sub["rds"].max()) * 1.08, noise_med * 2.2, 0.35)
+
+    for ax, temp in zip(axes, temps):
+        g = sub[sub["Temperature"].apply(lambda x: abs(x - temp) < 1e-6)].copy()
+        label = f"T={temp:g}"
+        if len(g) == 0:
+            ax.set_title(f"{label} (no pairs)")
+            continue
+
+        sns.boxplot(
+            data=g,
+            x="x",
+            y="rds",
+            ax=ax,
+            width=0.22,
+            showcaps=True,
+            showfliers=False,
+            boxprops={"facecolor": "white", "edgecolor": "#7f8c8d", "linewidth": 1.0, "alpha": 0.9},
+            whiskerprops={"color": "#7f8c8d", "linewidth": 1.0},
+            capprops={"color": "#7f8c8d", "linewidth": 1.0},
+            medianprops={"color": "#2471a3", "linewidth": 1.4},
+            zorder=1,
+        )
+        sns.swarmplot(
+            data=g,
+            x="x",
+            y="rds",
+            color=palette.get(label, "#c0392b"),
+            ax=ax,
+            size=2.6,
+            alpha=0.55,
+            zorder=3,
+        )
+        ax.axhline(
+            noise_med,
+            color="#7f8c8d",
+            linestyle="--",
+            linewidth=1.4,
+            label=f"Repeat-noise median ({noise_med:.3f})",
+        )
+        med = float(g["rds"].median())
+        ax.axhline(med, color="#2471a3", linestyle=":", linewidth=1.2, alpha=0.9)
+        ax.scatter([0], [float(g["rds"].max())], color="#111111", s=28, zorder=5)
+        ax.text(
+            0.12,
+            float(g["rds"].max()),
+            f"max={float(g['rds'].max()):.3f}",
+            fontsize=7.5,
+            va="center",
+        )
+        ax.set_xticks([0])
+        ax.set_xticklabels([label], fontsize=9)
+        ax.set_xlim(-0.55, 0.55)
+        ax.set_ylim(0, y_max)
+        ax.set_ylabel("RDS (cosine distance)" if ax is axes[0] else "")
+        ax.set_title(f"n={len(g):,}; mean={float(g['rds'].mean()):.3f}", fontsize=9)
+        ax.grid(True, axis="y", linestyle="--", alpha=0.25)
+
+    handles = [
+        mpatches.Patch(color="#c0392b", alpha=0.75, label="Pair-level RDS (swarm)"),
+        plt.Line2D([0], [0], color="#7f8c8d", linestyle="--", linewidth=1.4, label="Repeat-noise median"),
+        plt.Line2D([0], [0], color="#2471a3", linestyle=":", linewidth=1.2, label="Cell median"),
+    ]
+    fig.legend(handles=handles, loc="upper center", bbox_to_anchor=(0.5, 1.02), ncol=3, fontsize=8)
+    fig.suptitle(
+        f"Rationale sensitivity: matched-choice RDS distribution (swarm)\n"
+        f"{_short_model_name(model)} — {scenario} — {strategy} × {context_variant}",
+        fontsize=10.5,
+        y=1.12,
+    )
+    plt.tight_layout()
+    plt.savefig(save_path, dpi=300, bbox_inches="tight")
+    plt.close(fig)
+    return _summarize_rds_case_cell(sub)
+
+
+def _kde_half_width(
+    values: np.ndarray,
+    y_grid: np.ndarray,
+    *,
+    max_half_width: float = 0.42,
+    bw_factor: float = 0.38,
+) -> np.ndarray:
+    """Symmetric KDE half-width at each y, scaled to max_half_width."""
+    from scipy.stats import gaussian_kde
+
+    vals = np.asarray(values, dtype=float)
+    if len(vals) < 2:
+        return np.zeros_like(y_grid)
+
+    kde = gaussian_kde(vals)
+    kde.set_bandwidth(kde.factor * bw_factor)
+    density = kde(y_grid)
+    peak = float(density.max())
+    if peak <= 0:
+        return np.zeros_like(y_grid)
+    return (density / peak) * max_half_width
+
+
+def plot_rds_matched_choice_case_cell_swarm_envelope(
+    rds_cell_df: pd.DataFrame,
+    *,
+    model: str,
+    scenario: str,
+    strategy: str,
+    context_variant: str,
+    save_path: str,
+    temperatures: Sequence[float] = (0.0, 0.7),
+    noise_median: float | None = None,
+    envelope_bw_factor: float = 0.38,
+) -> pd.DataFrame:
+    """
+    Swarm plot with a mirrored KDE envelope wrapped around the point cloud.
+
+    Points remain visible (each dot = one pair); the filled curve summarizes
+    local vertical density without replacing the discrete swarm structure.
+    """
+    try:
+        from result_analysis.model_behavioral_profile import _short_model_name
+    except ImportError:
+        from model_behavioral_profile import _short_model_name
+
+    os.makedirs(os.path.dirname(save_path) or ".", exist_ok=True)
+    noise_med = float(noise_median if noise_median is not None else _load_noise_median())
+
+    sub = rds_cell_df.copy()
+    sub["Temperature"] = sub["Temperature"].astype(float)
+    temps = [float(t) for t in temperatures]
+    sub = sub[sub["Temperature"].apply(lambda x: any(abs(x - t) < 1e-6 for t in temps))]
+    if sub.empty:
+        raise ValueError("No RDS pairs in case cell for requested temperatures.")
+
+    sub["x"] = 0
+    palette = {"T=0": "#e74c3c", "T=0.7": "#c0392b"}
+    edge_palette = {"T=0": "#922b21", "T=0.7": "#7b241c"}
+
+    fig, axes = plt.subplots(1, len(temps), figsize=(4.6 * len(temps), 4.2), sharey=True)
+    if len(temps) == 1:
+        axes = np.array([axes])
+
+    y_max = max(float(sub["rds"].max()) * 1.08, noise_med * 2.2, 0.35)
+
+    for ax, temp in zip(axes, temps):
+        g = sub[sub["Temperature"].apply(lambda x: abs(x - temp) < 1e-6)].copy()
+        label = f"T={temp:g}"
+        if len(g) == 0:
+            ax.set_title(f"{label} (no pairs)")
+            continue
+
+        vals = g["rds"].to_numpy(dtype=float)
+        y_lo, y_hi = float(vals.min()), float(vals.max())
+        y_grid = np.linspace(y_lo, y_hi, 256)
+        half_w = _kde_half_width(
+            vals,
+            y_grid,
+            max_half_width=0.42,
+            bw_factor=envelope_bw_factor,
+        )
+        fill_color = palette.get(label, "#c0392b")
+        edge_color = edge_palette.get(label, "#7b241c")
+
+        ax.fill_betweenx(
+            y_grid,
+            -half_w,
+            half_w,
+            color=fill_color,
+            alpha=0.22,
+            linewidth=0,
+            zorder=0,
+        )
+        ax.plot(-half_w, y_grid, color=edge_color, linewidth=1.05, alpha=0.85, zorder=1)
+        ax.plot(half_w, y_grid, color=edge_color, linewidth=1.05, alpha=0.85, zorder=1)
+
+        sns.swarmplot(
+            data=g,
+            x="x",
+            y="rds",
+            color=fill_color,
+            ax=ax,
+            size=2.4,
+            alpha=0.62,
+            zorder=3,
+        )
+        ax.axhline(
+            noise_med,
+            color="#7f8c8d",
+            linestyle="--",
+            linewidth=1.4,
+            label=f"Repeat-noise median ({noise_med:.3f})",
+        )
+        med = float(g["rds"].median())
+        ax.axhline(med, color="#2471a3", linestyle=":", linewidth=1.2, alpha=0.9)
+        ax.scatter([0], [float(g["rds"].max())], color="#111111", s=28, zorder=5)
+        ax.text(
+            0.12,
+            float(g["rds"].max()),
+            f"max={float(g['rds'].max()):.3f}",
+            fontsize=7.5,
+            va="center",
+        )
+        ax.set_xticks([0])
+        ax.set_xticklabels([label], fontsize=9)
+        ax.set_xlim(-0.55, 0.55)
+        ax.set_ylim(0, y_max)
+        ax.set_ylabel("RDS (cosine distance)" if ax is axes[0] else "")
+        ax.set_title(f"n={len(g):,}; mean={float(g['rds'].mean()):.3f}", fontsize=9)
+        ax.grid(True, axis="y", linestyle="--", alpha=0.25)
+
+    handles = [
+        mpatches.Patch(color="#c0392b", alpha=0.55, label="KDE envelope + pair-level swarm"),
+        plt.Line2D([0], [0], color="#7f8c8d", linestyle="--", linewidth=1.4, label="Repeat-noise median"),
+        plt.Line2D([0], [0], color="#2471a3", linestyle=":", linewidth=1.2, label="Cell median"),
+    ]
+    fig.legend(handles=handles, loc="upper center", bbox_to_anchor=(0.5, 1.02), ncol=3, fontsize=8)
+    fig.suptitle(
+        f"Rationale sensitivity: matched-choice RDS distribution (swarm + envelope)\n"
+        f"{_short_model_name(model)} — {scenario} — {strategy} × {context_variant}",
+        fontsize=10.5,
+        y=1.12,
+    )
+    plt.tight_layout()
+    plt.savefig(save_path, dpi=300, bbox_inches="tight")
+    plt.close(fig)
+    return _summarize_rds_case_cell(sub)
+
+
 def plot_rds_case_cell_from_infer(
     input_dir: str,
     *,
