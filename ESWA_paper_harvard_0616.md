@@ -45,6 +45,16 @@ Synthesizing these strands, prior work shows that LLMs can (i) drive automated p
 
 In particular, three critical gaps remain. First, while existing studies focus on task performance, they rarely examine framing robustness—specifically, how arbitrary brand identities and narrative cues reshape strategy selection when the underlying economic facts are unchanged. Second, there is a lack of research on the interplay between qualitative context and quantitative data, leaving it unclear whether LLMs prioritize narrative consistency over numerical shifts in strategic settings. Finally, the operational reliability of these strategic choices across different decoding configurations (e.g., temperature) remains largely unexplored.
 
+Accordingly, this study addresses four research questions:
+
+**RQ1 (Context effect on choice).** How does semantic context—operationalized through context variants that emphasize opportunity, constraint, competition, or numerical perturbation—affect LLMs' categorical strategy choices when the underlying strategic dilemma is held constant?
+
+**RQ2 (Framing effect on choice).** How does brand framing (Generic vs. Specific firm identification) reshape strategy selection when model, temperature, scenario, context variant, and context load are otherwise identical?
+
+**RQ3 (Context–framing interaction on choice).** Is the effect of brand framing on strategy selection moderated by semantic context—that is, does the magnitude or profile of framing-induced reallocation vary systematically across context variants?
+
+**RQ4 (Framing effect on rationale).** When the chosen strategy is held constant, does brand framing alter the semantic content of model-generated rationales, and how large is this narrative divergence relative to repeat-noise and cross-strategy baselines?
+
 To address these limitations, this study reconceptualizes LLMs as conditional strategic agents whose decision-making logic is intrinsically linked to environmental framing. Rather than treating model outputs as static responses, we seek to characterize the dynamic boundaries of LLM-based reasoning by evaluating the stability and sensitivity of strategic choices under controlled perturbations. By bridging the gap between cognitive psychology and strategic management, this research provides a foundational framework for understanding how architectural biases in LLMs can be identified and managed in high-stakes corporate environments.
 
 **3\. Methodology**  

@@ -341,10 +341,6 @@ def plot_scenario_model_audit_landscape_paper(
             cbar = fig.colorbar(im, ax=ax, fraction=0.046, pad=0.02)
             cbar.set_label(METRIC_CBAR_LABELS[col], fontsize=8)
 
-    fig.suptitle(
-        "Scenario × model audit landscape (raw metric values)",
-        fontsize=12,
-    )
     plt.savefig(save_path, dpi=300, bbox_inches="tight")
     plt.close(fig)
     print(f"Saved: {save_path}")

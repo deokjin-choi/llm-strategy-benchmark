@@ -268,12 +268,6 @@ def plot_firm_identity_framing_strategy_stacks(
             title=f"T={float(temp):g}  (context_variant={','.join(context_variants_for_framing)})",
         )
 
-    fig.suptitle(
-        f"Firm-identity sensitivity: strategy mix (Generic vs Specific)\n"
-        f"{_short_model_name(model)} — {scenario}",
-        fontsize=11,
-        y=1.02,
-    )
     handles, labels = axes[0].get_legend_handles_labels()
     fig.legend(handles, labels, loc="center left", bbox_to_anchor=(1.02, 0.5), fontsize=8)
     plt.tight_layout()

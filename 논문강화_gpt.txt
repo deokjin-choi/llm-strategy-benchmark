@@ -1,0 +1,76 @@
+좋습니다. 제가 다시 정리해보면, 지금 호랭이님 논문은 실험을 더 해야 하는 단계가 아니라 **논문의 스토리를 정리하는 단계**입니다. ESWA 제출 전까지의 목표는 "결과가 많은 논문"을 "Audit Framework 논문"으로 바꾸는 것입니다.
+
+---
+
+### 1. 논문의 주인공을 명확히 정리하기
+
+가장 먼저 해야 할 일은 논문의 한 줄 정의를 만드는 것입니다. 현재 논문의 진짜 기여는 Tesla 효과도 아니고, 숫자 둔감성도 아니고, 개별 행동지표도 아닙니다.
+
+> We propose an audit framework for evaluating LLMs as algorithmic agents in R&D strategy.
+
+이 문장을 기준으로 Introduction, Contribution, Discussion, Conclusion이 모두 같은 방향을 바라보도록 수정해야 합니다. 현재 논문이 여러 개의 기여(Tesla 효과, Numerical Sensitivity, 행동지표 등)를 동시에 주장하는 것처럼 보이면 리뷰어가 핵심을 놓칠 수 있습니다. 최종 구조는 "Agent Audit → 5개 행동지표 → 다양한 실험 결과"가 되어야 합니다.
+
+---
+
+### 2. Findings와 행동지표의 관계를 명확히 만들기
+
+현재 구조 자체는 좋은 편입니다. 전략 선택 변화, Tesla 효과, 숫자 둔감성 같은 매크로 행동을 먼저 보여주고, 그 후에 이를 설명하기 위한 행동지표를 도출하는 방식은 자연스럽습니다. 다만 Findings와 행동지표가 별개의 기여처럼 보이면 안 됩니다.
+
+예를 들어 Tesla 효과는 FR의 사례, Context Effect는 CR의 사례, Numerical Insensitivity는 NS의 사례, Explanation Shift는 EFI의 사례가 되어야 합니다. 독자가 "아, 그래서 FR/CR/NS/DS/EFI가 필요했구나"라고 느끼도록 Findings 마지막에 해당 행동지표와 연결되는 해석을 추가해야 합니다.
+
+---
+
+### 3. 왜 하필 5개 행동지표인가를 설명하기
+
+리뷰어가 가장 먼저 물어볼 질문은 "왜 이 5개인가?"입니다. 따라서 행동지표를 정의하는 것이 아니라, 먼저 "전략적 AI를 감사하려면 무엇을 확인해야 하는가?"라는 질문을 던진 뒤 각 지표를 도출하는 형태가 좋습니다.
+
+예를 들어 브랜드에 흔들리는가(FR), 문맥 변화에 적응하는가(CR), 숫자 정보에 반응하는가(NS), 판단이 안정적인가(DS), 설명이 일관적인가(EFI)라는 감사 질문을 제시하고, 이 질문에 대응하는 행동 차원으로 5개 지표를 설명하는 방식입니다. 이렇게 하면 "왜 5개인가?"에 대한 방어력이 생깁니다.
+
+---
+
+### 4. DS(Decision Stability)를 집중적으로 검토하기
+
+현재 5개 지표 중에서 가장 공격받기 쉬운 것은 DS입니다. FR, CR, NS, EFI는 비교적 직관적인데 DS는 다른 지표와 구분이 애매해질 수 있습니다. 따라서 DS가 "입력 변화에 대한 민감성"이 아니라 "동일 입력 조건에서도 판단이 유지되는 안정성"을 의미한다는 점을 명확히 해야 합니다. DS가 독립적으로 존재해야 하는 이유를 별도로 정리해두는 것이 좋습니다.
+
+---
+
+### 5. 기존 데이터로 행동지표 간 관계 분석하기
+
+추가 실험 없이도 할 수 있는 가장 가치 있는 작업 중 하나입니다. FR, CR, NS, DS, EFI 사이의 상관관계를 분석해 보세요. Correlation Matrix 정도만 있어도 충분히 의미가 있습니다. 가능하면 PCA까지 해보면 좋습니다. 이 작업의 목적은 "5개 지표가 서로 다른 행동 특성을 측정한다"는 점을 보여주는 것입니다. 리뷰어가 "실제로 같은 현상을 다른 이름으로 부른 것 아닌가?"라고 질문할 가능성에 대비할 수 있습니다.
+
+---
+
+### 6. Introduction과 Related Work 재정비하기
+
+Introduction에서는 Accuracy, Prompting, Reasoning 성능 이야기 비중을 줄이고, Algorithmic Agent, Strategic Decision Making, Behavioral Audit, Behavioral Profiling 쪽을 강화하는 것이 좋습니다. 현재 제목 자체는 이미 Audit Framework 방향으로 잘 잡혀 있으므로, 초록과 Introduction이 그 방향을 따라가야 합니다.
+
+Related Work는 "LLM Evaluation", "Behavioral Bias", "Agentic Systems" 정도의 세 축으로 정리하고, 기존 연구는 정확도 중심이었지만 본 연구는 행동 감사(Behavioral Audit)에 초점을 둔다는 차별점을 명확히 해야 합니다.
+
+---
+
+### 7. Discussion을 Audit 관점으로 재작성하기
+
+Discussion에서 Tesla 효과나 숫자 둔감성을 길게 이야기할 필요는 없습니다. 그것들은 이제 사례입니다. Discussion의 중심은 Audit Framework의 의미, Algorithmic Agent라는 관점의 의미, Algorithmic Bounded Rationality와의 연결, 그리고 기업에서 AI 기반 전략 의사결정을 사용할 때의 실무적 함의가 되어야 합니다.
+
+즉, "Tesla에서 이런 현상이 발견되었다"가 아니라 "이러한 현상들이 행동 감사의 필요성을 보여준다"는 방향으로 논리를 전개해야 합니다.
+
+---
+
+### 8. Limitation을 먼저 인정하기
+
+Tesla 하나만 사용한 점, 숫자 변화 범위가 제한적인 점, R&D 전략 시나리오에 국한된 점은 리뷰어가 반드시 지적할 부분입니다. 따라서 논문에서 먼저 인정하는 것이 좋습니다. 다만 동시에 본 연구의 목적은 일반화가 아니라 Audit Framework를 제안하는 것이라는 점을 명확히 적어야 합니다.
+
+---
+
+### 최종 체크리스트
+
+제출 전 마지막으로 아래 질문에 모두 "YES"라고 답할 수 있어야 합니다.
+
+1. 논문의 주인공은 Audit Framework인가?
+2. 모든 Findings가 FR/CR/NS/DS/EFI와 연결되는가?
+3. 왜 하필 이 5개 행동지표인지 설명되는가?
+4. DS는 독립적인 행동 차원으로 정당화되는가?
+5. Introduction과 Conclusion이 같은 이야기를 하는가?
+6. Tesla 효과는 기여가 아니라 Audit Framework를 뒷받침하는 증거로 읽히는가?
+
+이 체크리스트를 만족하면, 지금 단계에서 ESWA 제출을 위해 가장 중요한 작업들은 대부분 완료된 상태라고 볼 수 있습니다. 핵심은 **새로운 실험을 추가하는 것이 아니라, 이미 있는 결과들을 하나의 "Algorithmic Agent Audit" 서사로 묶는 것**입니다.

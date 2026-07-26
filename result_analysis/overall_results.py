@@ -57,7 +57,6 @@ def plot_ratio_heatmap(df):
     ax.set_xticks(range(df.shape[1])); ax.set_xticklabels(df.columns, rotation=25, ha="right")
     ax.set_yticks(range(df.shape[0])); ax.set_yticklabels(df.index)
     title = "Strategy Ratio by Scenario"
-    ax.set_title(title)
     cbar = fig.colorbar(im, ax=ax); cbar.set_label("Strategy Ratio")
     for i in range(df.shape[0]):
         for j in range(df.shape[1]):
@@ -181,7 +180,6 @@ def plot_ratio_pca(df):
 
     # 7. 플롯 마무리
     title = "PCA of Strategy Ratios 2D"
-    ax.set_title(title, fontsize=14)
     ax.set_xlabel("PC1")
     ax.set_ylabel("PC2")
     plt.tight_layout()

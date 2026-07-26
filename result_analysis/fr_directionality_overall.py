@@ -297,12 +297,6 @@ def plot_fr_directionality_heatmap_by_variant(
     ax.set_yticklabels(mat.index.tolist(), fontsize=9)
     ax.set_xlabel("Strategy", fontsize=9)
     ax.set_ylabel("Context Variant", fontsize=9)
-    ax.set_title(
-        "Brand framing effect by context variant × strategy\n"
-        "Δp = p(Specific) − p(Generic), macro-averaged over conditions within each variant",
-        fontsize=10,
-        pad=10,
-    )
 
     for i in range(mat.shape[0]):
         for j in range(mat.shape[1]):

@@ -319,7 +319,6 @@ def _plot_calibration_histogram(
     ax.set_xlim(0, x_max)
     ax.set_xlabel("Cosine distance between rationale embeddings", fontsize=9)
     ax.set_ylabel("Percent of pairs (%)", fontsize=9)
-    ax.set_title("Framing vs. repeat noise vs. strategy ceiling", fontsize=11, pad=8)
     ax.legend(fontsize=8.5, loc="upper right", framealpha=0.92)
     ax.grid(True, axis="y", linestyle="--", alpha=0.25)
     plt.tight_layout()
@@ -447,12 +446,6 @@ def _plot_rds_strategy_boxplot(heatmap_df: pd.DataFrame, out_path: str) -> None:
     )
     ax.set_xlabel("Strategy (Chosen Option)", fontsize=9)
     ax.set_ylabel("Mean RDS (cosine distance)", fontsize=9)
-    ax.set_title(
-        "Rationale Divergence Score (RDS) by Strategy\n"
-        "Five context-variant cell means per strategy; matched pairs, brand framing only",
-        fontsize=10,
-        pad=10,
-    )
     ax.tick_params(axis="x", labelrotation=25)
     plt.setp(ax.get_xticklabels(), ha="right")
     ax.grid(True, axis="y", linestyle="--", alpha=0.25)
@@ -931,12 +924,6 @@ def plot_rds_matched_choice_case_cell_swarm_envelope(
         plt.Line2D([0], [0], color="#2471a3", linestyle=":", linewidth=1.2, label="Cell median"),
     ]
     fig.legend(handles=handles, loc="upper center", bbox_to_anchor=(0.5, 1.02), ncol=3, fontsize=8)
-    fig.suptitle(
-        f"Rationale sensitivity: matched-choice RDS distribution\n"
-        f"{_short_model_name(model)} — {scenario} — {strategy} × {context_variant}",
-        fontsize=10.5,
-        y=1.12,
-    )
     plt.tight_layout()
     for ax in axes:
         ax.set_xlabel("")

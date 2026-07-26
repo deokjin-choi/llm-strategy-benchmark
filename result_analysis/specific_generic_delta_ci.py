@@ -177,10 +177,6 @@ def plot_specific_generic_delta_bars(
     ax.set_yticks(y)
     ax.set_yticklabels(labels, fontsize=9)
     ax.set_xlabel("Δp  (Specific − Generic)")
-    ax.set_title(
-        "Strategy shift under brand exposure\n"
-        "Error bars: bootstrap 95% CI (condition-level); stars: FDR-corrected (* p<.05, ** p<.01, *** p<.001)"
-    )
     ax.grid(True, axis="x", linestyle="--", alpha=0.3)
     plt.tight_layout()
 

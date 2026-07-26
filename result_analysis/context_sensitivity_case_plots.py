@@ -198,12 +198,6 @@ def plot_context_strategy_stacks_framing_split(
             )
             row += 1
 
-    fig.suptitle(
-        f"Context sensitivity case: strategy mix by context variant (Generic vs Specific)\n"
-        f"{_short_model_name(model)} — {scenario}",
-        fontsize=11,
-        y=1.005,
-    )
     handles, labels = axes[0].get_legend_handles_labels()
     fig.legend(handles, labels, loc="center left", bbox_to_anchor=(1.02, 0.5), fontsize=7)
     plt.tight_layout()
@@ -247,12 +241,6 @@ def plot_context_tvd_by_variant_bars(
         ax.set_title(f"T={float(temp):g}")
         ax.grid(True, axis="y", linestyle="--", alpha=0.3)
 
-    fig.suptitle(
-        f"Context sensitivity: perturbation strength (mean TVD from base)\n"
-        f"{_short_model_name(model)} — {scenario}",
-        fontsize=11,
-        y=1.05,
-    )
     plt.tight_layout()
     plt.savefig(save_path, dpi=300, bbox_inches="tight")
     plt.close(fig)

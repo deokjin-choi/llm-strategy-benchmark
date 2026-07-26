@@ -7,13 +7,13 @@ We therefore reframe the evaluation problem from correctness to decision sensiti
 
 
 **1\. Introduction**  
-Large Language Models (LLMs) are increasingly used as algorithmic agents in R&D and innovation management—supporting technology assessment, competitive intelligence, and strategic planning under uncertainty. Organizations now consult LLMs not merely as information retrievers but as active contributors to strategic decision-making. Yet, despite this rapid adoption, empirical understanding of how these models behave as strategic agents remains critically limited.
+Large Language Models (LLMs) are increasingly used as algorithmic agents in R&D and innovation management—supporting technology opportunity discovery (Yoo et al., 2026) and strategic decision-making under uncertainty (Allen and McDonald, 2026). Organizations now consult LLMs not merely as information retrievers but as active contributors to strategic decision-making. Yet, despite this rapid adoption, empirical understanding of how these models behave as strategic agents remains critically limited.
 
-When an LLM produces a strategic recommendation, it does not simply retrieve facts. It actively interprets the problem, weighs competing considerations, and generates a course of action—behaviors that qualify it as an algorithmic agent. However, unlike human agents whose reasoning can be probed and audited, LLMs offer no built-in transparency about what drives their judgments. Do they rely on stable strategic logic, or are their recommendations systematically shaped by how the problem is framed, which brand name appears in the prompt, or even the randomness setting of the decoder?
+When an LLM produces a strategic recommendation, it does not simply retrieve facts. It actively interprets the problem, weighs competing considerations, and generates a course of action. Unlike human agents whose reasoning can be probed and audited, however, LLMs offer no built-in transparency about what drives their judgments. Do they rely on stable strategic logic, or are their recommendations systematically shaped by how the problem is framed, which brand name appears in the prompt, or even the randomness setting of the decoder?
 
 Current evaluative frameworks offer little answer to these questions. They primarily focus on accuracy, coherence, or task-level performance in isolated contexts (Chang et al., 2024). While informative, such metrics provide no insight into the stability of strategic judgments—how recommendations shift when the same underlying dilemma is presented with different contextual emphasis or brand identity, or decoded under different sampling settings. These are precisely the factors that matter most in R&D strategy, where outcomes are highly sensitive to market signals, competitive framing, and narrative persuasion.
 
-To address this gap, this study shifts the focus from "correctness" to "decision sensitivity". We introduce a scenario-based audit framework that holds the underlying dilemma and a closed strategy menu fixed while systematically varying contextual and firm-identity conditions, so as to measure how much—and where—LLMs reallocate their strategic recommendations. Our central question is: how stable are LLMs' strategic judgments across contextual framing, firm identity, and model configurations, and can that stability be measured before deployment? By answering it, we characterize LLMs as conditional strategic agents and provide an operational audit protocol—sensitivity metrics, baselines, and gating criteria—for evaluating their behavior before use in high-stakes R&D decision support.
+To address this gap, this study shifts the focus from "correctness" to "decision sensitivity". We introduce a scenario-based audit framework that holds the underlying dilemma and a closed strategy menu fixed while systematically varying contextual and firm-identity conditions, so as to measure how much—and where—LLMs reallocate their strategic recommendations. Our central question is: how stable are LLMs' strategic judgments across contextual framing, firm identity, and model configurations, and can that stability be measured before deployment? By answering it, we characterize LLMs as conditional strategic agents: systems whose strategic behavior must be profiled, reported, and governed under realistic perturbations rather than assumed constant once a prompt template is frozen. To operationalize this view, we provide an audit protocol—sensitivity metrics, baselines, and gating criteria—for evaluating LLM behavior before use in high-stakes R&D decision support.
 
 **2\. Background and related work**
 
@@ -21,17 +21,17 @@ To address this gap, this study shifts the focus from "correctness" to "decision
 Recent research has increasingly embedded LLMs into real-world decision pipelines, particularly in operations and engineering management. Wang et al. (2025a) propose a multi-agent scheduling chain that leverages LLM-based agents to handle flexible job shop scheduling and real-time rescheduling, demonstrating substantial gains in scheduling efficiency under disruptions. Du et al. (2025) introduce LLM-MANUF, an integrated framework in which multiple fine-tuned LLMs generate alternative decision plans that are subsequently ranked and fused, highlighting that manufacturing decision quality depends as much on comparing and aggregating candidate strategies as on generating a single “best” answer. Beyond manufacturing, Wang et al. (2025b), Xiong et al. (2025), and Gindullina et al. (2026) combine spatiotemporal knowledge graphs, digital twins, and physics-informed neural networks with LLM agents to support berth allocation, aviation design, and epidemic forecasting, respectively. These studies illustrate how LLMs can act as planning and coordination engines for complex operational systems, yet they typically assess success in terms of task performance and system-level efficiency. They rarely examine how, within a fixed set of strategic options, LLMs distribute their choices or how sensitive those choices are to subtle changes in contextual description or framing.
 
 **2.2 Reliability, hallucination, and safety in high-stakes decisions**  
-Another line of work focuses on making LLM-supported decisions more reliable in high-stakes environments. Kong et al. (2026) present HaluGNN, which models question–answer pairs as token graphs and uses graph neural networks to detect hallucinated content, thereby improving decision security in domains where factual errors are costly. Heo et al. (2025) develop HaluCheck, a visualization and automation framework that decomposes model responses into sentence-level claims, retrieves external evidence, and highlights likely hallucinations through an interactive interface for expert systems. Przystalski et al. (2026) use stylometric features to distinguish human- from LLM-generated texts, informing governance around authorship, attribution, and authenticity. In the context of smart-city management, Antuley et al. (2026) propose SORA-ATMAS, an adaptive trust and governance framework that aligns multiple LLM agents with cross-domain policies and regulatory constraints. Collectively, these studies treat reliability and safety primarily at the level of factual correctness, anomaly detection, and policy compliance. What remains underexplored is whether LLMs are reliable as strategic decision agents—specifically, how their strategic choices and rationales shift under contextual and framing manipulations when the underlying problem remains fixed.
+Another line of work focuses on making LLM-supported decisions more reliable in high-stakes environments. Kong et al. (2026) present HaluGNN, which models question–answer pairs as token graphs and uses graph neural networks to detect hallucinated content, thereby improving decision security in domains where factual errors are costly. Heo et al. (2025) develop HaluCheck, a visualization and automation framework that decomposes model responses into sentence-level claims, retrieves external evidence, and highlights likely hallucinations through an interactive interface for expert systems. Przystalski et al. (2026) use stylometric features to distinguish human- from LLM-generated texts, informing governance around authorship, attribution, and authenticity. In the context of smart-city management, Antuley et al. (2026) propose SORA-ATMAS, an adaptive trust and governance framework that aligns multiple LLM agents with cross-domain policies and regulatory constraints. In a separate high-stakes judgment setting, Choi and Park (2026) audit LLM-based patent comparison across three evaluative dimensions using diagnostic metrics that quantify prompt-induced shifts in consistency, alignment, and bias, positioning structured comparative judgment as an auditable paradigm for LLM deployment. Collectively, these studies treat reliability and safety primarily at the level of factual correctness, anomaly detection, policy compliance, or the internal consistency of a single fixed evaluative task. What remains underexplored is whether LLMs are reliable as strategic decision agents—specifically, how their strategic choices and rationales shift under contextual and framing manipulations when the underlying problem remains fixed.
 
 **2.3 Knowledge-grounded decision infrastructures**  
 A third strand of literature builds knowledge-grounded infrastructures that connect LLMs to structured data and domain ontologies. Ojuri et al. (2025) propose a text-to-SQL framework in which LLMs and intelligent agents translate natural language queries into executable SQL, lowering the access barrier for non-technical users and reducing dependence on data specialists in organizational decision-making. Xiong et al. (2025) introduce DR-RAG, a domain-rule-based retrieval-augmented generation framework that ties aviation digital models to knowledge graphs, rule bases, and digital twins, turning complex product design into a loop of retrieval, generation, and simulation feedback. In financial decision-making, Sinha et al. (2026) present FinBloom, a knowledge-grounded financial agent that combines a domain-specialized LLM with real-time news and regulatory filings to answer dynamic financial queries. Alarcón Serrano et al. (2026) evaluate how well general-purpose LLMs can recognize taxonomic relationships in SNOMED CT, clarifying their role in biomedical knowledge-graph workflows that support clinical reasoning. These works substantially improve what LLMs know and how they access relevant information. Yet, even with stronger grounding, they do not systematically analyze how a model’s strategic choices over a fixed option set change when only the narrative emphasis, identity cues, or quantitative inputs are perturbed.
 
 **2.4 Evaluation and Behavioral Profiling of LLMs**  
-Evaluation- and reasoning-centric research has sought to understand how LLMs plan, reason, and exhibit preferences across tasks. Liu et al. (2026) propose CART, a traceable planning framework that decomposes goals into subtasks, tracks planning trajectories, and triggers replanning when conditions change, thereby improving the robustness of LLM-based agents in incomplete-information environments. Gjorgjevikj et al. (2025) introduce xLLMBench, a decision-centric benchmarking framework that uses multi-criteria decision-making to rank models along accuracy, scale, energy consumption, and other non-performance factors. Memduhoğlu et al. (2026) treat LLMs as “virtual experts” for multi-criteria spatial planning, comparing their analytic hierarchy process (AHP) weightings with those of human panels and documenting systematic biases in how models prioritize criteria for solar power plant site selection. Torres-Moreno and Hermosillo-Valadez (2026) propose a semantic knowledge abstraction framework that restructures premise–hypothesis relations in natural language inference to improve consistency and reveal latent semantic gaps in LLMs’ reasoning. These contributions collectively move beyond simple accuracy metrics toward richer assessments of reasoning, robustness, and multi-dimensional trade-offs. However, these evaluation frameworks typically focus on task-level performance or general reasoning consistency, leaving open how LLMs' strategic preferences shift under controlled perturbations of brand identity, contextual emphasis, or numerical signals.
+Evaluation- and reasoning-centric research has sought to understand how LLMs plan, reason, and exhibit preferences across tasks. Liu et al. (2026) propose CART, a traceable planning framework that decomposes goals into subtasks, tracks planning trajectories, and triggers replanning when conditions change, thereby improving the robustness of LLM-based agents in incomplete-information environments. Gjorgjevikj et al. (2025) introduce xLLMBench, a decision-centric benchmarking framework that uses multi-criteria decision-making to rank models along accuracy, scale, energy consumption, and other non-performance factors. Memduhoğlu et al. (2026) treat LLMs as “virtual experts” for multi-criteria spatial planning, comparing their analytic hierarchy process (AHP) weightings with those of human panels and documenting systematic biases in how models prioritize criteria for solar power plant site selection. Torres-Moreno and Hermosillo-Valadez (2026) propose a semantic knowledge abstraction framework that restructures premise–hypothesis relations in natural language inference to improve consistency and reveal latent semantic gaps in LLMs’ reasoning. Most directly related to the present study, Allen and McDonald (2026) benchmark 21 proprietary and 13 open-source LLMs on the Back Bay Battery strategy simulation, showing that composite strategic performance has generally improved across model generations, yet even frontier models exhibit a systematic bias toward exploiting the existing business at the expense of long-term growth investment. This benchmark evaluates the quality of a single strategic trajectory produced under one fixed prompt configuration; it does not ask whether the same model, facing an unchanged strategic problem, would reach a different decision if that problem were merely narrated, identified, or decoded differently. These contributions collectively move beyond simple accuracy metrics toward richer assessments of reasoning, robustness, and multi-dimensional trade-offs. However, these evaluation frameworks—whether general-purpose or strategy-specific—typically focus on task-level performance or the quality of a single decision, leaving open how LLMs' strategic preferences shift under controlled perturbations of brand identity, contextual emphasis, or numerical signals.
 
 **2.5 Cognitive Biases, Framing Effects, and Strategic Heuristics**
 
-Human strategic judgments are susceptible to cognitive shortcuts that bypass deliberative reasoning (Kahneman, 2011). The *halo effect* occurs when a salient positive attribute—such as a firm's reputation—biases overall evaluation (Thorndike, 1920). *Anchoring* describes the tendency for an initial cue to shape subsequent judgments, even when that cue carries no objective decision-relevant information (Tversky & Kahneman, 1974). More broadly, Kahneman (2011) distinguishes fast, intuitive System 1 thinking from slow, analytical System 2 reasoning, with framing effects arising when System 1 dominates.
+Human strategic judgments are susceptible to cognitive shortcuts that bypass deliberative reasoning (Kahneman, 2011). The halo effect occurs when a salient positive attribute—such as a firm's reputation—biases overall evaluation (Thorndike, 1920). Anchoring describes the tendency for an initial cue to shape subsequent judgments, even when that cue carries no objective decision-relevant information (Tversky & Kahneman, 1974). More broadly, Kahneman (2011) distinguishes fast, intuitive System 1 thinking from slow, analytical System 2 reasoning, with framing effects arising when System 1 dominates.
 
 In LLM-based strategic decision-making, analogous patterns remain underexplored. The presence of a high-status brand identity or the selective emphasis of opportunity versus constraint information could trigger heuristic-like responses—leading models to prioritize narrative consistency over neutral evaluation of quantitative or factual signals. Nonetheless, existing benchmarks have not systematically characterized how such framing effects manifest in LLMs' categorical strategy choices, nor whether they persist in model-generated rationales.
 
@@ -41,7 +41,7 @@ To rigorously characterize the strategic behavior of LLMs, it is necessary to ma
 Specifically, the distinction between 'Technology Leadership' and 'Fast Follower' is grounded in the pioneering work on timing of entry and R&D intensity (Schilling, 2019). The concepts of 'Niche Focus' and 'Diversification' align with Porter’s generic strategies and the resource-based view of the firm (Porter, 1980; Barney, 1991). Furthermore, 'Open Innovation' reflects the modern shift toward collaborative R&D ecosystems (Chesbrough, 2003), while 'Retrenchment' and 'Maintain' represent critical defensive maneuvers under high environmental volatility (Miles et al., 1978). By constraining the LLM’s choice set to these validated archetypes, we transition from observing simple linguistic patterns to analyzing structural strategic reasoning. This methodological grounding ensures that the observed shifts in choice distributions are interpretable within the context of established management science.
 
 **2.7 Research gap**  
-Synthesizing these strands, prior work has advanced LLM-based decision support on four fronts: automated planning in operational systems, reliability through hallucination detection, knowledge-grounded access to structured domain information, and evaluation along general reasoning and multi-criteria dimensions. In every case, success is defined by accuracy, reliability, or task performance—whether the model reaches a correct or well-grounded answer—rather than by the stability of the strategic stance the model takes when the same problem is narrated or identified differently. Cognitive science, meanwhile, shows that human strategic judgment is systematically reshaped by framing, anchoring, and halo effects, and strategic management supplies a validated set of archetypes against which categorical choices can be interpreted. These two observations have not been joined: it remains unknown whether an LLM, treated as a categorical strategic decision-maker over a fixed archetype menu, exhibits comparable framing-driven instability when the underlying dilemma is held constant—and whether that instability is large enough, and structured enough, to matter for deployment.
+Synthesizing these strands, prior work has advanced LLM-based decision support on four fronts: automated planning in operational systems, reliability through hallucination detection and structured-judgment auditing, knowledge-grounded access to structured domain information, and evaluation along general reasoning, multi-criteria, and strategy-simulation performance dimensions. In every case, success is defined by accuracy, reliability, or task performance—whether the model reaches a correct or well-grounded answer, or a strategically sound one under a single fixed prompt—rather than by the stability of the strategic stance the model takes when the same problem is narrated or identified differently. Cognitive science, meanwhile, shows that human strategic judgment is systematically reshaped by framing, anchoring, and halo effects, and strategic management supplies a validated set of archetypes against which categorical choices can be interpreted. These two observations have not been joined: it remains unknown whether an LLM, treated as a categorical strategic decision-maker over a fixed archetype menu, exhibits comparable framing-driven instability when the underlying dilemma is held constant—and whether that instability is large enough, and structured enough, to matter for deployment.
 
 Closing this gap requires moving systematically from choice to rationale. We must first ask whether variation in semantic context—opportunity, constraint, competition, and numerical signals alike—reshapes the chosen strategy when the underlying dilemma is fixed. We must then isolate whether firm-identity framing reallocates strategy choice on its own; whether context and firm identity interact in a way that alters not only the magnitude but potentially the direction of framing effects; and whether, even when the selected strategy is unchanged, firm-identity framing still alters the rationale that justifies it. We therefore formulate four research questions:
 
@@ -319,7 +319,7 @@ Table 8. Strategy menu for 4\_model\_x\_launch.
 Fig. 9. Context sensitivity case: strategy mix across context perturbations and framing types (*4\_model\_x\_launch*, Llama-3.1-8B-Instruct).
 
 ![Context_deepdive_Llama_ModelX_tvd](final_results/plots/eval_deepdive_context_tvd_by_variant__Meta-Llama-3.1-8B__4_model_x_launch.png)  
-Fig. 10. Context sensitivity case: mean TVD from *base* by perturbation variant ($T=0.0$ vs. $T=0.7$); *randomized\_numbers* remains the weakest perturbation at both temperatures.
+Fig. 10. Context sensitivity case: mean TVD from *base* by perturbation variant (*4\_model\_x\_launch*, Llama-3.1-8B-Instruct; $T=0.0$ vs. $T=0.7$); *randomized\_numbers* remains the weakest perturbation at both temperatures.
 
 Under Generic framing, Retrenchment remains modal across *base*, *competitive\_dynamics*, and *count\_fact*; only under *opp\_focus* does Technology Leadership emerge as the modal choice. Under Specific framing, Technology Leadership becomes modal under all three semantic perturbations—reaching 69% mass share under *opp\_focus*—while *base* remains Retrenchment-dominant. The TVD hierarchy at $T=0.0$ (*opp\_focus* = 0.686 > *count\_fact* = 0.500 > *competitive\_dynamics* = 0.417 ≫ *randomized\_numbers* = 0.004) mirrors the population-level asymmetry in Section 5.1 and peaks at the highest context-shift magnitude in the benchmark grid—under *opp\_focus*, roughly two-thirds of strategy mass reallocates away from base. Context–identity moderation (Section 5.4) appears in miniature: firm identification does not uniformly amplify all variants but unlocks leadership-oriented mass under semantic perturbation that stays defensive under Generic framing. In this cell, the base dilemma already anchors Retrenchment; opportunity framing then unlocks Technology Leadership, producing the largest context-driven menu rewrite in the grid.
 
@@ -344,7 +344,7 @@ Table 9. Strategy menu for 5\_model\_3\_mass\_market.
 **(3) Observed behavior.** To isolate firm-identity effects, Fig. 11 reports strategy choices under the neutral *base* context variant only (Qwen2.5-14B-Instruct).
 
 ![Firm_identity_deepdive_Qwen_Model3](final_results/plots/eval_deepdive_firm_identity_framing_stacks__Qwen2.5-14B__5_model_3_mass_market.png)  
-Fig. 11. Firm-identity sensitivity case: strategy mix under Generic vs. Specific framing (*5\_model\_3\_mass\_market*, *base* context).
+Fig. 11. Firm-identity sensitivity case: strategy mix under Generic vs. Specific framing (Qwen2.5-14B-Instruct; *5\_model\_3\_mass\_market*, *base* context).
 
 Generic framing concentrates mass on Open Innovation (external manufacturing partnerships as the scaling lever). Specific (Tesla) framing shifts the modal choice to Maintain (gradual expansion with quality and profitability safeguards). The strategy label itself changes—not merely its rationale—illustrating a large local firm-identity reallocation in this scenario. The pattern also departs from the population-level trend in Section 5.3, where Specific framing boosted Technology Leadership on average: local firm-identity effects can reorder archetypes relative to macro-averages.
 
@@ -481,6 +481,8 @@ The practical implication is straightforward: for LLM-assisted strategy DSS, pre
 
 Alarcón Serrano, J.D., Cano-Marin, E. and Sicilia, M.-A. (2026). Assessing open LLMs' ability to identify biomedical taxonomic relationships: a SNOMED CT-based experimental evaluation. Knowledge-Based Systems, 115882.
 
+Allen, R.T. and McDonald, R.M. (2026). How well can AI do strategy? Empirical benchmarking using strategy simulations. Strategy Science, 11(1), pp. 93–117.
+
 Antuley, U., Siddiqui, S., Hameed, S., Arif, W. and Shah, S.A. (2026). SORA-ATMAS: adaptive trust management and multi-LLM aligned governance for future smart cities. Knowledge-Based Systems, 337, 115403.
 
 Barney, J. (1991). Firm resources and sustained competitive advantage. Journal of Management, 17(1), pp. 99–120.
@@ -488,6 +490,8 @@ Barney, J. (1991). Firm resources and sustained competitive advantage. Journal o
 Chang, Y., Wang, X., Wang, J., Wu, Y., Yang, L., Zhu, K., Chen, H., Yi, X., Wang, C. and Wang, Y. et al. (2024). A survey on evaluation of large language models. ACM Transactions on Intelligent Systems and Technology, 15(3), Article 39, pp. 1–45.
 
 Chesbrough, H.W. (2003). Open Innovation: The New Imperative for Creating and Profiting from Technology. Boston, MA: Harvard Business School Press.
+
+Choi, D. and Park, B. (2026). Structured LLM-based patent comparison across three evaluation dimensions. World Patent Information, 84, 102430.
 
 Du, K., Yang, B., Xie, K., Dong, N., Zhang, Z., Wang, S. and Mo, F. (2025). LLM-MANUF: an integrated framework of fine-tuning large language models for intelligent decision-making in manufacturing. Advanced Engineering Informatics, 65, 103263.
 
@@ -529,6 +533,8 @@ Wang, P., Hu, Q., Mei, Q., Wang, S., Yang, Y., Guo, D., Liu, X., Hu, W. and Chen
 
 Xiong, X., Cai, H., Yu, H., Shen, B. and Hu, P. (2025). DR-RAG: domain-rule-based retrieval-augmented generation for aviation digital model design. Advanced Engineering Informatics, 68, 103688.
 
+Yoo, M., Hwang, J. and Lee, H. (2026). Prescriptive technology intelligence for technology opportunity discovery: an LLM-based automated framework for narrating promising technology concepts. Technovation, 155, 103584.
+
 **Appendix A. Data Validation and Categorical Compliance**  
 This appendix reports instruction-following validity checks for the categorical strategy-selection task. The models demonstrated stable instruction-following performance, with an overall compliance rate of approximately 97.3% (396,961 valid responses out of 408,000 total inferences). Table A1 summarizes the compliance and non-compliance (error) rates across the five context variants.
 
@@ -543,3 +549,74 @@ This appendix reports instruction-following validity checks for the categorical 
 Table A1. Categorical compliance and error rates by context variant.
 
 As indicated in Table A1, the non-compliance rate remained within a narrow band, with a maximum deviation of only 0.61 percentage points between the lowest-error (Opportunity, 2.43%) and highest-error (Count Fact, 3.04%) variants. This uniformity indicates that categorical compliance was largely insensitive to contextual framing. The overall consistency across all variants confirms that the models are capable of operating within a constrained decision-making framework. To ensure a rigorous comparison of strategic patterns, subsequent analyses in Section 5 are conducted using the normalized distribution of valid strategic choices, excluding the out-of-set responses.
+
+**Appendix B. Sample Prompt and Model Response**
+
+Every inference in the benchmark is generated from the same four-part prompt template: (i) a fixed problem statement, (ii) a set of scenario-specific context blocks that varies by *context\_variant* (Section 3.2–3.3), (iii) a menu of seven candidate execution options with alphabetic labels rotated across scenarios to mitigate option-order bias (Section 3.4, Section 4.2), and (iv) a forced strict-JSON output schema requiring exactly one chosen option, its standard-strategy mapping, a short rationale, and the context tags actually used. The Generic–Specific firm-identity manipulation (Section 4.2, Section 5.3) is implemented as a single substitution inside the problem statement (e.g., "A company" → "Tesla"); the context-variant manipulation (*base*, *opp\_focus*, *competitive\_dynamics*, *count\_fact*, *randomized\_numbers*) replaces only the text of the context blocks. All other prompt content—including the strategy menu, option labels, and output schema—is held byte-identical across conditions, so that observed shifts in Section 5 are attributable to the audited perturbation rather than to incidental wording changes.
+
+For illustration, the exact prompt issued for the *4\_model\_x\_launch* scenario (Table 8; Case I, Section 5.6.3) under the Specific (Tesla) firm-identity condition and the *base* context variant, with all four context blocks included, is reproduced verbatim below.
+
+```
+You are a senior technology strategy analyst. Given the fixed problem and a subset of context blocks (which may be empty), select the single most appropriate execution option and justify it clearly.
+
+Problem (ALWAYS INCLUDED):
+Problem: Tesla aims to enter the growing SUV market. However, a complex product design creates high production difficulty and quality risks, which could severely damage the brand's reputation despite a lack of direct competition.
+
+Additional context (subset may be empty):
+- [Market] US SUV market share: about 32% of new car sales. SUVs made up about 32% of new car sales in the US, a large and growing segment.
+- [Market] Competition: There were very few competing electric SUVs at the time. At the time, there were very few competing electric SUVs.
+- [Technology] Design Complexity: A new design with complex, upward-swinging doors posed significant manufacturing challenges. A new design with complex, upward-swinging doors posed significant manufacturing challenges.
+- [Customer Response] High pre-order volume: Over 30,000 pre-orders existed, increasing pressure to deliver. There was a high pre-order volume, increasing the pressure to deliver.
+
+Candidate execution options (choose EXACTLY ONE):
+  A) Launch a luxury SUV with innovative, complex features
+  B) Introduce a simpler SUV quickly to capture demand before competitors
+  C) Partner with suppliers/OEMs to co-develop SUV platform and reduce complexity
+  D) Develop a standard, mid-priced SUV for a specific customer segment
+  E) Expand into related vehicle categories (e.g., crossover, minivan) alongside SUV
+  F) Reduce scope of SUV project, scale down features to cut risk
+  G) Postpone the SUV launch, focus on stabilizing Model S production first
+
+Standard strategy mappings:
+  A → Technology Leadership
+  B → Fast Follower
+  C → Open Innovation
+  D → Niche Focus
+  E → Diversification
+  F → Retrenchment
+  G → Maintain
+
+Return STRICT JSON with keys exactly: {"chosen_option": "<MUST be exactly ONE of A, B, C, D, E, F, G (choose ONLY ONE)>", "standard_mapping": "...", "rationale": "<3-4 concise sentences>", "key_signals_used": ["<copy EXACTLY the full tag+short title from the provided context blocks>"]}
+
+CRITICAL INSTRUCTIONS:
+- Your ENTIRE output must be ONLY a valid JSON object.
+- Do NOT include explanations, preambles, markdown, or text outside the JSON.
+- The first character must be '{' and the last character must be '}'.
+
+RULES FOR 'key_signals_used':
+- It must be an array of strings.
+- Each string MUST be the EXACT FULL TAG AND SHORT TITLE from the provided context blocks.
+- Example: If the context block is '[Market] EV share: <0.02% of global new car sales.', then output exactly '[Market] EV share: <0.02% of global new car sales.'
+- Do NOT shorten to just 'Market'.
+- Do NOT copy the full descriptive explanation, only the tag+short title.
+- Do NOT invent or modify tags.
+- If no context was used, return an empty array [].
+```
+
+A representative raw response to this exact prompt (gemma-2-9b-it, $T=0.0$) is reproduced below.
+
+````
+```json
+{
+"chosen_option": "B",
+"standard_mapping": "Fast Follower",
+"rationale": "Given the high pre-order volume and lack of direct competition, Tesla should prioritize a simpler SUV launch to capture demand before competitors exploit the market opportunity.",
+"key_signals_used": [
+"Market US SUV market share: about 32% of new car sales.",
+"Market Competition: There were very few competing electric SUVs at the time."
+]
+}
+```
+````
+
+This example also illustrates why some outputs are excluded from the normalized distributions reported in Section 5 (Section 4.2; Appendix A): despite explicit instructions to return only a bare JSON object, models occasionally wrap the payload in markdown code fences or drop bracket characters from copied context tags, so parsing must tolerate minor formatting noise around an otherwise well-formed JSON object. Under the *opp\_focus* context variant and the Llama-3.1-8B-Instruct model discussed in Case I, only the four "Additional context" lines above would change; the problem statement, option menu, and schema instructions remain identical, which is what allows the resulting shift in `chosen_option` (Section 5.6.3) to be attributed to the context perturbation itself.
