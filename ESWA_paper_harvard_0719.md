@@ -115,7 +115,7 @@ This distributional perspective is essential for assessing context and framing s
 
 **4.1 Model Selection**
 
-We evaluate five open-weight, instruction-tuned language models that span distinct developer ecosystems and pretraining traditions: Meta Llama 3.1 8B Instruct, Mistral 7B Instruct v0.3, Qwen 2.5 14B Instruct, DeepSeek LLM 7B Chat, and Yi 1.5 9B Chat. This selection is motivated by three considerations. First, architectural and institutional diversity reduces the risk that findings reflect idiosyncrasies of a single model family or geographic training corpus; the panel mixes U.S., European, and Asia-based open models whose alignment and data mixes differ in ways that may plausibly affect strategic framing and narrative priors. Second, all models are openly available instruct variants that can be hosted on local inference stacks, which supports reproducible, high-volume repeated sampling under fixed prompts and decoding regimes—conditions that are difficult to guarantee with proprietary API-only frontiers whose internals may change without notice. Third, parameter counts are confined to a compact scale band (roughly 7B–14B parameters), which keeps compute and latency within a range typical of on-premise or dedicated-GPU deployments in corporate R\&D settings while still allowing meaningful variation in model capacity (e.g., 7B-class versus 14B-class) within a single experimental design. The goal is comparable results across models and evidence that speaks to open weights firms can run on their own hardware.
+We evaluate five open-weight, instruction-tuned language models that span distinct developer ecosystems and pretraining traditions: Meta Llama 3.1 8B Instruct (Grattafiori et al., 2024), Mistral 7B Instruct v0.3 (Jiang et al., 2023), Qwen 2.5 14B Instruct (Qwen, 2024), DeepSeek LLM 7B Chat (DeepSeek-AI, 2024), and Yi 1.5 9B Chat (01.AI, 2024). <span style="color:red">[TODO: the citations "Qwen, 2024", "DeepSeek-AI, 2024", and "01.AI, 2024" use the organizational name that arXiv lists as first author of record for these technical reports; swap in a named individual author (see References) if the target journal does not accept organizational authorship.]</span> This selection is motivated by three considerations. First, architectural and institutional diversity reduces the risk that findings reflect idiosyncrasies of a single model family or geographic training corpus; the panel mixes U.S., European, and Asia-based open models whose alignment and data mixes differ in ways that may plausibly affect strategic framing and narrative priors. Second, all models are openly available instruct variants that can be hosted on local inference stacks, which supports reproducible, high-volume repeated sampling under fixed prompts and decoding regimes—conditions that are difficult to guarantee with proprietary API-only frontiers whose internals may change without notice. Third, parameter counts are confined to a compact scale band (roughly 7B–14B parameters), which keeps compute and latency within a range typical of on-premise or dedicated-GPU deployments in corporate R\&D settings while still allowing meaningful variation in model capacity (e.g., 7B-class versus 14B-class) within a single experimental design. The goal is comparable results across models and evidence that speaks to open weights firms can run on their own hardware.
 
 **4.2 Prompt Design and Bias Control**
 
@@ -213,7 +213,7 @@ Table 3. Semantic framing differences in rationale keywords
 
 These findings indicate that LLM-generated strategic rationales are not neutral analytical outputs but reflect framing-consistent narrative patterns. Notably, the effect persists after masking brand-referential terms, suggesting that firm identity cues trigger distinct explanatory styles rather than mere lexical priming.
 
-To quantify the degree of narrative divergence beyond keyword inspection, we introduce the Rationale Divergence Score (RDS)—the cosine distance between SentenceTransformer embeddings of matched Generic and Specific rationale pairs. RDS ∈ [0, 1], where 0 indicates semantically identical justifications and 1 indicates maximal divergence. Any RDS above zero therefore reflects the effect of firm framing alone on the explanatory narrative.
+To quantify the degree of narrative divergence beyond keyword inspection, we introduce the Rationale Divergence Score (RDS)—the cosine distance between Sentence-BERT embeddings (*paraphrase-MiniLM-L6-v2*; Reimers and Gurevych, 2019) of matched Generic and Specific rationale pairs. RDS ∈ [0, 1], where 0 indicates semantically identical justifications and 1 indicates maximal divergence. Any RDS above zero therefore reflects the effect of firm framing alone on the explanatory narrative.
 
 Across 146,565 matched pairs spanning 2,545 condition×strategy cells, mean RDS is 0.158 (median = 0.146, SD = 0.090; bootstrap 95% CI on cell-level macro means [0.156, 0.161]), confirming that the rationale shift documented in Table 3 is not confined to a narrow set of keywords but constitutes a pervasive, semantically measurable divergence. To interpret this magnitude, we compare RDS against two reference distributions using the same embedding pipeline and preprocessing (brand-term masking only). Noise and ceiling baselines each draw one random pair per eligible cell (seed = 42).
 
@@ -479,6 +479,8 @@ The practical implication is straightforward: for LLM-assisted strategy DSS, pre
 
 **References**
 
+01.AI (2024). Yi: open foundation models by 01.AI. arXiv preprint arXiv:2403.04652. <span style="color:red">[TODO: cited as organizational author "01.AI" because arXiv lists it as the first author of record; replace with a named individual author (e.g., Young, A. et al.) if the target journal's style does not accept organizational authorship.]</span>
+
 Alarcón Serrano, J.D., Cano-Marin, E. and Sicilia, M.-A. (2026). Assessing open LLMs' ability to identify biomedical taxonomic relationships: a SNOMED CT-based experimental evaluation. Knowledge-Based Systems, 115882.
 
 Allen, R.T. and McDonald, R.M. (2026). How well can AI do strategy? Empirical benchmarking using strategy simulations. Strategy Science, 11(1), pp. 93–117.
@@ -493,13 +495,19 @@ Chesbrough, H.W. (2003). Open Innovation: The New Imperative for Creating and Pr
 
 Choi, D. and Park, B. (2026). Structured LLM-based patent comparison across three evaluation dimensions. World Patent Information, 84, 102430.
 
+DeepSeek-AI (2024). DeepSeek LLM: scaling open-source language models with longtermism. arXiv preprint arXiv:2401.02954. <span style="color:red">[TODO: cited as organizational author "DeepSeek-AI" because arXiv lists it as the first author of record; replace with a named individual author (e.g., Bi, X. et al.) if the target journal's style does not accept organizational authorship.]</span>
+
 Du, K., Yang, B., Xie, K., Dong, N., Zhang, Z., Wang, S. and Mo, F. (2025). LLM-MANUF: an integrated framework of fine-tuning large language models for intelligent decision-making in manufacturing. Advanced Engineering Informatics, 65, 103263.
 
 Gindullina, D., Lazutov, M., Stolyarov, K., Danilenko, D. and Leonenko, V. (2026). Expert-guided forecasting of epidemic ARI incidence based on physics-informed neural networks and large language models. Expert Systems with Applications, 315, 131730.
 
 Gjorgjevikj, A., Nikolikj, A., Koroušić Seljak, B. and Eftimov, T. (2025). User-defined trade-offs in LLM benchmarking: balancing accuracy, scale, and sustainability. Knowledge-Based Systems, 330, 114405.
 
+Grattafiori, A., Dubey, A., Jauhri, A., Pandey, A., Kadian, A., Al-Dahle, A., Letman, A., Mathur, A., Schelten, A. and Vaughan, A. et al. (2024). The Llama 3 herd of models. arXiv preprint arXiv:2407.21783.
+
 Heo, S., Son, S. and Park, H. (2025). HaluCheck: explainable and verifiable automation for detecting hallucinations in LLM responses. Expert Systems with Applications, 272, 126712.
+
+Jiang, A.Q., Sablayrolles, A., Mensch, A., Bamford, C., Chaplot, D.S., de las Casas, D., Bressand, F., Lengyel, G., Lample, G., Saulnier, L., Renard Lavaud, L., Lachaux, M.-A., Stock, P., Le Scao, T., Lavril, T., Wang, T., Lacroix, T. and El Sayed, W. (2023). Mistral 7B. arXiv preprint arXiv:2310.06825.
 
 Kahneman, D. (2011). Thinking, Fast and Slow. New York: Farrar, Straus and Giroux.
 
@@ -516,6 +524,10 @@ Ojuri, S., Han, T.A., Chiong, R. and Di Stefano, A. (2025). Optimizing text-to-S
 Porter, M.E. (1980). Competitive Strategy: Techniques for Analyzing Industries and Competitors. New York: Free Press.
 
 Przystalski, K., Argasiński, J.K., Grabska-Gradzińska, I. and Ochab, J.K. (2026). Stylometry recognizes human and LLM-generated texts in short samples. Expert Systems with Applications, 296, 129001.
+
+Qwen (2024). Qwen2.5 technical report. arXiv preprint arXiv:2412.15115. <span style="color:red">[TODO: cited as organizational author "Qwen" because arXiv lists it as the first author of record; replace with a named individual author (e.g., Yang, A. et al.) if the target journal's style does not accept organizational authorship.]</span>
+
+Reimers, N. and Gurevych, I. (2019). Sentence-BERT: sentence embeddings using Siamese BERT-networks. arXiv preprint arXiv:1908.10084.
 
 Schilling, M.A. (2019). Strategic Management of Technological Innovation (6th ed.). New York: McGraw-Hill Education.
 
