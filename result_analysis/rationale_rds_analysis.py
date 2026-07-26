@@ -923,8 +923,10 @@ def plot_rds_matched_choice_case_cell_swarm_envelope(
         plt.Line2D([0], [0], color="#7f8c8d", linestyle="--", linewidth=1.4, label="Repeat-noise median"),
         plt.Line2D([0], [0], color="#2471a3", linestyle=":", linewidth=1.2, label="Cell median"),
     ]
-    fig.legend(handles=handles, loc="upper center", bbox_to_anchor=(0.5, 1.02), ncol=3, fontsize=8)
-    plt.tight_layout()
+    # Reserve a dedicated top margin for the figure-level legend so it never
+    # overlaps the per-panel titles or the swarm/envelope plot area below it.
+    plt.tight_layout(rect=[0, 0, 1, 0.86])
+    fig.legend(handles=handles, loc="upper center", bbox_to_anchor=(0.5, 0.99), ncol=3, fontsize=8, frameon=False)
     for ax in axes:
         ax.set_xlabel("")
         ax.xaxis.label.set_visible(False)

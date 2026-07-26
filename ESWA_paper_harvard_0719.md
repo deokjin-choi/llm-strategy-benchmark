@@ -7,7 +7,7 @@ We therefore reframe the evaluation problem from correctness to decision sensiti
 
 
 **1\. Introduction**  
-Large Language Models (LLMs) are increasingly used as algorithmic agents in R&D and innovation management—supporting technology opportunity discovery (Yoo et al., 2026) and strategic decision-making under uncertainty (Allen and McDonald, 2026). Organizations now consult LLMs not merely as information retrievers but as active contributors to strategic decision-making. Yet, despite this rapid adoption, empirical understanding of how these models behave as strategic agents remains critically limited.
+Large Language Models (LLMs) are increasingly used as algorithmic agents in R&D and innovation management—supporting technology opportunity discovery (Yoo et al., 2026) and strategic decision-making under uncertainty (Allen and McDonald, 2026). Organizations now consult LLMs not merely as information retrievers but as active participants in shaping strategic choices. Yet, despite this rapid adoption, empirical understanding of how these models behave as strategic agents remains critically limited.
 
 When an LLM produces a strategic recommendation, it does not simply retrieve facts. It actively interprets the problem, weighs competing considerations, and generates a course of action. Unlike human agents whose reasoning can be probed and audited, however, LLMs offer no built-in transparency about what drives their judgments. Do they rely on stable strategic logic, or are their recommendations systematically shaped by how the problem is framed, which brand name appears in the prompt, or even the randomness setting of the decoder?
 
