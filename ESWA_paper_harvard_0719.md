@@ -115,7 +115,7 @@ This distributional perspective is essential for assessing context and framing s
 
 **4.1 Model Selection**
 
-We evaluate five open-weight, instruction-tuned language models that span distinct developer ecosystems and pretraining traditions: Meta Llama 3.1 8B Instruct (Grattafiori et al., 2024), Mistral 7B Instruct v0.3 (Jiang et al., 2023), Qwen 2.5 14B Instruct (Qwen, 2024), DeepSeek LLM 7B Chat (DeepSeek-AI, 2024), and Yi 1.5 9B Chat (01.AI, 2024). <span style="color:red">[TODO: the citations "Qwen, 2024", "DeepSeek-AI, 2024", and "01.AI, 2024" use the organizational name that arXiv lists as first author of record for these technical reports; swap in a named individual author (see References) if the target journal does not accept organizational authorship.]</span> This selection is motivated by three considerations. First, architectural and institutional diversity reduces the risk that findings reflect idiosyncrasies of a single model family or geographic training corpus; the panel mixes U.S., European, and Asia-based open models whose alignment and data mixes differ in ways that may plausibly affect strategic framing and narrative priors. Second, all models are openly available instruct variants that can be hosted on local inference stacks, which supports reproducible, high-volume repeated sampling under fixed prompts and decoding regimes—conditions that are difficult to guarantee with proprietary API-only frontiers whose internals may change without notice. Third, parameter counts are confined to a compact scale band (roughly 7B–14B parameters), which keeps compute and latency within a range typical of on-premise or dedicated-GPU deployments in corporate R\&D settings while still allowing meaningful variation in model capacity (e.g., 7B-class versus 14B-class) within a single experimental design. The goal is comparable results across models and evidence that speaks to open weights firms can run on their own hardware.
+We evaluate five open-weight, instruction-tuned language models that span distinct developer ecosystems and pretraining traditions: Meta Llama 3.1 8B Instruct (Grattafiori et al., 2024), Mistral 7B Instruct v0.3 (Jiang et al., 2023), Qwen 2.5 14B Instruct (Yang et al., 2024), DeepSeek LLM 7B Chat (Bi et al., 2024), and Yi 1.5 9B Chat (Young et al., 2024). This selection is motivated by three considerations. First, architectural and institutional diversity reduces the risk that findings reflect idiosyncrasies of a single model family or geographic training corpus; the panel mixes U.S., European, and Asia-based open models whose alignment and data mixes differ in ways that may plausibly affect strategic framing and narrative priors. Second, all models are openly available instruct variants that can be hosted on local inference stacks, which supports reproducible, high-volume repeated sampling under fixed prompts and decoding regimes—conditions that are difficult to guarantee with proprietary API-only frontiers whose internals may change without notice. Third, parameter counts are confined to a compact scale band (roughly 7B–14B parameters), which keeps compute and latency within a range typical of on-premise or dedicated-GPU deployments in corporate R\&D settings while still allowing meaningful variation in model capacity (e.g., 7B-class versus 14B-class) within a single experimental design. The goal is comparable results across models and evidence that speaks to open weights firms can run on their own hardware.
 
 **4.2 Prompt Design and Bias Control**
 
@@ -479,8 +479,6 @@ The practical implication is straightforward: for LLM-assisted strategy DSS, pre
 
 **References**
 
-01.AI (2024). Yi: open foundation models by 01.AI. arXiv preprint arXiv:2403.04652. <span style="color:red">[TODO: cited as organizational author "01.AI" because arXiv lists it as the first author of record; replace with a named individual author (e.g., Young, A. et al.) if the target journal's style does not accept organizational authorship.]</span>
-
 Alarcón Serrano, J.D., Cano-Marin, E. and Sicilia, M.-A. (2026). Assessing open LLMs' ability to identify biomedical taxonomic relationships: a SNOMED CT-based experimental evaluation. Knowledge-Based Systems, 115882.
 
 Allen, R.T. and McDonald, R.M. (2026). How well can AI do strategy? Empirical benchmarking using strategy simulations. Strategy Science, 11(1), pp. 93–117.
@@ -489,13 +487,13 @@ Antuley, U., Siddiqui, S., Hameed, S., Arif, W. and Shah, S.A. (2026). SORA-ATMA
 
 Barney, J. (1991). Firm resources and sustained competitive advantage. Journal of Management, 17(1), pp. 99–120.
 
+Bi, X., Chen, D., Chen, G., Chen, S., Dai, D., Deng, C., Ding, H., Dong, K., Du, Q. and Fu, Z. et al. (2024). DeepSeek LLM: scaling open-source language models with longtermism. arXiv preprint arXiv:2401.02954.
+
 Chang, Y., Wang, X., Wang, J., Wu, Y., Yang, L., Zhu, K., Chen, H., Yi, X., Wang, C. and Wang, Y. et al. (2024). A survey on evaluation of large language models. ACM Transactions on Intelligent Systems and Technology, 15(3), Article 39, pp. 1–45.
 
 Chesbrough, H.W. (2003). Open Innovation: The New Imperative for Creating and Profiting from Technology. Boston, MA: Harvard Business School Press.
 
 Choi, D. and Park, B. (2026). Structured LLM-based patent comparison across three evaluation dimensions. World Patent Information, 84, 102430.
-
-DeepSeek-AI (2024). DeepSeek LLM: scaling open-source language models with longtermism. arXiv preprint arXiv:2401.02954. <span style="color:red">[TODO: cited as organizational author "DeepSeek-AI" because arXiv lists it as the first author of record; replace with a named individual author (e.g., Bi, X. et al.) if the target journal's style does not accept organizational authorship.]</span>
 
 Du, K., Yang, B., Xie, K., Dong, N., Zhang, Z., Wang, S. and Mo, F. (2025). LLM-MANUF: an integrated framework of fine-tuning large language models for intelligent decision-making in manufacturing. Advanced Engineering Informatics, 65, 103263.
 
@@ -525,8 +523,6 @@ Porter, M.E. (1980). Competitive Strategy: Techniques for Analyzing Industries a
 
 Przystalski, K., Argasiński, J.K., Grabska-Gradzińska, I. and Ochab, J.K. (2026). Stylometry recognizes human and LLM-generated texts in short samples. Expert Systems with Applications, 296, 129001.
 
-Qwen (2024). Qwen2.5 technical report. arXiv preprint arXiv:2412.15115. <span style="color:red">[TODO: cited as organizational author "Qwen" because arXiv lists it as the first author of record; replace with a named individual author (e.g., Yang, A. et al.) if the target journal's style does not accept organizational authorship.]</span>
-
 Reimers, N. and Gurevych, I. (2019). Sentence-BERT: sentence embeddings using Siamese BERT-networks. arXiv preprint arXiv:1908.10084.
 
 Schilling, M.A. (2019). Strategic Management of Technological Innovation (6th ed.). New York: McGraw-Hill Education.
@@ -545,7 +541,11 @@ Wang, P., Hu, Q., Mei, Q., Wang, S., Yang, Y., Guo, D., Liu, X., Hu, W. and Chen
 
 Xiong, X., Cai, H., Yu, H., Shen, B. and Hu, P. (2025). DR-RAG: domain-rule-based retrieval-augmented generation for aviation digital model design. Advanced Engineering Informatics, 68, 103688.
 
+Yang, A., Yang, B., Zhang, B., Hui, B., Zheng, B., Yu, B., Li, C., Liu, D., Huang, F. and Wei, H. et al. (2024). Qwen2.5 technical report. arXiv preprint arXiv:2412.15115.
+
 Yoo, M., Hwang, J. and Lee, H. (2026). Prescriptive technology intelligence for technology opportunity discovery: an LLM-based automated framework for narrating promising technology concepts. Technovation, 155, 103584.
+
+Young, A., Chen, B., Li, C., Huang, C., Zhang, G., Zhang, G., Wang, G., Li, H., Zhu, J. and Chen, J. et al. (2024). Yi: open foundation models by 01.AI. arXiv preprint arXiv:2403.04652.
 
 **Appendix A. Data Validation and Categorical Compliance**  
 This appendix reports instruction-following validity checks for the categorical strategy-selection task. The models demonstrated stable instruction-following performance, with an overall compliance rate of approximately 97.3% (396,961 valid responses out of 408,000 total inferences). Table A1 summarizes the compliance and non-compliance (error) rates across the five context variants.
