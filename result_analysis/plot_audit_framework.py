@@ -1,5 +1,8 @@
 """
-Paper figure: scenario-based decision sensitivity audit framework (§6.4).
+Paper figure: scenario-based decision sensitivity audit framework (§6.3).
+
+Four stages (aligned with the manuscript):
+  Step 1 Freeze · Step 2 Perturb · Step 3 Measure · Step 4 Human gate
 
 Output
 ------
@@ -104,7 +107,7 @@ def plot_audit_framework(
         color="#4a5568",
     )
 
-    # Step 1
+    # Step 1 — Freeze
     ax.text(0.55, 7.15, "Step 1", fontsize=7.5, color="#2c5282", fontweight="bold", va="center")
     _box(
         ax,
@@ -112,7 +115,7 @@ def plot_audit_framework(
         6.85,
         9.6,
         0.72,
-        "Freeze the audit design\n"
+        "Freeze the decision object\n"
         "Fixed R&D dilemma   ·   Closed strategy menu (7 archetypes)   ·   Documented decoding settings",
         fc="#ffffff",
         ec="#2c5282",
@@ -121,12 +124,12 @@ def plot_audit_framework(
     )
     _arrow(ax, 5.75, 6.45, 5.75, 6.05)
 
-    # Steps 2–3
-    ax.text(0.55, 5.85, "Steps 2–3", fontsize=7.5, color="#2c5282", fontweight="bold", va="center")
+    # Step 2 — Perturb (firm-identity + context)
+    ax.text(0.55, 5.85, "Step 2", fontsize=7.5, color="#2c5282", fontweight="bold", va="center")
     ax.text(
         5.75,
         5.90,
-        "Controlled perturbations (dilemma & menu held fixed)",
+        "Apply matched perturbations (dilemma & menu held fixed)",
         ha="center",
         va="center",
         fontsize=8.3,
@@ -161,8 +164,8 @@ def plot_audit_framework(
     )
     _arrow(ax, 5.75, 4.58, 5.75, 4.18)
 
-    # Steps 4–5: four axes
-    ax.text(0.55, 3.95, "Steps 4–5", fontsize=7.5, color="#2c5282", fontweight="bold", va="center")
+    # Step 3 — Measure four axes
+    ax.text(0.55, 3.95, "Step 3", fontsize=7.5, color="#2c5282", fontweight="bold", va="center")
     ax.text(
         5.75,
         4.00,
@@ -185,15 +188,15 @@ def plot_audit_framework(
 
     _arrow(ax, 5.75, 2.05, 5.75, 1.65)
 
-    # Step 6
-    ax.text(0.55, 1.40, "Step 6", fontsize=7.5, color="#c05621", fontweight="bold", va="center")
+    # Step 4 — Human gate
+    ax.text(0.55, 1.40, "Step 4", fontsize=7.5, color="#c05621", fontweight="bold", va="center")
     _box(
         ax,
         5.75,
         0.95,
         9.6,
         1.15,
-        "Human-in-the-loop gate  →  Pass / remediate / withhold deployment\n"
+        "Human-in-the-loop gate  →  proceed / pilot / revise / withhold\n"
         "Required reports:  Generic–Specific Δp summary  ·  multi-context stress summary  ·  matched-choice rationale note\n"
         "Reviewer actions: flag discounted downside risks · verify decoding settings · document audit trail",
         fc="#ffffff",
