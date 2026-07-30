@@ -58,7 +58,7 @@ To address these questions, this study reconceptualizes LLMs as conditional stra
 **3\. Methodology**  
 This study adopts a scenario-based benchmarking framework to analyze LLMs make strategic decisions under varying contextual and framing conditions. As illustrated in Fig. 1, the methodology consists of five sequential stages. First, we define six historically grounded base strategic scenarios, each representing a fixed strategic dilemma. Across all scenarios, problem framing is systematically controlled through two conditions: a Generic framing (anonymous firm) and a Specific framing (explicitly identified as Tesla), which are applied consistently throughout the experiment. Second, each base scenario is expanded using four contextual variants that selectively modify competitive, factual, opportunity-related, or numerical information. Third, contextual information related to technology, market competition, policy, and financial conditions is automatically injected or removed while preserving the same core problem structure. Fourth, LLMs are required to select a single strategy from a predefined set of strategic options and to articulate a brief rationale for their choice. Finally, each scenario configuration is evaluated through repeated inference under different decoding settings, and the resulting outputs are aggregated and analyzed to assess decision sensitivity across conditions.
 
-![Research Method](final_results/plots/research_method_optionA_v4.png)
+![Research Method](final_results/plots/research_method_optionA_v6.png)
 
 Fig 1\. Scenario-based decision sensitivity experiment for LLM strategic decision-making  
 **3.1 Base Strategic Scenarios and Problem Framing**  
