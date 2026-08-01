@@ -614,20 +614,15 @@ RULES FOR 'key_signals_used':
 - If no context was used, return an empty array [].
 ```
 
-A representative raw response to this exact prompt (gemma-2-9b-it, $T=0.0$) is reproduced below.
+A representative raw response to this exact prompt (Llama-3.1-8B-Instruct, $T=0.0$) is reproduced below.
 
-````
-```json
+```
 {
-"chosen_option": "B",
-"standard_mapping": "Fast Follower",
-"rationale": "Given the high pre-order volume and lack of direct competition, Tesla should prioritize a simpler SUV launch to capture demand before competitors exploit the market opportunity.",
-"key_signals_used": [
-"Market US SUV market share: about 32% of new car sales.",
-"Market Competition: There were very few competing electric SUVs at the time."
-]
+  "chosen_option": "F",
+  "standard_mapping": "Retrenchment",
+  "rationale": "Reducing the scope of the SUV project and scaling down features to cut risk is the most appropriate option given the high production difficulty and quality risks associated with the complex product design. This approach allows Tesla to mitigate potential damage to its brand reputation while still meeting the high pre-order volume. It also provides an opportunity to refine the design and manufacturing process before full-scale production.",
+  "key_signals_used": ["[Market] US SUV market share: about 32% of new car sales.", "[Technology] Design Complexity: A new design with complex, upward-swinging doors posed significant manufacturing challenges.", "[Customer Response] High pre-order volume: Over 30,000 pre-orders existed, increasing pressure to deliver."]
 }
 ```
-````
 
-This example also illustrates why some outputs are excluded from the normalized distributions reported in Section 5 (Section 4.2; Appendix A): despite explicit instructions to return only a bare JSON object, models occasionally wrap the payload in markdown code fences or drop bracket characters from copied context tags, so parsing must tolerate minor formatting noise around an otherwise well-formed JSON object. Under the *opp\_focus* context variant and the Llama-3.1-8B-Instruct model discussed in Case I, only the four "Additional context" lines above would change; the problem statement, option menu, and schema instructions remain identical, which is what allows the resulting shift in `chosen_option` (Section 5.6.3) to be attributed to the context perturbation itself.
+This response is a well-formed bare JSON object. In the broader benchmark, however, models occasionally wrap an otherwise valid payload in markdown code fences or drop bracket characters from copied context tags despite explicit instructions to return only JSON (Section 4.2; Appendix A), so parsing must tolerate minor formatting noise when constructing the normalized distributions in Section 5. Under the *opp\_focus* context variant for the same Llama-3.1-8B-Instruct model discussed in Case I, only the four "Additional context" lines above would change; the problem statement, option menu, and schema instructions remain identical, which is what allows the resulting shift in `chosen_option` (Section 5.6.3) to be attributed to the context perturbation itself.
