@@ -1,14 +1,21 @@
-# 대규모 실험결과
-infer_results/
+# Author-only packets and drafts (keep local; do not publish)
+ESWA_submission/
+KOSME/
+RnDSeoul/
+author_notes/
+about_me/
 
-# 참조논문
+# Large inference dumps and local literature
+infer_results/
 references/
 
-# 캐시/임시파일/발표자료
+# Cache, editor, and binary artifacts
 __pycache__/
 *.pyc
 .DS_Store
+.vscode/
 *.pptx
 *.docx
 *.pdf
 *.mp4
+*.zip
