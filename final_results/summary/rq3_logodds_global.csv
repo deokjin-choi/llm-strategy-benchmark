@@ -1,0 +1,2 @@
+n_pairs,n_vocab,obs_global_mean_abs_delta,perm_global_mean_abs_delta_mean,perm_global_p_value
+118784,52400,0.3235040081042819,0.22334292529756758,0.0033222591362126247

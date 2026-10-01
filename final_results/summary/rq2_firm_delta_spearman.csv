@@ -1,0 +1,7 @@
+variant_a,variant_b,spearman_rho
+base,count_fact,0.9285714285714288
+base,opp_focus,0.9285714285714288
+base,randomized_numbers,0.9285714285714288
+count_fact,opp_focus,1.0
+count_fact,randomized_numbers,1.0
+opp_focus,randomized_numbers,1.0
