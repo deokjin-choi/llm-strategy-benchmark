@@ -45,7 +45,7 @@
     "context_blocks": {
       "[Finance] Large factory acquisition: $35.72M.": "The company acquired a large manufacturing factory for $35.72M, securing a large production facility.",
       "[Policy/Regulation] Government loan: $430.49M support.": "The company received a $430.49M government loan, providing significant financial backing.",
-      "[Market] Fuel cost savings: A new premium sedan was projected to save about $2,000 over 6 years.": "A new premium sedan was projected to save customers about $2,000 in fuel costs over 6 years, a strong selling point for consumers."
+      "[Market] Fuel cost savings: A new premium sedan was projected to save about $2,000 over 5.28 years.": "A new premium sedan was projected to save customers about $2,000 in fuel costs over 5.28 years, a strong selling point for consumers."
     },
     "execution_options": {
       "C": { "name": "Sell battery packs and powertrains to other companies", "mapping": "Open Innovation" },
@@ -77,8 +77,8 @@
     }
   },
   "5_model_3_mass_market": {
-    "problem_generic": "Problem: Facing an explosive increase in pre-orders, a company must rapidly scale production while maintaining product quality, financial stability, and public trust. The core challenge is to overcome production bottlenecks, dubbed 'Production Hell', and reduce costs without sacrificing the brand’s reputation in the mass market.",
-    "problem_specific": "Problem: Tesla must rapidly scale production while maintaining product quality, financial stability, and public trust. The core challenge is to overcome production bottlenecks, dubbed 'Production Hell', and reduce costs without sacrificing the brand’s reputation in the mass market.",
+    "problem_generic": "Problem: Facing an explosive increase in pre-orders, a company must rapidly scale production while maintaining product quality, financial stability, and public trust. The core challenge is to overcome production bottlenecks and reduce costs without sacrificing the brand’s reputation in the mass market.",
+    "problem_specific": "Problem: Facing an explosive increase in pre-orders, Tesla must rapidly scale production while maintaining product quality, financial stability, and public trust. The core challenge is to overcome production bottlenecks, dubbed 'Production Hell', and reduce costs without sacrificing the brand’s reputation in the mass market.",
     "context_blocks": {
       "[Customer Response] First week pre-orders: over 289,000 units.": "Over 289,000 units were pre-ordered in the first week.",
       "[Finance] Value of orders: about $15.15B.": "The value of pre-orders was approximately $15.15 billion.",
@@ -101,7 +101,7 @@
     "context_blocks": {
       "[Technology] Proprietary charging network: over 1,930 stations, 20,650+ chargers (2020).": "The company's proprietary charging network had over 1,930 stations and 20,650+ chargers by 2020, demonstrating a significant investment in infrastructure.",
       "[Technology] Large-scale factory production capacity: 30.58 GWh per year.": "The company's large-scale factory had a production capacity of 30.58 GWh per year, a key asset for battery supply.",
-      "[Market] Solar module price: fell by about 75.59% over 9.46 years.": "Solar module prices fell by about 75.59% over a decade, making solar energy more viable.",
+      "[Market] Solar module price: fell by about 75.59% over 9.46 years.": "Solar module prices fell by about 75.59% over 9.46 years, making solar energy more viable.",
       "[Competitive Landscape] Competitors' Infrastructure: Most other automakers relied on third-party charging networks, not building their own.": "Competitors typically relied on third-party charging networks, not proprietary ones."
     },
     "execution_options": {
